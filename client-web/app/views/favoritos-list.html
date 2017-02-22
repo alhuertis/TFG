@@ -1,0 +1,20 @@
+<div class="loading" *ngIf="loading">
+	<img src="../../assets/images/loader.gif">
+</div>
+
+<div class="container-fluid" *ngIf="favoritos">
+	<div class="row">
+		<div *ngFor=" let favorito of favoritos" class="favorito-item col-sm-4">
+			<h4>{{favorito.title}}</h4>
+			<p>{{favorito.url}}</p>
+			
+			<a href="{{favorito.url}}" target="_blank" class="btn btn-warning btn-xs">Ir al marcador</a>
+			<a [routerLink]="['/marcador', favorito._id]" class="btn btn-info btn-xs">ver</a>
+			<a href="{{favorito.url}}" target="_blank" class="btn btn-success btn-xs">Editar</a>
+			<a href="{{favorito.url}}" target="_blank" class="btn btn-danger btn-xs">Eliminar</a>
+						
+		</div>
+	</div>
+</div>
+
+
