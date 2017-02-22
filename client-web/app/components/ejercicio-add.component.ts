@@ -17,8 +17,6 @@ import {Ejercicio} from '../models/ejercicio';
 // Clase del componente donde irán los datos y funcionalidades
 export class EjercicioAddComponent implements OnInit{ 
 
-	//Comentario de prueba para git
-
 	public ejercicio: Ejercicio;
 	public errorMessage: string;
 	public niveles= ['Bajo', 'Medio', 'Avanzado'];
@@ -67,7 +65,7 @@ export class EjercicioAddComponent implements OnInit{
 					alert('Error en el servidor')
 				}
 				else{
-				
+					
 					this.ejercicio= response.ejercicio;
 					this._router.navigate(['/']);
 				}
