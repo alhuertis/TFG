@@ -6,7 +6,7 @@
 var Ejercicio= require('../models/ejercicio')
 
 
-
+//Recuperar un ejercicio
 function getEjercicio(req, res){
 
 	var ejercicioId= req.params.id;
