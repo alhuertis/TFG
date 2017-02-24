@@ -2,7 +2,7 @@
 'use strict'
 
 
-//Importamos express
+//Importamos express de otro
 var api = require('./routes/ejercicio'); //carga todo lo que haya en el fichero de rutas
 
 
