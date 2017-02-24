@@ -2,6 +2,7 @@
 //Aqui vamos a tener las funcones de rutas
 'use strict'
 
+//perra e fuego!!!!!!
 //Importamos el modelo
 var Ejercicio= require('../models/ejercicio')
 
