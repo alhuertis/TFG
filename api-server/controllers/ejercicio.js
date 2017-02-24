@@ -1,8 +1,7 @@
 //Controlador de la aplicacio de favoritos
 //Aqui vamos a tener las funcones de rutas
 'use strict'
-
-//PRUEBA LUIS ZORRILLA
+//mi comentario d emierda
 var Ejercicio= require('../models/ejercicio')
 
 
