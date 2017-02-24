@@ -65,7 +65,7 @@ export class EjercicioAddComponent implements OnInit{
 					alert('Error en el servidor')
 				}
 				else{
-					
+
 					this.ejercicio= response.ejercicio;
 					this._router.navigate(['/']);
 				}
