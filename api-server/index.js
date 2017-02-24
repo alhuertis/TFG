@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/tfg', (err,res)=>{
 		});
 	}
 
-
+//prueba de conflictos
 
 
 });
