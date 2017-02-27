@@ -15,7 +15,6 @@ var ProfesorSchema = Schema({
         _id: String,
         ejercicios:[{
             //Campo de los ejercicios
-            id_profesor:  String,
             _id: String,
             titulo: String,
             nivel: String,
