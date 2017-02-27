@@ -46,7 +46,8 @@ FavoritosListComponent = __decorate([
         templateUrl: 'app/views/favoritos-list.html',
         providers: [favorito_service_1.FavoritoService] //Necesitamos esto para poder usar los metodos
     }),
-    __metadata("design:paramtypes", [favorito_service_1.FavoritoService])
+    __metadata("design:paramtypes", [typeof (_a = typeof favorito_service_1.FavoritoService !== "undefined" && favorito_service_1.FavoritoService) === "function" && _a || Object])
 ], FavoritosListComponent);
 exports.FavoritosListComponent = FavoritosListComponent;
+var _a;
 //# sourceMappingURL=favoritos-list.component.js.map

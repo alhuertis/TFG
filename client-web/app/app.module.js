@@ -13,9 +13,6 @@ var http_1 = require("@angular/http");
 var app_routing_1 = require("./app.routing");
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
-var favoritos_list_component_1 = require("./components/favoritos-list.component");
-var favorito_detail_component_1 = require("./components/favorito-detail.component");
-var favorito_add_component_1 = require("./components/favorito-add.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -32,9 +29,6 @@ AppModule = __decorate([
         //Aqui cargamos todos los componentes que vamos a usar en la aplicacion.(Es un array).
         declarations: [
             app_component_1.AppComponent,
-            favoritos_list_component_1.FavoritosListComponent,
-            favorito_detail_component_1.FavoritoDetailComponent,
-            favorito_add_component_1.FavoritoAddComponent,
             panel_profesor_component_1.PanelProfesorComponent,
             ejercicio_add_component_1.EjercicioAddComponent
         ],
