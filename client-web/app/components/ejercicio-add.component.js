@@ -25,7 +25,7 @@ var EjercicioAddComponent = (function () {
     }
     EjercicioAddComponent.prototype.ngOnInit = function () {
         //Lo ponemos asi para rellenarlo con el chuwidatabindin
-        this.ejercicio = new ejercicio_1.Ejercicio("", "", "", null, "Antonio Sarasa", "UCM", new Date(), new Date(), "", "", "", "", "", "");
+        this.ejercicio = new ejercicio_1.Ejercicio("", "", "", "", null, "Antonio Sarasa", "UCM", new Date(), new Date(), "", "", "", "", "", "");
     };
     EjercicioAddComponent.prototype.onSubmit = function () {
         var _this = this;

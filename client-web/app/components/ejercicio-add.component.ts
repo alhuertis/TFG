@@ -22,7 +22,7 @@ export class EjercicioAddComponent implements OnInit{
 	public niveles= ['Bajo', 'Medio', 'Avanzado'];
 	public tipos=[1,2,3,4];
 
-	
+	public id_profesor: string;
 	public titulo: string;
 	public nivel: string;
 	public tipo: number;
@@ -50,7 +50,7 @@ export class EjercicioAddComponent implements OnInit{
 	ngOnInit(){
 
 		//Lo ponemos asi para rellenarlo con el chuwidatabindin
-		this.ejercicio= new Ejercicio("","","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","");
+		this.ejercicio= new Ejercicio("","","","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","");
 
 	}
 

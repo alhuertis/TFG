@@ -11,9 +11,12 @@ const appRoutes: Routes = [
 	//{path: '', component: FavoritosListComponent},
 	//{path:'marcador/:id', component: FavoritoDetailComponent},
 	//{path:'crear-marcador', component: PanelProfesorComponent},
-	{path: '', component: PanelProfesorComponent},
-	{path:'crear-ejercicio', component: EjercicioAddComponent},
-
+	{path: 'profesor', component: PanelProfesorComponent,
+		children:[
+			{path:'crear-ejercicio', component: EjercicioAddComponent}
+		]	
+	},
+	
 	//Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
 	{path:'**', component: PanelProfesorComponent},
 ];
