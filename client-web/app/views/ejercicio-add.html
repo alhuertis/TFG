@@ -1,70 +1,73 @@
 
-	
-	<div class="ejercicio-add-cabecera text-center">
-		<h4>Nuevo ejercicio</h4>
+	<div class="col-md-8 add-ejercicio">
+		<div class="row">
+			<div class="col-md-12 ejercicio-add-cabecera text-left">
+				<h4>Nuevo ejercicio</h4>
 
-	</div>
-	<form #formEjercicio="ngForm" (ngSubmit)="onSubmit()" class="col-md-4 col-md-push-2 form-horizontal">
-	  	<div class="form-group">
+			</div>
 
-	    	<input type="text" class="form-control"  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejercicio.titulo">
-	  	</div>
+		</div>
 
-	   	<div class="form-group">
-	        <label for="power">Nivel</label>
-	        <select class="form-control" id="nivel"
-	                required
-	                [(ngModel)]="ejercicio.nivel" name="nivel"
-	                #nivel="ngModel" >
-	          <option *ngFor="let niv of niveles" [value]="niv">{{niv}}</option>
-	        </select>
-	        <div [hidden]="nivel.valid || nivel.pristine" class="alert alert-danger">
-	          Nivel requerida
-	        </div>
-      </div>
+		<div class="row">
+			<div class="col-md-12 add-formulario-ejercicio">
+				<form #formEjercicio="ngForm" (ngSubmit)="onSubmit()" class="col-md-4  form-horizontal">
+					<div class="form-group">
 
+						<input type="text" class="form-control"  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejercicio.titulo">
+					</div>
 
-      	<div class="form-group">
-	        <label for="power">Tipo</label>
-	        <select class="form-control" id="tipo"
-	                required
-	                [(ngModel)]="ejercicio.tipo" name="tipo"
-	                #tipo="ngModel" >
-	          <option *ngFor="let tip of tipos" [value]="tip">{{tip}}</option>
-	        </select>
-	        <div [hidden]="tipo.valid || tipo.pristine" class="alert alert-danger">
-	          Tipo requerido
-	        </div>
-      </div>
+					<div class="form-group">
+						<label for="power">Nivel</label>
+						<select class="form-control" id="nivel"
+								required
+								[(ngModel)]="ejercicio.nivel" name="nivel"
+								#nivel="ngModel" >
+						<option *ngFor="let niv of niveles" [value]="niv">{{niv}}</option>
+						</select>
+						<div [hidden]="nivel.valid || nivel.pristine" class="alert alert-danger">
+						Nivel requerida
+						</div>
+				</div>
 
 
-
-	  	<div class="form-group">
-	    	<textarea class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado"> </textarea>
-	  	</div>
-
-	  	<div class="form-group">
-	    	<textarea class="form-control" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
-	  	</div>
-
-	  	<div class="form-group">
-	    	<textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico"> </textarea>
-	  	</div>
-
-	  	<div class="form-group">
-	    	<textarea class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
-	  	</div>
-
-	  	<div class="form-group">
-	    	<textarea class="form-control" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
-	  	</div>
-
-	
-	
+					<div class="form-group">
+						<label for="power">Tipo</label>
+						<select class="form-control" id="tipo"
+								required
+								[(ngModel)]="ejercicio.tipo" name="tipo"
+								#tipo="ngModel" >
+						<option *ngFor="let tip of tipos" [value]="tip">{{tip}}</option>
+						</select>
+						<div [hidden]="tipo.valid || tipo.pristine" class="alert alert-danger">
+						Tipo requerido
+						</div>
+				</div>
 
 
 
-	<div>
-	  <button type="submit" class="btn btn-success">Crear</button> <a [routerLink]="['/']" class="btn btn-danger">Salir</a>
-	 </div>
-</form>
+					<div class="form-group">
+						<textarea class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado"> </textarea>
+					</div>
+
+					<div class="form-group">
+						<textarea class="form-control" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
+					</div>
+
+					<div class="form-group">
+						<textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico"> </textarea>
+					</div>
+
+					<div class="form-group">
+						<textarea class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
+					</div>
+
+					<div class="form-group">
+						<textarea class="form-control" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
+					</div>
+				<div>
+				<button type="submit" class="btn btn-success">Crear</button> <a [routerLink]="['/']" class="btn btn-danger">Salir</a>
+				</div>
+				</form>
+			</div>
+		</div>
+</div>

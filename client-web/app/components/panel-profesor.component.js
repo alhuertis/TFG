@@ -74,7 +74,7 @@ var PanelProfesorComponent = (function () {
         $('#tree1').treed();
         $('#tree2').treed({ openedClass: 'glyphicon-folder-open', closedClass: 'glyphicon-folder-close' });
         $('#tree3').treed({ openedClass: 'glyphicon-chevron-right', closedClass: 'glyphicon-chevron-down' });
-        console.log('panel-profesor cargado!!');
+        //Obtencion de datos
         this._ejercicioService.getEjercicios().subscribe(function (result) {
             console.log(result);
             _this.ejercicios = result.ejercicios;

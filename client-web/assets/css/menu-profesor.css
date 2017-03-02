@@ -24,9 +24,11 @@
     margin:0;
     padding:0 1em;
     line-height:2em;
-    color:#369;
+    color:#27292B;
     font-weight:700;
-    position:relative
+    position:relative;
+    font-size: 18px;
+    
 }
 .tree ul li:before {
     content:"";
@@ -50,11 +52,11 @@
 }
 .tree li a {
     text-decoration: none;
-    color:#369;
+    color:#27292B;
 }
 .tree li button, .tree li button:active, .tree li button:focus {
     text-decoration: none;
-    color:#369;
+    color:#27292B;
     border:none;
     background:transparent;
     margin:0px 0px 0px 0px;

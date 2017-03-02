@@ -122,6 +122,13 @@ function deleteEjercicio(req, res){
 	});
 }
 
+function getIdProfesor(req, res){
+
+	
+
+
+}
+
 
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {

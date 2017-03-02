@@ -9,6 +9,7 @@ var appRoutes = [
     //{path:'crear-marcador', component: PanelProfesorComponent},
     { path: 'profesor', component: panel_profesor_component_1.PanelProfesorComponent,
         children: [
+            { path: '', redirectTo: 'profesor', pathMatch: 'full' },
             { path: 'crear-ejercicio', component: ejercicio_add_component_1.EjercicioAddComponent }
         ]
     },

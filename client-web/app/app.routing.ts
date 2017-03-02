@@ -13,6 +13,7 @@ const appRoutes: Routes = [
 	//{path:'crear-marcador', component: PanelProfesorComponent},
 	{path: 'profesor', component: PanelProfesorComponent,
 		children:[
+			{path:'', redirectTo:'profesor', pathMatch:'full'},
 			{path:'crear-ejercicio', component: EjercicioAddComponent}
 		]	
 	},

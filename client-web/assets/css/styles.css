@@ -1,3 +1,4 @@
+/***********HACKS*********/
 .clearfix{
 	float: none;
 	clear: both;
@@ -9,30 +10,13 @@
     padding: 0;
     margin: 0;
 }
+/***********FIN HACKS**************/
+
+/***********ANIMACIONES***********/
 
 
-/** PANEL PROFESOR **/
 
-.navbar-brand, .navbar-header span {
-	color: #4c4747 !important;
-}
-
-.panel-profesor{
-	min-height: 300px;
-
-}
-
-.ejercicio-detalle{
-	border: 1px solid #ddd;
-	margin-top: 10px !important;
-	padding: 10px !important;
-	border-radius: 5px;
-	background-color: #3a3a3a;
-	color: white;
-
-
-}
-
+/*********FIN ANIMACIONES***********/
 .animated {
 	-webkit-animation-duration: 1s;
 	animation-duration: 1s;
@@ -64,10 +48,12 @@
 	animation-name: fadeInLeft;
 } 
 animation-name: fadeInDown;
+/*********HEADER PROFESOR**********/
 
-.panel-profesor-izq p{
-	padding-left: 10px;
+.navbar-brand, .navbar-header span {
+	color: #27292B !important;
 }
+
 
 .btn-nav-circle{
     transition: transform 0.3s;
@@ -81,8 +67,8 @@ animation-name: fadeInDown;
     color: #000 !important;
 }
 .navbar-default {
-    background-color: #0bbcb9;
-    border-color: #0e6d5a;
+    background-color: #1bd3bb;
+	border-color: #27292B;
 }
 
 .btn-crear-eje{
@@ -90,7 +76,32 @@ animation-name: fadeInDown;
 	color:white !important;
 }
 
+
+/********FIN HEADER PROFESOR************/
+
+
+/*******PANEL PROFESOR ********/
 .menu-profesor-arbol{
 	margin: 10px !important;
 	font-size: 14px !important;
 }
+
+.panel-profesor{
+	min-height: 300px;
+
+}
+
+.menu-profesor-arbol{
+}
+
+.add-ejercicio{
+}
+
+.ejercicio-add-cabecera{
+}
+
+.add-formulario-ejercicio{
+}
+/*******FIN PANEL PROFESOR ********/
+
+

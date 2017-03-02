@@ -23,6 +23,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public loading: boolean;
 	public errorMessage: string;
 	public nEjercicios: number;
+	public nMiColeccion: number;
 
 	
 	
@@ -101,9 +102,7 @@ export class  PanelProfesorComponent implements OnInit{
 
 		$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
 
-
-
-		console.log('panel-profesor cargado!!');
+		//Obtencion de datos
 		this._ejercicioService.getEjercicios().subscribe(
 			result =>{
 				console.log(result);

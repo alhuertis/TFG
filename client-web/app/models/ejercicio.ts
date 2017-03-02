@@ -2,8 +2,7 @@ export class Ejercicio{
 
 	constructor(
 		//El id es el interno que asigna solo mongo, pero nos viene bien para recuperarlo
-		public id_profesor: String,
-		public _id: String,
+		public _id: string,
 		public titulo: string,
 		public nivel: string,
 		public tipo: number,
