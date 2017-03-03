@@ -24,6 +24,9 @@ export class  PanelProfesorComponent implements OnInit{
 	public errorMessage: string;
 	public nEjercicios: number;
 	public nMiColeccion: number;
+	public nBajos: number=0;
+	public nMedios: number=0;
+	public nAvanzados: number=0;
 
 	
 	
@@ -114,6 +117,17 @@ export class  PanelProfesorComponent implements OnInit{
 				else{
 					this.loading=false;
 					this.nEjercicios= this.ejercicios.length;
+					for(var i=0; i<this.ejercicios.length; i++){
+					if(this.ejercicios[i].nivel=="Bajo"){
+						this.nBajos++;	
+					}
+					if(this.ejercicios[i].nivel=="Medio"){
+						this.nMedios++;	
+					}
+					if(this.ejercicios[i].nivel=="Avanzado"){
+						this.nAvanzados++;	
+					}
+				}
 				}
 
 			},

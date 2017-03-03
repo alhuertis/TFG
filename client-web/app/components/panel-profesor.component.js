@@ -15,6 +15,9 @@ var ejercicio_service_1 = require("../services/ejercicio.service");
 var PanelProfesorComponent = (function () {
     function PanelProfesorComponent(_ejercicioService) {
         this._ejercicioService = _ejercicioService;
+        this.nBajos = 0;
+        this.nMedios = 0;
+        this.nAvanzados = 0;
         this.title = "Panel de profesores";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
@@ -84,6 +87,17 @@ var PanelProfesorComponent = (function () {
             else {
                 _this.loading = false;
                 _this.nEjercicios = _this.ejercicios.length;
+                for (var i = 0; i < _this.ejercicios.length; i++) {
+                    if (_this.ejercicios[i].nivel == "Bajo") {
+                        _this.nBajos++;
+                    }
+                    if (_this.ejercicios[i].nivel == "Medio") {
+                        _this.nMedios++;
+                    }
+                    if (_this.ejercicios[i].nivel == "Avanzado") {
+                        _this.nAvanzados++;
+                    }
+                }
             }
         }, function (error) {
             _this.errorMessage = error;
