@@ -16,6 +16,8 @@ var PanelProfesorComponent = (function () {
     function PanelProfesorComponent(_ejercicioService) {
         this._ejercicioService = _ejercicioService;
         this.title = "Panel de profesores";
+        this.user = "Antonio Sarasa";
+        this.id_profesor = "000001";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -90,6 +92,21 @@ var PanelProfesorComponent = (function () {
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
                 alert('Error en la peticion');
+            }
+        }); //fin getEjercicios (Todos)
+        this._ejercicioService.getEjersMiColeccion(this.id_profesor).subscribe(function (result) {
+            _this.miColeccion = result.miColeccion;
+            if (!_this.miColeccion) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccion = _this.miColeccion.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
             }
         });
     }; //fin ngOnInit

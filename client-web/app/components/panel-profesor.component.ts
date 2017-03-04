@@ -19,10 +19,13 @@ declare var $:any;
 export class  PanelProfesorComponent implements OnInit{
 
 	public title: string;
+	public user: string;
+	public id_profesor: string;
 	public ejercicios: Ejercicio[];
 	public loading: boolean;
 	public errorMessage: string;
 	public nEjercicios: number;
+	public miColeccion: Ejercicio[];
 	public nMiColeccion: number;
 
 	
@@ -33,6 +36,8 @@ export class  PanelProfesorComponent implements OnInit{
 
 	){
 		this.title= "Panel de profesores";
+		this.user="Antonio Sarasa";
+		this.id_profesor= "000001"
 		
 	}
 
@@ -126,7 +131,36 @@ export class  PanelProfesorComponent implements OnInit{
 				}
 			}
 
+		); //fin getEjercicios (Todos)
+
+		this._ejercicioService.getEjersMiColeccion(this.id_profesor).subscribe(
+
+			result => {
+				this.miColeccion= result.miColeccion;
+
+				if(!this.miColeccion){
+					alert('Error en el servidor');
+				}
+				else{
+					this.nMiColeccion= this.miColeccion.length;
+				}
+
+
+			},
+
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+
+			}
+
+
 		);
+
 	}//fin ngOnInit
 
 

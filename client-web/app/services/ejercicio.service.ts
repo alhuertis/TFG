@@ -34,4 +34,8 @@ export class EjercicioService{
 
 		return this._http.post(this.url+'ejercicio', params, {headers: headers}).map(res=> res.json());
 	}
+
+	getEjersMiColeccion(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccion/'+id_profesor).map(res => res.json());
+	}
 }

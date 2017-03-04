@@ -54,6 +54,7 @@ function saveEjercicio(req, res){
 	var ejercicio= new Ejercicio();
 
 	var params= req.body; //Recoge todos los parametros
+	ejercicio.id_profesor= params.id_profesor;
 	ejercicio.titulo= params.titulo;
 	ejercicio.nivel= params.nivel;
 	ejercicio.tipo= params.tipo;
@@ -122,8 +123,26 @@ function deleteEjercicio(req, res){
 	});
 }
 
-function getIdProfesor(req, res){
+function getEjersMiColeccion(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":id_profesor}).exec(function(err, miColeccion){
 
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id'});
+		}
+		else{
+
+			if(!miColeccion){
+				res.status(404).send({message:'No hay ejers de tu coleccion'});	
+			}
+			else{
+				res.status(200).send({miColeccion});
+			}
+
+		
+		}
+	});	
 	
 
 
@@ -136,7 +155,8 @@ module.exports= {
 	getEjercicios,
 	saveEjercicio,
 	updateEjercicio,
-	deleteEjercicio
+	deleteEjercicio,
+	getEjersMiColeccion,
 
 
 }

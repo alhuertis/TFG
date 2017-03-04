@@ -4,7 +4,7 @@ var mongoose= require('mongoose');
 var Schema= mongoose.Schema; //Nos permite definir y trabajar con Schemas de mongo
 
 var EjercicioSchema= Schema({
-	
+	id_profesor: String,
 	titulo: String,
 	nivel: String,
 	tipo: Number,

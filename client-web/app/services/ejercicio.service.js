@@ -31,6 +31,9 @@ var EjercicioService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'ejercicio', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    EjercicioService.prototype.getEjersMiColeccion = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccion/' + id_profesor).map(function (res) { return res.json(); });
+    };
     return EjercicioService;
 }());
 EjercicioService = __decorate([

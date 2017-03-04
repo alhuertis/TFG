@@ -21,8 +21,10 @@ export class EjercicioAddComponent implements OnInit{
 	public errorMessage: string;
 	public niveles= ['Bajo', 'Medio', 'Avanzado'];
 	public tipos=[1,2,3,4];
+	public user: string;
 
 	public _id: string;
+	public id_profesor: string;
 	public titulo: string;
 	public nivel: string;
 	public tipo: number;
@@ -44,13 +46,15 @@ export class EjercicioAddComponent implements OnInit{
 	){
 
 		this.titulo= "Crear ejercicio";
+		this.user="Antonio Sarasa";
+		this.id_profesor= "000001"
 		
 	}
 
 	ngOnInit(){
 
 		//Lo ponemos asi para rellenarlo con el chuwidatabindin
-		this.ejercicio= new Ejercicio("","","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","");
+		this.ejercicio= new Ejercicio("","","","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","");
 
 	}
 
@@ -79,12 +83,12 @@ export class EjercicioAddComponent implements OnInit{
 					console.log(this.errorMessage);
 					alert('Error en la peticion');
 				}
-
-
 			}
-
-
 		);
-	}
+	}// fin onSubmit
+
+
+
+	
 
 }

@@ -11,6 +11,7 @@ var api= express.Router();
 
 api.get('/ejercicio/:id', EjercicioController.getEjercicio); //Con esto puedo dirigir al controlador cuando llamemos a favrito.
 api.get('/ejercicios', EjercicioController.getEjercicios);
+api.get('/ejercicios/miColeccion/:id_profesor', EjercicioController.getEjersMiColeccion);
 api.post('/ejercicio', EjercicioController.saveEjercicio);
 api.put('/ejercicio/:id', EjercicioController.updateEjercicio);
 api.delete('/ejercicio/:id', EjercicioController.deleteEjercicio);
