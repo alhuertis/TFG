@@ -5,6 +5,7 @@ import {Routes, RouterModule} from '@angular/router';
 //Aqui vamos a importar todos los componentes que necesitemos
 import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component';
+import {EjercicioMostrarComponent} from './components/ejercicio-mostrar.component';
 
 const appRoutes: Routes = [
 
@@ -14,7 +15,8 @@ const appRoutes: Routes = [
 	{path: 'profesor', component: PanelProfesorComponent,
 		children:[
 			{path:'', redirectTo:'profesor', pathMatch:'full'},
-			{path:'crear-ejercicio', component: EjercicioAddComponent}
+			{path:'crear-ejercicio', component: EjercicioAddComponent},
+			{path:'mostrar-ejercicios', component: EjercicioMostrarComponent}
 		]	
 	},
 	

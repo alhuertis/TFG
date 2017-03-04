@@ -1,0 +1,23 @@
+
+<div class="container panel-profesor">
+
+	<div class="row">
+		
+		<div class="col-md-8">
+			
+			<div *ngFor="let ejercicio of ejercicios" class="ejercicio-detalle animated fadeInLeft">
+					<label>Titulo:</label> <span>{{ejercicio.titulo}}</span><br>
+					<label>Nivel:</label> <span>{{ejercicio.nivel}}</span><br>
+					<label>Tipo:</label> <span>{{ejercicio.tipo}}</span><br>
+					<label>Enunciado:</label> <span>{{ejercicio.enunciado}}</span><br>
+			</div>
+
+		</div>
+
+		<div class="col-md-2">
+			
+		</div>
+
+	</div>
+
+</div>
