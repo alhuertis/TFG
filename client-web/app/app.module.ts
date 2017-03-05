@@ -6,6 +6,7 @@ import {HttpModule, JsonpModule} from '@angular/http';
 import {routing, appRoutingProviders} from './app.routing';
 
 import {PanelProfesorComponent} from './components/panel-profesor.component'; 
+import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component';
 import {EjercicioMostrarComponent} from './components/ejercicio-mostrar.component'; 
 
@@ -23,7 +24,8 @@ import {EjercicioMostrarComponent} from './components/ejercicio-mostrar.componen
   			AppComponent,
         PanelProfesorComponent,
         EjercicioAddComponent,
-        EjercicioMostrarComponent
+        EjercicioMostrarComponent,
+        PanelAlumnoComponent
 
    ],
   providers: [appRoutingProviders],
