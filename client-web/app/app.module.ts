@@ -6,7 +6,10 @@ import {HttpModule, JsonpModule} from '@angular/http';
 import {routing, appRoutingProviders} from './app.routing';
 
 import {PanelProfesorComponent} from './components/panel-profesor.component'; 
-import {EjercicioAddComponent} from './components/ejercicio-add.component'; 
+import {PanelAlumnoComponent} from './components/panel-alumno.component';
+import {EjercicioAddComponent} from './components/ejercicio-add.component';
+import {EjercicioMostrarComponent} from './components/ejercicio-mostrar.component'; 
+
 
 
 @NgModule({
@@ -20,7 +23,9 @@ import {EjercicioAddComponent} from './components/ejercicio-add.component';
   declarations: [ 
   			AppComponent,
         PanelProfesorComponent,
-        EjercicioAddComponent
+        EjercicioAddComponent,
+        EjercicioMostrarComponent,
+        PanelAlumnoComponent
 
    ],
   providers: [appRoutingProviders],

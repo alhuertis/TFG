@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-book color-texto" aria-hidden="true"></span> {{title}}</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+      	<!--<li><div class="aling-cmp-nav">Nº Ejercicios <span class="badge">{{nEjercicios}}</span></div></li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="panel-profesor container-fluid" style="margin-top:30px;">
+
+    <div class="row">
+        <div class="col-md-3 menu-profesor-arbol">
+            <ul id="tree1">                
+
+              <li><a href="#"> Actividades: {{nEjercicios}}</a>
+                <ul>
+                    <li> Nivel</li>
+                    <ul>
+                        <li> Bajo</li>
+                        <li> Medio</li>
+                        <li> Avanzado</li>
+                        </ul>
+                </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

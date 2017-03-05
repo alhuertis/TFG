@@ -2,7 +2,9 @@
 var router_1 = require("@angular/router");
 //Aqui vamos a importar todos los componentes que necesitemos
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
+var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
+var ejercicio_mostrar_component_1 = require("./components/ejercicio-mostrar.component");
 var appRoutes = [
     //{path: '', component: FavoritosListComponent},
     //{path:'marcador/:id', component: FavoritoDetailComponent},
@@ -10,8 +12,12 @@ var appRoutes = [
     { path: 'profesor', component: panel_profesor_component_1.PanelProfesorComponent,
         children: [
             { path: '', redirectTo: 'profesor', pathMatch: 'full' },
-            { path: 'crear-ejercicio', component: ejercicio_add_component_1.EjercicioAddComponent }
+            { path: 'crear-ejercicio', component: ejercicio_add_component_1.EjercicioAddComponent },
+            { path: 'mostrar-ejercicios', component: ejercicio_mostrar_component_1.EjercicioMostrarComponent }
         ]
+    },
+    { path: 'alumno', component: panel_alumno_component_1.PanelAlumnoComponent,
+        children: []
     },
     //Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
     { path: '**', component: panel_profesor_component_1.PanelProfesorComponent },

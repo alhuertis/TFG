@@ -12,7 +12,9 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_routing_1 = require("./app.routing");
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
+var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
+var ejercicio_mostrar_component_1 = require("./components/ejercicio-mostrar.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,7 +32,9 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             panel_profesor_component_1.PanelProfesorComponent,
-            ejercicio_add_component_1.EjercicioAddComponent
+            ejercicio_add_component_1.EjercicioAddComponent,
+            ejercicio_mostrar_component_1.EjercicioMostrarComponent,
+            panel_alumno_component_1.PanelAlumnoComponent
         ],
         providers: [app_routing_1.appRoutingProviders],
         bootstrap: [app_component_1.AppComponent]
