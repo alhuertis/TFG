@@ -38,4 +38,32 @@ export class EjercicioService{
 	getEjersMiColeccion(id_profesor: string){
 		return this._http.get(this.url+'ejercicios/miColeccion/'+id_profesor).map(res => res.json());
 	}
+
+	getEjersMiColeccionNivelA(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccionNivelA/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersMiColeccionNivelM(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccionNivelM/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersMiColeccionNivelB(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccionNivelB/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersMiColeccionTipo1(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccionTipo1/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersMiColeccionTipo2(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccionTipo2/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersMiColeccionTipo3(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccionTipo3/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersMiColeccionTipo4(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/miColeccionTipo4/'+id_profesor).map(res => res.json());
+	}
 }

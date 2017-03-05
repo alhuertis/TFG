@@ -21,6 +21,162 @@ var PanelProfesorComponent = (function () {
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
+        //Obtencion de datos
+        this._ejercicioService.getEjercicios().subscribe(function (result) {
+            console.log(result);
+            _this.ejercicios = result.ejercicios;
+            if (!_this.ejercicios) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.loading = false;
+                _this.nEjercicios = _this.ejercicios.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion');
+            }
+        }); //fin getEjercicios (Todos)
+        this._ejercicioService.getEjersMiColeccion(this.id_profesor).subscribe(function (result) {
+            _this.miColeccion = result.miColeccion;
+            if (!_this.miColeccion) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccion = _this.miColeccion.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        });
+        this._ejercicioService.getEjersMiColeccion(this.id_profesor).subscribe(function (result) {
+            _this.miColeccion = result.miColeccion;
+            if (!_this.miColeccion) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccion = _this.miColeccion.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion
+        this._ejercicioService.getEjersMiColeccionNivelA(this.id_profesor).subscribe(function (result) {
+            _this.miColeccionNivelA = result.miColeccionNivelA;
+            if (!_this.miColeccionNivelA) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccionNivelA = _this.miColeccionNivelA.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion nivel Avanzado
+        this._ejercicioService.getEjersMiColeccionNivelM(this.id_profesor).subscribe(function (result) {
+            _this.miColeccionNivelM = result.miColeccionNivelM;
+            if (!_this.miColeccionNivelM) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccionNivelM = _this.miColeccionNivelM.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion nivel Medio
+        this._ejercicioService.getEjersMiColeccionNivelB(this.id_profesor).subscribe(function (result) {
+            _this.miColeccionNivelB = result.miColeccionNivelB;
+            if (!_this.miColeccionNivelB) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccionNivelB = _this.miColeccionNivelB.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion nivel bajo
+        this._ejercicioService.getEjersMiColeccionTipo1(this.id_profesor).subscribe(function (result) {
+            _this.miColeccionTipo1 = result.miColeccionTipo1;
+            if (!_this.miColeccionTipo1) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccionTipo1 = _this.miColeccionTipo1.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion tipo 1
+        this._ejercicioService.getEjersMiColeccionTipo2(this.id_profesor).subscribe(function (result) {
+            _this.miColeccionTipo2 = result.miColeccionTipo2;
+            if (!_this.miColeccionTipo2) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccionTipo2 = _this.miColeccionTipo2.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion tipo 2
+        this._ejercicioService.getEjersMiColeccionTipo3(this.id_profesor).subscribe(function (result) {
+            _this.miColeccionTipo3 = result.miColeccionTipo3;
+            if (!_this.miColeccionTipo3) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccionTipo3 = _this.miColeccionTipo3.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion tipo 3
+        this._ejercicioService.getEjersMiColeccionTipo4(this.id_profesor).subscribe(function (result) {
+            _this.miColeccionTipo4 = result.miColeccionTipo4;
+            if (!_this.miColeccionTipo4) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.nMiColeccionTipo4 = _this.miColeccionTipo4.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        }); //fin getEjercicios de mi coleccion tipo 4
+    }; //fin ngOnInit
+    PanelProfesorComponent.prototype.ngAfterViewInit = function () {
+        //Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery
         $.fn.extend({
             treed: function (o) {
                 var openedClass = 'glyphicon-minus-sign';
@@ -76,43 +232,7 @@ var PanelProfesorComponent = (function () {
         $('#tree1').treed();
         $('#tree2').treed({ openedClass: 'glyphicon-folder-open', closedClass: 'glyphicon-folder-close' });
         $('#tree3').treed({ openedClass: 'glyphicon-chevron-right', closedClass: 'glyphicon-chevron-down' });
-        //Obtencion de datos
-        this._ejercicioService.getEjercicios().subscribe(function (result) {
-            console.log(result);
-            _this.ejercicios = result.ejercicios;
-            if (!_this.ejercicios) {
-                alert('Error en el servidor');
-            }
-            else {
-                _this.loading = false;
-                _this.nEjercicios = _this.ejercicios.length;
-            }
-        }, function (error) {
-            _this.errorMessage = error;
-            if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
-                alert('Error en la peticion');
-            }
-        }); //fin getEjercicios (Todos)
-        this._ejercicioService.getEjersMiColeccion(this.id_profesor).subscribe(function (result) {
-            _this.miColeccion = result.miColeccion;
-            if (!_this.miColeccion) {
-                alert('Error en el servidor');
-            }
-            else {
-                _this.nMiColeccion = _this.miColeccion.length;
-            }
-        }, function (error) {
-            _this.errorMessage = error;
-            if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
-                alert('Error en la peticion de mi coleccion');
-            }
-        });
-    }; //fin ngOnInit
-    PanelProfesorComponent.prototype.numEjercicios = function () {
-        return this.ejercicios.length;
-    };
+    }; //fin ngAfterViewInit
     return PanelProfesorComponent;
 }());
 PanelProfesorComponent = __decorate([
