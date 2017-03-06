@@ -19,21 +19,57 @@
   </div>
 </nav>
 
-<div class="panel-profesor container-fluid" style="margin-top:30px;">
+<div class="panel-alumno container-fluid" style="margin-top:30px;">
 
     <div class="row">
-        <div class="col-md-3 menu-profesor-arbol">
+        <div class="col-md-3 menu-alumno-arbol">
             <ul id="tree1">                
 
-              <li><a href="#"> Actividades: {{nEjercicios}}</a>
-                <ul>
-                    <li> Nivel</li>
+              <li><a href="#"> Actividades </a><span class="badge"> {{nActividades}}</span>
+
                     <ul>
-                        <li> Bajo</li>
-                        <li> Medio</li>
-                        <li> Avanzado</li>
-                        </ul>
-                </ul>
+                      <li><a href="#"> Actividades hechas </a> <span class="badge"> {{nActHechas}}</span>
+                        <ul>
+                          <li><a href="#"> Nivel</a>
+                            <ul>
+                              <li> Bajo <span class="badge">{{nActHechasNivelB}}</span></li>
+                              <li> Medio <span class="badge">{{nMiColeccionNivelM}}</span></li>
+                              <li> Avanzado <span class="badge">{{nActHechasNivelA}}</span></li>
+                            </ul>
+                          </li>
+                          <li> Profesor
+                            <ul>
+                              <li>{Lista de nombres de profesores}
+                                <ul>
+                                   <li> Bajo <span class="badge">{{}}</span></li>
+                                   <li> Medio <span class="badge">{{}}</span></li>
+                                   <li> Avanzado <span class="badge">{{}}</span></li>
+                                </ul>
+                            </ul>
+                          </li> 
+                          <li><a href="#"> Estadísticas </a></li>
+                          </ul>
+                        </li>
+                        <li> Actividades propuestas  <span class="badge"> {{nActividades-nActHechas}}</span>
+                        <ul>
+                          <li> Nivel
+                            <ul>
+                              <li> Bajo <span class="badge">{{nOtrasColeccionesNivelB}}</span></li>
+                              <li> Medio <span class="badge">{{nOtrasColeccionesNivelM}}</span></li>
+                              <li> Avanzado <span class="badge">{{nOtrasColeccionesNivelA}}</span></li>
+                            </ul>
+                          </li>
+                          <li> Tipo
+                            <ul>
+                              <li> Tipo 1 <span class="badge">{{nOtrasColeccionesTipo1}}</span></li>
+                              <li> Tipo 2 <span class="badge">{{nOtrasColeccionesTipo2}}</span></li>
+                              <li> Tipo 3 <span class="badge">{{nOtrasColeccionesTipo3}}</span></li>
+                              <li> Tipo 4 <span class="badge">{{nOtrasColeccionesTipo4}}</span></li>
+                            </ul>
+                          </li> 
+                          </ul>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
