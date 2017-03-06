@@ -66,4 +66,36 @@ export class EjercicioService{
 	getEjersMiColeccionTipo4(id_profesor: string){
 		return this._http.get(this.url+'ejercicios/miColeccionTipo4/'+id_profesor).map(res => res.json());
 	}
+	//Otras colecciones
+	getEjersOtrasColecciones(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColecciones/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersOtrasColeccionesNivelA(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColeccionesNivelA/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersOtrasColeccionesNivelM(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColeccionesNivelM/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersOtrasColeccionesNivelB(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColeccionesNivelB/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersOtrasColeccionesTipo1(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColeccionesTipo1/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersOtrasColeccionesTipo2(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColeccionesTipo2/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersOtrasColeccionesTipo3(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColeccionesTipo3/'+id_profesor).map(res => res.json());
+	}
+
+	getEjersOtrasColeccionesTipo4(id_profesor: string){
+		return this._http.get(this.url+'ejercicios/otrasColeccionesTipo4/'+id_profesor).map(res => res.json());
+	}
 }

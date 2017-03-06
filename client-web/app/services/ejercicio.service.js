@@ -55,6 +55,31 @@ var EjercicioService = (function () {
     EjercicioService.prototype.getEjersMiColeccionTipo4 = function (id_profesor) {
         return this._http.get(this.url + 'ejercicios/miColeccionTipo4/' + id_profesor).map(function (res) { return res.json(); });
     };
+    //Otras colecciones
+    EjercicioService.prototype.getEjersOtraColeccion = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccion/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjersOtraColeccionNivelA = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccionNivelA/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjersOtraColeccionNivelM = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccionNivelM/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjersOtraColeccionNivelB = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccionNivelB/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjersOtraColeccionTipo1 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccionTipo1/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjersOtraColeccionTipo2 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccionTipo2/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjersOtraColeccionTipo3 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccionTipo3/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjersOtraColeccionTipo4 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/miColeccionTipo4/' + id_profesor).map(function (res) { return res.json(); });
+    };
     return EjercicioService;
 }());
 EjercicioService = __decorate([

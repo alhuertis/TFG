@@ -285,6 +285,169 @@ function getEjersMiColeccionTipo4(req, res){
 	});	
 }
 
+//Otras colecciones
+function getEjersOtrasColecciones(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}}).exec(function(err, otrasColecciones){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id'});
+		}
+		else{
+
+			if(!otrasColecciones){
+				res.status(404).send({message:'No hay ejers de otras colecciones'});	
+			}
+			else{
+				res.status(200).send({otrasColecciones});
+			}
+		}
+	});	
+}
+
+
+function getEjersOtrasColeccionesNivelA(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "nivel":"Avanzado"}).exec(function(err, otrasColeccionesNivelA){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id con nivel avanzado'});
+		}
+		else{
+
+			if(!otrasColeccionesNivelA){
+				res.status(404).send({message:'No hay ejers de otras colecciones con nivel Avanzado'});	
+			}
+			else{
+				res.status(200).send({otrasColeccionesNivelA});
+			}
+		}
+	});	
+}
+
+function getEjersOtrasColeccionesNivelM(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "nivel":"Medio"}).exec(function(err, otrasColeccionesNivelM){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id con nivel medio'});
+		}
+		else{
+
+			if(!otrasColeccionesNivelM){
+				res.status(404).send({message:'No hay ejers de otras colecciones con nivel Medio'});	
+			}
+			else{
+				res.status(200).send({otrasColeccionesNivelM});
+			}
+		}
+	});	
+}
+
+function getEjersOtrasColeccionesNivelB(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "nivel":"Bajo"}).exec(function(err, otrasColeccionesNivelB){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id con nivel bajo'});
+		}
+		else{
+
+			if(!otrasColeccionesNivelB){
+				res.status(404).send({message:'No hay ejers de otras colecciones con nivel Bajo'});	
+			}
+			else{
+				res.status(200).send({otrasColeccionesNivelB});
+			}
+		}
+	});	
+}
+
+
+function getEjersOtrasColeccionesTipo1(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "tipo":1}).exec(function(err, otrasColeccionesTipo1){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id de tipo 1'});
+		}
+		else{
+
+			if(!otrasColeccionesTipo1){
+				res.status(404).send({message:'No hay ejers de otras colecciones de tipo 1'});	
+			}
+			else{
+				res.status(200).send({otrasColeccionesTipo1});
+			}
+		}
+	});	
+}
+
+function getEjersOtrasColeccionesTipo2(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "tipo":2}).exec(function(err, otrasColeccionesTipo2){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id de tipo 2'});
+		}
+		else{
+
+			if(!otrasColeccionesTipo2){
+				res.status(404).send({message:'No hay ejers de otras colecciones de tipo 2'});	
+			}
+			else{
+				res.status(200).send({otrasColeccionesTipo2});
+			}
+		}
+	});	
+}
+
+function getEjersOtrasColeccionesTipo3(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "tipo":3}).exec(function(err, otrasColeccionesTipo3){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id de tipo 3'});
+		}
+		else{
+
+			if(!otrasColeccionesTipo3){
+				res.status(404).send({message:'No hay ejers de otras colecciones de tipo 3'});	
+			}
+			else{
+				res.status(200).send({otrasColeccionesTipo3});
+			}
+		}
+	});	
+}
+
+function getEjersOtrasColeccionesTipo4(req, res){
+	var id_profesor= req.params.id_profesor;
+	
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "tipo":4}).exec(function(err, otrasColeccionesTipo4){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver la coleccion por id de tipo 4'});
+		}
+		else{
+
+			if(!otrasColeccionesTipo4){
+				res.status(404).send({message:'No hay ejers de otras colecciones de tipo 4'});	
+			}
+			else{
+				res.status(200).send({otrasColeccionesTipo4});
+			}
+		}
+	});	
+}
+
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {
 	getEjercicio,
@@ -300,6 +463,14 @@ module.exports= {
 	getEjersMiColeccionTipo2,
 	getEjersMiColeccionTipo3,
 	getEjersMiColeccionTipo4,
+	getEjersOtrasColecciones,
+	getEjersOtrasColeccionesNivelA,
+	getEjersOtrasColeccionesNivelM,
+	getEjersOtrasColeccionesNivelB,
+	getEjersOtrasColeccionesTipo1,
+	getEjersOtrasColeccionesTipo2,
+	getEjersOtrasColeccionesTipo3,
+	getEjersOtrasColeccionesTipo4,
 
 
 }

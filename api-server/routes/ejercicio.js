@@ -22,5 +22,13 @@ api.get('/ejercicios/miColeccionTipo4/:id_profesor', EjercicioController.getEjer
 api.post('/ejercicio', EjercicioController.saveEjercicio);
 api.put('/ejercicio/:id', EjercicioController.updateEjercicio);
 api.delete('/ejercicio/:id', EjercicioController.deleteEjercicio);
+api.get('/ejercicios/otrasColecciones/:id_profesor', EjercicioController.getEjersOtrasColecciones);
+api.get('/ejercicios/otrasColeccionesNivelA/:id_profesor', EjercicioController.getEjersOtrasColeccionesNivelA);
+api.get('/ejercicios/otrasColeccionesNivelM/:id_profesor', EjercicioController.getEjersOtrasColeccionesNivelM);
+api.get('/ejercicios/otrasColeccionesNivelB/:id_profesor', EjercicioController.getEjersOtrasColeccionesNivelB);
+api.get('/ejercicios/otrasColeccionesTipo1/:id_profesor', EjercicioController.getEjersOtrasColeccionesTipo1);
+api.get('/ejercicios/otrasColeccionesTipo2/:id_profesor', EjercicioController.getEjersOtrasColeccionesTipo2);
+api.get('/ejercicios/otrasColeccionesTipo3/:id_profesor', EjercicioController.getEjersOtrasColeccionesTipo3);
+api.get('/ejercicios/otrasColeccionesTipo4/:id_profesor', EjercicioController.getEjersOtrasColeccionesTipo4);
 
 module.exports= api;
