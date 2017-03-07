@@ -18,7 +18,8 @@ var PanelProfesorComponent = (function () {
         this.title = "Panel de profesores";
         this.user = "Antonio Sarasa";
         this.id_profesor = "000001";
-        this.saludoo = "Alberto";
+        this.mostrarLista = true;
+        this.datosAMostrar = "";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -370,6 +371,31 @@ var PanelProfesorComponent = (function () {
         $('#tree2').treed({ openedClass: 'glyphicon-folder-open', closedClass: 'glyphicon-folder-close' });
         $('#tree3').treed({ openedClass: 'glyphicon-chevron-right', closedClass: 'glyphicon-chevron-down' });
     }; //fin ngAfterViewInit
+    PanelProfesorComponent.prototype.seleccionaDatos = function (datos) {
+        switch (datos) {
+            case 'ejercicios':
+                this.ejersAMostrar = this.ejercicios;
+                this.datosAMostrar = "Todos los ejercicios";
+                break;
+            case 'mios':
+                this.ejersAMostrar = this.miColeccion;
+                this.datosAMostrar = "Mi Coleccion";
+                break;
+            case 'mios bajo':
+                this.ejersAMostrar = this.miColeccionNivelB;
+                this.datosAMostrar = "Mi Coleccion nivel bajo";
+                break;
+            case 'mios medio':
+                this.ejersAMostrar = this.miColeccionNivelM;
+                this.datosAMostrar = "Mi Coleccion nivel medio";
+                break;
+            case 'mios avanzado':
+                this.ejersAMostrar = this.miColeccionNivelA;
+                this.datosAMostrar = "Mi Coleccion nivel avanzado";
+                break;
+        }
+        this.mostrarLista = true;
+    };
     return PanelProfesorComponent;
 }());
 PanelProfesorComponent = __decorate([

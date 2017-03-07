@@ -22,8 +22,16 @@ var ListadoProfesorComponent = (function () {
 }());
 __decorate([
     core_1.Input(),
+    __metadata("design:type", Array)
+], ListadoProfesorComponent.prototype, "listaEjers", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], ListadoProfesorComponent.prototype, "mostrarLista", void 0);
+__decorate([
+    core_1.Input(),
     __metadata("design:type", String)
-], ListadoProfesorComponent.prototype, "saludo", void 0);
+], ListadoProfesorComponent.prototype, "titulo", void 0);
 ListadoProfesorComponent = __decorate([
     core_1.Component({
         selector: 'listado-ejers',

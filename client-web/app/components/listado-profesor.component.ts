@@ -16,21 +16,18 @@ import {Ejercicio} from '../models/ejercicio';
 
 export class  ListadoProfesorComponent implements OnInit{
 	
-	//@Input listaEjers;
-	@Input() saludo: string;
+	@Input() listaEjers: Ejercicio[];
+	@Input() mostrarLista: boolean;
+	@Input() titulo: string;
+
 	public loading: boolean;
 	public errorMessage: string;
-	public nEjercicios: number;
-
-	
 	
 
 	constructor(
 			private _ejercicioService: EjercicioService,
 
 	){
-	
-		
 		
 	}
 

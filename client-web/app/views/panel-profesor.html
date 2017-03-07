@@ -26,16 +26,16 @@
         <div class="col-md-3 menu-profesor-arbol">
             <ul id="tree1">
 
-                <li><a routerLink="/profesor/listar-ejercicios"> Ejercicios </a><span class="badge"> {{nEjercicios}}</span>
+                <li><a (click)="seleccionaDatos('ejercicios')"> Ejercicios </a><span class="badge"> {{nEjercicios}}</span>
 
                     <ul>
-                      <li><a href="#"> Mi Coleccion </a> <span class="badge"> {{nMiColeccion}}</span>
+                      <li><a (click)="seleccionaDatos('mios')"> Mi Coleccion </a> <span class="badge"> {{nMiColeccion}}</span>
                         <ul>
                           <li><a href="#"> Nivel</a>
                             <ul>
-                              <li> Bajo <span class="badge">{{nMiColeccionNivelB}}</span></li>
-                              <li> Medio <span class="badge">{{nMiColeccionNivelM}}</span></li>
-                              <li> Avanzado <span class="badge">{{nMiColeccionNivelA}}</span></li>
+                              <li><a (click)="seleccionaDatos('mios bajo')"> Bajo </a> <span class="badge">{{nMiColeccionNivelB}}</span></li>
+                              <li><a (click)="seleccionaDatos('mios medio')"> Medio </a> <span class="badge">{{nMiColeccionNivelM}}</span></li>
+                              <li><a (click)="seleccionaDatos('mios avanzado')"> Avanzado </a> <span class="badge">{{nMiColeccionNivelA}}</span></li>
                             </ul>
                           </li>
                           <li> Tipo
@@ -144,7 +144,7 @@
         </div>
    
 
-      <listado-ejers [saludo]= "saludoo"></listado-ejers>
+      <listado-ejers [listaEjers]= "ejersAMostrar" [mostrarLista]="mostrarLista" [titulo]="datosAMostrar"></listado-ejers>
 
   </div>
 

@@ -24,6 +24,9 @@ export class  PanelProfesorComponent implements OnInit{
 	public ejercicios: Ejercicio[];
 	public loading: boolean;
 	public errorMessage: string;
+	public mostrarLista: boolean;
+	public ejersAMostrar: Ejercicio[];
+	public datosAMostrar: string;
 
 	//Totales
 	public nEjercicios: number;
@@ -67,10 +70,6 @@ export class  PanelProfesorComponent implements OnInit{
 	public otrasColeccionesTipo4: Ejercicio[];
 	public nOtrasColeccionesTipo4: number;
 
-	public saludoo: string;
-
-	
-	
 
 	constructor(
 			private _ejercicioService: EjercicioService
@@ -79,7 +78,8 @@ export class  PanelProfesorComponent implements OnInit{
 		this.title= "Panel de profesores";
 		this.user="Antonio Sarasa";
 		this.id_profesor= "000001";
-		this.saludoo="Alberto";
+		this.mostrarLista=true;
+		this.datosAMostrar="";
 		
 	}
 
@@ -576,6 +576,37 @@ export class  PanelProfesorComponent implements OnInit{
 		$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
 
 	}//fin ngAfterViewInit
+
+	public seleccionaDatos(datos){
+		switch(datos){
+			case 'ejercicios': 
+				this.ejersAMostrar= this.ejercicios;
+				this.datosAMostrar="Todos los ejercicios";
+				break;
+			case 'mios': 
+				this.ejersAMostrar= this.miColeccion;
+				this.datosAMostrar="Mi Coleccion";
+				break;
+			case 'mios bajo': 
+				this.ejersAMostrar= this.miColeccionNivelB;
+				this.datosAMostrar="Mi Coleccion nivel bajo";
+				break;
+			case 'mios medio': 
+				this.ejersAMostrar= this.miColeccionNivelM;
+				this.datosAMostrar="Mi Coleccion nivel medio";
+				break;
+			case 'mios avanzado': 
+				this.ejersAMostrar= this.miColeccionNivelA;
+				this.datosAMostrar="Mi Coleccion nivel avanzado";
+				break;
+
+
+		}
+
+		this.mostrarLista=true;
+
+		
+	}
 
 
 }
