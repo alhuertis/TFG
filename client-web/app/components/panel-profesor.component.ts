@@ -599,6 +599,54 @@ export class  PanelProfesorComponent implements OnInit{
 				this.ejersAMostrar= this.miColeccionNivelA;
 				this.datosAMostrar="Mi Coleccion nivel avanzado";
 				break;
+			case 'mios T1': 
+				this.ejersAMostrar= this.miColeccionTipo1;
+				this.datosAMostrar="Mi Coleccion ejercicios tipo 1";
+				break;
+			case 'mios T2': 
+				this.ejersAMostrar= this.miColeccionTipo2;
+				this.datosAMostrar="Mi Coleccion ejerciciostipo 2";
+				break;
+			case 'mios T3': 
+				this.ejersAMostrar= this.miColeccionTipo3;
+				this.datosAMostrar="Mi Coleccion ejercicios tipo 3";
+				break;
+			case 'mios T4': 
+				this.ejersAMostrar= this.miColeccionTipo4;
+				this.datosAMostrar="Mi Coleccion ejercicios tipo 4";
+				break;
+				case 'otros': 
+				this.ejersAMostrar= this.otrasColecciones;
+				this.datosAMostrar="Coleccion";
+				break;
+			case 'otros bajo': 
+				this.ejersAMostrar= this.otrasColeccionesNivelB;
+				this.datosAMostrar="Coleccion nivel bajo";
+				break;
+			case 'otros medio': 
+				this.ejersAMostrar= this.otrasColeccionesNivelM;
+				this.datosAMostrar="Coleccion nivel medio";
+				break;
+			case 'otros avanzado': 
+				this.ejersAMostrar= this.otrasColeccionesNivelA;
+				this.datosAMostrar="Coleccion nivel avanzado";
+				break;
+			case 'otros T1': 
+				this.ejersAMostrar= this.otrasColeccionesTipo1;
+				this.datosAMostrar="Coleccion ejercicios tipo 1";
+				break;
+			case 'otros T2': 
+				this.ejersAMostrar= this.otrasColeccionesTipo2;
+				this.datosAMostrar="Coleccion ejercicios tipo 2";
+				break;
+			case 'otros T3': 
+				this.ejersAMostrar= this.otrasColeccionesTipo3;
+				this.datosAMostrar="Coleccion ejercicios tipo 3";
+				break;
+			case 'otros T4': 
+				this.ejersAMostrar= this.otrasColeccionesTipo4;
+				this.datosAMostrar="Coleccion ejercicios tipo 4";
+				break;
 
 
 		}
