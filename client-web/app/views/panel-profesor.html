@@ -26,7 +26,7 @@
         <div class="col-md-3 menu-profesor-arbol">
             <ul id="tree1">
 
-                <li><a href="#"> Ejercicios </a><span class="badge"> {{nEjercicios}}</span>
+                <li><a routerLink="/profesor/listar-ejercicios"> Ejercicios </a><span class="badge"> {{nEjercicios}}</span>
 
                     <ul>
                       <li><a href="#"> Mi Coleccion </a> <span class="badge"> {{nMiColeccion}}</span>
@@ -144,7 +144,7 @@
         </div>
    
 
-      <router-outlet></router-outlet>
+      <listado-ejers [saludo]= "saludoo"></listado-ejers>
 
   </div>
 

@@ -18,6 +18,7 @@ var PanelProfesorComponent = (function () {
         this.title = "Panel de profesores";
         this.user = "Antonio Sarasa";
         this.id_profesor = "000001";
+        this.saludoo = "Alberto";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;

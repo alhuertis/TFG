@@ -56,29 +56,29 @@ var EjercicioService = (function () {
         return this._http.get(this.url + 'ejercicios/miColeccionTipo4/' + id_profesor).map(function (res) { return res.json(); });
     };
     //Otras colecciones
-    EjercicioService.prototype.getEjersOtraColeccion = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccion/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColecciones = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColecciones/' + id_profesor).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjersOtraColeccionNivelA = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccionNivelA/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColeccionesNivelA = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColeccionesNivelA/' + id_profesor).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjersOtraColeccionNivelM = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccionNivelM/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColeccionesNivelM = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColeccionesNivelM/' + id_profesor).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjersOtraColeccionNivelB = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccionNivelB/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColeccionesNivelB = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColeccionesNivelB/' + id_profesor).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjersOtraColeccionTipo1 = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccionTipo1/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColeccionesTipo1 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColeccionesTipo1/' + id_profesor).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjersOtraColeccionTipo2 = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccionTipo2/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColeccionesTipo2 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColeccionesTipo2/' + id_profesor).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjersOtraColeccionTipo3 = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccionTipo3/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColeccionesTipo3 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColeccionesTipo3/' + id_profesor).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjersOtraColeccionTipo4 = function (id_profesor) {
-        return this._http.get(this.url + 'ejercicios/miColeccionTipo4/' + id_profesor).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjersOtrasColeccionesTipo4 = function (id_profesor) {
+        return this._http.get(this.url + 'ejercicios/otrasColeccionesTipo4/' + id_profesor).map(function (res) { return res.json(); });
     };
     return EjercicioService;
 }());

@@ -6,7 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component';
-import {EjercicioMostrarComponent} from './components/ejercicio-mostrar.component';
+import {ListadoProfesorComponent} from './components/listado-profesor.component';
 
 const appRoutes: Routes = [
 
@@ -17,7 +17,7 @@ const appRoutes: Routes = [
 		children:[
 			{path:'', redirectTo:'profesor', pathMatch:'full'},
 			{path:'crear-ejercicio', component: EjercicioAddComponent},
-			{path:'mostrar-ejercicios', component: EjercicioMostrarComponent}
+			{path:'listar-ejercicios', component: ListadoProfesorComponent}
 		]	
 	},
 

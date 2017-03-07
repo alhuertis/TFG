@@ -67,6 +67,8 @@ export class  PanelProfesorComponent implements OnInit{
 	public otrasColeccionesTipo4: Ejercicio[];
 	public nOtrasColeccionesTipo4: number;
 
+	public saludoo: string;
+
 	
 	
 
@@ -76,7 +78,8 @@ export class  PanelProfesorComponent implements OnInit{
 	){
 		this.title= "Panel de profesores";
 		this.user="Antonio Sarasa";
-		this.id_profesor= "000001"
+		this.id_profesor= "000001";
+		this.saludoo="Alberto";
 		
 	}
 

@@ -4,7 +4,7 @@ var router_1 = require("@angular/router");
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
-var ejercicio_mostrar_component_1 = require("./components/ejercicio-mostrar.component");
+var listado_profesor_component_1 = require("./components/listado-profesor.component");
 var appRoutes = [
     //{path: '', component: FavoritosListComponent},
     //{path:'marcador/:id', component: FavoritoDetailComponent},
@@ -13,7 +13,7 @@ var appRoutes = [
         children: [
             { path: '', redirectTo: 'profesor', pathMatch: 'full' },
             { path: 'crear-ejercicio', component: ejercicio_add_component_1.EjercicioAddComponent },
-            { path: 'mostrar-ejercicios', component: ejercicio_mostrar_component_1.EjercicioMostrarComponent }
+            { path: 'listar-ejercicios', component: listado_profesor_component_1.ListadoProfesorComponent }
         ]
     },
     { path: 'alumno', component: panel_alumno_component_1.PanelAlumnoComponent,
