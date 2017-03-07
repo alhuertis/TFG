@@ -19,23 +19,144 @@
   </div>
 </nav>
 
-<div class="panel-profesor container-fluid" style="margin-top:30px;">
+<div class="panel-alumno container-fluid" style="margin-top:30px;">
 
     <div class="row">
-        <div class="col-md-3 menu-profesor-arbol">
-            <ul id="tree1">                
+        <div class="col-md-3 menu-alumno-arbol">
+            <ul id="tree1">
 
-              <li><a href="#"> Actividades: {{nEjercicios}}</a>
-                <ul>
-                    <li> Nivel</li>
+                <li><a href="#"> Actividades </a><span class="badge"> {{nEjercicios}}</span>
+
                     <ul>
-                        <li> Bajo</li>
-                        <li> Medio</li>
-                        <li> Avanzado</li>
-                        </ul>
-                </ul>
+                      <li><a href="#"> Mis actividades hechas </a> <span class="badge"> {{nMiColeccion}}</span>
+                        <ul>
+                          <li><a href="#"> Nivel</a>
+                            <ul>
+                              <li> Nivel Inicial <span class="badge">{{nMiColeccionNivelB}}</span></li>
+                              <li> Nivel Medio <span class="badge">{{nMiColeccionNivelM}}</span></li>
+                              <li> Nivel Avanzado <span class="badge">{{nMiColeccionNivelA}}</span></li>
+                            </ul>
+                          </li>
+                          <li><a href="#"> Profesor </a>
+                            <ul>
+                              <li> Profesor 1 <span class="badge">{{nMiColeccionTipo1}}</span></li>
+                                <ul>
+                                  <li> Nivel Inicial <span class="badge">{{nMiColeccionNivelB}}</span></li>
+                                  <li> Nivel Medio <span class="badge">{{nMiColeccionNivelM}}</span></li>
+                                  <li> Nivel Avanzado <span class="badge">{{nMiColeccionNivelA}}</span></li>
+                                </ul>
+                              <li> Profesor 2 <span class="badge">{{nMiColeccionTipo2}}</span></li>
+                                <ul>
+                                  <li> Nivel Inicial <span class="badge">{{nMiColeccionNivelB}}</span></li>
+                                  <li> Nivel Medio <span class="badge">{{nMiColeccionNivelM}}</span></li>
+                                  <li> Nivel Avanzado <span class="badge">{{nMiColeccionNivelA}}</span></li>
+                                </ul>
+                              <li> Profesor 3 <span class="badge">{{nMiColeccionTipo3}}</span></li>
+                              <li> Profesor 4 <span class="badge">{{nMiColeccionTipo4}}</span></li>
+                            </ul>
+                          </li> 
+                          <li><a href="#"> Estadísticas</a></li>
+                          </ul>
+                        </li>
+                        <li> Actividades propuestas  <span class="badge"> {{nEjercicios-nMiColeccion}}</span>
+                        <ul>
+                          <li> Nivel
+                            <ul>
+                              <li> Bajo <span class="badge">{{nOtrasColeccionesNivelB}}</span></li>
+                              <li> Medio <span class="badge">{{nOtrasColeccionesNivelM}}</span></li>
+                              <li> Avanzado <span class="badge">{{nOtrasColeccionesNivelA}}</span></li>
+                            </ul>
+                          </li>
+                          <li> Tipo
+                            <ul>
+                              <li> Tipo 1 <span class="badge">{{nOtrasColeccionesTipo1}}</span></li>
+                              <li> Tipo 2 <span class="badge">{{nOtrasColeccionesTipo2}}</span></li>
+                              <li> Tipo 3 <span class="badge">{{nOtrasColeccionesTipo3}}</span></li>
+                              <li> Tipo 4 <span class="badge">{{nOtrasColeccionesTipo4}}</span></li>
+                            </ul>
+                          </li> 
+                          </ul>
+                        </li>
+                    </ul>
                 </li>
+                
+
+                <li><a href="#"> Actividades</a>
+
+                    <ul>
+                      <li> Mi Coleccion
+                        <ul>
+                          <li> Nivel
+                            <ul>
+                              <li> Bajo</li>
+                              <li> Medio</li>
+                              <li> Avanzado</li>
+                            </ul>
+                          </li>
+                          <li> Actividades visibles
+                            <ul>
+                              <li> Nivel
+                                <ul>
+                                  <li> Bajo</li>
+                                  <li> Medio</li>
+                                  <li> Avanzado</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                          <li> Actividades no visibles
+                            <ul>
+                              <li> Nivel
+                                <ul>
+                                  <li> Bajo</li>
+                                  <li> Medio</li>
+                                  <li> Avanzado</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li> 
+                          </ul>
+                        </li>
+                        <li> Otras Colecciones
+                        <ul>
+                          <li> Nivel
+                            <ul>
+                              <li> Bajo</li>
+                              <li> Medio</li>
+                              <li> Avanzado</li>
+                            </ul>
+                          </li>
+                          <li> Tipo
+                            <ul>
+                              <li> Tipo 1</li>
+                              <li> Tipo 2</li>
+                              <li> Tipo 3</li>
+                              <li> Tipo 4</li>
+                            </ul>
+                          </li>
+                          <li> Profesor
+                            <ul>
+                              <li> Antonio Sarasa</li>
+                              <li> Ana</li>
+                            </ul>
+                          </li>  
+                          </ul>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
+
             </ul>
+                
         </div>
-    </div>
+   
+
+      <router-outlet></router-outlet>
+
+  </div>
+
 </div>
+

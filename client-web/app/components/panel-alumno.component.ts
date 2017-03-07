@@ -13,7 +13,7 @@ declare var $:any;
 	selector: 'panel-alumno',
 	templateUrl: 'app/views/panel-alumno.html',
 	providers: [EjercicioService], //Necesitamos esto para poder usar los metodos
-	styleUrls: ['../../assets/css/menu-profesor.css'],
+	styleUrls: ['../../assets/css/menu-alumno.css'],
 }) 
 
 export class  PanelAlumnoComponent implements OnInit{
