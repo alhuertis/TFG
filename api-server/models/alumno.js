@@ -22,7 +22,11 @@ var AlumnoSchema = Schema({
             autor: String,
             institucion_profesor: String,
             fechaCreacion: Date,
+<<<<<<< HEAD
             fechaModificacion: Date, 
+=======
+            fechaModificacion: Date,
+>>>>>>> eef676e82b364fcf41ae55da27a67cde35fb142e
             enunciado: String,
             fraseATraducir: String,
             solucionFLogico: String,
