@@ -117,7 +117,7 @@ PanelAlumnoComponent = __decorate([
         selector: 'panel-alumno',
         templateUrl: 'app/views/panel-alumno.html',
         providers: [ejercicio_service_1.EjercicioService],
-        styleUrls: ['../../assets/css/menu-profesor.css'],
+        styleUrls: ['../../assets/css/menu-alumno.css'],
     }),
     __metadata("design:paramtypes", [ejercicio_service_1.EjercicioService])
 ], PanelAlumnoComponent);

@@ -11,16 +11,18 @@ var appRoutes = [
     //{path:'crear-marcador', component: PanelProfesorComponent},
     { path: 'profesor', component: panel_profesor_component_1.PanelProfesorComponent,
         children: [
-            { path: '', redirectTo: 'profesor', pathMatch: 'full' },
+            //{path:'', redirectTo:'profesor', pathMatch:'full'},
             { path: 'crear-ejercicio', component: ejercicio_add_component_1.EjercicioAddComponent },
             { path: 'listar-ejercicios', component: listado_profesor_component_1.ListadoProfesorComponent }
         ]
     },
     { path: 'alumno', component: panel_alumno_component_1.PanelAlumnoComponent,
-        children: []
+        children: [
+            { path: '', redirectTo: 'alumno', pathMatch: 'full' }
+        ]
     },
     //Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
-    { path: '**', component: panel_profesor_component_1.PanelProfesorComponent },
+    { path: '**', component: panel_alumno_component_1.PanelAlumnoComponent },
 ];
 exports.appRoutingProviders = [];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
