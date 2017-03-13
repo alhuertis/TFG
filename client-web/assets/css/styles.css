@@ -102,6 +102,17 @@ animation-name: fadeInDown;
 
 .add-formulario-ejercicio{
 }
+
+.ejer-lista{
+	background: #eee;
+	padding: 10px !important;
+	border-radius: 4px;
+	margin-bottom: 8px !important;
+}
+
+.ejer-lista ul{
+	list-style-type: none;
+}
 /*******FIN PANEL PROFESOR ********/
 
 

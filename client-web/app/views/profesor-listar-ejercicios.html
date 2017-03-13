@@ -1,14 +1,38 @@
 <div class="col-md-5">
 	<h2 class="text-center">{{titulo}}</h2>
 	<div *ngIf="mostrarLista">
-		<div *ngFor="let ejercicio of listaEjers; let i=index">
-			<ul>
-				<li><strong>Titulo:</strong>{{ejercicio.titulo}}</li>
-			</ul>
+
+		<div class="row">
+			<div class="col-md-11 ejer-lista" *ngFor="let ejercicio of listaEjers; let i=index">
+				<div class="row">
+					<div class="col-md-5">
+						<ul>
+							<li><strong>Titulo:</strong>{{ejercicio.titulo}}</li>
+							<li><strong>Autor:</strong>{{ejercicio.autor}}</li>
+							<li><strong>Tipo:</strong>{{ejercicio.tipo}}</li>
+							<li><strong>Nivel:</strong>{{ejercicio.nivel}}</li>
+						</ul>
+					</div>
+
+					<div class="col-md-5">
+						<div class="row">
+							
+							<a class="btn btn-info">Añadir</a>
+							<a class="btn btn-warning">Modificar</a>
+
+						</div>
+						
+					</div>
+				
+				</div>
+				
+			</div>
+
+
 		</div>
 	</div>
 </div>
 
-<div class="col-md-3" style="background: #126142">
+<div class="col-md-3" style="background: #ddd">
 	<h3>Aqui va la parte de carrito</h3>
 </div>

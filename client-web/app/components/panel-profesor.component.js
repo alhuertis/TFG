@@ -339,10 +339,10 @@ var PanelProfesorComponent = (function () {
                         if (this == e.target) {
                             var icon = $(this).children('i:first');
                             icon.toggleClass(openedClass + " " + closedClass);
-                            $(this).children().children().toggle();
+                            $(this).children().children().slideToggle(200);
                         }
                     });
-                    branch.children().children().toggle();
+                    branch.children().children().slideToggle(200);
                 });
                 //fire event from the dynamically added icon
                 tree.find('.branch .indicator').each(function () {
@@ -368,8 +368,8 @@ var PanelProfesorComponent = (function () {
         });
         //Initialization of treeviews
         $('#tree1').treed();
-        $('#tree2').treed({ openedClass: 'glyphicon-folder-open', closedClass: 'glyphicon-folder-close' });
-        $('#tree3').treed({ openedClass: 'glyphicon-chevron-right', closedClass: 'glyphicon-chevron-down' });
+        //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
+        //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
     }; //fin ngAfterViewInit
     PanelProfesorComponent.prototype.seleccionaDatos = function (datos) {
         switch (datos) {
