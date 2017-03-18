@@ -1,48 +1,48 @@
 <cabecera-profesor></cabecera-profesor>
 
-<div class="panel-profesor container-fluid" style="margin-top:30px;">
+<div class="panel-profesor container-fluid">
 
     <div class="row">
         <div class="col-md-3 menu-profesor-arbol">
             <ul id="tree1">
 
-                <li><a (click)="seleccionaDatos('ejercicios')"> Ejercicios </a><span class="badge"> {{nEjercicios}}</span>
+                <li> Ejercicios <span class="badge badge-small"> {{nEjercicios}}</span><i (click)="seleccionaDatos('ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
 
                     <ul>
-                      <li><a (click)="seleccionaDatos('mios')"> Mi Coleccion </a> <span class="badge"> {{nMiColeccion}}</span>
+                      <li> Mi Coleccion <span class="badge badge-small"> {{nMiColeccion}}</span><i (click)="seleccionaDatos('mios')" class="glyphicon glyphicon-eye-open ojo"></i>
                         <ul>
                           <li><a href="#"> Nivel</a>
                             <ul>
-                              <li><a (click)="seleccionaDatos('mios bajo')"> Bajo </a> <span class="badge">{{nMiColeccionNivelB}}</span></li>
-                              <li><a (click)="seleccionaDatos('mios medio')"> Medio </a> <span class="badge">{{nMiColeccionNivelM}}</span></li>
-                              <li><a (click)="seleccionaDatos('mios avanzado')"> Avanzado </a> <span class="badge">{{nMiColeccionNivelA}}</span></li>
+                              <li> Bajo <span class="badge badge-small">{{nMiColeccionNivelB}}</span><i (click)="seleccionaDatos('mios bajo')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span><i (click)="seleccionaDatos('mios medio')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span><i (click)="seleccionaDatos('mios avanzado')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li>
                           <li> Tipo
                             <ul>
-                              <li><a (click)="seleccionaDatos('mios T1')"> Tipo 1</a> <span class="badge">{{nMiColeccionTipo1}}</span></li>
-                              <li><a (click)="seleccionaDatos('mios T2')"> Tipo 2 </a><span class="badge">{{nMiColeccionTipo2}}</span></li>
-                              <li><a (click)="seleccionaDatos('mios T3')"> Tipo 3 </a><span class="badge">{{nMiColeccionTipo3}}</span></li>
-                              <li><a (click)="seleccionaDatos('mios T4')"> Tipo 4 </a><span class="badge">{{nMiColeccionTipo4}}</span></li>
+                              <li> Tipo 1 <span class="badge badge-small">{{nMiColeccionTipo1}}</span><i (click)="seleccionaDatos('mios T1')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 2 <span class="badge badge-small">{{nMiColeccionTipo2}}</span><i (click)="seleccionaDatos('mios T2')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 3 <span class="badge badge-small">{{nMiColeccionTipo3}}</span><i (click)="seleccionaDatos('mios T3')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 4 <span class="badge badge-small">{{nMiColeccionTipo4}}</span><i (click)="seleccionaDatos('mios T4')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li> 
                           </ul>
                         </li>
-                        <li> Otras Colecciones  <span class="badge"> {{nEjercicios-nMiColeccion}}</span>
+                        <li> Otras Colecciones <span class="badge badge-small"> {{nEjercicios-nMiColeccion}}</span><i (click)="seleccionaDatos('otros')" class="glyphicon glyphicon-eye-open ojo"></i>
                         <ul>
                           <li> Nivel
                             <ul>
-                              <li><a (click)="seleccionaDatos('otros bajo')"> Bajo </a><span class="badge">{{nOtrasColeccionesNivelB}}</span></li>
-                              <li><a (click)="seleccionaDatos('otros medio')"> Medio </a><span class="badge">{{nOtrasColeccionesNivelM}}</span></li>
-                              <li><a (click)="seleccionaDatos('otros avanzado')"> Avanzado </a><span class="badge">{{nOtrasColeccionesNivelA}}</span></li>
+                              <li> Bajo <span class="badge badge-small">{{nOtrasColeccionesNivelB}}</span><i (click)="seleccionaDatos('otros bajo')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Medio <span class="badge badge-small">{{nOtrasColeccionesNivelM}}</span><i (click)="seleccionaDatos('otros medio')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Avanzado <span class="badge badge-small">{{nOtrasColeccionesNivelA}}</span><i (click)="seleccionaDatos('otros avanzado')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li>
                           <li> Tipo
                             <ul>
-                              <li><a (click)="seleccionaDatos('otros T1')"> Tipo 1 </a><span class="badge">{{nOtrasColeccionesTipo1}}</span></li>
-                              <li><a (click)="seleccionaDatos('otros T2')"> Tipo 2 </a><span class="badge">{{nOtrasColeccionesTipo2}}</span></li>
-                              <li><a (click)="seleccionaDatos('otros T3')"> Tipo 3 </a><span class="badge">{{nOtrasColeccionesTipo3}}</span></li>
-                              <li><a (click)="seleccionaDatos('otros T4')"> Tipo 4 </a><span class="badge">{{nOtrasColeccionesTipo4}}</span></li>
+                              <li> Tipo 1 <span class="badge badge-small">{{nOtrasColeccionesTipo1}}</span><i (click)="seleccionaDatos('otros T1')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 2 <span class="badge badge-small">{{nOtrasColeccionesTipo2}}</span><i (click)="seleccionaDatos('otros T2')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 3 <span class="badge badge-small">{{nOtrasColeccionesTipo3}}</span><i (click)="seleccionaDatos('otros T3')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 4 <span class="badge badge-small">{{nOtrasColeccionesTipo4}}</span><i (click)="seleccionaDatos('otros T4')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li> 
                           </ul>
@@ -114,21 +114,14 @@
                         </li>
                     </ul>
                 </li>
-
-
-
-
-
-            </ul>
-                
+            </ul>                
         </div>
 
-        <div class="col-md-5">
-          <h2 class="text-center">{{titulo}}</h2>
+        <div class="col-md-5 panel-ejercicios">
+          <h2 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h2>
           <div *ngIf="mostrarLista">
-
             <div class="row">
-              <div class="col-md-11 ejer-lista" *ngFor="let ejercicio of pagedItems; let i=index">
+              <div class="col-md-11 ejer-lista animated fadeInLeft" *ngFor="let ejercicio of pagedItems; let i=index">
                 <div class="row">
                   <div class="col-md-5">
                     <ul>
@@ -141,20 +134,14 @@
 
                   <div class="col-md-5">
                     <div class="row">
-                      
                       <a class="btn btn-info">Añadir</a>
                       <a class="btn btn-warning">Modificar</a>
-
                     </div>
-                    
                   </div>
-                
                 </div>
-                
               </div>
-
-
             </div>
+
             <div class="row">
               <div class="col-md-11">
                 <!-- pager -->
@@ -180,9 +167,9 @@
           </div>
         </div>
 
-        <div class="col-md-3" style="background: #ddd">
+        <!--<div class="col-md-3" style="background: #ddd">
           <h3>Aqui va la parte de carrito</h3>
-        </div>
+        </div>-->
    
 
   </div>

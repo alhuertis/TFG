@@ -63,3 +63,29 @@
     padding:0px 0px 0px 0px;
     outline: 0;
 }
+
+#tree1 li:hover{
+	cursor: pointer;
+}
+
+#tree1 .badge-small{
+	cursor: auto;
+}
+
+.ojo{
+	top: 2px;
+	left: 5px;
+	color: rgba(119,119,119,1);
+	cursor: pointer;
+	font-size: 0.9em;
+}
+
+.ojo:hover{
+	color: rgb(39, 41, 49);
+}
+
+.badge-small{
+	font-size: 0.6em;
+	background: rgba(39, 41, 49, 0.8);
+	margin-top: -3px;
+}

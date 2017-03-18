@@ -20,7 +20,7 @@ var PanelProfesorComponent = (function () {
         this.title = "Panel de profesores";
         this.user = "Antonio Sarasa";
         this.id_profesor = "000001";
-        this.mostrarLista = true;
+        this.mostrarLista = false;
         this.datosAMostrar = "";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
@@ -35,9 +35,6 @@ var PanelProfesorComponent = (function () {
             else {
                 _this.loading = false;
                 _this.nEjercicios = _this.ejercicios.length;
-                _this.ejersAMostrar = _this.ejercicios;
-                _this.datosAMostrar = "Todos los ejercicios";
-                _this.mostrarLista = true;
             }
         }, function (error) {
             _this.errorMessage = error;
@@ -375,6 +372,18 @@ var PanelProfesorComponent = (function () {
         $('#tree1').treed();
         //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
         //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
+        /*$('#tree1 li,#tree1 span, #tree1 i').on('mouseover', function(){
+            $(this).children('.ojo').animate({
+                opacity: "1",
+                top:"2"
+            }, 100, "linear");
+        });
+
+        $('#tree1 li').on('mouseout', function(){
+            $(this).children('.ojo').animate({
+                opacity: "0",
+            }, 100, "linear");
+        });*/
     }; //fin ngAfterViewInit
     PanelProfesorComponent.prototype.seleccionaDatos = function (datos) {
         switch (datos) {

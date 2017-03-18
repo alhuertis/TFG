@@ -18,8 +18,8 @@
 
 /*********FIN ANIMACIONES***********/
 .animated {
-	-webkit-animation-duration: 1s;
-	animation-duration: 1s;
+	-webkit-animation-duration: 0.5s;
+	animation-duration: 0.5s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }     
@@ -47,7 +47,6 @@
 	-webkit-animation-name: fadeInLeft;
 	animation-name: fadeInLeft;
 } 
-animation-name: fadeInDown;
 /*********HEADER PROFESOR**********/
 
 .navbar-brand, .navbar-header span {
@@ -67,8 +66,8 @@ animation-name: fadeInDown;
     color: #000 !important;
 }
 .navbar-default {
-    background-color: #1bd3bb;
-	border-color: #27292B;
+    background-color: #39a890;
+	border-bottom: 1px solid #3b9b86;
 }
 
 .btn-crear-eje{
@@ -82,7 +81,7 @@ animation-name: fadeInDown;
 
 /*******PANEL PROFESOR ********/
 .menu-profesor-arbol{
-	margin: 10px !important;
+	/*background: blue;*/
 	font-size: 14px !important;
 }
 
@@ -91,27 +90,35 @@ animation-name: fadeInDown;
 
 }
 
-.menu-profesor-arbol{
+.panel-ejercicios{
+	/*background: red;*/
 }
 
-.add-ejercicio{
-}
-
-.ejercicio-add-cabecera{
-}
-
-.add-formulario-ejercicio{
+.panel-ejercicios > h2{
+	/*background: red;*/
+	margin: 0px !important;
+	margin-bottom:4px !important; 
 }
 
 .ejer-lista{
-	background: #eee;
-	padding: 10px !important;
+	background: rgba(73, 68, 68,0.8);
+	padding: 7px !important;
 	border-radius: 4px;
 	margin-bottom: 8px !important;
 }
 
 .ejer-lista ul{
 	list-style-type: none;
+}
+
+.ejer-lista ul li{
+	color: white;
+	font-size: 1em;
+}
+
+.active a{
+	background: #39a890 !important;
+	border: 1px solid #39a890 !important;
 }
 /*******FIN PANEL PROFESOR ********/
 
