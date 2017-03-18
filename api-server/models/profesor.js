@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var Ejercicio= require('./ejercicio');
 var ProfesorSchema = Schema({
 
     _id: String,
@@ -15,20 +15,7 @@ var ProfesorSchema = Schema({
         _id: String,
         ejercicios:[{
             //Campo de los ejercicios
-            _id: String,
-            titulo: String,
-            nivel: String,
-            tipo: Number,
-            autor: String,
-            institucion_profesor: String,
-            fechaCreacion: Date,
-            fechaModificacion: Date,
-            enunciado: String,
-            fraseATraducir: String,
-            solucionFLogico: String,
-            solucionFPatron: String,
-            solucionPEspanol: String,
-            solucionPLatin: String
+            Ejercicio
         }],
         alumnos: [{
             _id: String,

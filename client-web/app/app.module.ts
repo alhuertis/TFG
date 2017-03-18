@@ -7,8 +7,8 @@ import {routing, appRoutingProviders} from './app.routing';
 
 import {PanelProfesorComponent} from './components/panel-profesor.component'; 
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
-import {EjercicioAddComponent} from './components/ejercicio-add.component';
-import {ListadoProfesorComponent} from './components/listado-profesor.component'; 
+import {EjercicioAddComponent} from './components/ejercicio-add.component'; 
+import {CabeceraProfesorComponent} from './components/cabecera-profesor.component'; 
 
 
 
@@ -24,8 +24,8 @@ import {ListadoProfesorComponent} from './components/listado-profesor.component'
   			AppComponent,
         PanelProfesorComponent,
         EjercicioAddComponent,
-        ListadoProfesorComponent,
-        PanelAlumnoComponent
+        PanelAlumnoComponent,
+        CabeceraProfesorComponent
 
    ],
   providers: [appRoutingProviders],

@@ -15,6 +15,8 @@ var ejercicio_service_1 = require("../services/ejercicio.service");
 var PanelProfesorComponent = (function () {
     function PanelProfesorComponent(_ejercicioService) {
         this._ejercicioService = _ejercicioService;
+        // pager object
+        this.pager = {};
         this.title = "Panel de profesores";
         this.user = "Antonio Sarasa";
         this.id_profesor = "000001";
@@ -33,6 +35,9 @@ var PanelProfesorComponent = (function () {
             else {
                 _this.loading = false;
                 _this.nEjercicios = _this.ejercicios.length;
+                _this.ejersAMostrar = _this.ejercicios;
+                _this.datosAMostrar = "Todos los ejercicios";
+                _this.mostrarLista = true;
             }
         }, function (error) {
             _this.errorMessage = error;
@@ -443,6 +448,17 @@ var PanelProfesorComponent = (function () {
                 break;
         }
         this.mostrarLista = true;
+        this.setPage(1);
+    };
+    PanelProfesorComponent.prototype.setPage = function (page) {
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+        // get pager object from service
+        this.pager = this._ejercicioService.getPager(this.ejersAMostrar.length, page);
+        // get current page of items
+        this.pagedItems = this.ejersAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        //alert(this.ejercicios.slice(1,5));
     };
     return PanelProfesorComponent;
 }());

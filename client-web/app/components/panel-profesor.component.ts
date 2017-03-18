@@ -5,6 +5,8 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {EjercicioService} from '../services/ejercicio.service';
 import {Ejercicio} from '../models/ejercicio';
 
+//Para usar undescore y jquery
+import * as _ from 'underscore';
 declare var $:any;
 
 //los decoradores no tienen punto y coma
@@ -27,6 +29,11 @@ export class  PanelProfesorComponent implements OnInit{
 	public mostrarLista: boolean;
 	public ejersAMostrar: Ejercicio[];
 	public datosAMostrar: string;
+
+	// pager object
+    pager: any = {};
+    // paged items
+    public pagedItems: Ejercicio[];
 
 	//Totales
 	public nEjercicios: number;
@@ -85,7 +92,6 @@ export class  PanelProfesorComponent implements OnInit{
 
 
 	ngOnInit(){
-
 		//Obtencion de datos
 		this._ejercicioService.getEjercicios().subscribe(
 			result =>{
@@ -98,6 +104,9 @@ export class  PanelProfesorComponent implements OnInit{
 				else{
 					this.loading=false;
 					this.nEjercicios= this.ejercicios.length;
+					this.ejersAMostrar= this.ejercicios;
+					this.datosAMostrar="Todos los ejercicios";
+					this.mostrarLista=true;
 				}
 
 			},
@@ -509,6 +518,9 @@ export class  PanelProfesorComponent implements OnInit{
 			}
 		);//fin getEjercicios de mi coleccion tipo 4
 
+
+
+
 	}//fin ngOnInit
 
 	ngAfterViewInit(){
@@ -652,9 +664,25 @@ export class  PanelProfesorComponent implements OnInit{
 		}
 
 		this.mostrarLista=true;
+		this.setPage(1);
 
 		
 	}
+
+
+	setPage(page: number) {
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+
+        // get pager object from service
+       	this.pager = this._ejercicioService.getPager(this.ejersAMostrar.length, page);
+        // get current page of items
+        this.pagedItems = this.ejersAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+	
+		//alert(this.ejercicios.slice(1,5));
+		
+    }
 
 
 }

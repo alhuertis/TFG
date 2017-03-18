@@ -6,20 +6,20 @@ import {Routes, RouterModule} from '@angular/router';
 import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component';
-import {ListadoProfesorComponent} from './components/listado-profesor.component';
+import {CabeceraProfesorComponent} from './components/cabecera-profesor.component';
 
 const appRoutes: Routes = [
 
 	//{path: '', component: FavoritosListComponent},
 	//{path:'marcador/:id', component: FavoritoDetailComponent},
 	//{path:'crear-marcador', component: PanelProfesorComponent},
+	{path:'', redirectTo:'profesor', pathMatch:'full'},
 	{path: 'profesor', component: PanelProfesorComponent,
 		children:[
-			{path:'', redirectTo:'profesor', pathMatch:'full'},
-			{path:'crear-ejercicio', component: EjercicioAddComponent},
-			{path:'listar-ejercicios', component: ListadoProfesorComponent}
-		]	
-	},
+				{path:'cabecera-profesor', component: CabeceraProfesorComponent},
+			]
+	},		
+	{path:'crear-ejercicio', component: EjercicioAddComponent},
 
 	{path: 'alumno', component: PanelAlumnoComponent,
 		children:[
