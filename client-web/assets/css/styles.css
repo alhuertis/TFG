@@ -94,7 +94,7 @@
 }
 
 .ejer-lista input[type=checkbox]{
-	margin-top: 37px;
+	margin-top: 25px;
 	width: 10px;
 	height: 10px;
 
@@ -129,11 +129,13 @@
 
 .ejer-lista ul{
 	list-style-type: none;
+	padding: 10px;
 }
 
 .ejer-lista ul li{
 	color: white;
 	font-size: 1em;
+	margin-bottom:3px;
 }
 
 .pagination a{
@@ -146,7 +148,7 @@
 }
 
 .panel-actividad{
-	top:45px;
+	top:55px;
 }
 
 .panel-actividad h4{
