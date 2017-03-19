@@ -16,6 +16,7 @@ export class Ejercicio{
 		public solucionFLogico: string,
 		public solucionFPatron: string,
 		public solucionPEspanol: string,
-		public solucionPLatin: string
+		public solucionPLatin: string,
+		public marcado: Boolean
 	){}
 }

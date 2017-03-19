@@ -120,7 +120,7 @@
         <div class="col-md-5 col-sm-5 panel-ejercicios">
           <div class="row">
             <div class="col-sm-12">
-              <h2 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h2>
+              <h3 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h3>
             </div>
           </div>
           
@@ -129,7 +129,7 @@
               <div class="col-md-12 ejer-lista animated fadeInLeft" *ngFor="let ejercicio of pagedItems; let i=index">
                 <div class="row">
                   <div class="col-sm-1">
-                      <input type="checkbox">
+                      <input type="checkbox" [checked]="ejercicio.marcado" (click)="addActividad($event, ejercicio._id)">
                   </div>
                   <div class="col-sm-7">
                     <ul>
@@ -174,14 +174,23 @@
           </div>
         
 
-        <!--<div class="col-md-4 col-sm-4" style="background: #ddd; opacity:0.5">
+        <div class="col-md-4 col-sm-4 panel-actividad" *ngIf="mostrarLista">
           <div class="row">
             <div class="col-md-12">
-              <h2>Aqui va la parte de carrito</h2>
+              <h4 class="text-center">Listo para actividad</h4>
             </div>
-
           </div>
-        </div>-->
+
+          <div class="row"> 
+            <div class="col-md-12">
+              <ul>
+                <li *ngFor="let ejer of actividad">
+                  {{ejer.titulo}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
    
 
   </div>

@@ -2,7 +2,7 @@
 var Ejercicio = (function () {
     function Ejercicio(
         //El id es el interno que asigna solo mongo, pero nos viene bien para recuperarlo
-        _id, id_profesor, titulo, nivel, tipo, autor, institucion_profesor, fechaCreacion, fechaModificacion, enunciado, fraseATraducir, solucionFLogico, solucionFPatron, solucionPEspanol, solucionPLatin) {
+        _id, id_profesor, titulo, nivel, tipo, autor, institucion_profesor, fechaCreacion, fechaModificacion, enunciado, fraseATraducir, solucionFLogico, solucionFPatron, solucionPEspanol, solucionPLatin, marcado) {
         this._id = _id;
         this.id_profesor = id_profesor;
         this.titulo = titulo;
@@ -18,6 +18,7 @@ var Ejercicio = (function () {
         this.solucionFPatron = solucionFPatron;
         this.solucionPEspanol = solucionPEspanol;
         this.solucionPLatin = solucionPLatin;
+        this.marcado = marcado;
     }
     return Ejercicio;
 }());

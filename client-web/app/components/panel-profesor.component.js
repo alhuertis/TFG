@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
 var core_1 = require("@angular/core");
 var ejercicio_service_1 = require("../services/ejercicio.service");
+//Para usar undescore y jquery
+var _ = require("underscore");
 //los decoradores no tienen punto y coma
 var PanelProfesorComponent = (function () {
     function PanelProfesorComponent(_ejercicioService) {
@@ -22,6 +24,7 @@ var PanelProfesorComponent = (function () {
         this.id_profesor = "000001";
         this.mostrarLista = false;
         this.datosAMostrar = "";
+        this.actividad = [];
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -468,6 +471,18 @@ var PanelProfesorComponent = (function () {
         // get current page of items
         this.pagedItems = this.ejersAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
         //alert(this.ejercicios.slice(1,5));
+    };
+    PanelProfesorComponent.prototype.addActividad = function (event, id) {
+        var indiceEj = _.findIndex(this.ejersAMostrar, { _id: id });
+        if (event.target.checked) {
+            this.actividad[this.actividad.length] = this.ejersAMostrar[indiceEj];
+            this.ejersAMostrar[indiceEj].marcado = true;
+        }
+        else {
+            var indiceAct = _.findIndex(this.actividad, { _id: id });
+            this.actividad.splice(indiceAct, 1);
+            this.ejersAMostrar[indiceEj].marcado = false;
+        }
     };
     return PanelProfesorComponent;
 }());

@@ -29,6 +29,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public mostrarLista: boolean;
 	public ejersAMostrar: Ejercicio[];
 	public datosAMostrar: string;
+	public actividad: Ejercicio[];
 
 	// pager object
     pager: any = {};
@@ -87,6 +88,7 @@ export class  PanelProfesorComponent implements OnInit{
 		this.id_profesor= "000001";
 		this.mostrarLista=false;
 		this.datosAMostrar="";
+		this.actividad=[];
 		
 	}
 
@@ -518,9 +520,6 @@ export class  PanelProfesorComponent implements OnInit{
 			}
 		);//fin getEjercicios de mi coleccion tipo 4
 
-
-
-
 	}//fin ngOnInit
 
 	ngAfterViewInit(){
@@ -696,6 +695,21 @@ export class  PanelProfesorComponent implements OnInit{
 		//alert(this.ejercicios.slice(1,5));
 		
     }
+
+	addActividad(event, id: String){
+		
+		let indiceEj= _.findIndex(this.ejersAMostrar, {_id: id});
+		if(event.target.checked){
+			this.actividad[this.actividad.length]=this.ejersAMostrar[indiceEj];
+			this.ejersAMostrar[indiceEj].marcado=true;
+		}
+		else{
+			let indiceAct= _.findIndex(this.actividad, {_id: id});
+			this.actividad.splice(indiceAct, 1);
+			this.ejersAMostrar[indiceEj].marcado=false;
+		}
+		
+	}
 
 
 }
