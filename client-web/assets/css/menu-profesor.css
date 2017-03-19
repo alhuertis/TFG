@@ -1,7 +1,7 @@
 .tree, .tree ul {
     margin:0;
     padding:0;
-    list-style:none
+    list-style:none;
 }
 .tree ul {
     margin-left:1em;
@@ -22,12 +22,12 @@
 }
 .tree li {
     margin:0;
-    padding:0 1em;
+    padding:0 0.9em;
     line-height:2em;
     color:#27292B;
     font-weight:700;
     position:relative;
-    font-size: 18px;
+    font-size: 16px;
     
 }
 .tree ul li:before {

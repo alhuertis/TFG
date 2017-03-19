@@ -3,7 +3,7 @@
 <div class="panel-profesor container-fluid">
 
     <div class="row">
-        <div class="col-md-3 menu-profesor-arbol">
+        <div class="col-md-3 col-sm-3 menu-profesor-arbol">
             <ul id="tree1">
 
                 <li> Ejercicios <span class="badge badge-small"> {{nEjercicios}}</span><i (click)="seleccionaDatos('ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
@@ -116,14 +116,22 @@
                 </li>
             </ul>                
         </div>
-
-        <div class="col-md-5 panel-ejercicios">
-          <h2 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h2>
-          <div *ngIf="mostrarLista">
-            <div class="row">
-              <div class="col-md-11 ejer-lista animated fadeInLeft" *ngFor="let ejercicio of pagedItems; let i=index">
+ 
+        <div class="col-md-5 col-sm-5 panel-ejercicios">
+          <div class="row">
+            <div class="col-sm-12">
+              <h2 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h2>
+            </div>
+          </div>
+          
+          <div class="row" *ngIf="mostrarLista">
+         
+              <div class="col-md-12 ejer-lista animated fadeInLeft" *ngFor="let ejercicio of pagedItems; let i=index">
                 <div class="row">
-                  <div class="col-md-5">
+                  <div class="col-sm-1">
+                      <input type="checkbox">
+                  </div>
+                  <div class="col-sm-7">
                     <ul>
                       <li><strong>Titulo:</strong>{{ejercicio.titulo}}</li>
                       <li><strong>Autor:</strong>{{ejercicio.autor}}</li>
@@ -132,18 +140,17 @@
                     </ul>
                   </div>
 
-                  <div class="col-md-5">
-                    <div class="row">
+                  <div class="col-sm-4">
                       <a class="btn btn-info">Añadir</a>
                       <a class="btn btn-warning">Modificar</a>
-                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            
+          </div>
 
             <div class="row">
-              <div class="col-md-11">
+              <div class="col-sm-12">
                 <!-- pager -->
                 <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
                   <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -165,10 +172,15 @@
               </div>
             </div>
           </div>
-        </div>
+        
 
-        <!--<div class="col-md-3" style="background: #ddd">
-          <h3>Aqui va la parte de carrito</h3>
+        <!--<div class="col-md-4 col-sm-4" style="background: #ddd; opacity:0.5">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Aqui va la parte de carrito</h2>
+            </div>
+
+          </div>
         </div>-->
    
 

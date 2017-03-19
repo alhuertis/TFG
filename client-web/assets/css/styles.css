@@ -7,8 +7,8 @@
 }
 
 .sinpadding [class*="col-"] {
-    padding: 0;
-    margin: 0;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 /***********FIN HACKS**************/
 
@@ -81,28 +81,21 @@
 
 /*******PANEL PROFESOR ********/
 .menu-profesor-arbol{
-	/*background: blue;*/
-	font-size: 14px !important;
-}
-
-.panel-profesor{
-	min-height: 300px;
-
+	padding-top: 30px !important;
 }
 
 .panel-ejercicios{
 	/*background: red;*/
 }
 
-.panel-ejercicios > h2{
-	/*background: red;*/
+.panel-ejercicios h2{
 	margin: 0px !important;
-	margin-bottom:4px !important; 
+	margin-bottom:15px !important; 
 }
 
 .ejer-lista{
-	background: rgba(73, 68, 68,0.8);
-	padding: 7px !important;
+	background: rgba(73, 68, 68,0.7);
+	/*padding: 7px !important;*/
 	border-radius: 4px;
 	margin-bottom: 8px !important;
 }
@@ -114,6 +107,10 @@
 .ejer-lista ul li{
 	color: white;
 	font-size: 1em;
+}
+
+.pagination a{
+	cursor: pointer;
 }
 
 .active a{
