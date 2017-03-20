@@ -5,6 +5,8 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {EjercicioService} from '../services/ejercicio.service';
 import {Ejercicio} from '../models/ejercicio';
 
+import {TruncatePipe} from './truncate-pipe.component';
+
 //Para usar undescore y jquery
 import * as _ from 'underscore';
 declare var $:any;
@@ -712,13 +714,18 @@ export class  PanelProfesorComponent implements OnInit{
 	}
 
 	descartarEjer(event, id: String){
-		$(event.target).parent().addClass("fadeOut");
-		this.sleep(500).then(()=>{
+		$(event.target).parent().removeClass("aparecer").addClass("fadeOut");
+
+		$(event.target).parent().next().addClass("subir");
+
+		this.sleep(300).then(()=>{
 			let indiceAct= _.findIndex(this.actividad, {_id: id});
 			this.actividad.splice(indiceAct, 1);
 
 			let indiceEj=  _.findIndex(this.ejersAMostrar, {_id: id});
 			this.ejersAMostrar[indiceEj].marcado=false;
+
+			$(event.target).parent().next().removeClass("subir").addClass("aparecer");
 		});
 		
 	}

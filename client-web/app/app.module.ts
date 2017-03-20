@@ -9,6 +9,7 @@ import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component'; 
 import {CabeceraProfesorComponent} from './components/cabecera-profesor.component'; 
+import {TruncatePipe} from './components/truncate-pipe.component'; 
 
 
 
@@ -25,7 +26,8 @@ import {CabeceraProfesorComponent} from './components/cabecera-profesor.componen
         PanelProfesorComponent,
         EjercicioAddComponent,
         PanelAlumnoComponent,
-        CabeceraProfesorComponent
+        CabeceraProfesorComponent,
+        TruncatePipe
 
    ],
   providers: [appRoutingProviders],

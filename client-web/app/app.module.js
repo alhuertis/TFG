@@ -15,6 +15,7 @@ var panel_profesor_component_1 = require("./components/panel-profesor.component"
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
 var cabecera_profesor_component_1 = require("./components/cabecera-profesor.component");
+var truncate_pipe_component_1 = require("./components/truncate-pipe.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -34,7 +35,8 @@ AppModule = __decorate([
             panel_profesor_component_1.PanelProfesorComponent,
             ejercicio_add_component_1.EjercicioAddComponent,
             panel_alumno_component_1.PanelAlumnoComponent,
-            cabecera_profesor_component_1.CabeceraProfesorComponent
+            cabecera_profesor_component_1.CabeceraProfesorComponent,
+            truncate_pipe_component_1.TruncatePipe
         ],
         providers: [app_routing_1.appRoutingProviders],
         bootstrap: [app_component_1.AppComponent]

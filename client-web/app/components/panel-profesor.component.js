@@ -486,12 +486,14 @@ var PanelProfesorComponent = (function () {
     };
     PanelProfesorComponent.prototype.descartarEjer = function (event, id) {
         var _this = this;
-        $(event.target).parent().addClass("fadeOut");
-        this.sleep(500).then(function () {
+        $(event.target).parent().removeClass("aparecer").addClass("fadeOut");
+        $(event.target).parent().next().addClass("subir");
+        this.sleep(300).then(function () {
             var indiceAct = _.findIndex(_this.actividad, { _id: id });
             _this.actividad.splice(indiceAct, 1);
             var indiceEj = _.findIndex(_this.ejersAMostrar, { _id: id });
             _this.ejersAMostrar[indiceEj].marcado = false;
+            $(event.target).parent().next().removeClass("subir").addClass("aparecer");
         });
     };
     PanelProfesorComponent.prototype.sleep = function (ms) {
