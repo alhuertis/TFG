@@ -46,6 +46,32 @@
 .fadeInLeft {
 	-webkit-animation-name: fadeInLeft;
 	animation-name: fadeInLeft;
+}
+
+
+@-webkit-keyframes fadeOut {
+	0% {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translateX(-40px);
+	}
+}
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(-40px);
+	}
+}
+.fadeOut {
+	-webkit-animation-name: fadeOut;
+	animation-name: fadeOut;
 } 
 /*********HEADER PROFESOR**********/
 

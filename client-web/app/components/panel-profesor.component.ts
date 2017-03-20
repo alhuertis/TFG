@@ -712,11 +712,19 @@ export class  PanelProfesorComponent implements OnInit{
 	}
 
 	descartarEjer(event, id: String){
-		let indiceAct= _.findIndex(this.actividad, {_id: id});
-		this.actividad.splice(indiceAct, 1);
+		$(event.target).parent().addClass("fadeOut");
+		this.sleep(500).then(()=>{
+			let indiceAct= _.findIndex(this.actividad, {_id: id});
+			this.actividad.splice(indiceAct, 1);
 
-		let indiceEj=  _.findIndex(this.ejersAMostrar, {_id: id});
-		this.ejersAMostrar[indiceEj].marcado=false;
+			let indiceEj=  _.findIndex(this.ejersAMostrar, {_id: id});
+			this.ejersAMostrar[indiceEj].marcado=false;
+		});
+		
+	}
+
+	sleep(ms = 0) {
+    	return new Promise(r => setTimeout(r, ms));
 	}
 
 
