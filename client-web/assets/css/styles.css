@@ -246,7 +246,7 @@
 
 .panel-actividad .listado-actividad ul{
 	background: #e0dede;
-	width: 325px;
+	width: 345px;
 	margin: 0 auto !important;
 	border-radius: 10px;
 	padding: 7px;
@@ -289,6 +289,22 @@
 .panel-actividad .listado-actividad ul li .glyphicon-remove:hover{
 	color: #f76262;
 	cursor: pointer;
+}
+
+.panel-actividad .opciones-actividad{
+	width: 335px;
+	margin: 2px auto;
+	border-radius: 4px;
+	padding: 0 12px 0 12px;
+}
+
+.panel-actividad .opciones-actividad a{
+	font-size: 16px;
+	cursor: default; 
+}
+
+.panel-actividad .opciones-actividad a:last-child{
+	float: right;
 }
 /*******FIN PANEL PROFESOR ********/
 

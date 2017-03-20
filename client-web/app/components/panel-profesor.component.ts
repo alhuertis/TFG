@@ -707,8 +707,11 @@ export class  PanelProfesorComponent implements OnInit{
 		}
 		else{
 			let indiceAct= _.findIndex(this.actividad, {_id: id});
-			this.actividad.splice(indiceAct, 1);
-			this.ejersAMostrar[indiceEj].marcado=false;
+			$('.listado-actividad li:eq('+indiceAct+')').removeClass("fadeInLeft").addClass("fadeOut");
+			this.sleep(500).then(()=>{
+				this.actividad.splice(indiceAct, 1);
+				this.ejersAMostrar[indiceEj].marcado=false;
+			});
 		}
 		
 	}
@@ -734,5 +737,17 @@ export class  PanelProfesorComponent implements OnInit{
     	return new Promise(r => setTimeout(r, ms));
 	}
 
-
+	vaciarLista(){
+		for(var item of this.actividad){
+			let id= item._id;
+			let indiceEj= _.findIndex(this.ejersAMostrar, {_id: id});
+			this.ejersAMostrar[indiceEj].marcado=false;
+		}
+		
+		$('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
+		this.sleep(500).then(()=>{
+			this.actividad=[];
+		});
+	}
+	
 }

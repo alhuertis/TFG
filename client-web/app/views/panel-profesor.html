@@ -150,7 +150,7 @@
                   </div>
 
                   <div class="col-sm-4 botones-lista">
-                      <a class="btn btn-xs btn-info">Añadir</a>
+                      <a class="btn btn-xs btn-info">Abrir</a>
                       <a class="btn btn-xs btn-warning">Modificar</a>
                   </div>
                 </div>
@@ -200,6 +200,10 @@
                   <i class="glyphicon glyphicon-remove" (click)="descartarEjer($event, ejer._id)"></i>
                 </li>
               </ul>
+              <div class="opciones-actividad">
+                <a (click)="vaciarLista()">Vaciar lista</a>
+                <a>Crear</a>
+              </div>
             </div>
           </div>
         </div>

@@ -473,15 +473,19 @@ var PanelProfesorComponent = (function () {
         //alert(this.ejercicios.slice(1,5));
     };
     PanelProfesorComponent.prototype.addActividad = function (event, id) {
+        var _this = this;
         var indiceEj = _.findIndex(this.ejersAMostrar, { _id: id });
         if (event.target.checked) {
             this.actividad[this.actividad.length] = this.ejersAMostrar[indiceEj];
             this.ejersAMostrar[indiceEj].marcado = true;
         }
         else {
-            var indiceAct = _.findIndex(this.actividad, { _id: id });
-            this.actividad.splice(indiceAct, 1);
-            this.ejersAMostrar[indiceEj].marcado = false;
+            var indiceAct_1 = _.findIndex(this.actividad, { _id: id });
+            $('.listado-actividad li:eq(' + indiceAct_1 + ')').removeClass("fadeInLeft").addClass("fadeOut");
+            this.sleep(500).then(function () {
+                _this.actividad.splice(indiceAct_1, 1);
+                _this.ejersAMostrar[indiceEj].marcado = false;
+            });
         }
     };
     PanelProfesorComponent.prototype.descartarEjer = function (event, id) {
@@ -499,6 +503,19 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.sleep = function (ms) {
         if (ms === void 0) { ms = 0; }
         return new Promise(function (r) { return setTimeout(r, ms); });
+    };
+    PanelProfesorComponent.prototype.vaciarLista = function () {
+        var _this = this;
+        for (var _i = 0, _a = this.actividad; _i < _a.length; _i++) {
+            var item = _a[_i];
+            var id = item._id;
+            var indiceEj = _.findIndex(this.ejersAMostrar, { _id: id });
+            this.ejersAMostrar[indiceEj].marcado = false;
+        }
+        $('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
+        this.sleep(500).then(function () {
+            _this.actividad = [];
+        });
     };
     return PanelProfesorComponent;
 }());
