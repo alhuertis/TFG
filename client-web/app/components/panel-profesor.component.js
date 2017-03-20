@@ -485,10 +485,18 @@ var PanelProfesorComponent = (function () {
         }
     };
     PanelProfesorComponent.prototype.descartarEjer = function (event, id) {
-        var indiceAct = _.findIndex(this.actividad, { _id: id });
-        this.actividad.splice(indiceAct, 1);
-        var indiceEj = _.findIndex(this.ejersAMostrar, { _id: id });
-        this.ejersAMostrar[indiceEj].marcado = false;
+        var _this = this;
+        $(event.target).parent().addClass("fadeOut");
+        this.sleep(500).then(function () {
+            var indiceAct = _.findIndex(_this.actividad, { _id: id });
+            _this.actividad.splice(indiceAct, 1);
+            var indiceEj = _.findIndex(_this.ejersAMostrar, { _id: id });
+            _this.ejersAMostrar[indiceEj].marcado = false;
+        });
+    };
+    PanelProfesorComponent.prototype.sleep = function (ms) {
+        if (ms === void 0) { ms = 0; }
+        return new Promise(function (r) { return setTimeout(r, ms); });
     };
     return PanelProfesorComponent;
 }());
