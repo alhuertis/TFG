@@ -54,8 +54,8 @@ export class EjercicioAddComponent implements OnInit{
 	ngOnInit(){
 
 		//Lo ponemos asi para rellenarlo con el chuwidatabindin
-		this.ejercicio= new Ejercicio("",this.id_profesor,"","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","");
-
+		this.ejercicio= new Ejercicio("",this.id_profesor,"","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","", false);
+		
 	}
 
 	public onSubmit(){
