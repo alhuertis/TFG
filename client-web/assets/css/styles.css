@@ -97,11 +97,9 @@
 	margin-top: 25px;
 	width: 10px;
 	height: 10px;
-
+	-moz-appearance: none;
 	-webkit-appearance: none;
 	background-color: #fafafa;
-	/*border: 1px solid #cacece;*/
-	/*box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);*/
 	padding: 9px;
 	border-radius: 20px;
 	display: inline-block;
@@ -112,9 +110,16 @@
 	background-color: #3df4cd;
 }
 
+.ejer-lista input[type=checkbox]:hover{
+	background-color: #3df4cd;
+	cursor: pointer;
+}
+
 .ejer-lista input[type=checkbox]:focus{
 	outline: none;
 }
+
+
 
 .ejer-lista input[type=checkbox]:checked:active, .ejer-lista input[type=checkbox]:active{
 	border: none;
@@ -138,6 +143,10 @@
 	margin-bottom:3px;
 }
 
+.ejer-lista .botones-lista{
+	padding-top: 20px;
+}
+
 .pagination a{
 	cursor: pointer;
 }
@@ -148,7 +157,7 @@
 }
 
 .panel-actividad{
-	top:55px;
+	top:57px;
 }
 
 .panel-actividad h4{
@@ -158,6 +167,28 @@
 	padding: 7px;
 	border-radius: 30px;
 	color: white;
+
+}
+
+
+.panel-actividad .listado-actividad ul{
+	background: #e0dede;
+	width: 325px;
+	margin: 0 auto !important;
+	border-radius: 10px;
+	padding: 7px;
+	margin-top: 5px !important;
+	min-height: 300px;
+	border:1px solid #39a890;;
+}
+
+.panel-actividad .listado-actividad ul li{
+	list-style-type: none;
+	background: #333;
+	color: white;
+	padding: 2px 5px 5px 5px;
+	border-radius: 5px;
+	margin-bottom: 4px;
 
 }
 /*******FIN PANEL PROFESOR ********/

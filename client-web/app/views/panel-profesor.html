@@ -149,9 +149,9 @@
                   </div>
                   </div>
 
-                  <div class="col-sm-4">
-                      <a class="btn btn-info">Añadir</a>
-                      <a class="btn btn-warning">Modificar</a>
+                  <div class="col-sm-4 botones-lista">
+                      <a class="btn btn-xs btn-info">Añadir</a>
+                      <a class="btn btn-xs btn-warning">Modificar</a>
                   </div>
                 </div>
               </div>
@@ -186,12 +186,12 @@
         <div class="col-md-4 col-sm-4 panel-actividad" *ngIf="mostrarLista">
           <div class="row">
             <div class="col-md-12">
-              <h4 class="text-center">Listo para actividad</h4>
+              <h4 class="text-center">Seleccion para actividad</h4>
             </div>
           </div>
 
           <div class="row"> 
-            <div class="col-md-12">
+            <div class="col-md-12 listado-actividad">
               <ul>
                 <li *ngFor="let ejer of actividad">
                   {{ejer.titulo}}
