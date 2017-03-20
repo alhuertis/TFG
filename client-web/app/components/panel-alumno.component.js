@@ -10,14 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
 var core_1 = require("@angular/core");
-var ejercicio_service_1 = require("../services/ejercicio.service");
+var actividad_service_1 = require("../services/actividad.service");
 //los decoradores no tienen punto y coma
 var PanelAlumnoComponent = (function () {
-    function PanelAlumnoComponent(_ejercicioService) {
-        this._ejercicioService = _ejercicioService;
-        this.nBajos = 0;
-        this.nMedios = 0;
-        this.nAvanzados = 0;
+    function PanelAlumnoComponent(_actividadService) {
+        this._actividadService = _actividadService;
         this.title = "Panel de alumno";
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
@@ -78,37 +75,27 @@ var PanelAlumnoComponent = (function () {
         $('#tree2').treed({ openedClass: 'glyphicon-folder-open', closedClass: 'glyphicon-folder-close' });
         $('#tree3').treed({ openedClass: 'glyphicon-chevron-right', closedClass: 'glyphicon-chevron-down' });
         //Obtencion de datos
-        this._ejercicioService.getEjercicios().subscribe(function (result) {
+        this._actividadService.getActividades().subscribe(function (result) {
             console.log(result);
-            _this.ejercicios = result.ejercicios;
-            if (!_this.ejercicios) {
+            _this.actividades = result.actividades;
+            if (!_this.actividades) {
                 alert('Error en el servidor');
             }
             else {
                 _this.loading = false;
-                _this.nEjercicios = _this.ejercicios.length;
-                for (var i = 0; i < _this.ejercicios.length; i++) {
-                    if (_this.ejercicios[i].nivel == "Bajo") {
-                        _this.nBajos++;
-                    }
-                    if (_this.ejercicios[i].nivel == "Medio") {
-                        _this.nMedios++;
-                    }
-                    if (_this.ejercicios[i].nivel == "Avanzado") {
-                        _this.nAvanzados++;
-                    }
-                }
+                _this.nActividades = _this.actividades.length;
             }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
-                alert('Error en la peticion');
+                alert(_this.errorMessage);
+                alert('Error todo tocho');
             }
         });
     }; //fin ngOnInit
-    PanelAlumnoComponent.prototype.numEjercicios = function () {
-        return this.ejercicios.length;
+    PanelAlumnoComponent.prototype.numActividades = function () {
+        return this.actividades.length;
     };
     return PanelAlumnoComponent;
 }());
@@ -116,10 +103,10 @@ PanelAlumnoComponent = __decorate([
     core_1.Component({
         selector: 'panel-alumno',
         templateUrl: 'app/views/panel-alumno.html',
-        providers: [ejercicio_service_1.EjercicioService],
+        providers: [actividad_service_1.ActividadService],
         styleUrls: ['../../assets/css/menu-alumno.css'],
     }),
-    __metadata("design:paramtypes", [ejercicio_service_1.EjercicioService])
+    __metadata("design:paramtypes", [actividad_service_1.ActividadService])
 ], PanelAlumnoComponent);
 exports.PanelAlumnoComponent = PanelAlumnoComponent;
 //# sourceMappingURL=panel-alumno.component.js.map

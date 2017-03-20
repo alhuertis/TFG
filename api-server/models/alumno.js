@@ -1,6 +1,7 @@
 'use strict'
 
 var mongoose = require('mongoose');
+var Ejercicio = require('./ejercicio')
 var Schema = mongoose.Schema;
 
 var AlumnoSchema = Schema({
@@ -15,24 +16,21 @@ var AlumnoSchema = Schema({
         _id: String,
         ejercicios:[{
             //Campo de los ejercicios
-            _id: String,
+            ejercicio: Ejercicio
+           /* _id: String,
             titulo: String,
             nivel: String,
             tipo: Number,
             autor: String,
             institucion_profesor: String,
             fechaCreacion: Date,
-<<<<<<< HEAD
-            fechaModificacion: Date, 
-=======
             fechaModificacion: Date,
->>>>>>> eef676e82b364fcf41ae55da27a67cde35fb142e
             enunciado: String,
             fraseATraducir: String,
             solucionFLogico: String,
             solucionFPatron: String,
             solucionPEspanol: String,
-            solucionPLatin: String
+            solucionPLatin: String*/
         }],
         alumnos: [{
             _id: String,

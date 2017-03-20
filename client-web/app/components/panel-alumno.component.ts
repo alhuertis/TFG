@@ -2,8 +2,8 @@
 import{Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
-import {EjercicioService} from '../services/ejercicio.service';
-import {Ejercicio} from '../models/ejercicio';
+import {ActividadService} from '../services/actividad.service';
+import {Actividad} from '../models/actividad';
 
 declare var $:any;
 
@@ -12,26 +12,29 @@ declare var $:any;
 
 	selector: 'panel-alumno',
 	templateUrl: 'app/views/panel-alumno.html',
-	providers: [EjercicioService], //Necesitamos esto para poder usar los metodos
+	providers: [ActividadService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/menu-alumno.css'],
 }) 
 
 export class  PanelAlumnoComponent implements OnInit{
 
 	public title: string;
-	public ejercicios: Ejercicio[];
+	public actividades: Actividad[];
+	public actividadesNB: Actividad[];
+	public actividadesNM: Actividad[];
+	public actividadesNA: Actividad[];
 	public loading: boolean;
 	public errorMessage: string;
-	public nEjercicios: number;
-	public nBajos: number=0;
-	public nMedios: number=0;
-	public nAvanzados: number=0;
+	public nActividades: number;
+	public nBajos: number;
+	public nMedios: number;
+	public nAvanzados: number;
 
 	
 	
 
 	constructor(
-			private _ejercicioService: EjercicioService
+			private _actividadService: ActividadService
 
 	){
 		this.title= "Panel de alumno";
@@ -105,28 +108,18 @@ export class  PanelAlumnoComponent implements OnInit{
 		$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
 
 		//Obtencion de datos
-		this._ejercicioService.getEjercicios().subscribe(
+		this._actividadService.getActividades().subscribe(
 			result =>{
 				console.log(result);
-				this.ejercicios= result.ejercicios;
+				this.actividades= result.actividades;
 
-				if(!this.ejercicios){
+				if(!this.actividades){
 					alert('Error en el servidor');
 				}
 				else{
 					this.loading=false;
-					this.nEjercicios= this.ejercicios.length;
-					for(var i=0; i<this.ejercicios.length; i++){
-					if(this.ejercicios[i].nivel=="Bajo"){
-						this.nBajos++;	
-					}
-					if(this.ejercicios[i].nivel=="Medio"){
-						this.nMedios++;	
-					}
-					if(this.ejercicios[i].nivel=="Avanzado"){
-						this.nAvanzados++;	
-					}
-				}
+					this.nActividades= this.actividades.length;
+				
 				}
 
 			},
@@ -135,7 +128,8 @@ export class  PanelAlumnoComponent implements OnInit{
 
 				if(this.errorMessage != null){
 					console.log(this.errorMessage);
-					alert('Error en la peticion');
+					alert(this.errorMessage);
+					alert('Error todo tocho');
 				}
 			}
 
@@ -143,7 +137,7 @@ export class  PanelAlumnoComponent implements OnInit{
 	}//fin ngOnInit
 
 
-	public numEjercicios(){
-		return this.ejercicios.length;
+	public numActividades(){
+		return this.actividades.length;
 	}
 }
