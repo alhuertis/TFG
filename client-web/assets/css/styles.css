@@ -179,7 +179,7 @@
 	padding: 7px;
 	margin-top: 5px !important;
 	min-height: 300px;
-	border:1px solid #39a890;;
+	border:1px solid #39a890;
 }
 
 .panel-actividad .listado-actividad ul li{
@@ -190,6 +190,27 @@
 	border-radius: 5px;
 	margin-bottom: 4px;
 
+}
+
+.panel-actividad .listado-actividad ul li i{
+	margin-right: 8px;
+	margin-left: 5px;
+}
+
+.panel-actividad .listado-actividad ul li span{
+	border-right: 1px solid;
+	padding-right: 8px;
+}
+
+.panel-actividad .listado-actividad ul li span#last{
+	border-right: none;
+}
+
+.panel-actividad .listado-actividad ul li .glyphicon-remove{
+	color: #f43333;
+	float: right;
+	padding-top: 3px;
+	font-size: 16px;
 }
 /*******FIN PANEL PROFESOR ********/
 

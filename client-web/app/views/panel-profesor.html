@@ -193,8 +193,11 @@
           <div class="row"> 
             <div class="col-md-12 listado-actividad">
               <ul>
-                <li *ngFor="let ejer of actividad">
-                  {{ejer.titulo}}
+                <li *ngFor="let ejer of actividad" class="animated fadeInLeft">
+                  <i class="glyphicon glyphicon-pencil"></i> <span>{{ejer.titulo}}</span>
+                  <i class="glyphicon glyphicon-tags"></i> <span>{{ejer.tipo}}</span>
+                  <i class="glyphicon glyphicon-signal"></i> <span id="last">{{ejer.nivel}}</span>
+                   <i class="glyphicon glyphicon-remove"></i>
                 </li>
               </ul>
             </div>
