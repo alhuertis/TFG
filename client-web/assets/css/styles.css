@@ -212,6 +212,11 @@
 	padding-top: 3px;
 	font-size: 16px;
 }
+
+.panel-actividad .listado-actividad ul li .glyphicon-remove:hover{
+	color: #f76262;
+	cursor: pointer;
+}
 /*******FIN PANEL PROFESOR ********/
 
 

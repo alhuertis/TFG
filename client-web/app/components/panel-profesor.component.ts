@@ -711,5 +711,13 @@ export class  PanelProfesorComponent implements OnInit{
 		
 	}
 
+	descartarEjer(event, id: String){
+		let indiceAct= _.findIndex(this.actividad, {_id: id});
+		this.actividad.splice(indiceAct, 1);
+
+		let indiceEj=  _.findIndex(this.ejersAMostrar, {_id: id});
+		this.ejersAMostrar[indiceEj].marcado=false;
+	}
+
 
 }

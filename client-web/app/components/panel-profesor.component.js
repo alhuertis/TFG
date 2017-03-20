@@ -484,6 +484,12 @@ var PanelProfesorComponent = (function () {
             this.ejersAMostrar[indiceEj].marcado = false;
         }
     };
+    PanelProfesorComponent.prototype.descartarEjer = function (event, id) {
+        var indiceAct = _.findIndex(this.actividad, { _id: id });
+        this.actividad.splice(indiceAct, 1);
+        var indiceEj = _.findIndex(this.ejersAMostrar, { _id: id });
+        this.ejersAMostrar[indiceEj].marcado = false;
+    };
     return PanelProfesorComponent;
 }());
 PanelProfesorComponent = __decorate([
