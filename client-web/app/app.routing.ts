@@ -7,6 +7,7 @@ import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component';
 import {CabeceraProfesorComponent} from './components/cabecera-profesor.component';
+import {ResolverActividadComponent} from './components/resolver-actividad.component';
 
 const appRoutes: Routes = [
 
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
 			//{path:'mostrar-ejercicios', component: EjercicioMostrarComponent}
 		]	
 	},
+	{path:'resolver-actividad', component: ResolverActividadComponent},
 	
 	//Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
 	{path:'**', component: PanelProfesorComponent},

@@ -555,7 +555,7 @@ export class  PanelProfesorComponent implements OnInit{
 							$(this).children().children().slideToggle(200);
 						}
 					})
-					branch.children().children().slideToggle(200);
+					branch.children().children().slideToggle(1);
 				});
 				//fire event from the dynamically added icon
 				tree.find('.branch .indicator').each(function(){
@@ -748,6 +748,12 @@ export class  PanelProfesorComponent implements OnInit{
 		this.sleep(500).then(()=>{
 			this.actividad=[];
 		});
+	}
+
+	crearActividad(){
+		if(this.actividad.length > 0){
+			alert("Se va a crear la actividad");
+		}
 	}
 	
 }

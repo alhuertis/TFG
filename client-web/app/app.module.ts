@@ -9,7 +9,13 @@ import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component'; 
 import {CabeceraProfesorComponent} from './components/cabecera-profesor.component'; 
-import {TruncatePipe} from './components/truncate-pipe.component'; 
+import {TruncatePipe} from './components/truncate-pipe.component';
+import {CabeceraAlumnoComponent} from './components/cabecera-alumno.component';
+import {ResolverActividadComponent} from './components/resolver-actividad.component';
+
+
+
+CabeceraAlumnoComponent 
 
 
 
@@ -27,7 +33,9 @@ import {TruncatePipe} from './components/truncate-pipe.component';
         EjercicioAddComponent,
         PanelAlumnoComponent,
         CabeceraProfesorComponent,
-        TruncatePipe
+        TruncatePipe,
+        CabeceraAlumnoComponent,
+        ResolverActividadComponent
 
    ],
   providers: [appRoutingProviders],

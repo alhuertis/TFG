@@ -5,6 +5,7 @@ var panel_profesor_component_1 = require("./components/panel-profesor.component"
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
 var cabecera_profesor_component_1 = require("./components/cabecera-profesor.component");
+var resolver_actividad_component_1 = require("./components/resolver-actividad.component");
 var appRoutes = [
     //{path: '', component: FavoritosListComponent},
     //{path:'marcador/:id', component: FavoritoDetailComponent},
@@ -19,6 +20,7 @@ var appRoutes = [
     { path: 'alumno', component: panel_alumno_component_1.PanelAlumnoComponent,
         children: []
     },
+    { path: 'resolver-actividad', component: resolver_actividad_component_1.ResolverActividadComponent },
     //Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
     { path: '**', component: panel_profesor_component_1.PanelProfesorComponent },
 ];

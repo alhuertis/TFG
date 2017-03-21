@@ -16,9 +16,39 @@ var PanelAlumnoComponent = (function () {
     function PanelAlumnoComponent(_actividadService) {
         this._actividadService = _actividadService;
         this.title = "Panel de alumno";
+        this.actividades = [];
+        this.nActividades = 0;
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
-        var _this = this;
+        //Obtencion de datos
+        /*this._actividadService.getActividades().subscribe(
+            result =>{
+                console.log(result);
+                this.actividades= result.actividades;
+
+                if(!this.actividades){
+                    alert('Error en el servidor');
+                }
+                else{
+                    this.loading=false;
+                    this.nActividades= this.actividades.length;
+                
+                }
+
+            },
+            error => {
+                this.errorMessage= <any>error;
+
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert(this.errorMessage);
+                    alert('Error todo tocho');
+                }
+            }*/
+        ;
+    }; //fin ngOnInit
+    PanelAlumnoComponent.prototype.ngAfterViewInit = function () {
+        //Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery
         $.fn.extend({
             treed: function (o) {
                 var openedClass = 'glyphicon-minus-sign';
@@ -43,10 +73,10 @@ var PanelAlumnoComponent = (function () {
                         if (this == e.target) {
                             var icon = $(this).children('i:first');
                             icon.toggleClass(openedClass + " " + closedClass);
-                            $(this).children().children().toggle();
+                            $(this).children().children().slideToggle(200);
                         }
                     });
-                    branch.children().children().toggle();
+                    branch.children().children().slideToggle(1);
                 });
                 //fire event from the dynamically added icon
                 tree.find('.branch .indicator').each(function () {
@@ -72,28 +102,9 @@ var PanelAlumnoComponent = (function () {
         });
         //Initialization of treeviews
         $('#tree1').treed();
-        $('#tree2').treed({ openedClass: 'glyphicon-folder-open', closedClass: 'glyphicon-folder-close' });
-        $('#tree3').treed({ openedClass: 'glyphicon-chevron-right', closedClass: 'glyphicon-chevron-down' });
-        //Obtencion de datos
-        this._actividadService.getActividades().subscribe(function (result) {
-            console.log(result);
-            _this.actividades = result.actividades;
-            if (!_this.actividades) {
-                alert('Error en el servidor');
-            }
-            else {
-                _this.loading = false;
-                _this.nActividades = _this.actividades.length;
-            }
-        }, function (error) {
-            _this.errorMessage = error;
-            if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
-                alert(_this.errorMessage);
-                alert('Error todo tocho');
-            }
-        });
-    }; //fin ngOnInit
+        //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
+        //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
+    }; //fin ngAfterViewInit
     PanelAlumnoComponent.prototype.numActividades = function () {
         return this.actividades.length;
     };
@@ -104,7 +115,7 @@ PanelAlumnoComponent = __decorate([
         selector: 'panel-alumno',
         templateUrl: 'app/views/panel-alumno.html',
         providers: [actividad_service_1.ActividadService],
-        styleUrls: ['../../assets/css/menu-alumno.css'],
+        styleUrls: ['../../assets/css/menu-profesor.css'],
     }),
     __metadata("design:paramtypes", [actividad_service_1.ActividadService])
 ], PanelAlumnoComponent);

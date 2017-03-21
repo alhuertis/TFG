@@ -347,7 +347,7 @@ var PanelProfesorComponent = (function () {
                             $(this).children().children().slideToggle(200);
                         }
                     });
-                    branch.children().children().slideToggle(200);
+                    branch.children().children().slideToggle(1);
                 });
                 //fire event from the dynamically added icon
                 tree.find('.branch .indicator').each(function () {
@@ -516,6 +516,11 @@ var PanelProfesorComponent = (function () {
         this.sleep(500).then(function () {
             _this.actividad = [];
         });
+    };
+    PanelProfesorComponent.prototype.crearActividad = function () {
+        if (this.actividad.length > 0) {
+            alert("Se va a crear la actividad");
+        }
     };
     return PanelProfesorComponent;
 }());
