@@ -8,3 +8,13 @@
         </ol>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-md-4">
+        <ul>
+            <li *ngFor="let ejer of actividad, let i=index" (click)="seleccionaEjer(i)"><a>{{ejer.enunciado}}</a></li>
+        </ul>
+    </div>
+
+{{ejercicio.titulo}}
+</div>

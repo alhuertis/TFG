@@ -11,13 +11,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
 var core_1 = require("@angular/core");
 var actividad_service_1 = require("../services/actividad.service");
+var ejercicio_1 = require("../models/ejercicio");
 var ResolverActividadComponent = (function () {
     function ResolverActividadComponent(_actividadService) {
         this._actividadService = _actividadService;
+        this.actividad =
+            [
+                {
+                    "_id": "",
+                    "id_profesor": "000001",
+                    "titulo": "Titulo 1",
+                    "nivel": "Medio",
+                    "tipo": 1,
+                    "autor": "Antonio Sarasa",
+                    "institucion_profesor": "Universidad complutense",
+                    "fechaCreacion": new Date(),
+                    "fechaModificacion": new Date(),
+                    "enunciado": "Traducir la siguiente frase al español",
+                    "fraseATraducir": "Dei sacrificium accipiunt",
+                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
+                    "solucionFPatron": "dioses + reciben + sacrificio",
+                    "solucionPEspanol": "Los dioses reciben el sacrificio",
+                    "solucionPLatin": "",
+                    "marcado": false
+                },
+                {
+                    "_id": "",
+                    "id_profesor": "000001",
+                    "titulo": "Titulo 2",
+                    "nivel": "Medio",
+                    "tipo": 1,
+                    "autor": "Antonio Sarasa",
+                    "institucion_profesor": "Universidad complutense",
+                    "fechaCreacion": new Date(),
+                    "fechaModificacion": new Date(),
+                    "enunciado": "Traducir toda la frase",
+                    "fraseATraducir": "Dei sacrificium accipiunt",
+                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
+                    "solucionFPatron": "dioses + reciben + sacrificio",
+                    "solucionPEspanol": "Los dioses reciben el sacrificio",
+                    "solucionPLatin": "",
+                    "marcado": false
+                }
+            ];
+        this.ejercicio = new ejercicio_1.Ejercicio("", "", "", "", null, "", "", null, null, "", "", "", "", "", "", false);
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
-        ;
     }; //fin ngOnInit
+    ResolverActividadComponent.prototype.seleccionaEjer = function (i) {
+        this.ejercicio = this.actividad[i];
+    };
     return ResolverActividadComponent;
 }());
 ResolverActividadComponent = __decorate([
