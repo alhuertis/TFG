@@ -52,14 +52,60 @@ var ResolverActividadComponent = (function () {
                     "solucionPEspanol": "Los dioses reciben el sacrificio",
                     "solucionPLatin": "",
                     "marcado": false
+                },
+                {
+                    "_id": "",
+                    "id_profesor": "000001",
+                    "titulo": "Titulo 3",
+                    "nivel": "Medio",
+                    "tipo": 1,
+                    "autor": "Antonio Sarasa",
+                    "institucion_profesor": "Universidad complutense",
+                    "fechaCreacion": new Date(),
+                    "fechaModificacion": new Date(),
+                    "enunciado": "Aprende latin con este ejercicio",
+                    "fraseATraducir": "Dei sacrificium accipiunt",
+                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
+                    "solucionFPatron": "dioses + reciben + sacrificio",
+                    "solucionPEspanol": "Los dioses reciben el sacrificio",
+                    "solucionPLatin": "",
+                    "marcado": false
+                },
+                {
+                    "_id": "",
+                    "id_profesor": "000001",
+                    "titulo": "Titulo 4",
+                    "nivel": "Medio",
+                    "tipo": 1,
+                    "autor": "Antonio Sarasa",
+                    "institucion_profesor": "Universidad complutense",
+                    "fechaCreacion": new Date(),
+                    "fechaModificacion": new Date(),
+                    "enunciado": "Traduce lo que puedas",
+                    "fraseATraducir": "Dei sacrificium accipiunt",
+                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
+                    "solucionFPatron": "dioses + reciben + sacrificio",
+                    "solucionPEspanol": "Los dioses reciben el sacrificio",
+                    "solucionPLatin": "",
+                    "marcado": false
                 }
             ];
         this.ejercicio = new ejercicio_1.Ejercicio("", "", "", "", null, "", "", null, null, "", "", "", "", "", "", false);
+        this.ejerSel = 0;
+        this.anterior = this.ejerSel > 0;
+        this.siguiente = this.ejerSel < this.actividad.length;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
-    ResolverActividadComponent.prototype.seleccionaEjer = function (i) {
-        this.ejercicio = this.actividad[i];
+    ResolverActividadComponent.prototype.siguienteEjer = function () {
+        this.ejerSel++;
+        this.siguiente = this.ejerSel < this.actividad.length - 1;
+        this.anterior = this.ejerSel > 0;
+    };
+    ResolverActividadComponent.prototype.anteriorEjer = function () {
+        this.ejerSel--;
+        this.anterior = this.ejerSel > 0;
+        this.siguiente = this.ejerSel < this.actividad.length;
     };
     return ResolverActividadComponent;
 }());

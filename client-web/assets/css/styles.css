@@ -307,4 +307,74 @@
 }
 /*******FIN PANEL PROFESOR ********/
 
+/********PANEL ALUMNO***************/
+
+.info-actividad{
+	border: 1px solid #eee;
+	border-radius: 7px;
+	padding: 5px 5px 15px 5px;
+	background: #eaf9f6;
+}
+
+
+.info-actividad ul li{
+	display: inline;
+	margin-left: 5px;
+	margin-right: 5px;
+
+}
+
+.enunciado{
+	background: #544f4f;
+	color: #e0dede;
+	padding: 8px 10px 1px 30px;
+	border-radius: 7px;
+	margin-top: -25px;
+}
+
+.enunciado span{
+	color: white;
+	font-size: 16px;
+}
+
+
+.pager-actividad div{
+	font-size: 14px;
+	display: inline-block;
+	min-width: 100px;
+	margin: 2px;
+	padding: 8px;
+
+}
+
+.pager-actividad div:nth-child(2){
+	color: #39a890;
+	font-size: 16px;
+
+}
+
+.pager-actividad div a{
+	cursor: pointer;
+	color: #27292B;
+}
+
+.pager-actividad div a:hover{
+	text-decoration: none;
+}
+
+.pager-actividad div a i{font-size: 40px;}
+
+.pager-actividad div a i#iSiguiente{
+	top: 12px;
+	left: 5px;
+}
+
+.pager-actividad div a i#iAnterior{
+	top: 12px;
+	right: 5px;
+}
+
+
+/*********FIN PANEL ALUMNO**********/
+
 

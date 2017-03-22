@@ -45,7 +45,7 @@ var PanelAlumnoComponent = (function () {
                     alert('Error todo tocho');
                 }
             }*/
-        ;
+        //);
     }; //fin ngOnInit
     PanelAlumnoComponent.prototype.ngAfterViewInit = function () {
         //Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery

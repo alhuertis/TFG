@@ -72,7 +72,7 @@ export class  PanelAlumnoComponent implements OnInit{
 				}
 			}*/
 
-		);
+		//);
 	}//fin ngOnInit
 
 	ngAfterViewInit(){
