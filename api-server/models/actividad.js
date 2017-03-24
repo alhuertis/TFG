@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 //var Ejercicio = require('./ejercicio');
 var Schema = mongoose.Schema;
 
-var AtividadSchema = Schema({
+var ActividadSchema = Schema({
 
-    _id: String,
-	profesor: String,
-    fecha_creacion: Date,
-    nivel: String,
+    //_id: String,
+	profesor: String
+    //fecha_creacion: Date,
+    //nivel: String,
  /*   ejercicios: Ejercicio[], /*[{  
         //Campo de los ejercicios
         //ejercicio: Ejercicio,

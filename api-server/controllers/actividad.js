@@ -33,15 +33,16 @@ function saveActividad(req, res){
 	var actividad = new Actividad();
 	var params = req.body;
 	actividad.profesor = params.profesor;
-	actividad.nivel = params.nivel;
+
+	console.log(actividad);
 
 	actividad.save((err, actividadStored)=>{
 		if(err){
-			res.status(500).send({message:'error al guardar'});
+			res.status(500).send({message:'error al guardarrrrr'});
 
 		}
 		else{
-			res.status(200).send({actividad:actividadStored});
+			res.status(200).send({actividadStored});
 		}
 	});
 

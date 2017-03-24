@@ -47,7 +47,7 @@ export class  PanelAlumnoComponent implements OnInit{
 	ngOnInit(){
 
 		//Obtencion de datos
-		/*this._actividadService.getActividades().subscribe(
+		this._actividadService.getActividades().subscribe(
 			result =>{
 				console.log(result);
 				this.actividades= result.actividades;
@@ -70,9 +70,8 @@ export class  PanelAlumnoComponent implements OnInit{
 					alert(this.errorMessage);
 					alert('Error todo tocho');
 				}
-			}*/
-
-		//);
+			}
+		);
 	}//fin ngOnInit
 
 	ngAfterViewInit(){

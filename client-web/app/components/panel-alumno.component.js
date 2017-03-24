@@ -20,32 +20,26 @@ var PanelAlumnoComponent = (function () {
         this.nActividades = 0;
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
+        var _this = this;
         //Obtencion de datos
-        /*this._actividadService.getActividades().subscribe(
-            result =>{
-                console.log(result);
-                this.actividades= result.actividades;
-
-                if(!this.actividades){
-                    alert('Error en el servidor');
-                }
-                else{
-                    this.loading=false;
-                    this.nActividades= this.actividades.length;
-                
-                }
-
-            },
-            error => {
-                this.errorMessage= <any>error;
-
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert(this.errorMessage);
-                    alert('Error todo tocho');
-                }
-            }*/
-        //);
+        this._actividadService.getActividades().subscribe(function (result) {
+            console.log(result);
+            _this.actividades = result.actividades;
+            if (!_this.actividades) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.loading = false;
+                _this.nActividades = _this.actividades.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+                alert('Error todo tocho');
+            }
+        });
     }; //fin ngOnInit
     PanelAlumnoComponent.prototype.ngAfterViewInit = function () {
         //Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery
