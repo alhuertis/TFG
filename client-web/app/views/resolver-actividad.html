@@ -22,14 +22,14 @@
 
     <div class="col-md-4">
         <div class="progreso">
-            <h4>aqui va el progreso</h4>
+            <h4>Barra de progreso</h4>
         </div>
     </div>
 </div>
 
 
 <div class="row">
-    <div class="col-md-7 col-md-offset-2"> 
+    <div class="col-md-7 col-md-offset-2 resolver"> 
         <div class="row">
             <div class="col-md-2">
                 <div class="panel-resolver-fichas">
@@ -51,8 +51,14 @@
                     <div class="enunciado">
                         <p><span><i class="glyphicon glyphicon-pencil"></i> Enunciado:</span> {{actividad[ejerSel].enunciado}}</p>
                     </div>
+
                     <div class="frase-traducir">
                         <p><span class="label label-default" *ngFor="let palabra of fraseSplit">{{palabra}}</span></p>
+                    </div>
+
+                    <div class="solucion">
+                        <input type="text">
+                        <button class="btn btn-default disabled">Calificar</button>
                     </div>
                         
                 </div>
