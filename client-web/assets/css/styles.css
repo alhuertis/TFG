@@ -345,6 +345,11 @@
 	font-weight: bold;
 }
 
+.enunciado i{
+	margin-right: 5px;
+	margin-left: 8px;
+}
+
 
 .pager-actividad div{
 	font-size: 14px;
@@ -370,15 +375,15 @@
 	text-decoration: none;
 }
 
-.pager-actividad div a i{font-size: 40px;}
+.pager-actividad div a i{font-size: 30px;}
 
 .pager-actividad div a i#iSiguiente{
-	top: 12px;
+	top: 7px;
 	left: 5px;
 }
 
 .pager-actividad div a i#iAnterior{
-	top: 12px;
+	top: 7px;
 	right: 5px;
 }
 
@@ -386,7 +391,7 @@
 	margin-top: 10px;
 	padding: 15px;
 	border-radius: 5px;
-	border: 1px solid #39a890;
+	/*border: 1px solid #39a890;*/
 }
 
 .panel-resolver{
@@ -453,12 +458,60 @@
 	background:#f43333;
 }
 
+.solucion{
+	margin-top: 25px;
+}
+
 .solucion input{
 	margin-left: 20px;
 	margin-top: 10px;
 	width: 300px;
-	height: 30px
+	height: 30px;
+	padding: 7px;
+	color: #555;
+	font-size: 16px;
+	border: none;
+	border-bottom: 1px solid #5f7225;
+
 }
+
+.solucion input:focus, .solucion input:link{
+	border:none;
+	outline: 0;
+	border-bottom: 2px solid #5f7225;
+}
+
+.solucion .btn-default{
+	margin-left: 10px;
+}
+
+.solucion .btn-default:enabled{
+	background:#5f7225;
+	color: white;
+	border: none;
+	
+}
+
+.solucion .btn-default:link, .solucion .btn-default:focus{
+	outline: 0;
+}
+
+.calificacion{
+	background: #63b1ed;
+    width: 380px;
+    margin: 30px 15px 15px 15px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+	font-weight: bold;
+}
+
+
+.progress{
+	width: 250px;
+	height: 20px;
+}
+
 /*********FIN PANEL ALUMNO**********/
 
 

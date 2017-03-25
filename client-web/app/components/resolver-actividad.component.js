@@ -12,6 +12,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var actividad_service_1 = require("../services/actividad.service");
 var ejercicio_1 = require("../models/ejercicio");
+var _ = require("underscore");
 var ResolverActividadComponent = (function () {
     function ResolverActividadComponent(_actividadService) {
         this._actividadService = _actividadService;
@@ -95,6 +96,9 @@ var ResolverActividadComponent = (function () {
         this.anterior = this.ejerSel > 0;
         this.siguiente = this.ejerSel < this.actividad.length;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        this.calificaciones = [];
+        this.respuesta = "";
+        this.msgCalificacion = "";
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
@@ -103,12 +107,45 @@ var ResolverActividadComponent = (function () {
         this.siguiente = this.ejerSel < this.actividad.length - 1;
         this.anterior = this.ejerSel > 0;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        this.respuesta = "";
     };
     ResolverActividadComponent.prototype.anteriorEjer = function () {
         this.ejerSel--;
         this.anterior = this.ejerSel > 0;
         this.siguiente = this.ejerSel < this.actividad.length;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        this.respuesta = "";
+    };
+    ResolverActividadComponent.prototype.calificar = function () {
+        if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
+            this.msgCalificacion = "!!Enhorabuena¡¡ La respues es correcta";
+            this.calificaciones[this.ejerSel] = 1;
+        }
+        else {
+            var patron = void 0;
+            var res = void 0;
+            res = this.respuesta.split(" ");
+            patron = this.actividad[this.ejerSel].solucionFPatron.split(" + ");
+            res = _.intersection(res, patron);
+            if (_.isEqual(patron, res)) {
+                this.msgCalificacion = "La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
+                this.calificaciones[this.ejerSel] = 1;
+            }
+            else {
+                if (res.length == patron.length) {
+                    this.msgCalificacion = "No estan en el mismo orden";
+                    this.calificaciones[this.ejerSel] = 1 / 2;
+                }
+                else if (res.length > patron.length / 2) {
+                    this.msgCalificacion = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.calificaciones[this.ejerSel] = 1 / 4;
+                }
+                else {
+                    this.msgCalificacion = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.calificaciones[this.ejerSel] = 0;
+                }
+            }
+        }
     };
     return ResolverActividadComponent;
 }());
