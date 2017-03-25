@@ -23,6 +23,7 @@ export class  ResolverActividadComponent implements OnInit{
     ejerSel: number;
     anterior: Boolean;
     siguiente: Boolean;
+    fraseSplit: String[];
 	
 	
 
@@ -62,7 +63,7 @@ export class  ResolverActividadComponent implements OnInit{
                 "fechaCreacion": new Date(),
                 "fechaModificacion": new Date(),
                 "enunciado": "Traducir toda la frase",
-                "fraseATraducir": "Dei sacrificium accipiunt",
+                "fraseATraducir": "Dei sacrificium accipiunt Dei sacrificium accipiunt",
                 "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
                 "solucionFPatron": "dioses + reciben + sacrificio",
                 "solucionPEspanol": "Los dioses reciben el sacrificio",
@@ -111,6 +112,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.ejerSel=0;
         this.anterior=this.ejerSel >0 ;
         this.siguiente=this.ejerSel < this.actividad.length;
+        this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
 	
 	}
 
@@ -124,12 +126,14 @@ export class  ResolverActividadComponent implements OnInit{
         this.ejerSel++;
         this.siguiente= this.ejerSel < this.actividad.length - 1;
         this.anterior=this.ejerSel > 0;
+        this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
     }
 
     anteriorEjer(){
         this.ejerSel--;
         this.anterior= this.ejerSel > 0;
         this.siguiente= this.ejerSel < this.actividad.length;
+        this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
     }
 
 

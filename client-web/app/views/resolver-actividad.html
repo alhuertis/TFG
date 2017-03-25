@@ -27,13 +27,44 @@
     </div>
 </div>
 
+
 <div class="row">
-    <div class="col-md-3 col-md-offset-4">
-        <div class="enunciado">
-        <p><span><i class="glyphicon glyphicon-pencil"></i> Enunciado:</span> {{actividad[ejerSel].enunciado}}</p>
+    <div class="col-md-7 col-md-offset-2"> 
+        <div class="row">
+            <div class="col-md-2">
+                <div class="panel-resolver-fichas">
+                    <h4>Fichas</h4>
+                    
+                    <img src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive"> 
+                    <img src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
+                    <img src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
+                    <img src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive"> 
+                    <img src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
+                    <img src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
+                    <img src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
+                    <img src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="panel-resolver-centro">
+                    <div class="enunciado">
+                        <p><span><i class="glyphicon glyphicon-pencil"></i> Enunciado:</span> {{actividad[ejerSel].enunciado}}</p>
+                    </div>
+                    <div class="frase-traducir">
+                        <p><span class="label label-default" *ngFor="let palabra of fraseSplit">{{palabra}}</span></p>
+                    </div>
+                        
+                </div>
+            </div>    
+        </div> 
     </div>
+
+    <div class="col-md-3">
+        <div class="panel-resolver-derecha">
+            
+        </div>
     </div>
-    
 
 </div>
 

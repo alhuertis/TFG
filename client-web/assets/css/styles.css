@@ -312,10 +312,18 @@
 .info-actividad{
 	border: 1px solid #eee;
 	border-radius: 7px;
-	padding: 5px 5px 15px 5px;
-	background: #eaf9f6;
+	padding: 5px 5px 0px 5px;
+	background: #544f4f;
+	color: white;
 }
 
+.info-actividad h3{
+	margin-top: 5px;
+}
+
+.info-actividad ul{
+	padding-left: 0px !important;
+}
 
 .info-actividad ul li{
 	display: inline;
@@ -325,16 +333,15 @@
 }
 
 .enunciado{
-	background: #544f4f;
-	color: #e0dede;
-	padding: 8px 10px 1px 30px;
-	border-radius: 7px;
-	margin-top: -25px;
+	color: #544f4f;
+	padding: 8px 0px 0px 10px;
+
+
 }
 
 .enunciado span{
-	color: white;
 	font-size: 16px;
+	font-weight: bold;
 }
 
 
@@ -374,6 +381,69 @@
 	right: 5px;
 }
 
+.panel-resolver{
+	margin-top: 10px;
+}
+
+.panel-resolver-fichas{
+	border: 1px solid #544f4f;
+	border-radius: 5px;
+	padding-bottom: 10px;
+	margin-top: 20px;
+	width:60px;
+	margin-left: 30px;
+}
+
+
+.panel-resolver-fichas h4{
+	text-align: center;
+	background: #544f4f;
+	margin-top: 0px;
+	color: #e0dede;
+	border-radius: 5px 5px 0px 0px;
+	padding: 2px;
+	font-size: 14px;
+}
+
+.panel-resolver-fichas img{
+	margin: 0 auto;
+	width: 30px;
+	margin-top: 2px;
+	cursor: pointer;
+	-webkit-transition: all 0.2s; /* Safari */
+    transition: all 0.2s;
+}
+
+.panel-resolver-fichas img:hover{
+	transform: rotate(45deg);
+}
+
+
+.panel-resolver-centro{
+	margin-top: 10px;
+}
+
+.panel-resolver-derecha{
+	/*border: 1px solid #27292B;*/
+	width: 200px;
+	float: left;
+}
+
+.frase-traducir{
+	padding-left: 20px;
+}
+
+.frase-traducir p span{
+	margin: 2px;
+	font-size: 18px;
+	background: #39a890;
+	cursor: pointer;
+	
+}
+
+.frase-traducir p span:hover{
+	background:#f43333;
+}
 
 /*********FIN PANEL ALUMNO**********/
 

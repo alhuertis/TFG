@@ -46,7 +46,7 @@ var ResolverActividadComponent = (function () {
                     "fechaCreacion": new Date(),
                     "fechaModificacion": new Date(),
                     "enunciado": "Traducir toda la frase",
-                    "fraseATraducir": "Dei sacrificium accipiunt",
+                    "fraseATraducir": "Dei sacrificium accipiunt Dei sacrificium accipiunt",
                     "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
                     "solucionFPatron": "dioses + reciben + sacrificio",
                     "solucionPEspanol": "Los dioses reciben el sacrificio",
@@ -94,6 +94,7 @@ var ResolverActividadComponent = (function () {
         this.ejerSel = 0;
         this.anterior = this.ejerSel > 0;
         this.siguiente = this.ejerSel < this.actividad.length;
+        this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
@@ -101,11 +102,13 @@ var ResolverActividadComponent = (function () {
         this.ejerSel++;
         this.siguiente = this.ejerSel < this.actividad.length - 1;
         this.anterior = this.ejerSel > 0;
+        this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
     };
     ResolverActividadComponent.prototype.anteriorEjer = function () {
         this.ejerSel--;
         this.anterior = this.ejerSel > 0;
         this.siguiente = this.ejerSel < this.actividad.length;
+        this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
     };
     return ResolverActividadComponent;
 }());
