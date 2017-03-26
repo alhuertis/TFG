@@ -27,6 +27,10 @@
                     {{progreso}}%
                 </div>
             </div>
+
+            <div class="nota-final animated aparecer" *ngIf="progreso == 100">
+                <p>Has obtenido una nota de {{calificacionFinal}} sobre {{actividad.length}}</p>
+            </div>
         
     </div>
 </div>

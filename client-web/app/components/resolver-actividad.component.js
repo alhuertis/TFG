@@ -100,6 +100,7 @@ var ResolverActividadComponent = (function () {
         this.respuesta = "";
         this.msgCalificacion = "";
         this.progreso = 0;
+        this.calificacionFinal = 0;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
@@ -148,6 +149,11 @@ var ResolverActividadComponent = (function () {
             }
         }
         this.progreso = (this.calificaciones.length * 100) / this.actividad.length;
+        if (this.progreso == 100) {
+            for (var i = 0; i < this.calificaciones.length; i++) {
+                this.calificacionFinal += this.calificaciones[i];
+            }
+        }
     };
     return ResolverActividadComponent;
 }());

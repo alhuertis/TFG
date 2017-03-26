@@ -101,7 +101,7 @@
 
 @-webkit-keyframes aparecer {
 	0% {
-		opacity: 1;
+		opacity: 0;
 	}
 	100% {
 		opacity: 1;
@@ -109,7 +109,7 @@
 }
 @keyframes aparecer {
 	0% {
-		opacity: 1;
+		opacity: 0;
 	}
 	100% {
 		opacity: 1;
@@ -313,8 +313,8 @@
 	border: 1px solid #eee;
 	border-radius: 7px;
 	padding: 5px 5px 0px 5px;
-	background: #544f4f;
-	color: white;
+	background: #F5F5F5;
+	color: #444;
 }
 
 .info-actividad h3{
@@ -471,14 +471,14 @@
 	color: #555;
 	font-size: 16px;
 	border: none;
-	border-bottom: 1px solid #5f7225;
+	border-bottom: 1px solid #63b1ed;
 
 }
 
 .solucion input:focus, .solucion input:link{
 	border:none;
 	outline: 0;
-	border-bottom: 2px solid #5f7225;
+	border-bottom: 2px solid #63b1ed;
 }
 
 .solucion .btn-default{
@@ -486,7 +486,7 @@
 }
 
 .solucion .btn-default:enabled{
-	background:#5f7225;
+	background:#63b1ed;
 	color: white;
 	border: none;
 	
@@ -510,6 +510,12 @@
 .progress{
 	width: 250px;
 	height: 20px;
+	margin-bottom: 7px;
+}
+
+.nota-final p{
+	color: #5CB85C;
+	font-weight: bold;
 }
 
 /*********FIN PANEL ALUMNO**********/
