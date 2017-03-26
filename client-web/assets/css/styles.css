@@ -498,9 +498,9 @@
 
 .calificacion{
 	background: #63b1ed;
-    width: 380px;
+    width: 480px;
     margin: 30px 15px 15px 15px;
-    padding: 10px;
+    padding: 5px 5px 5px 10px;
     border-radius: 10px;
     color: white;
 	font-weight: bold;

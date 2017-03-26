@@ -29,6 +29,7 @@ export class  ResolverActividadComponent implements OnInit{
     respuesta: String;
     calificaciones: number[];
     msgCalificacion: String;
+    progreso: number;
 	
 	
 
@@ -121,6 +122,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.calificaciones=[];
         this.respuesta="";
         this.msgCalificacion="";
+        this.progreso=0;
 	
 	}
 
@@ -147,6 +149,7 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     calificar(){
+
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
             this.msgCalificacion="!!Enhorabuena¡¡ La respues es correcta";
             this.calificaciones[this.ejerSel]= 1;
@@ -177,10 +180,10 @@ export class  ResolverActividadComponent implements OnInit{
                    this.calificaciones[this.ejerSel]= 0;
                }
            }
-
-
-
         }
+
+        this.progreso= (this.calificaciones.length * 100) / this.actividad.length;
+        
     }
 
 

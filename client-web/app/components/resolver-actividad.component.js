@@ -99,6 +99,7 @@ var ResolverActividadComponent = (function () {
         this.calificaciones = [];
         this.respuesta = "";
         this.msgCalificacion = "";
+        this.progreso = 0;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
@@ -146,6 +147,7 @@ var ResolverActividadComponent = (function () {
                 }
             }
         }
+        this.progreso = (this.calificaciones.length * 100) / this.actividad.length;
     };
     return ResolverActividadComponent;
 }());
