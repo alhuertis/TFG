@@ -171,7 +171,7 @@ export class  ResolverActividadComponent implements OnInit{
                
 
                if(res.length == patron.length){
-                   this.msgCalificacion="No estan en el mismo orden";
+                   this.msgCalificacion="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
                    this.calificaciones[this.ejerSel]= 1/2;
                }
                else if(res.length > patron.length/2){
