@@ -37,20 +37,20 @@
 
 
 <div class="row">
-    <div class="col-md-7 col-md-offset-2 resolver"> 
+    <div class="col-md-6 col-md-offset-2 resolver"> 
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" style="padding-right: 0px;">
                 <div class="panel-resolver-fichas">
                     <h4>Fichas</h4>
                     
-                    <img src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive"> 
-                    <img src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
-                    <img src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
-                    <img src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive"> 
-                    <img src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
-                    <img src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
-                    <img src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
-                    <img src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
+                    <img (click)="clickMonovalente($event)" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive"> 
+                    <img (click)="clickBivalente($event)" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
+                    <img (click)="clickTrivalente($event)" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
+                    <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive"> 
+                    <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
+                    <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
+                    <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
+                    <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
                 </div>
             </div>
 
@@ -79,8 +79,18 @@
         </div> 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="panel-resolver-derecha">
+            <div class="puzle">
+                <img *ngIf="amarilla.activa" id="amarilla" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': amarilla.top}">
+                <img *ngIf="azul.activa" id="azul" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
+                <img *ngIf="naranja.activa" id="naranja" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
+                <img *ngIf="roja.activa" id="roja" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
+                <img *ngIf="verde.activa" id="verde" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">   
+                <img *ngIf="monovalente.activa" id="monovalente" value="hola" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': monovalente.top}">
+                <img *ngIf="bivalente.activa" id="bivalente" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': bivalente.top}">    
+                <img *ngIf="trivalente.activa" id="trivalente" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': trivalente.top}">
+            </div>
             
         </div>
     </div>

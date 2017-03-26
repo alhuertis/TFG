@@ -6,6 +6,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {ActividadService} from '../services/actividad.service';
 import {Actividad} from '../models/actividad';
 import {Ejercicio} from '../models/ejercicio';
+import {Ficha} from '../models/ficha';
 
 declare var $:any;
 import * as _ from 'underscore';
@@ -31,6 +32,16 @@ export class  ResolverActividadComponent implements OnInit{
     msgCalificacion: String;
     progreso: number;
     calificacionFinal: number;
+    monovalente: Ficha;
+    bivalente: Ficha;
+    trivalente: Ficha;
+    amarilla: Ficha;
+    azul: Ficha;
+    naranja: Ficha;
+    roja: Ficha;
+    verde: Ficha;
+    argumentos: number;
+ 
 	
 	
 
@@ -125,6 +136,16 @@ export class  ResolverActividadComponent implements OnInit{
         this.msgCalificacion="";
         this.progreso=0;
         this.calificacionFinal=0;
+        this.monovalente=new Ficha(false,"50px", "0px");
+        this.bivalente= new Ficha(false,"50px", "0px");
+        this.trivalente= new Ficha(false,"50px", "0px");
+        this.amarilla= new Ficha(false,"", "");
+        this.azul= new Ficha(false,"", "");
+        this.naranja= new Ficha(false,"", "");
+        this.roja= new Ficha(false,"", "");
+        this.verde= new Ficha(false,"", "");
+        this.argumentos=0;
+
 	
 	}
 
@@ -192,6 +213,78 @@ export class  ResolverActividadComponent implements OnInit{
             }
         }
         
+    }
+
+
+    clickMonovalente(event){
+        if(this.monovalente.activa)
+            this.monovalente.activa=false;
+        else
+            this.monovalente.activa=true;
+    }
+
+    clickBivalente(event){
+        if(this.bivalente.activa)
+            this.bivalente.activa=false;
+        else
+            this.bivalente.activa=true;
+    }
+
+    clickTrivalente(event){
+        if(this.trivalente.activa)
+            this.trivalente.activa=false;
+        else
+            this.trivalente.activa=true;
+    }
+
+    clickAmarilla(event){
+        if(this.amarilla.activa)
+            this.amarilla.activa=false;
+        else{
+            this.amarilla.activa=true;
+            this.amarilla.top="0px";
+            this.amarilla.left="0px";
+        }
+    }
+
+    clickAzul(event){
+        if(this.azul.activa)
+            this.azul.activa=false;
+        else{
+            this.azul.activa=true;
+            this.azul.top="20px";
+            this.azul.left="30px";
+        }
+    }
+
+    clickNaranja(event){
+        if(this.naranja.activa)
+            this.naranja.activa=false;
+        else{
+            this.naranja.activa=true;
+            this.naranja.top="20px";
+            this.naranja.left="30px";
+        }
+    }
+
+    clickRoja(event){
+        if(this.roja.activa)
+            this.roja.activa=false;
+        else{
+            this.roja.activa=true;
+            this.roja.top="20px";
+            this.roja.left="30px";
+        }
+    }
+
+    clickVerde(event){
+        if(this.verde.activa)
+            this.verde.activa=false;
+        else{
+            this.verde.activa=true;
+            this.verde.top="20px";
+            this.verde.left="30px";
+        }
     }
 
 

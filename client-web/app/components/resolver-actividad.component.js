@@ -12,6 +12,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var actividad_service_1 = require("../services/actividad.service");
 var ejercicio_1 = require("../models/ejercicio");
+var ficha_1 = require("../models/ficha");
 var _ = require("underscore");
 var ResolverActividadComponent = (function () {
     function ResolverActividadComponent(_actividadService) {
@@ -101,6 +102,15 @@ var ResolverActividadComponent = (function () {
         this.msgCalificacion = "";
         this.progreso = 0;
         this.calificacionFinal = 0;
+        this.monovalente = new ficha_1.Ficha(false, "50px", "0px");
+        this.bivalente = new ficha_1.Ficha(false, "50px", "0px");
+        this.trivalente = new ficha_1.Ficha(false, "50px", "0px");
+        this.amarilla = new ficha_1.Ficha(false, "", "");
+        this.azul = new ficha_1.Ficha(false, "", "");
+        this.naranja = new ficha_1.Ficha(false, "", "");
+        this.roja = new ficha_1.Ficha(false, "", "");
+        this.verde = new ficha_1.Ficha(false, "", "");
+        this.argumentos = 0;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
@@ -153,6 +163,69 @@ var ResolverActividadComponent = (function () {
             for (var i = 0; i < this.calificaciones.length; i++) {
                 this.calificacionFinal += this.calificaciones[i];
             }
+        }
+    };
+    ResolverActividadComponent.prototype.clickMonovalente = function (event) {
+        if (this.monovalente.activa)
+            this.monovalente.activa = false;
+        else
+            this.monovalente.activa = true;
+    };
+    ResolverActividadComponent.prototype.clickBivalente = function (event) {
+        if (this.bivalente.activa)
+            this.bivalente.activa = false;
+        else
+            this.bivalente.activa = true;
+    };
+    ResolverActividadComponent.prototype.clickTrivalente = function (event) {
+        if (this.trivalente.activa)
+            this.trivalente.activa = false;
+        else
+            this.trivalente.activa = true;
+    };
+    ResolverActividadComponent.prototype.clickAmarilla = function (event) {
+        if (this.amarilla.activa)
+            this.amarilla.activa = false;
+        else {
+            this.amarilla.activa = true;
+            this.amarilla.top = "0px";
+            this.amarilla.left = "0px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickAzul = function (event) {
+        if (this.azul.activa)
+            this.azul.activa = false;
+        else {
+            this.azul.activa = true;
+            this.azul.top = "20px";
+            this.azul.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickNaranja = function (event) {
+        if (this.naranja.activa)
+            this.naranja.activa = false;
+        else {
+            this.naranja.activa = true;
+            this.naranja.top = "20px";
+            this.naranja.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickRoja = function (event) {
+        if (this.roja.activa)
+            this.roja.activa = false;
+        else {
+            this.roja.activa = true;
+            this.roja.top = "20px";
+            this.roja.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickVerde = function (event) {
+        if (this.verde.activa)
+            this.verde.activa = false;
+        else {
+            this.verde.activa = true;
+            this.verde.top = "20px";
+            this.verde.left = "30px";
         }
     };
     return ResolverActividadComponent;
