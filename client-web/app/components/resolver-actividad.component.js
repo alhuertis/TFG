@@ -111,9 +111,24 @@ var ResolverActividadComponent = (function () {
         this.roja = new ficha_1.Ficha(false, "", "");
         this.verde = new ficha_1.Ficha(false, "", "");
         this.argumentos = 0;
+        this.faseVerbo = false;
+        this.verbo = this.extraerVerbo();
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
+    ResolverActividadComponent.prototype.extraerVerbo = function () {
+        var args = this.actividad[this.ejerSel].solucionFLogico.split(",");
+        this.argumentos = args.length - 1;
+        var verbo;
+        for (var _i = 0, args_1 = args; _i < args_1.length; _i++) {
+            var s = args_1[_i];
+            if (s.includes("Verbo")) {
+                verbo = s.substring(s.indexOf("Verbo(") + "Verbo(".length, s.length - 1);
+                break;
+            }
+        }
+        return verbo;
+    };
     ResolverActividadComponent.prototype.siguienteEjer = function () {
         this.ejerSel++;
         this.siguiente = this.ejerSel < this.actividad.length - 1;
@@ -166,22 +181,37 @@ var ResolverActividadComponent = (function () {
         }
     };
     ResolverActividadComponent.prototype.clickMonovalente = function (event) {
-        if (this.monovalente.activa)
-            this.monovalente.activa = false;
-        else
-            this.monovalente.activa = true;
+        if (this.argumentos > 1) {
+            alert("Esta pieza no representa el numero de argumentos del verbo");
+        }
+        else {
+            if (this.monovalente.activa)
+                this.monovalente.activa = false;
+            else
+                this.monovalente.activa = true;
+        }
     };
     ResolverActividadComponent.prototype.clickBivalente = function (event) {
-        if (this.bivalente.activa)
-            this.bivalente.activa = false;
-        else
-            this.bivalente.activa = true;
+        if (this.argumentos != 2) {
+            alert("Esta pieza no representa el numero de argumentos del verbo");
+        }
+        else {
+            if (this.bivalente.activa)
+                this.bivalente.activa = false;
+            else
+                this.bivalente.activa = true;
+        }
     };
     ResolverActividadComponent.prototype.clickTrivalente = function (event) {
-        if (this.trivalente.activa)
-            this.trivalente.activa = false;
-        else
-            this.trivalente.activa = true;
+        if (this.argumentos != 3) {
+            alert("Esta pieza no representa el numero de argumentos del verbo");
+        }
+        else {
+            if (this.trivalente.activa)
+                this.trivalente.activa = false;
+            else
+                this.trivalente.activa = true;
+        }
     };
     ResolverActividadComponent.prototype.clickAmarilla = function (event) {
         if (this.amarilla.activa)
@@ -226,6 +256,17 @@ var ResolverActividadComponent = (function () {
             this.verde.activa = true;
             this.verde.top = "20px";
             this.verde.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickPalabra = function (event, palabra) {
+        $(event.target).addClass("marcada");
+        if (palabra == this.verbo) {
+            alert("Es el verbo!");
+            $(event.target).addClass("marcada");
+        }
+        else {
+            alert("No es el verbo");
+            $(event.target).removeClass("marcada");
         }
     };
     return ResolverActividadComponent;

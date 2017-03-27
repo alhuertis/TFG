@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="frase-traducir animated fadeInLeft">
-                        <p><span class="label label-default" *ngFor="let palabra of fraseSplit">{{palabra}}</span></p>
+                        <p><span class="label label-default" *ngFor="let palabra of fraseSplit" (click)="clickPalabra($event,palabra)">{{palabra}}</span></p>
                     </div>
 
                     <div class="solucion">

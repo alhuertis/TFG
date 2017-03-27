@@ -458,6 +458,16 @@
 	background:#f43333;
 }
 
+.marcada{
+	background:#f43333 !important;
+}
+
+.acertada{
+	background: #ccc !important;
+	cursor: default !important;
+
+}
+
 .solucion{
 	margin-top: 25px;
 }
