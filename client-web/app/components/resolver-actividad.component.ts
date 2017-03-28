@@ -183,6 +183,18 @@ export class  ResolverActividadComponent implements OnInit{
         this.anterior=this.ejerSel > 0;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta="";
+        this.verboMarcado=false;
+        this.verbo= this.extraerVerbo();
+        this.faseVerbo=false;
+        this.monovalente.activa=false;
+        this.bivalente.activa=false;
+        this.trivalente.activa=false;
+        this.amarilla.activa=false;
+        this.azul.activa=false;
+        this.naranja.activa=false;
+        this.roja.activa=false;
+        this.verde.activa=false;
+        $('span.acertada').removeClass("acertada");
     }
 
     anteriorEjer(){
@@ -340,6 +352,20 @@ export class  ResolverActividadComponent implements OnInit{
         }
     }
 
+    sacarFichas(event){
+        if($(event.target).next().css("display") == "none"){
+            $(event.target).next().css("display", "block").removeClass("fadeOut").addClass("animated fadeInLeft");    
+        }else{
+            $(event.target).next().removeClass("fadeInLeft").animate({
+                "opacity": "0"
+            },500);
+
+            this.sleep(500).then(()=>{
+                $(event.target).next().css("display", "none");
+            });
+        }
+    }
+
     clickPalabra(event, palabra: String){
 
         if(this.verboMarcado && !this.faseVerbo){
@@ -357,6 +383,11 @@ export class  ResolverActividadComponent implements OnInit{
             }
         }
     }
+
+
+    sleep(ms = 0) {
+    	return new Promise(r => setTimeout(r, ms));
+	}
 
 
 }

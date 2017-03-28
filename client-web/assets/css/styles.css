@@ -418,6 +418,12 @@
 	font-size: 14px;
 }
 
+.panel-resolver-fichas>div{
+	position: relative;	
+	padding: 0px !important;;
+	margin: 0px !important;
+}
+
 .panel-resolver-fichas img{
 	margin: 0 auto;
 	width: 30px;
@@ -425,10 +431,12 @@
 	cursor: pointer;
 	-webkit-transition: all 0.2s; /* Safari */
     transition: all 0.2s;
+	position: relative;
 }
 
 .panel-resolver-fichas img:hover{
 	transform: rotate(45deg);
+	
 }
 
 
@@ -455,7 +463,7 @@
 }
 
 .frase-traducir p span:hover{
-	background:#f43333;
+	background:#544f4f;
 }
 
 .marcada{
@@ -543,7 +551,31 @@
 	position: absolute;
 }
 
+.sub-fichas{
+	position: absolute !important;
+	top: 0px;
+	left: -112px;
+	width: 110px;
+	display: none;
+	
+}
 
+.sub-fichas img{
+	display: inline;
+	top: -3px;
+}
+
+/*.panel-resolver-fichas img:hover + .sub-fichas{
+	display: inline-block;
+}*/
+
+.izquierda{
+	transform: rotate(-15deg);
+}
+
+.derecha{
+	transform: rotate(15deg);
+}
 /*********FIN PANEL ALUMNO**********/
 
 

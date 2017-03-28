@@ -42,15 +42,62 @@
             <div class="col-md-2" style="padding-right: 0px;">
                 <div class="panel-resolver-fichas">
                     <h4>Fichas</h4>
+                    <div>
+                        <img (click)="clickMonovalente($event)" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive"> 
+                    </div>
+
+                    <div>
+                        <img (click)="clickBivalente($event)" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
+                    </div>
+
+                    <div>
+                        <img (click)="clickTrivalente($event)" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
+                    </div>
+
+                    <div>
+                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive">
+                        <div class="sub-fichas"> 
+                            <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive izquierda">
+                            <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive">
+                            <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive derecha">    
+                        </div>
+                    </div>
+
+                    <div>
+                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
+                        <div class="sub-fichas"> 
+                            <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive izquierda">    
+                            <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
+                            <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive derecha">    
+                        </div>
+                    </div>
+
+                    <div>
+                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
+                        <div class="sub-fichas">
+                            <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive izquierda">
+                            <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
+                            <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive derecha">
+                        </div>
+                    </div>
                     
-                    <img (click)="clickMonovalente($event)" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive"> 
-                    <img (click)="clickBivalente($event)" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
-                    <img (click)="clickTrivalente($event)" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
-                    <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive"> 
-                    <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
-                    <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
-                    <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
-                    <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
+                    <div>
+                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
+                        <div class="sub-fichas">
+                            <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive izquierda">
+                            <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
+                            <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive derecha">
+                        </div>
+                    </div>
+
+                    <div>
+                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
+                        <div class="sub-fichas">
+                            <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive izquierda">                       
+                            <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
+                            <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive derecha">                           
+                        </div>
+                    </div>
                 </div>
             </div>
 
