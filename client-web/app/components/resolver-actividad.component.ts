@@ -333,6 +333,7 @@ export class  ResolverActividadComponent implements OnInit{
         else{
             alert("No es el verbo");
             $(event.target).removeClass("marcada");
+        }
     }
 
 
