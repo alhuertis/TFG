@@ -43,6 +43,7 @@ export class  ResolverActividadComponent implements OnInit{
     argumentos: number;
     verbo: string;
     faseVerbo: Boolean;
+    verboMarcado: Boolean;
     
 
  
@@ -151,6 +152,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.argumentos=0;
         this.faseVerbo=false;
         this.verbo= this.extraerVerbo();
+        this.verboMarcado=false;
 
 	
 	}
@@ -241,11 +243,15 @@ export class  ResolverActividadComponent implements OnInit{
         if(this.argumentos > 1){
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }else{
-    
-            if(this.monovalente.activa)
-                this.monovalente.activa=false;
-            else
+            if(this.verboMarcado){
+                this.faseVerbo=true;
                 this.monovalente.activa=true;
+            }else{
+                if(this.monovalente.activa)
+                    this.monovalente.activa=false;
+                else
+                    this.monovalente.activa=true;
+            }    
         }
     }
 
@@ -254,10 +260,16 @@ export class  ResolverActividadComponent implements OnInit{
         if(this.argumentos != 2){
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }else{
-            if(this.bivalente.activa)
-                this.bivalente.activa=false;
-            else
+             if(this.verboMarcado){
+                this.faseVerbo=true;
                 this.bivalente.activa=true;
+                $('span.marcada').removeClass("marcada").addClass("acertada");
+            }else{
+                if(this.bivalente.activa)
+                    this.bivalente.activa=false;
+                else
+                    this.bivalente.activa=true;
+            }
         }
     }
 
@@ -266,10 +278,15 @@ export class  ResolverActividadComponent implements OnInit{
          if(this.argumentos != 3){
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }else{
-            if(this.trivalente.activa)
-                this.trivalente.activa=false;
-            else
+             if(this.verboMarcado){
+                this.faseVerbo=true;
                 this.trivalente.activa=true;
+            }else{
+                if(this.trivalente.activa)
+                    this.trivalente.activa=false;
+                else
+                    this.trivalente.activa=true;
+            }
         }
     }
 
@@ -325,14 +342,19 @@ export class  ResolverActividadComponent implements OnInit{
 
     clickPalabra(event, palabra: String){
 
-        $(event.target).addClass("marcada");
-        if(palabra == this.verbo){
-            alert("Es el verbo!");
-             $(event.target).addClass("marcada");
-        }
-        else{
-            alert("No es el verbo");
+        if(this.verboMarcado && !this.faseVerbo){
+            this.verboMarcado=false;
             $(event.target).removeClass("marcada");
+        }else if(!this.faseVerbo){
+            if(palabra == this.verbo){
+                this.verboMarcado=true;
+                alert("Es el verbo!");
+                $(event.target).addClass("marcada");
+            }
+            else{
+                alert("No es el verbo");
+                $(event.target).removeClass("marcada");
+            }
         }
     }
 

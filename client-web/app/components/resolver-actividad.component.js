@@ -113,6 +113,7 @@ var ResolverActividadComponent = (function () {
         this.argumentos = 0;
         this.faseVerbo = false;
         this.verbo = this.extraerVerbo();
+        this.verboMarcado = false;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
@@ -185,10 +186,16 @@ var ResolverActividadComponent = (function () {
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }
         else {
-            if (this.monovalente.activa)
-                this.monovalente.activa = false;
-            else
+            if (this.verboMarcado) {
+                this.faseVerbo = true;
                 this.monovalente.activa = true;
+            }
+            else {
+                if (this.monovalente.activa)
+                    this.monovalente.activa = false;
+                else
+                    this.monovalente.activa = true;
+            }
         }
     };
     ResolverActividadComponent.prototype.clickBivalente = function (event) {
@@ -196,10 +203,17 @@ var ResolverActividadComponent = (function () {
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }
         else {
-            if (this.bivalente.activa)
-                this.bivalente.activa = false;
-            else
+            if (this.verboMarcado) {
+                this.faseVerbo = true;
                 this.bivalente.activa = true;
+                $('span.marcada').removeClass("marcada").addClass("acertada");
+            }
+            else {
+                if (this.bivalente.activa)
+                    this.bivalente.activa = false;
+                else
+                    this.bivalente.activa = true;
+            }
         }
     };
     ResolverActividadComponent.prototype.clickTrivalente = function (event) {
@@ -207,10 +221,16 @@ var ResolverActividadComponent = (function () {
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }
         else {
-            if (this.trivalente.activa)
-                this.trivalente.activa = false;
-            else
+            if (this.verboMarcado) {
+                this.faseVerbo = true;
                 this.trivalente.activa = true;
+            }
+            else {
+                if (this.trivalente.activa)
+                    this.trivalente.activa = false;
+                else
+                    this.trivalente.activa = true;
+            }
         }
     };
     ResolverActividadComponent.prototype.clickAmarilla = function (event) {
@@ -259,14 +279,20 @@ var ResolverActividadComponent = (function () {
         }
     };
     ResolverActividadComponent.prototype.clickPalabra = function (event, palabra) {
-        $(event.target).addClass("marcada");
-        if (palabra == this.verbo) {
-            alert("Es el verbo!");
-            $(event.target).addClass("marcada");
-        }
-        else {
-            alert("No es el verbo");
+        if (this.verboMarcado && !this.faseVerbo) {
+            this.verboMarcado = false;
             $(event.target).removeClass("marcada");
+        }
+        else if (!this.faseVerbo) {
+            if (palabra == this.verbo) {
+                this.verboMarcado = true;
+                alert("Es el verbo!");
+                $(event.target).addClass("marcada");
+            }
+            else {
+                alert("No es el verbo");
+                $(event.target).removeClass("marcada");
+            }
         }
     };
     return ResolverActividadComponent;
