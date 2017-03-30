@@ -156,13 +156,19 @@
 	padding-top: 30px !important;
 }
 
-.panel-ejercicios{
-	/*background: red;*/
-}
-
 .panel-ejercicios h2{
 	margin: 0px !important;
 	margin-bottom:15px !important; 
+}
+
+.ejercicio-add-cabecera{
+	margin: 0;
+	padding: 0;
+}
+
+.ejercicio-add-cabecera h3{
+	margin: 0;
+	padding: 0;
 }
 
 .ejer-lista input[type=checkbox]{
@@ -304,6 +310,29 @@
 
 .panel-actividad .opciones-actividad a:last-child{
 	float: right;
+}
+
+.add-ejercicio-tit h3{
+	margin-top: -3px;
+	margin-bottom: 2px;
+}
+.form-add-ejer{
+	background: #444;
+	padding: 12px;
+	color: white;
+}
+
+.form-add-ejer textarea{
+	font-size: 14px;
+}
+
+.form-add-ejer>div>div{
+	margin-top: 5px;
+}
+
+.form-add-ejer button, .form-add-ejer a{
+	float: right;
+	margin: 5px;
 }
 /*******FIN PANEL PROFESOR ********/
 

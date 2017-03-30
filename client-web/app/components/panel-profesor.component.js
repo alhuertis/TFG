@@ -25,6 +25,8 @@ var PanelProfesorComponent = (function () {
         this.mostrarLista = false;
         this.datosAMostrar = "";
         this.actividad = [];
+        this.visible = false;
+        this.visibleAnimate = false;
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -521,6 +523,17 @@ var PanelProfesorComponent = (function () {
         if (this.actividad.length > 0) {
             alert("Se va a crear la actividad");
         }
+    };
+    PanelProfesorComponent.prototype.show = function (ejercicio) {
+        var _this = this;
+        this.visible = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+        this.ejerAbrir = ejercicio;
+    };
+    PanelProfesorComponent.prototype.hide = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.visible = false; }, 300);
     };
     return PanelProfesorComponent;
 }());
