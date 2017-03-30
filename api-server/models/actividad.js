@@ -6,8 +6,9 @@ var Schema = mongoose.Schema;
 
 var ActividadSchema = Schema({
 
-    //_id: String,
-	profesor: String
+    _id: String,
+	profesor: String,
+    resuelta: Boolean
     //fecha_creacion: Date,
     //nivel: String,
  /*   ejercicios: Ejercicio[], /*[{  
