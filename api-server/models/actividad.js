@@ -10,7 +10,7 @@ var ActividadSchema = Schema({
 	profesor: String,
     resuelta: Boolean
     //fecha_creacion: Date,
-    //nivel: String,
+    nivel: String,
  /*   ejercicios: Ejercicio[], /*[{  
         //Campo de los ejercicios
         //ejercicio: Ejercicio,
