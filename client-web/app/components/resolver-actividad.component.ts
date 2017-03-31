@@ -86,10 +86,10 @@ export class  ResolverActividadComponent implements OnInit{
                 "fechaCreacion": new Date(),
                 "fechaModificacion": new Date(),
                 "enunciado": "Traducir toda la frase",
-                "fraseATraducir": "Dei sacrificium accipiunt Dei sacrificium accipiunt",
-                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                "solucionFPatron": "dioses + reciben + sacrificio",
-                "solucionPEspanol": "Los dioses reciben el sacrificio",
+                "fraseATraducir": "Magister sapientiam amat",
+                "solucionFLogico": "Nominativo(magister), Acusativo(sapientiam),Verbo(amat)",
+                "solucionFPatron": "maestro + ama + sabiduria",
+                "solucionPEspanol": "El maestro ama la sabiduría",
                 "solucionPLatin": "",
                 "marcado": false 
             },
@@ -195,6 +195,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.roja.activa=false;
         this.verde.activa=false;
         $('span.acertada').removeClass("acertada");
+        $('span.marcada').removeClass("marcada");
     }
 
     anteriorEjer(){
@@ -208,7 +209,7 @@ export class  ResolverActividadComponent implements OnInit{
     calificar(){
 
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
-            this.msgCalificacion="!!Enhorabuena¡¡ La respues es correcta";
+            this.msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
             this.calificaciones[this.ejerSel]= 1;
         }else{
             let patron: String[];

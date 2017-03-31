@@ -80,6 +80,11 @@ export class  PanelProfesorComponent implements OnInit{
 	public otrasColeccionesTipo4: Ejercicio[];
 	public nOtrasColeccionesTipo4: number;
 
+	
+  	public visible: Boolean;
+  	private visibleAnimate: Boolean;
+	public ejerAbrir: Ejercicio;
+
 
 	constructor(
 			private _ejercicioService: EjercicioService
@@ -91,6 +96,8 @@ export class  PanelProfesorComponent implements OnInit{
 		this.mostrarLista=false;
 		this.datosAMostrar="";
 		this.actividad=[];
+		this.visible=false;
+		this.visibleAnimate=false;
 		
 	}
 
@@ -755,5 +762,16 @@ export class  PanelProfesorComponent implements OnInit{
 			alert("Se va a crear la actividad");
 		}
 	}
+
+	show(ejercicio: Ejercicio){
+    	this.visible = true;
+    	setTimeout(() => this.visibleAnimate = true);
+		this.ejerAbrir=ejercicio;
+  	}
+
+  	hide(){
+    	this.visibleAnimate = false;
+    	setTimeout(() => this.visible = false, 300);
+  	}
 	
 }
