@@ -4,6 +4,7 @@ import { AppComponent }  from './app.component';
 import {FormsModule} from '@angular/forms';
 import {HttpModule, JsonpModule} from '@angular/http';
 import {routing, appRoutingProviders} from './app.routing';
+import {Ng2DragDropModule} from "ng2-drag-drop";
 
 import {PanelProfesorComponent} from './components/panel-profesor.component'; 
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
@@ -24,7 +25,8 @@ CabeceraAlumnoComponent
   			BrowserModule, 
   			FormsModule,
   			HttpModule,
-        routing 
+        routing,
+        Ng2DragDropModule 
   ],
   //Aqui cargamos todos los componentes que vamos a usar en la aplicacion.(Es un array).
   declarations: [ 
