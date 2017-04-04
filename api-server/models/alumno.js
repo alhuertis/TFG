@@ -13,10 +13,14 @@ var AlumnoSchema = Schema({
     email: String,
     fecha_nacimiento: String,
     actividades: [{
-        _id: String,
-        ejercicios:[{
+        actividad: Actividad,
+        resuelta: Boolean,
+        corregida: Boolean,
+        nota: String
+        //_id: String,
+        //ejercicios:[{
             //Campo de los ejercicios
-            ejercicio: Ejercicio
+            //ejercicio: Ejercicio
            /* _id: String,
             titulo: String,
             nivel: String,
@@ -31,14 +35,7 @@ var AlumnoSchema = Schema({
             solucionFPatron: String,
             solucionPEspanol: String,
             solucionPLatin: String*/
-        }],
-        alumnos: [{
-            _id: String,
-            calificacion: number,
-            solucion: string
-        }]
     }]
-
 });
 
 module.exports= mongoose.model('Alumno', AlumnoSchema);

@@ -7,11 +7,11 @@ var Schema = mongoose.Schema;
 var ActividadSchema = Schema({
 
     _id: String,
+    idProfesor: String,
 	profesor: String,
-    resuelta: Boolean
-    //fecha_creacion: Date,
+    fecha_creacion: Date,
     nivel: String,
- /*   ejercicios: Ejercicio[], /*[{  
+    ejercicios: Ejercicio[], /*[{  
         //Campo de los ejercicios
         //ejercicio: Ejercicio,
         id_profesor: String,
