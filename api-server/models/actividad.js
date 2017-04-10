@@ -11,7 +11,7 @@ var ActividadSchema = Schema({
 	profesor: String,
     fecha_creacion: Date,
     nivel: String,
-    ejercicios: Ejercicio[], /*[{  
+    /*ejercicios: Ejercicio[] [{  
         //Campo de los ejercicios
         //ejercicio: Ejercicio,
         id_profesor: String,
