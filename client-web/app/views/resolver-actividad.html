@@ -43,60 +43,35 @@
                 <div class="panel-resolver-fichas">
                     <h4>Fichas</h4>
                     <div>
-                        <img (click)="clickMonovalente($event)" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive"> 
+                        <img draggable="true" [dragData]="'monovalente'" [dragOverClass]="'drag-ficha'" (click)="clickMonovalente($event)" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive" id="monovalente"> 
                     </div>
 
                     <div>
-                        <img (click)="clickBivalente($event)" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
+                        <img draggable="true" [dragData]="'bivalente'" (click)="clickBivalente($event)" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
                     </div>
 
                     <div>
-                        <img (click)="clickTrivalente($event)" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
+                        <img draggable="true" [dragData]="'trivalente'" (click)="clickTrivalente($event)" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
                     </div>
 
                     <div>
-                        <img draggable (click)="sacarFichas($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive">
-                        <div class="sub-fichas"> 
-                            <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive izquierda">
-                            <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive">
-                            <img (click)="clickAmarilla($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive derecha">    
-                        </div>
+                        <img draggable="true" [dragOverClass]="'drag-ficha'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive">
                     </div>
 
                     <div>
-                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
-                        <div class="sub-fichas"> 
-                            <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive izquierda">    
-                            <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
-                            <img (click)="clickAzul($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive derecha">    
-                        </div>
+                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">
                     </div>
 
                     <div>
-                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
-                        <div class="sub-fichas">
-                            <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive izquierda">
-                            <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
-                            <img (click)="clickNaranja($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive derecha">
-                        </div>
+                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
                     </div>
                     
                     <div>
-                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
-                        <div class="sub-fichas">
-                            <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive izquierda">
-                            <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
-                            <img (click)="clickRoja($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive derecha">
-                        </div>
+                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
                     </div>
 
                     <div>
-                        <img (click)="sacarFichas($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
-                        <div class="sub-fichas">
-                            <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive izquierda">                       
-                            <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
-                            <img (click)="clickVerde($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive derecha">                           
-                        </div>
+                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
                     </div>
                 </div>
             </div>
@@ -108,7 +83,7 @@
                     </div>
 
                     <div class="frase-traducir animated fadeInLeft">
-                        <p><span class="label label-default" *ngFor="let palabra of fraseSplit" (click)="clickPalabra($event,palabra)">{{palabra}}</span></p>
+                        <p><span droppable="true" class="label label-default" [dragOverClass]="'drop-ficha-palabra'" *ngFor="let palabra of fraseSplit" (onDrop)="dropVerbo($event, palabra)" (click)="clickPalabra($event,palabra)" draggable="true" [dragData]="palabra">{{palabra}}</span></p>
                     </div>
 
                     <div class="solucion">
@@ -116,9 +91,25 @@
                         <button class="btn btn-default" [disabled]="respuesta.length == 0" (click)="calificar()">Calificar</button>
                     </div>
 
-                    <div *ngIf="calificaciones[ejerSel] != null" class="calificacion animated fadeInLeft">
-                        <p *ngIf="calificaciones[ejerSel] != null">Nota: {{calificaciones[ejerSel]}}</p>
-                        <p *ngIf="calificaciones[ejerSel] != null">{{msgCalificacion}}</p>
+                    <div class="puzle">
+                        <div id="central">
+                            <img *ngIf="monovalente.activa" id="monovalente" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': monovalente.top}">
+                            <img *ngIf="bivalente.activa" id="bivalente" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': bivalente.top}">    
+                            <img *ngIf="trivalente.activa" id="trivalente" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': trivalente.top}">
+
+                            <div id="izq" (click)="quitaPentagono($event)" *ngIf="argumentos == 3" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'izquierda')">
+                                <img class="img-responsive izquierda">
+                            </div>
+                                
+                            <div id="superior" (click)="quitaPentagono($event)" *ngIf="argumentos >= 1" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'superior')">
+                                <img class="img-responsive superior">
+                            </div>
+
+                            <div id="der" (click)="quitaPentagono($event)" *ngIf="argumentos >= 2"  droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'derecha')">
+                                <img class="img-responsive derecha">
+                            </div>  
+                        </div>
+                        
                     </div>
       
                 </div>
@@ -127,19 +118,11 @@
     </div>
 
     <div class="col-md-4">
-        <div class="panel-resolver-derecha">
-            <div class="puzle">
-                <img *ngIf="amarilla.activa" id="amarilla" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': amarilla.top}">
-                <img *ngIf="azul.activa" id="azul" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">    
-                <img *ngIf="naranja.activa" id="naranja" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
-                <img *ngIf="roja.activa" id="roja" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
-                <img *ngIf="verde.activa" id="verde" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">   
-                <img *ngIf="monovalente.activa" id="monovalente" value="hola" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': monovalente.top}">
-                <img *ngIf="bivalente.activa" id="bivalente" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': bivalente.top}">    
-                <img *ngIf="trivalente.activa" id="trivalente" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': trivalente.top}">
-            </div>
-            
+        <div *ngIf="calificaciones[ejerSel] != null" class="calificacion animated fadeInRigth">
+            <p *ngIf="calificaciones[ejerSel] != null">Nota: {{calificaciones[ejerSel]}}</p>
+            <p *ngIf="calificaciones[ejerSel] != null">{{msgCalificacion}}</p>
         </div>
+        
     </div>
 
 </div>

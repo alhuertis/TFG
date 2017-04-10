@@ -102,9 +102,9 @@ var ResolverActividadComponent = (function () {
         this.msgCalificacion = "";
         this.progreso = 0;
         this.calificacionFinal = 0;
-        this.monovalente = new ficha_1.Ficha(false, "50px", "0px");
-        this.bivalente = new ficha_1.Ficha(false, "50px", "0px");
-        this.trivalente = new ficha_1.Ficha(false, "50px", "0px");
+        this.monovalente = new ficha_1.Ficha(false, "0px", "0px");
+        this.bivalente = new ficha_1.Ficha(false, "0px", "0px");
+        this.trivalente = new ficha_1.Ficha(false, "0px", "0px");
         this.amarilla = new ficha_1.Ficha(false, "", "");
         this.azul = new ficha_1.Ficha(false, "", "");
         this.naranja = new ficha_1.Ficha(false, "", "");
@@ -114,6 +114,7 @@ var ResolverActividadComponent = (function () {
         this.faseVerbo = false;
         this.verbo = this.extraerVerbo();
         this.verboMarcado = false;
+        this.srcDraggedPentagono = "adios";
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
     }; //fin ngOnInit
@@ -149,6 +150,8 @@ var ResolverActividadComponent = (function () {
         this.verde.activa = false;
         $('span.acertada').removeClass("acertada");
         $('span.marcada').removeClass("marcada");
+        $('.izquierda, .superior, .derecha').removeAttr("src");
+        $('.izquierda, .superior, .derecha').css("display", "none");
     };
     ResolverActividadComponent.prototype.anteriorEjer = function () {
         this.ejerSel--;
@@ -156,6 +159,7 @@ var ResolverActividadComponent = (function () {
         this.siguiente = this.ejerSel < this.actividad.length;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta = "";
+        this.verbo = this.extraerVerbo();
     };
     ResolverActividadComponent.prototype.calificar = function () {
         if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
@@ -320,6 +324,52 @@ var ResolverActividadComponent = (function () {
                 $(event.target).removeClass("marcada");
             }
         }
+    };
+    ResolverActividadComponent.prototype.dropVerbo = function (event, palabra) {
+        //alert(palabra + " " + event.dragData);
+        if (this.faseVerbo)
+            alert("Ya has encontrado el verbo anteriormente");
+        else {
+            if (palabra == this.verbo) {
+                alert("Has acertado, es el verbo");
+                this.faseVerbo = true;
+                if (this.argumentos == 1 && event.dragData == "monovalente") {
+                    this.monovalente.activa = true;
+                }
+                else if (this.argumentos == 2 && event.dragData == "bivalente") {
+                    this.bivalente.activa = true;
+                    $(event.nativeEvent.target).addClass("marcada");
+                }
+                else if (this.argumentos == 3 && event.dragData == "trivalente") {
+                    this.bivalente.activa = true;
+                }
+                else {
+                    alert("Pero no es la ficha adecuada");
+                    this.faseVerbo = false;
+                }
+            }
+            else {
+                alert("No es el verbo");
+                this.faseVerbo = false;
+            }
+        }
+    };
+    ResolverActividadComponent.prototype.dragPentagono = function (event) {
+        //alert($(event.nativeEvent.target).attr("src"));
+        this.srcDraggedPentagono = $(event.target).attr("src");
+    };
+    ResolverActividadComponent.prototype.dropPentagono = function (event, posicion) {
+        if (event.dragData) {
+            alert(event.dragData);
+        }
+        else {
+            $(event.nativeEvent.target).children().css("display", "block");
+            $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
+        }
+    };
+    ResolverActividadComponent.prototype.quitaPentagono = function (event) {
+        $(event.target).children().removeAttr("src");
+        $(event.target).children().css("display", "none");
     };
     ResolverActividadComponent.prototype.sleep = function (ms) {
         if (ms === void 0) { ms = 0; }
