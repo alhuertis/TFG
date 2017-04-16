@@ -44,6 +44,7 @@ export class  ResolverActividadComponent implements OnInit{
     verbo: string;
     faseVerbo: Boolean;
     verboMarcado: Boolean;
+    srcDraggedPentagono: String;
     
 
  
@@ -141,9 +142,9 @@ export class  ResolverActividadComponent implements OnInit{
         this.msgCalificacion="";
         this.progreso=0;
         this.calificacionFinal=0;
-        this.monovalente=new Ficha(false,"50px", "0px");
-        this.bivalente= new Ficha(false,"50px", "0px");
-        this.trivalente= new Ficha(false,"50px", "0px");
+        this.monovalente=new Ficha(false,"0px", "0px");
+        this.bivalente= new Ficha(false,"0px", "0px");
+        this.trivalente= new Ficha(false,"0px", "0px");
         this.amarilla= new Ficha(false,"", "");
         this.azul= new Ficha(false,"", "");
         this.naranja= new Ficha(false,"", "");
@@ -153,6 +154,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.faseVerbo=false;
         this.verbo= this.extraerVerbo();
         this.verboMarcado=false;
+        this.srcDraggedPentagono="adios";
 
 	
 	}
@@ -196,6 +198,8 @@ export class  ResolverActividadComponent implements OnInit{
         this.verde.activa=false;
         $('span.acertada').removeClass("acertada");
         $('span.marcada').removeClass("marcada");
+        $('.izquierda, .superior, .derecha').removeAttr("src");
+        $('.izquierda, .superior, .derecha').css("display", "none");
     }
 
     anteriorEjer(){
@@ -204,6 +208,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.siguiente= this.ejerSel < this.actividad.length;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta="";
+        this.verbo= this.extraerVerbo();
     }
 
     calificar(){
@@ -385,10 +390,65 @@ export class  ResolverActividadComponent implements OnInit{
         }
     }
 
+    dropVerbo(event: any, palabra: String){
+        //alert(palabra + " " + event.dragData);
+        if(this.faseVerbo)
+            alert("Ya has encontrado el verbo anteriormente");
+        else{
+
+            if(palabra == this.verbo){
+                alert("Has acertado, es el verbo");
+                this.faseVerbo=true;
+
+                if(this.argumentos==1 && event.dragData == "monovalente"){
+                    this.monovalente.activa=true;
+                }
+                else if(this.argumentos==2 && event.dragData == "bivalente"){
+                    this.bivalente.activa=true;
+                    $(event.nativeEvent.target).addClass("marcada");
+                }else if(this.argumentos==3 && event.dragData == "trivalente"){
+                    this.bivalente.activa=true;
+                }
+                else{
+                    alert("Pero no es la ficha adecuada");
+                    this.faseVerbo=false;
+                }
+            }
+            else{
+                alert("No es el verbo");
+                this.faseVerbo=false;
+            }
+        }
+    }
+
+    dragPentagono(event: any){
+
+        //alert($(event.nativeEvent.target).attr("src"));
+        
+        this.srcDraggedPentagono=$(event.target).attr("src");
+        
+    }
+
+    dropPentagono(event: any, posicion : String){
+        if(event.dragData){ //Si lo hacemos drop con las palabras
+            alert(event.dragData);
+
+        }
+        else{ //Si hacemos drop con las fichas
+            $(event.nativeEvent.target).children().css("display", "block");
+            $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
+        }
+    }
+
+    quitaPentagono(event: any){
+        $(event.target).children().removeAttr("src");
+        $(event.target).children().css("display", "none");
+    }
+
 
     sleep(ms = 0) {
     	return new Promise(r => setTimeout(r, ms));
 	}
 
-
+    
 }
