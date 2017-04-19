@@ -16,7 +16,7 @@ export class ActividadService{
 	public url: string;
 
 	constructor(private _http: Http){
-		this.url= 'http://localhost:3678/api/';
+		this.url= 'http://localhost:3678/api2/';
 	}
 
 	getActividades(){
@@ -34,7 +34,7 @@ export class ActividadService{
 
 		let headers= new Headers({'Content-Type': 'application/json'});
 
-		return this._http.post(this.url+'ejercicio', params, {headers: headers}).map(res=> res.json());
+		return this._http.post(this.url+'actividad', params, {headers: headers}).map(res=> res.json());
 	}
 
    /* getPager(totalItems: number, currentPage: number = 1, pageSize: number = 4) {

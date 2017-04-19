@@ -7,6 +7,7 @@ import {ActividadService} from '../services/actividad.service';
 import {Actividad} from '../models/actividad';
 import {Ejercicio} from '../models/ejercicio';
 import {Ficha} from '../models/ficha';
+import {Solucion} from '../models/solucion';
 
 declare var $:any;
 import * as _ from 'underscore';
@@ -45,7 +46,9 @@ export class  ResolverActividadComponent implements OnInit{
     faseVerbo: Boolean;
     verboMarcado: Boolean;
     srcDraggedPentagono: String;
-    
+
+    solucion: Array<Solucion>;
+    resueltos: number;
 
  
 	
@@ -138,6 +141,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.siguiente=this.ejerSel < this.actividad.length;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.calificaciones=[];
+        this.solucion=new Array<Solucion>();
         this.respuesta="";
         this.msgCalificacion="";
         this.progreso=0;
@@ -155,6 +159,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.verbo= this.extraerVerbo();
         this.verboMarcado=false;
         this.srcDraggedPentagono="adios";
+        this.resueltos=0;
 
 	
 	}
@@ -162,7 +167,9 @@ export class  ResolverActividadComponent implements OnInit{
 
 	ngOnInit(){
 
-
+        for(let i=0; i < this.actividad.length; i++){
+            this.solucion.push(new Solucion());
+        }
 	}//fin ngOnInit
 
     extraerVerbo(){
@@ -212,10 +219,9 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     calificar(){
-
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
-            this.msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
-            this.calificaciones[this.ejerSel]= 1;
+            this.solucion[this.ejerSel].msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
+            this.solucion[this.ejerSel].calificacion= 1;
         }else{
             let patron: String[];
             let res: String[];
@@ -225,31 +231,32 @@ export class  ResolverActividadComponent implements OnInit{
             res= _.intersection(res,patron);
 
            if(_.isEqual(patron, res)){
-               this.msgCalificacion="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
-               this.calificaciones[this.ejerSel]= 1;
+               this.solucion[this.ejerSel].msgCalificacion="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
+               this.solucion[this.ejerSel].calificacion= 1;
            }
            else{
                
 
                if(res.length == patron.length){
-                   this.msgCalificacion="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
-                   this.calificaciones[this.ejerSel]= 1/2;
+                   this.solucion[this.ejerSel].msgCalificacion="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
+                   this.solucion[this.ejerSel].calificacion= 1/2;
                }
                else if(res.length > patron.length/2){
-                   this.msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                   this.calificaciones[this.ejerSel]= 1/4;
+                   this.solucion[this.ejerSel].msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                   this.solucion[this.ejerSel].calificacion= 1/4;
                }else{
-                   this.msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                   this.calificaciones[this.ejerSel]= 0;
+                   this.solucion[this.ejerSel].msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                   this.solucion[this.ejerSel].calificacion= 0;
                }
            }
         }
-
-        this.progreso= (this.calificaciones.length * 100) / this.actividad.length;
+        this.solucion[this.ejerSel].respuesta= this.respuesta;
+        this.resueltos++;
+        this.progreso= (this.resueltos * 100) / this.actividad.length;
 
         if(this.progreso == 100){
-            for(var i=0; i < this.calificaciones.length; i++){
-                this.calificacionFinal+=this.calificaciones[i];
+            for(var i=0; i < this.solucion.length; i++){
+                this.calificacionFinal+=this.solucion[i].calificacion;
             }
         }
         

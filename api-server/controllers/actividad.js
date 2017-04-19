@@ -33,20 +33,19 @@ function saveActividad(req, res){
 	var actividad = new Actividad();
 	var params = req.body;
 	actividad.profesor = params.profesor;
-	actividad.idProfesor = params.idProfesor;
-	actividad.fechaCreacion = params.fechaCreacion;
+	actividad.id_profesor = params.id_profesor;
+	actividad.fecha_creacion = new Date();
 	actividad.nivel = params.nivel;
 	actividad.ejercicios = params.ejercicios;
-
-	console.log(actividad);
 
 	actividad.save((err, actividadStored)=>{
 		if(err){
 			res.status(500).send({message:'Error al guardar la actividad'});
-
+			console.log("Error al guardar");
 		}
 		else{
-			res.status(200).send({actividadStored});
+			res.status(200).send({respuesta: 'ok'});
+			console.log("Guardado");
 		}
 	});
 

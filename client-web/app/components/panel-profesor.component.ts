@@ -3,7 +3,9 @@ import{Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {EjercicioService} from '../services/ejercicio.service';
+import {ActividadService} from '../services/actividad.service';
 import {Ejercicio} from '../models/ejercicio';
+import {Actividad} from '../models/actividad';
 
 import {TruncatePipe} from './truncate-pipe.component';
 
@@ -16,7 +18,7 @@ declare var $:any;
 
 	selector: 'panel-profesor',
 	templateUrl: 'app/views/panel-profesor.html',
-	providers: [EjercicioService], //Necesitamos esto para poder usar los metodos
+	providers: [EjercicioService, ActividadService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/menu-profesor.css'],
 }) 
 
@@ -87,7 +89,8 @@ export class  PanelProfesorComponent implements OnInit{
 
 
 	constructor(
-			private _ejercicioService: EjercicioService
+			private _ejercicioService: EjercicioService,
+			private _actividadService: ActividadService
 
 	){
 		this.title= "Panel de profesores";
@@ -760,6 +763,34 @@ export class  PanelProfesorComponent implements OnInit{
 	crearActividad(){
 		if(this.actividad.length > 0){
 			alert("Se va a crear la actividad");
+			let ids : String[];
+			ids= new Array<String>();
+
+			for(let ej of this.actividad)
+				ids.push(ej._id);
+			
+			var nuevaActividad : Actividad;
+			nuevaActividad =new Actividad(this.id_profesor, this.user, new Date(), "bajo", ids);
+
+			this._actividadService.addActividad(nuevaActividad).subscribe(
+				result => {
+					
+					if(!result.respuesta){
+						alert('Error en el servidor');
+					}
+					else{
+						alert('Se ha guardado correctamente');
+					}
+				},
+				error => {
+					this.errorMessage= <any>error;
+
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert('Error al guardar actividad');
+					}
+				}
+			);
 		}
 	}
 

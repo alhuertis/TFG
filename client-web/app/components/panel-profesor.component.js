@@ -11,12 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
 var core_1 = require("@angular/core");
 var ejercicio_service_1 = require("../services/ejercicio.service");
+var actividad_service_1 = require("../services/actividad.service");
+var actividad_1 = require("../models/actividad");
 //Para usar undescore y jquery
 var _ = require("underscore");
 //los decoradores no tienen punto y coma
 var PanelProfesorComponent = (function () {
-    function PanelProfesorComponent(_ejercicioService) {
+    function PanelProfesorComponent(_ejercicioService, _actividadService) {
         this._ejercicioService = _ejercicioService;
+        this._actividadService = _actividadService;
         // pager object
         this.pager = {};
         this.title = "Panel de profesores";
@@ -520,8 +523,31 @@ var PanelProfesorComponent = (function () {
         });
     };
     PanelProfesorComponent.prototype.crearActividad = function () {
+        var _this = this;
         if (this.actividad.length > 0) {
             alert("Se va a crear la actividad");
+            var ids = void 0;
+            ids = new Array();
+            for (var _i = 0, _a = this.actividad; _i < _a.length; _i++) {
+                var ej = _a[_i];
+                ids.push(ej._id);
+            }
+            var nuevaActividad;
+            nuevaActividad = new actividad_1.Actividad(this.id_profesor, this.user, new Date(), "bajo", ids);
+            this._actividadService.addActividad(nuevaActividad).subscribe(function (result) {
+                if (!result.respuesta) {
+                    alert('Error en el servidor');
+                }
+                else {
+                    alert('Se ha guardado correctamente');
+                }
+            }, function (error) {
+                _this.errorMessage = error;
+                if (_this.errorMessage != null) {
+                    console.log(_this.errorMessage);
+                    alert('Error al guardar actividad');
+                }
+            });
         }
     };
     PanelProfesorComponent.prototype.show = function (ejercicio) {
@@ -541,10 +567,11 @@ PanelProfesorComponent = __decorate([
     core_1.Component({
         selector: 'panel-profesor',
         templateUrl: 'app/views/panel-profesor.html',
-        providers: [ejercicio_service_1.EjercicioService],
+        providers: [ejercicio_service_1.EjercicioService, actividad_service_1.ActividadService],
         styleUrls: ['../../assets/css/menu-profesor.css'],
     }),
-    __metadata("design:paramtypes", [ejercicio_service_1.EjercicioService])
+    __metadata("design:paramtypes", [ejercicio_service_1.EjercicioService,
+        actividad_service_1.ActividadService])
 ], PanelProfesorComponent);
 exports.PanelProfesorComponent = PanelProfesorComponent;
 //# sourceMappingURL=panel-profesor.component.js.map

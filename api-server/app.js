@@ -28,6 +28,6 @@ app.use((req, res, next) =>{
 });
 
 app.use('/api', api);//Lo cargamo dentro de express. El primer parametro es el prefijo que se va a usar para todas las rutas. El segundo es el objeto qyue se va a cargar: api
-app.use('/api', api2);
+app.use('/api2', api2);
 //Con esto permitimos que este modulo sea importado con require en otros modulos
 module.exports= app;

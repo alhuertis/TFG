@@ -6,30 +6,12 @@ var Schema = mongoose.Schema;
 
 var ActividadSchema = Schema({
 
-    _id: String,
-    idProfesor: String,
+    id_profesor: String,
 	profesor: String,
     fecha_creacion: Date,
     nivel: String,
-    /*ejercicios: Ejercicio[] [{  
-        //Campo de los ejercicios
-        //ejercicio: Ejercicio,
-        id_profesor: String,
-        titulo: String,
-        nivel: String,
-        tipo: Number,
-        autor: String,
-        institucion_profesor: String,
-        fechaCreacion: Date,
-        fechaModificacion: Date,
-        enunciado: String,
-        fraseATraducir: String,
-        solucionFLogico: String,
-        solucionFPatron: String,
-        solucionPEspanol: String,
-        solucionPLatin: String
-    }]*/
+    ejercicios: [{type:Schema.ObjectId, ref: "Ejercicio"}]
 
 });
 
-module.exports= mongoose.model('Actividad', ActividadSchema);
+module.exports= mongoose.model('Actividad', ActividadSchema, 'actividades');

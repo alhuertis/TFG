@@ -118,9 +118,10 @@
     </div>
 
     <div class="col-md-4">
-        <div *ngIf="calificaciones[ejerSel] != null" class="calificacion animated fadeInRigth">
-            <p *ngIf="calificaciones[ejerSel] != null">Nota: {{calificaciones[ejerSel]}}</p>
-            <p *ngIf="calificaciones[ejerSel] != null">{{msgCalificacion}}</p>
+        <div *ngIf="solucion[ejerSel].calificacion != null" class="calificacion animated fadeInRigth">
+            <p>Nota: {{solucion[ejerSel].calificacion}}</p>
+            <p>Respuesta: {{solucion[ejerSel].respuesta}}</p>
+            <p>{{solucion[ejerSel].msgCalificacion}}</p>
         </div>
         
     </div>
@@ -130,16 +131,14 @@
     
 
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-4 col-md-offset-6">
         <div class="row pager-actividad">
             <div>
-                <a *ngIf="anterior" (click)="anteriorEjer()"><i class="glyphicon glyphicon-circle-arrow-left" id="iAnterior"></i> {{actividad[ejerSel-1].titulo}}</a>
+                <a *ngIf="anterior" (click)="anteriorEjer()"><i class="glyphicon glyphicon-circle-arrow-left" id="iAnterior"></i> anterior</a>
             </div>
+            
             <div>
-                <span>{{actividad[ejerSel].titulo}}</span>
-            </div>
-            <div>
-                <a *ngIf="siguiente" (click)="siguienteEjer()">{{actividad[ejerSel+1].titulo}} <i class="glyphicon glyphicon-circle-arrow-right" id="iSiguiente"></i></a>
+                <a *ngIf="siguiente" (click)="siguienteEjer()">siguiente <i class="glyphicon glyphicon-circle-arrow-right" id="iSiguiente"></i></a>
             </div>
         </div>
     </div>
