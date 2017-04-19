@@ -105,6 +105,13 @@ function deleteActividad(req, res) {
 	});
 }
 
+function getActividadesResueltas(req, res) {
+	var id_alumno = req.params.id_alumno;
+
+	Actividad.find({"id_alumno":id_alumno,})
+
+}
+
 
 
 //Exportamos las funciones que tengamos, para poder usar en routes
