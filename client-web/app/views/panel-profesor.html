@@ -211,17 +211,19 @@
 
   </div>
 
-</div>
-
-<div (click)="hide()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+  <div (click)="hide()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
        [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        Titulo: ###########
+      <div *ngIf="ejerAbrir != null" class="modal-header">
+        Titulo: {{ejerAbrir.titulo}}
       </div>
-      <div class="modal-body">
-        Info del ejercicio
+      <div *ngIf="ejerAbrir != null" class="modal-body">
+        <p>Autor: {{ejerAbrir.autor}}</p>
+        <p>Nivel: {{ejerAbrir.nivel}}</p>
+        <p>Tipo: {{ejerAbrir.tipo}}</p>
+        <p>Enunciado: {{ejerAbrir.enunciado}}</p>
+        <p>Frase a traducir: {{ejerAbrir.fraseATraducir}}</p>
 
       </div>
       <div class="modal-footer">
@@ -229,6 +231,9 @@
     </div>
   </div>
 </div>
+</div>
+
+
 
 		
 

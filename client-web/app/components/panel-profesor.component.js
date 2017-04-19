@@ -513,9 +513,7 @@ var PanelProfesorComponent = (function () {
         var _this = this;
         for (var _i = 0, _a = this.actividad; _i < _a.length; _i++) {
             var item = _a[_i];
-            var id = item._id;
-            var indiceEj = _.findIndex(this.ejersAMostrar, { _id: id });
-            this.ejersAMostrar[indiceEj].marcado = false;
+            item.marcado = false;
         }
         $('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
         this.sleep(500).then(function () {
@@ -540,6 +538,7 @@ var PanelProfesorComponent = (function () {
                 }
                 else {
                     alert('Se ha guardado correctamente');
+                    _this.vaciarLista();
                 }
             }, function (error) {
                 _this.errorMessage = error;

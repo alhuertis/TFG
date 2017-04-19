@@ -749,9 +749,7 @@ export class  PanelProfesorComponent implements OnInit{
 
 	vaciarLista(){
 		for(var item of this.actividad){
-			let id= item._id;
-			let indiceEj= _.findIndex(this.ejersAMostrar, {_id: id});
-			this.ejersAMostrar[indiceEj].marcado=false;
+			item.marcado=false;
 		}
 		
 		$('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
@@ -780,6 +778,7 @@ export class  PanelProfesorComponent implements OnInit{
 					}
 					else{
 						alert('Se ha guardado correctamente');
+						this.vaciarLista();
 					}
 				},
 				error => {
