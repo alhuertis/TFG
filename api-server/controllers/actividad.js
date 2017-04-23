@@ -37,6 +37,11 @@ function saveActividad(req, res){
 	actividad.fecha_creacion = new Date();
 	actividad.nivel = params.nivel;
 	actividad.ejercicios = params.ejercicios;
+	actividad.titulo= params.titulo;
+	actividad.visible= params.visible;
+	actividad.propuesta= params.propuesta;
+	actividad.fecha_prop_fin= params.fecha_prop_fin;
+	console.log(actividad);
 
 	actividad.save((err, actividadStored)=>{
 		if(err){

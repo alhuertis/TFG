@@ -34,6 +34,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public ejersAMostrar: Ejercicio[];
 	public datosAMostrar: string;
 	public actividad: Ejercicio[];
+	public nuevaActividad: Actividad;
 
 	// pager object
     pager: any = {};
@@ -82,8 +83,9 @@ export class  PanelProfesorComponent implements OnInit{
 	public otrasColeccionesTipo4: Ejercicio[];
 	public nOtrasColeccionesTipo4: number;
 
-	
-  	public visible: Boolean;
+	//Modales
+  	public modalEjercicio: Boolean;
+	public modalActividad: Boolean;
   	private visibleAnimate: Boolean;
 	public ejerAbrir: Ejercicio;
 
@@ -99,7 +101,8 @@ export class  PanelProfesorComponent implements OnInit{
 		this.mostrarLista=false;
 		this.datosAMostrar="";
 		this.actividad=[];
-		this.visible=false;
+		this.modalEjercicio=false;
+		this.modalActividad=false;
 		this.visibleAnimate=false;
 		
 	}
@@ -759,49 +762,68 @@ export class  PanelProfesorComponent implements OnInit{
 	}
 
 	crearActividad(){
+		
 		if(this.actividad.length > 0){
-			alert("Se va a crear la actividad");
 			let ids : String[];
 			ids= new Array<String>();
 
 			for(let ej of this.actividad)
 				ids.push(ej._id);
 			
-			var nuevaActividad : Actividad;
-			nuevaActividad =new Actividad(this.id_profesor, this.user, new Date(), "bajo", ids);
+			this.nuevaActividad =new Actividad("",this.id_profesor, this.user, new Date(), "", ids,false,false,null);
 
-			this._actividadService.addActividad(nuevaActividad).subscribe(
-				result => {
-					
-					if(!result.respuesta){
-						alert('Error en el servidor');
-					}
-					else{
-						alert('Se ha guardado correctamente');
-						this.vaciarLista();
-					}
-				},
-				error => {
-					this.errorMessage= <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert('Error al guardar actividad');
-					}
-				}
-			);
 		}
+
+		this.modalActividad = true;
+    	setTimeout(() => this.visibleAnimate = true);
+		
 	}
 
-	show(ejercicio: Ejercicio){
-    	this.visible = true;
+
+	cancelarActividad(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalActividad = false, 300);
+
+		this.nuevaActividad= null;
+	}
+
+	guardarActividad(){
+	
+		this._actividadService.addActividad(this.nuevaActividad).subscribe(
+			result => {
+				
+				if(!result.respuesta){
+					alert('Error en el servidor');
+				}
+				else{
+					alert('Se ha guardado correctamente');
+					this.vaciarLista();
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error al guardar actividad');
+				}
+			}
+		);
+		
+
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalActividad = false, 300);
+	}
+
+	showEjercicio(ejercicio: Ejercicio){
+    	this.modalEjercicio = true;
     	setTimeout(() => this.visibleAnimate = true);
 		this.ejerAbrir=ejercicio;
   	}
 
-  	hide(){
+  	hideEjercicio(){
     	this.visibleAnimate = false;
-    	setTimeout(() => this.visible = false, 300);
+    	setTimeout(() => this.modalEjercicio = false, 300);
   	}
 	
 }

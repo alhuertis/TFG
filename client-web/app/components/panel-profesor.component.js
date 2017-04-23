@@ -28,7 +28,8 @@ var PanelProfesorComponent = (function () {
         this.mostrarLista = false;
         this.datosAMostrar = "";
         this.actividad = [];
-        this.visible = false;
+        this.modalEjercicio = false;
+        this.modalActividad = false;
         this.visibleAnimate = false;
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
@@ -523,42 +524,53 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.crearActividad = function () {
         var _this = this;
         if (this.actividad.length > 0) {
-            alert("Se va a crear la actividad");
             var ids = void 0;
             ids = new Array();
             for (var _i = 0, _a = this.actividad; _i < _a.length; _i++) {
                 var ej = _a[_i];
                 ids.push(ej._id);
             }
-            var nuevaActividad;
-            nuevaActividad = new actividad_1.Actividad(this.id_profesor, this.user, new Date(), "bajo", ids);
-            this._actividadService.addActividad(nuevaActividad).subscribe(function (result) {
-                if (!result.respuesta) {
-                    alert('Error en el servidor');
-                }
-                else {
-                    alert('Se ha guardado correctamente');
-                    _this.vaciarLista();
-                }
-            }, function (error) {
-                _this.errorMessage = error;
-                if (_this.errorMessage != null) {
-                    console.log(_this.errorMessage);
-                    alert('Error al guardar actividad');
-                }
-            });
+            this.nuevaActividad = new actividad_1.Actividad("", this.id_profesor, this.user, new Date(), "", ids, false, false, null);
         }
+        this.modalActividad = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
     };
-    PanelProfesorComponent.prototype.show = function (ejercicio) {
+    PanelProfesorComponent.prototype.cancelarActividad = function () {
         var _this = this;
-        this.visible = true;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalActividad = false; }, 300);
+        this.nuevaActividad = null;
+    };
+    PanelProfesorComponent.prototype.guardarActividad = function () {
+        var _this = this;
+        this._actividadService.addActividad(this.nuevaActividad).subscribe(function (result) {
+            if (!result.respuesta) {
+                alert('Error en el servidor');
+            }
+            else {
+                alert('Se ha guardado correctamente');
+                _this.vaciarLista();
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error al guardar actividad');
+            }
+        });
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalActividad = false; }, 300);
+    };
+    PanelProfesorComponent.prototype.showEjercicio = function (ejercicio) {
+        var _this = this;
+        this.modalEjercicio = true;
         setTimeout(function () { return _this.visibleAnimate = true; });
         this.ejerAbrir = ejercicio;
     };
-    PanelProfesorComponent.prototype.hide = function () {
+    PanelProfesorComponent.prototype.hideEjercicio = function () {
         var _this = this;
         this.visibleAnimate = false;
-        setTimeout(function () { return _this.visible = false; }, 300);
+        setTimeout(function () { return _this.modalEjercicio = false; }, 300);
     };
     return PanelProfesorComponent;
 }());

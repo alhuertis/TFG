@@ -150,8 +150,8 @@
                   </div>
 
                   <div class="col-sm-4 botones-lista">
-                      <a class="btn btn-xs btn-info" (click)="show(ejercicio)">Abrir</a>
-                      <a class="btn btn-xs btn-warning" (click)="show(ejercicio)">Modificar</a>
+                      <a class="btn btn-xs btn-info" (click)="showEjercicio(ejercicio)">Abrir</a>
+                      <a class="btn btn-xs btn-warning" (click)="showEjercicio(ejercicio)">Modificar</a>
                   </div>
                 </div>
               </div>
@@ -211,26 +211,78 @@
 
   </div>
 
-  <div (click)="hide()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
-       [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div *ngIf="ejerAbrir != null" class="modal-header">
-        Titulo: {{ejerAbrir.titulo}}
-      </div>
-      <div *ngIf="ejerAbrir != null" class="modal-body">
-        <p>Autor: {{ejerAbrir.autor}}</p>
-        <p>Nivel: {{ejerAbrir.nivel}}</p>
-        <p>Tipo: {{ejerAbrir.tipo}}</p>
-        <p>Enunciado: {{ejerAbrir.enunciado}}</p>
-        <p>Frase a traducir: {{ejerAbrir.fraseATraducir}}</p>
+  <!-- modal mostrar ejercicio -->
+  <div (click)="hideEjercicio()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalEjercicio ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div *ngIf="ejerAbrir != null" class="modal-header">
+          Titulo: {{ejerAbrir.titulo}}
+        </div>
+        <div *ngIf="ejerAbrir != null" class="modal-body">
+          <p>Autor: {{ejerAbrir.autor}}</p>
+          <p>Nivel: {{ejerAbrir.nivel}}</p>
+          <p>Tipo: {{ejerAbrir.tipo}}</p>
+          <p>Enunciado: {{ejerAbrir.enunciado}}</p>
+          <p>Frase a traducir: {{ejerAbrir.fraseATraducir}}</p>
 
-      </div>
-      <div class="modal-footer">
+        </div>
+        <div class="modal-footer">
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- modal crear actividad -->
+  <div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalActividad ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Completar datos de la actividad</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-nueva-actividad" *ngIf="nuevaActividad != null">
+              <input type="text" class="form-control"  placeholder="Titulo de actividad" name="titulo" #titulo="ngModel" [(ngModel)]="nuevaActividad.titulo">
+              <label for="power">Nivel</label>
+              <select class="form-control" name="nivel" #nivel="ngModel" 
+                  required
+                  [(ngModel)]="nuevaActividad.nivel">
+                <option value="Bajo">Bajo</option>
+                <option value="Medio">Medio</option>
+                <option value="Avanzado">Avanzado</option>
+              </select>
+
+              <div>
+                <label>
+                  <input #visible [(ngModel)]="nuevaActividad.visible" type="checkbox" data-toggle="toggle">Visible
+                </label>
+              </div>
+             
+
+              <div>
+                <label>
+                <input #propuesta [(ngModel)]="nuevaActividad.propuesta" type="checkbox" data-toggle="toggle">Propuesta
+              </label>
+              </div>
+              
+              <div [ngStyle]="{'display': nuevaActividad.propuesta ? 'block' : 'none'}">
+                <label for="">Fecha de fin </label>
+                <input type="date" name="fecha-fin" [(ngModel)]="nuevaActividad.fecha_prop_fin" useValueAsDate>
+              </div>
+              
+
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button (click)="cancelarActividad()" class="btn">Cancelar</button>
+            <button (click)="guardarActividad()" class="btn btn-success">Guardar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
 </div>
 
 

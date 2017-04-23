@@ -6,11 +6,16 @@ var Schema = mongoose.Schema;
 
 var ActividadSchema = Schema({
 
+    titulo: String,
     id_profesor: String,
 	profesor: String,
     fecha_creacion: Date,
     nivel: String,
-    ejercicios: [{type:Schema.ObjectId, ref: "Ejercicio"}]
+    ejercicios: [{type:Schema.ObjectId, ref: "Ejercicio"}],
+    visible: Boolean,
+    propuesta: Boolean,
+    fecha_prop_fin: Date
+
 
 });
 
