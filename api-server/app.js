@@ -5,6 +5,7 @@
 //Importamos express de otro
 var api = require('./routes/ejercicio'); //carga todo lo que haya en el fichero de rutas
 var api2= require('./routes/actividad');
+var apiProfesor= require('./routes/profesor');
 
 var bodyParser= require('body-parser'); //Esto es un midelware que se carga antes de nuestro script
 var express= require('express'); 
@@ -29,5 +30,6 @@ app.use((req, res, next) =>{
 
 app.use('/api', api);//Lo cargamo dentro de express. El primer parametro es el prefijo que se va a usar para todas las rutas. El segundo es el objeto qyue se va a cargar: api
 app.use('/api2', api2);
+app.use('/apiProfesor', apiProfesor);
 //Con esto permitimos que este modulo sea importado con require en otros modulos
 module.exports= app;

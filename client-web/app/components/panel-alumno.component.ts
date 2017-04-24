@@ -3,7 +3,9 @@ import{Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {ActividadService} from '../services/actividad.service';
+import {ProfesorService} from '../services/profesor.service';
 import {Actividad} from '../models/actividad';
+import {Profesor} from '../models/profesor';
 
 declare var $:any;
 
@@ -12,7 +14,7 @@ declare var $:any;
 
 	selector: 'panel-alumno',
 	templateUrl: 'app/views/panel-alumno.html',
-	providers: [ActividadService], //Necesitamos esto para poder usar los metodos
+	providers: [ActividadService, ProfesorService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/menu-profesor.css'],
 }) 
 
@@ -30,16 +32,20 @@ export class  PanelAlumnoComponent implements OnInit{
 	public nMedios: number;
 	public nAvanzados: number;
 
+	public profesores: Profesor[];
+
 	
 	
 
 	constructor(
-			private _actividadService: ActividadService
+			private _actividadService: ActividadService,
+			private _profesorService: ProfesorService
 
 	){
 		this.title= "Panel de alumno";
 		this.actividades=[];
 		this.nActividades=0;
+		this.profesores=[];
 		
 	}
 
@@ -72,7 +78,31 @@ export class  PanelAlumnoComponent implements OnInit{
 				}
 			}
 		);
+
+		//Obtener profesores
+		this._profesorService.getProfesores().subscribe(
+			result =>{
+				console.log(result);
+				this.profesores= result.profesores;
+
+				if(!this.profesores){
+					alert('Error al obtener profesores');
+				}else{
+					alert(this.profesores);
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+
 	}//fin ngOnInit
+
 
 	ngAfterViewInit(){
 		//Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery
