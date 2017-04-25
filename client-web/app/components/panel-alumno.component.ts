@@ -7,6 +7,7 @@ import {ProfesorService} from '../services/profesor.service';
 import {Actividad} from '../models/actividad';
 import {Profesor} from '../models/profesor';
 
+import * as _ from 'underscore';
 declare var $:any;
 
 //los decoradores no tienen punto y coma
@@ -21,18 +22,16 @@ declare var $:any;
 export class  PanelAlumnoComponent implements OnInit{
 
 	public title: string;
-	public actividades: Actividad[];
-	public actividadesNB: Actividad[];
-	public actividadesNM: Actividad[];
-	public actividadesNA: Actividad[];
-	public loading: boolean;
-	public errorMessage: string;
-	public nActividades: number;
-	public nBajos: number;
-	public nMedios: number;
-	public nAvanzados: number;
-
 	public profesores: Profesor[];
+	public actividades: Actividad[];
+	public disponibles: Actividad[];
+	public disponiblesNBajo: Actividad[];
+	public disponiblesNMedio: Actividad[];
+	public disponiblesNAlto: Actividad[];
+
+	public errorMessage: string;
+
+	
 
 	
 	
@@ -44,8 +43,11 @@ export class  PanelAlumnoComponent implements OnInit{
 	){
 		this.title= "Panel de alumno";
 		this.actividades=[];
-		this.nActividades=0;
 		this.profesores=[];
+		this.disponibles=new Array<Actividad>();
+		this.disponiblesNBajo=new Array<Actividad>();
+		this.disponiblesNMedio=new Array<Actividad>();
+		this.disponiblesNAlto=new Array<Actividad>();
 		
 	}
 
@@ -61,12 +63,6 @@ export class  PanelAlumnoComponent implements OnInit{
 				if(!this.actividades){
 					alert('Error en el servidor');
 				}
-				else{
-					this.loading=false;
-					this.nActividades= this.actividades.length;
-				
-				}
-
 			},
 			error => {
 				this.errorMessage= <any>error;
@@ -74,7 +70,6 @@ export class  PanelAlumnoComponent implements OnInit{
 				if(this.errorMessage != null){
 					console.log(this.errorMessage);
 					alert(this.errorMessage);
-					alert('Error todo tocho');
 				}
 			}
 		);
@@ -87,8 +82,6 @@ export class  PanelAlumnoComponent implements OnInit{
 
 				if(!this.profesores){
 					alert('Error al obtener profesores');
-				}else{
-					alert(this.profesores);
 				}
 			},
 			error => {
@@ -100,6 +93,79 @@ export class  PanelAlumnoComponent implements OnInit{
 				}
 			}
 		);
+
+		this._actividadService.getDisponibles().subscribe(
+			result =>{
+				console.log(result);
+				this.disponibles= result.actividades;
+
+				if(!this.disponibles){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+
+		this._actividadService.getDisponiblesNB().subscribe(
+			result =>{
+				console.log(result);
+				this.disponiblesNBajo= result.actividades;
+
+				if(!this.disponiblesNBajo){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+
+		this._actividadService.getDisponiblesNM().subscribe(
+			result =>{
+				console.log(result);
+				this.disponiblesNMedio= result.actividades;
+
+				if(!this.disponiblesNMedio){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+
+		this._actividadService.getDisponiblesNA().subscribe(
+			result =>{
+				console.log(result);
+				this.disponiblesNAlto= result.actividades;
+
+				if(!this.disponiblesNAlto){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+		
 
 	}//fin ngOnInit
 
@@ -167,11 +233,6 @@ export class  PanelAlumnoComponent implements OnInit{
 		$('#tree1').treed();
 		//$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
 		//$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
-
 	}//fin ngAfterViewInit
 
-
-	public numActividades(){
-		return this.actividades.length;
-	}
 }

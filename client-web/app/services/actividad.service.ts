@@ -28,6 +28,22 @@ export class ActividadService{
 		return this._http.get(this.url+'actividad/'+id).map(res => res.json());
 	}
 
+    getDisponibles(){
+		return this._http.get(this.url+'actividad-disponibles').map(res => res.json());
+	}
+
+    getDisponiblesNB(){
+		return this._http.get(this.url+'actividad-disponiblesNB').map(res => res.json());
+	}
+
+    getDisponiblesNM(){
+		return this._http.get(this.url+'actividad-disponiblesNM').map(res => res.json());
+	}
+
+    getDisponiblesNA(){
+		return this._http.get(this.url+'actividad-disponiblesNA').map(res => res.json());
+	}
+
     addActividad(actividad: Actividad){
 		let json = JSON.stringify(actividad);
 		let params= json;

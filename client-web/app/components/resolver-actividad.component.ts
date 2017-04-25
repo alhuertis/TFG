@@ -259,6 +259,7 @@ export class  ResolverActividadComponent implements OnInit{
             for(var i=0; i < this.solucion.calificacion.length; i++){
                 this.calificacionFinal+=this.solucion.calificacion[i];
             }
+            this.solucion.notaFinal=this.calificacionFinal;
         }
         
     }

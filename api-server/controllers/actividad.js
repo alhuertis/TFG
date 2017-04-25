@@ -117,6 +117,86 @@ function getActividadesResueltas(req, res) {
 
 }
 
+function getDisponibles(req, res){
+
+	Actividad.find({"visible": "true"}).exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
+function getDisponiblesNBajo(req, res){
+
+	Actividad.find({"visible": "true", "nivel":"Bajo"}).exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
+function getDisponiblesNMedio(req, res){
+
+	Actividad.find({"visible": "true", "nivel":"Medio"}).exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
+function getDisponiblesNAlto(req, res){
+
+	Actividad.find({"visible": "true", "nivel":"Avanzado"}).exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
 
 
 //Exportamos las funciones que tengamos, para poder usar en routes
@@ -124,5 +204,9 @@ module.exports= {
 	getActividad,
 	getActividades,
 	saveActividad,
+	getDisponibles,
+	getDisponiblesNBajo,
+	getDisponiblesNMedio,
+	getDisponiblesNAlto,
 
 }

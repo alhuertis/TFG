@@ -25,6 +25,18 @@ var ActividadService = (function () {
         console.log('Llamando a ' + this.url + 'actividad/' + id);
         return this._http.get(this.url + 'actividad/' + id).map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.getDisponibles = function () {
+        return this._http.get(this.url + 'actividad-disponibles').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getDisponiblesNB = function () {
+        return this._http.get(this.url + 'actividad-disponiblesNB').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getDisponiblesNM = function () {
+        return this._http.get(this.url + 'actividad-disponiblesNM').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getDisponiblesNA = function () {
+        return this._http.get(this.url + 'actividad-disponiblesNA').map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.addActividad = function (actividad) {
         var json = JSON.stringify(actividad);
         var params = json;

@@ -3,84 +3,84 @@
 <div class="panel-alumno container-fluid">
 
   <div class="row">
-    <div class="col-md-3 menu-alumno-arbol">
+    <div class="col-md-4 menu-alumno-arbol">
 
       <ul id="tree1">
 
-        <li><a href="#"> Actividades </a><span class="badge badge-small"> {{nActividades}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
+        <li><a href="#"> Actividades </a><span class="badge badge-small"> {{actividades.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
 
           <ul>
-            <li><a href="#"> Mis actividades hechas </a> <span class="badge badge-small"> {{nActividades}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
+            <li><a href="#"> Mis actividades hechas </a> <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
                 <li><a href="#"> Nivel</a>
                   <ul>
-                    <li> Inicial <span class="badge badge-small">{{nBajos}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    <li> Medio <span class="badge badge-small">{{nMedios}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    <li> Avanzado <span class="badge badge-small">{{nAvanzados}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Inicial <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Medio <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Avanzado <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <li><a href="#"> Profesor </a>
                   <ul *ngIf="profesores.length > 0">
-                    <li *ngFor="let profesor of profesores">{{profesor.nombre}}</li>
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <li><a href="#"> Estadísticas</a></li>
               </ul>
             </li>
-            <li> Actividades propuestas <span class="badge badge-small"> {{nEjercicios-nMiColeccion}}</span>
+            <li> Actividades propuestas <span class="badge badge-small"> x</span>
               <ul>
                 <li><a href="#"> Profesor </a>
                   <ul>
-                    <li><a href="#"> Profesor 1 <span class="badge badge-small">{{nMiColeccionTipo1}}</span></a>
+                    <li><a href="#"> Profesor 1 <span class="badge badge-small">x</span></a>
                       <ul>
-                        <li> Nivel Inicial <span class="badge badge-small">{{nMiColeccionNivelB}}</span></li>
-                        <li> Nivel Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span></li>
-                        <li> Nivel Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span></li>
+                        <li> Nivel Inicial <span class="badge badge-small">x</span></li>
+                        <li> Nivel Medio <span class="badge badge-small">x</span></li>
+                        <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
                       </ul>
                     </li>
-                    <li><a href="#"> Profesor 2 <span class="badge badge-small">{{nMiColeccionTipo1}}</span></a>
+                    <li><a href="#"> Profesor 2 <span class="badge badge-small">x</span></a>
                       <ul>
-                        <li> Nivel Inicial <span class="badge badge-small">{{nMiColeccionNivelB}}</span></li>
-                        <li> Nivel Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span></li>
-                        <li> Nivel Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span></li>
+                        <li> Nivel Inicial <span class="badge badge-small">x</span></li>
+                        <li> Nivel Medio <span class="badge badge-small">x</span></li>
+                        <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
                       </ul>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#"> Fecha de apertura (orden cronológico)<span class="badge badge-small">{{nMiColeccionTipo1}}</span></a>
-                  <li><a href="#"> Fecha de cierre (orden cronológico)<span class="badge badge-small">{{nMiColeccionTipo1}}</span></a>
+                <li><a href="#"> Fecha de apertura (orden cronológico)<span class="badge badge-small">x</span></a>
+                  <li><a href="#"> Fecha de cierre (orden cronológico)<span class="badge badge-small">x</span></a>
               </ul>
               </li>
-              <li><a href="#"> Actividades disponibles </a> <span class="badge badge-small"> {{nMiColeccion}}</span>
+              <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
                 <ul>
-                  <li><a href="#"> Nivel</a>
+                  <li> Nivel
                     <ul>
-                      <li> Nivel Inicial <span class="badge badge-small">{{nMiColeccionNivelB}}</span></li>
-                      <li> Nivel Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span></li>
-                      <li> Nivel Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span></li>
+                      <li> Nivel Inicial <span class="badge badge-small">{{disponiblesNBajo.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                      <li> Nivel Medio <span class="badge badge-small">{{disponiblesNMedio.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                      <li> Nivel Avanzado <span class="badge badge-small">{{disponiblesNAlto.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                     </ul>
                   </li>
                   <li><a href="#"> Profesor </a>
                     <ul>
-                      <li><a href="#"> Profesor 1 <span class="badge badge-small">{{nMiColeccionTipo1}}</span></a>
+                      <li><a href="#"> Profesor 1 <span class="badge badge-small">x</span></a>
                         <ul>
-                          <li> Nivel Inicial <span class="badge badge-small">{{nMiColeccionNivelB}}</span></li>
-                          <li> Nivel Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span></li>
-                          <li> Nivel Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span></li>
+                          <li> Nivel Inicial <span class="badge badge-small">x</span></li>
+                          <li> Nivel Medio <span class="badge badge-small">x</span></li>
+                          <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
                         </ul>
                       </li>
-                      <li><a href="#"> Profesor 2 <span class="badge badge-small">{{nMiColeccionTipo1}}</span></a>
+                      <li><a href="#"> Profesor 2 <span class="badge badge-small">x</span></a>
                         <ul>
-                          <li> Nivel Inicial <span class="badge badge-small">{{nMiColeccionNivelB}}</span></li>
-                          <li> Nivel Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span></li>
-                          <li> Nivel Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span></li>
+                          <li> Nivel Inicial <span class="badge badge-small">x</span></li>
+                          <li> Nivel Medio <span class="badge badge-small">x</span></li>
+                          <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
                         </ul>
                       </li>
-                      <li><a href="#"> Profesor 3 <span class="badge badge-small">{{nMiColeccionTipo1}}</span></a>
+                      <li><a href="#"> Profesor 3 <span class="badge badge-small">x</span></a>
                         <ul>
-                          <li> Nivel Inicial <span class="badge badge-small">{{nMiColeccionNivelB}}</span></li>
-                          <li> Nivel Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span></li>
-                          <li> Nivel Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span></li>
+                          <li> Nivel Inicial <span class="badge badge-small">x</span></li>
+                          <li> Nivel Medio <span class="badge badge-small">x</span></li>
+                          <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
                         </ul>
                       </li>
                     </ul>

@@ -19,8 +19,11 @@ var PanelAlumnoComponent = (function () {
         this._profesorService = _profesorService;
         this.title = "Panel de alumno";
         this.actividades = [];
-        this.nActividades = 0;
         this.profesores = [];
+        this.disponibles = new Array();
+        this.disponiblesNBajo = new Array();
+        this.disponiblesNMedio = new Array();
+        this.disponiblesNAlto = new Array();
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -31,16 +34,11 @@ var PanelAlumnoComponent = (function () {
             if (!_this.actividades) {
                 alert('Error en el servidor');
             }
-            else {
-                _this.loading = false;
-                _this.nActividades = _this.actividades.length;
-            }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
                 alert(_this.errorMessage);
-                alert('Error todo tocho');
             }
         });
         //Obtener profesores
@@ -50,8 +48,57 @@ var PanelAlumnoComponent = (function () {
             if (!_this.profesores) {
                 alert('Error al obtener profesores');
             }
-            else {
-                alert(_this.profesores);
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getDisponibles().subscribe(function (result) {
+            console.log(result);
+            _this.disponibles = result.actividades;
+            if (!_this.disponibles) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getDisponiblesNB().subscribe(function (result) {
+            console.log(result);
+            _this.disponiblesNBajo = result.actividades;
+            if (!_this.disponiblesNBajo) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getDisponiblesNM().subscribe(function (result) {
+            console.log(result);
+            _this.disponiblesNMedio = result.actividades;
+            if (!_this.disponiblesNMedio) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getDisponiblesNA().subscribe(function (result) {
+            console.log(result);
+            _this.disponiblesNAlto = result.actividades;
+            if (!_this.disponiblesNAlto) {
+                alert('Error en el servidor');
             }
         }, function (error) {
             _this.errorMessage = error;
@@ -119,9 +166,6 @@ var PanelAlumnoComponent = (function () {
         //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
         //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
     }; //fin ngAfterViewInit
-    PanelAlumnoComponent.prototype.numActividades = function () {
-        return this.actividades.length;
-    };
     return PanelAlumnoComponent;
 }());
 PanelAlumnoComponent = __decorate([
