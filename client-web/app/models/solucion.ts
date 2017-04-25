@@ -3,23 +3,24 @@ import {Ficha} from '../models/ficha';
 export class Solucion{
 
     public id_actividad: String;
+    public id_alumno: String;
+    public nombreAlumno: String;
+    public id_ejercicios: String[];
+    public calificacion: number[];
+    public msgCalificacion: String[];
+    public respuesta: String[];
+    public notaFinal: number;
     public terminado: Boolean;
-    public calificacion: number;
-    public respuesta: String;
-    public msgCalificacion: String;
-    public monovalente: Ficha;
-    public bivalente: Ficha;
-    public trivalente: Ficha;
-    public amarilla: Ficha;
-    public azul: Ficha;
-    public naranja: Ficha;
-    public roja: Ficha;
-    public verde: Ficha;
-
+    
+    
     constructor(){
         this.terminado=false;
-        this.calificacion=null;
-        this.respuesta="";
-        this.msgCalificacion="";
+        this.calificacion=new Array();;
+        this.respuesta=new Array();
+        this.msgCalificacion=new Array();
+        this.id_actividad=null;
+        this.id_alumno=null;
+        this.notaFinal=0;
+        this.nombreAlumno=null;
     }
 }

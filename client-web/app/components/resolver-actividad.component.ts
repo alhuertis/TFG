@@ -47,7 +47,8 @@ export class  ResolverActividadComponent implements OnInit{
     verboMarcado: Boolean;
     srcDraggedPentagono: String;
 
-    solucion: Array<Solucion>;
+    //solucion: Array<Solucion>;
+    solucion: Solucion;
     resueltos: number;
 
  
@@ -141,7 +142,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.siguiente=this.ejerSel < this.actividad.length;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.calificaciones=[];
-        this.solucion=new Array<Solucion>();
+        this.solucion=new Solucion();
         this.respuesta="";
         this.msgCalificacion="";
         this.progreso=0;
@@ -168,7 +169,7 @@ export class  ResolverActividadComponent implements OnInit{
 	ngOnInit(){
 
         for(let i=0; i < this.actividad.length; i++){
-            this.solucion.push(new Solucion());
+            
         }
 	}//fin ngOnInit
 
@@ -220,8 +221,8 @@ export class  ResolverActividadComponent implements OnInit{
 
     calificar(){
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
-            this.solucion[this.ejerSel].msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
-            this.solucion[this.ejerSel].calificacion= 1;
+            this.solucion.msgCalificacion[this.ejerSel]="!!Enhorabuena¡¡ La respuesta es correcta";
+            this.solucion.calificacion[this.ejerSel]= 1;
         }else{
             let patron: String[];
             let res: String[];
@@ -231,32 +232,32 @@ export class  ResolverActividadComponent implements OnInit{
             res= _.intersection(res,patron);
 
            if(_.isEqual(patron, res)){
-               this.solucion[this.ejerSel].msgCalificacion="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
-               this.solucion[this.ejerSel].calificacion= 1;
+               this.solucion.msgCalificacion[this.ejerSel]="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
+               this.solucion.calificacion[this.ejerSel]= 1;
            }
            else{
                
 
                if(res.length == patron.length){
-                   this.solucion[this.ejerSel].msgCalificacion="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
-                   this.solucion[this.ejerSel].calificacion= 1/2;
+                    this.solucion.msgCalificacion[this.ejerSel]="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
+                    this.solucion.calificacion[this.ejerSel]= 1/2;
                }
                else if(res.length > patron.length/2){
-                   this.solucion[this.ejerSel].msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                   this.solucion[this.ejerSel].calificacion= 1/4;
+                    this.solucion.msgCalificacion[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.calificacion[this.ejerSel]= 1/4;
                }else{
-                   this.solucion[this.ejerSel].msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                   this.solucion[this.ejerSel].calificacion= 0;
+                    this.solucion.msgCalificacion[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.calificacion[this.ejerSel]= 0;
                }
            }
         }
-        this.solucion[this.ejerSel].respuesta= this.respuesta;
+        this.solucion.respuesta[this.ejerSel]= this.respuesta;
         this.resueltos++;
         this.progreso= (this.resueltos * 100) / this.actividad.length;
 
         if(this.progreso == 100){
-            for(var i=0; i < this.solucion.length; i++){
-                this.calificacionFinal+=this.solucion[i].calificacion;
+            for(var i=0; i < this.solucion.calificacion.length; i++){
+                this.calificacionFinal+=this.solucion.calificacion[i];
             }
         }
         

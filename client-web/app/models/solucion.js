@@ -2,9 +2,14 @@
 var Solucion = (function () {
     function Solucion() {
         this.terminado = false;
-        this.calificacion = null;
-        this.respuesta = "";
-        this.msgCalificacion = "";
+        this.calificacion = new Array();
+        ;
+        this.respuesta = new Array();
+        this.msgCalificacion = new Array();
+        this.id_actividad = null;
+        this.id_alumno = null;
+        this.notaFinal = 0;
+        this.nombreAlumno = null;
     }
     return Solucion;
 }());
