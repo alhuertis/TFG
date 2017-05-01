@@ -16,7 +16,7 @@ export class ActividadService{
 	public url: string;
 
 	constructor(private _http: Http){
-		this.url= 'http://localhost:3678/api/';
+		this.url= 'http://localhost:3678/api2/';
 	}
 
 	getActividades(){
@@ -28,13 +28,29 @@ export class ActividadService{
 		return this._http.get(this.url+'actividad/'+id).map(res => res.json());
 	}
 
+    getDisponibles(){
+		return this._http.get(this.url+'actividad-disponibles').map(res => res.json());
+	}
+
+    getDisponiblesNB(){
+		return this._http.get(this.url+'actividad-disponiblesNB').map(res => res.json());
+	}
+
+    getDisponiblesNM(){
+		return this._http.get(this.url+'actividad-disponiblesNM').map(res => res.json());
+	}
+
+    getDisponiblesNA(){
+		return this._http.get(this.url+'actividad-disponiblesNA').map(res => res.json());
+	}
+
     addActividad(actividad: Actividad){
 		let json = JSON.stringify(actividad);
 		let params= json;
 
 		let headers= new Headers({'Content-Type': 'application/json'});
 
-		return this._http.post(this.url+'ejercicio', params, {headers: headers}).map(res=> res.json());
+		return this._http.post(this.url+'actividad', params, {headers: headers}).map(res=> res.json());
 	}
 
    /* getPager(totalItems: number, currentPage: number = 1, pageSize: number = 4) {

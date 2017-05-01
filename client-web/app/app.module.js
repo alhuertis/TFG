@@ -11,6 +11,7 @@ var app_component_1 = require("./app.component");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_routing_1 = require("./app.routing");
+var ng2_drag_drop_1 = require("ng2-drag-drop");
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
@@ -30,7 +31,8 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            app_routing_1.routing
+            app_routing_1.routing,
+            ng2_drag_drop_1.Ng2DragDropModule
         ],
         //Aqui cargamos todos los componentes que vamos a usar en la aplicacion.(Es un array).
         declarations: [

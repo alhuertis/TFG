@@ -3,7 +3,9 @@ import{Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {EjercicioService} from '../services/ejercicio.service';
+import {ActividadService} from '../services/actividad.service';
 import {Ejercicio} from '../models/ejercicio';
+import {Actividad} from '../models/actividad';
 
 import {TruncatePipe} from './truncate-pipe.component';
 
@@ -16,7 +18,7 @@ declare var $:any;
 
 	selector: 'panel-profesor',
 	templateUrl: 'app/views/panel-profesor.html',
-	providers: [EjercicioService], //Necesitamos esto para poder usar los metodos
+	providers: [EjercicioService, ActividadService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/menu-profesor.css'],
 }) 
 
@@ -32,6 +34,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public ejersAMostrar: Ejercicio[];
 	public datosAMostrar: string;
 	public actividad: Ejercicio[];
+	public nuevaActividad: Actividad;
 
 	// pager object
     pager: any = {};
@@ -80,9 +83,16 @@ export class  PanelProfesorComponent implements OnInit{
 	public otrasColeccionesTipo4: Ejercicio[];
 	public nOtrasColeccionesTipo4: number;
 
+	//Modales
+  	public modalEjercicio: Boolean;
+	public modalActividad: Boolean;
+  	private visibleAnimate: Boolean;
+	public ejerAbrir: Ejercicio;
+
 
 	constructor(
-			private _ejercicioService: EjercicioService
+			private _ejercicioService: EjercicioService,
+			private _actividadService: ActividadService
 
 	){
 		this.title= "Panel de profesores";
@@ -91,6 +101,9 @@ export class  PanelProfesorComponent implements OnInit{
 		this.mostrarLista=false;
 		this.datosAMostrar="";
 		this.actividad=[];
+		this.modalEjercicio=false;
+		this.modalActividad=false;
+		this.visibleAnimate=false;
 		
 	}
 
@@ -739,9 +752,7 @@ export class  PanelProfesorComponent implements OnInit{
 
 	vaciarLista(){
 		for(var item of this.actividad){
-			let id= item._id;
-			let indiceEj= _.findIndex(this.ejersAMostrar, {_id: id});
-			this.ejersAMostrar[indiceEj].marcado=false;
+			item.marcado=false;
 		}
 		
 		$('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
@@ -751,9 +762,68 @@ export class  PanelProfesorComponent implements OnInit{
 	}
 
 	crearActividad(){
+		
 		if(this.actividad.length > 0){
-			alert("Se va a crear la actividad");
+			let ids : String[];
+			ids= new Array<String>();
+
+			for(let ej of this.actividad)
+				ids.push(ej._id);
+			
+			this.nuevaActividad =new Actividad("",this.id_profesor, this.user, new Date(), "", ids,false,false,null);
+
 		}
+
+		this.modalActividad = true;
+    	setTimeout(() => this.visibleAnimate = true);
+		
 	}
+
+
+	cancelarActividad(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalActividad = false, 300);
+
+		this.nuevaActividad= null;
+	}
+
+	guardarActividad(){
+	
+		this._actividadService.addActividad(this.nuevaActividad).subscribe(
+			result => {
+				
+				if(!result.respuesta){
+					alert('Error en el servidor');
+				}
+				else{
+					alert('Se ha guardado correctamente');
+					this.vaciarLista();
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error al guardar actividad');
+				}
+			}
+		);
+		
+
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalActividad = false, 300);
+	}
+
+	showEjercicio(ejercicio: Ejercicio){
+    	this.modalEjercicio = true;
+    	setTimeout(() => this.visibleAnimate = true);
+		this.ejerAbrir=ejercicio;
+  	}
+
+  	hideEjercicio(){
+    	this.visibleAnimate = false;
+    	setTimeout(() => this.modalEjercicio = false, 300);
+  	}
 	
 }

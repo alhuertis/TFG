@@ -11,13 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
 var core_1 = require("@angular/core");
 var actividad_service_1 = require("../services/actividad.service");
+var profesor_service_1 = require("../services/profesor.service");
 //los decoradores no tienen punto y coma
 var PanelAlumnoComponent = (function () {
-    function PanelAlumnoComponent(_actividadService) {
+    function PanelAlumnoComponent(_actividadService, _profesorService) {
         this._actividadService = _actividadService;
+        this._profesorService = _profesorService;
         this.title = "Panel de alumno";
         this.actividades = [];
-        this.nActividades = 0;
+        this.profesores = [];
+        this.disponibles = new Array();
+        this.disponiblesNBajo = new Array();
+        this.disponiblesNMedio = new Array();
+        this.disponiblesNAlto = new Array();
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -28,16 +34,77 @@ var PanelAlumnoComponent = (function () {
             if (!_this.actividades) {
                 alert('Error en el servidor');
             }
-            else {
-                _this.loading = false;
-                _this.nActividades = _this.actividades.length;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        //Obtener profesores
+        this._profesorService.getProfesores().subscribe(function (result) {
+            console.log(result);
+            _this.profesores = result.profesores;
+            if (!_this.profesores) {
+                alert('Error al obtener profesores');
             }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
                 alert(_this.errorMessage);
-                alert('Error todo tocho');
+            }
+        });
+        this._actividadService.getDisponibles().subscribe(function (result) {
+            console.log(result);
+            _this.disponibles = result.actividades;
+            if (!_this.disponibles) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getDisponiblesNB().subscribe(function (result) {
+            console.log(result);
+            _this.disponiblesNBajo = result.actividades;
+            if (!_this.disponiblesNBajo) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getDisponiblesNM().subscribe(function (result) {
+            console.log(result);
+            _this.disponiblesNMedio = result.actividades;
+            if (!_this.disponiblesNMedio) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getDisponiblesNA().subscribe(function (result) {
+            console.log(result);
+            _this.disponiblesNAlto = result.actividades;
+            if (!_this.disponiblesNAlto) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
             }
         });
     }; //fin ngOnInit
@@ -99,19 +166,17 @@ var PanelAlumnoComponent = (function () {
         //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
         //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
     }; //fin ngAfterViewInit
-    PanelAlumnoComponent.prototype.numActividades = function () {
-        return this.actividades.length;
-    };
     return PanelAlumnoComponent;
 }());
 PanelAlumnoComponent = __decorate([
     core_1.Component({
         selector: 'panel-alumno',
         templateUrl: 'app/views/panel-alumno.html',
-        providers: [actividad_service_1.ActividadService],
+        providers: [actividad_service_1.ActividadService, profesor_service_1.ProfesorService],
         styleUrls: ['../../assets/css/menu-profesor.css'],
     }),
-    __metadata("design:paramtypes", [actividad_service_1.ActividadService])
+    __metadata("design:paramtypes", [actividad_service_1.ActividadService,
+        profesor_service_1.ProfesorService])
 ], PanelAlumnoComponent);
 exports.PanelAlumnoComponent = PanelAlumnoComponent;
 //# sourceMappingURL=panel-alumno.component.js.map

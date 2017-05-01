@@ -16,7 +16,7 @@ require("rxjs/add/operator/map");
 var ActividadService = (function () {
     function ActividadService(_http) {
         this._http = _http;
-        this.url = 'http://localhost:3678/api/';
+        this.url = 'http://localhost:3678/api2/';
     }
     ActividadService.prototype.getActividades = function () {
         return this._http.get(this.url + 'actividades').map(function (res) { return res.json(); });
@@ -25,11 +25,23 @@ var ActividadService = (function () {
         console.log('Llamando a ' + this.url + 'actividad/' + id);
         return this._http.get(this.url + 'actividad/' + id).map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.getDisponibles = function () {
+        return this._http.get(this.url + 'actividad-disponibles').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getDisponiblesNB = function () {
+        return this._http.get(this.url + 'actividad-disponiblesNB').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getDisponiblesNM = function () {
+        return this._http.get(this.url + 'actividad-disponiblesNM').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getDisponiblesNA = function () {
+        return this._http.get(this.url + 'actividad-disponiblesNA').map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.addActividad = function (actividad) {
         var json = JSON.stringify(actividad);
         var params = json;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this._http.post(this.url + 'ejercicio', params, { headers: headers }).map(function (res) { return res.json(); });
+        return this._http.post(this.url + 'actividad', params, { headers: headers }).map(function (res) { return res.json(); });
     };
     return ActividadService;
 }());

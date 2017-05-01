@@ -12,6 +12,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var actividad_service_1 = require("../services/actividad.service");
 var ejercicio_1 = require("../models/ejercicio");
+var ficha_1 = require("../models/ficha");
+var solucion_1 = require("../models/solucion");
 var _ = require("underscore");
 var ResolverActividadComponent = (function () {
     function ResolverActividadComponent(_actividadService) {
@@ -47,10 +49,10 @@ var ResolverActividadComponent = (function () {
                     "fechaCreacion": new Date(),
                     "fechaModificacion": new Date(),
                     "enunciado": "Traducir toda la frase",
-                    "fraseATraducir": "Dei sacrificium accipiunt Dei sacrificium accipiunt",
-                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                    "solucionFPatron": "dioses + reciben + sacrificio",
-                    "solucionPEspanol": "Los dioses reciben el sacrificio",
+                    "fraseATraducir": "Magister sapientiam amat",
+                    "solucionFLogico": "Nominativo(magister), Acusativo(sapientiam),Verbo(amat)",
+                    "solucionFPatron": "maestro + ama + sabiduria",
+                    "solucionPEspanol": "El maestro ama la sabiduría",
                     "solucionPLatin": "",
                     "marcado": false
                 },
@@ -97,17 +99,64 @@ var ResolverActividadComponent = (function () {
         this.siguiente = this.ejerSel < this.actividad.length;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.calificaciones = [];
+        this.solucion = new solucion_1.Solucion();
         this.respuesta = "";
         this.msgCalificacion = "";
+        this.progreso = 0;
+        this.calificacionFinal = 0;
+        this.monovalente = new ficha_1.Ficha(false, "0px", "0px");
+        this.bivalente = new ficha_1.Ficha(false, "0px", "0px");
+        this.trivalente = new ficha_1.Ficha(false, "0px", "0px");
+        this.amarilla = new ficha_1.Ficha(false, "", "");
+        this.azul = new ficha_1.Ficha(false, "", "");
+        this.naranja = new ficha_1.Ficha(false, "", "");
+        this.roja = new ficha_1.Ficha(false, "", "");
+        this.verde = new ficha_1.Ficha(false, "", "");
+        this.argumentos = 0;
+        this.faseVerbo = false;
+        this.verbo = this.extraerVerbo();
+        this.verboMarcado = false;
+        this.srcDraggedPentagono = "adios";
+        this.resueltos = 0;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
+        for (var i = 0; i < this.actividad.length; i++) {
+        }
     }; //fin ngOnInit
+    ResolverActividadComponent.prototype.extraerVerbo = function () {
+        var args = this.actividad[this.ejerSel].solucionFLogico.split(",");
+        this.argumentos = args.length - 1;
+        var verbo;
+        for (var _i = 0, args_1 = args; _i < args_1.length; _i++) {
+            var s = args_1[_i];
+            if (s.includes("Verbo")) {
+                verbo = s.substring(s.indexOf("Verbo(") + "Verbo(".length, s.length - 1);
+                break;
+            }
+        }
+        return verbo;
+    };
     ResolverActividadComponent.prototype.siguienteEjer = function () {
         this.ejerSel++;
         this.siguiente = this.ejerSel < this.actividad.length - 1;
         this.anterior = this.ejerSel > 0;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta = "";
+        this.verboMarcado = false;
+        this.verbo = this.extraerVerbo();
+        this.faseVerbo = false;
+        this.monovalente.activa = false;
+        this.bivalente.activa = false;
+        this.trivalente.activa = false;
+        this.amarilla.activa = false;
+        this.azul.activa = false;
+        this.naranja.activa = false;
+        this.roja.activa = false;
+        this.verde.activa = false;
+        $('span.acertada').removeClass("acertada");
+        $('span.marcada').removeClass("marcada");
+        $('.izquierda, .superior, .derecha').removeAttr("src");
+        $('.izquierda, .superior, .derecha').css("display", "none");
     };
     ResolverActividadComponent.prototype.anteriorEjer = function () {
         this.ejerSel--;
@@ -115,11 +164,12 @@ var ResolverActividadComponent = (function () {
         this.siguiente = this.ejerSel < this.actividad.length;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta = "";
+        this.verbo = this.extraerVerbo();
     };
     ResolverActividadComponent.prototype.calificar = function () {
         if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
-            this.msgCalificacion = "!!Enhorabuena¡¡ La respues es correcta";
-            this.calificaciones[this.ejerSel] = 1;
+            this.solucion.msgCalificacion[this.ejerSel] = "!!Enhorabuena¡¡ La respuesta es correcta";
+            this.solucion.calificacion[this.ejerSel] = 1;
         }
         else {
             var patron = void 0;
@@ -128,24 +178,210 @@ var ResolverActividadComponent = (function () {
             patron = this.actividad[this.ejerSel].solucionFPatron.split(" + ");
             res = _.intersection(res, patron);
             if (_.isEqual(patron, res)) {
-                this.msgCalificacion = "La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
-                this.calificaciones[this.ejerSel] = 1;
+                this.solucion.msgCalificacion[this.ejerSel] = "La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
+                this.solucion.calificacion[this.ejerSel] = 1;
             }
             else {
                 if (res.length == patron.length) {
-                    this.msgCalificacion = "No estan en el mismo orden";
-                    this.calificaciones[this.ejerSel] = 1 / 2;
+                    this.solucion.msgCalificacion[this.ejerSel] = "La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
+                    this.solucion.calificacion[this.ejerSel] = 1 / 2;
                 }
                 else if (res.length > patron.length / 2) {
-                    this.msgCalificacion = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                    this.calificaciones[this.ejerSel] = 1 / 4;
+                    this.solucion.msgCalificacion[this.ejerSel] = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.calificacion[this.ejerSel] = 1 / 4;
                 }
                 else {
-                    this.msgCalificacion = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                    this.calificaciones[this.ejerSel] = 0;
+                    this.solucion.msgCalificacion[this.ejerSel] = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.calificacion[this.ejerSel] = 0;
                 }
             }
         }
+        this.solucion.respuesta[this.ejerSel] = this.respuesta;
+        this.resueltos++;
+        this.progreso = (this.resueltos * 100) / this.actividad.length;
+        if (this.progreso == 100) {
+            for (var i = 0; i < this.solucion.calificacion.length; i++) {
+                this.calificacionFinal += this.solucion.calificacion[i];
+            }
+            this.solucion.notaFinal = this.calificacionFinal;
+        }
+    };
+    ResolverActividadComponent.prototype.clickMonovalente = function (event) {
+        if (this.argumentos > 1) {
+            alert("Esta pieza no representa el numero de argumentos del verbo");
+        }
+        else {
+            if (this.verboMarcado) {
+                this.faseVerbo = true;
+                this.monovalente.activa = true;
+            }
+            else {
+                if (this.monovalente.activa)
+                    this.monovalente.activa = false;
+                else
+                    this.monovalente.activa = true;
+            }
+        }
+    };
+    ResolverActividadComponent.prototype.clickBivalente = function (event) {
+        if (this.argumentos != 2) {
+            alert("Esta pieza no representa el numero de argumentos del verbo");
+        }
+        else {
+            if (this.verboMarcado) {
+                this.faseVerbo = true;
+                this.bivalente.activa = true;
+                $('span.marcada').removeClass("marcada").addClass("acertada");
+            }
+            else {
+                if (this.bivalente.activa)
+                    this.bivalente.activa = false;
+                else
+                    this.bivalente.activa = true;
+            }
+        }
+    };
+    ResolverActividadComponent.prototype.clickTrivalente = function (event) {
+        if (this.argumentos != 3) {
+            alert("Esta pieza no representa el numero de argumentos del verbo");
+        }
+        else {
+            if (this.verboMarcado) {
+                this.faseVerbo = true;
+                this.trivalente.activa = true;
+            }
+            else {
+                if (this.trivalente.activa)
+                    this.trivalente.activa = false;
+                else
+                    this.trivalente.activa = true;
+            }
+        }
+    };
+    ResolverActividadComponent.prototype.clickAmarilla = function (event) {
+        if (this.amarilla.activa)
+            this.amarilla.activa = false;
+        else {
+            this.amarilla.activa = true;
+            this.amarilla.top = "0px";
+            this.amarilla.left = "0px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickAzul = function (event) {
+        if (this.azul.activa)
+            this.azul.activa = false;
+        else {
+            this.azul.activa = true;
+            this.azul.top = "20px";
+            this.azul.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickNaranja = function (event) {
+        if (this.naranja.activa)
+            this.naranja.activa = false;
+        else {
+            this.naranja.activa = true;
+            this.naranja.top = "20px";
+            this.naranja.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickRoja = function (event) {
+        if (this.roja.activa)
+            this.roja.activa = false;
+        else {
+            this.roja.activa = true;
+            this.roja.top = "20px";
+            this.roja.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.clickVerde = function (event) {
+        if (this.verde.activa)
+            this.verde.activa = false;
+        else {
+            this.verde.activa = true;
+            this.verde.top = "20px";
+            this.verde.left = "30px";
+        }
+    };
+    ResolverActividadComponent.prototype.sacarFichas = function (event) {
+        if ($(event.target).next().css("display") == "none") {
+            $(event.target).next().css("display", "block").removeClass("fadeOut").addClass("animated fadeInLeft");
+        }
+        else {
+            $(event.target).next().removeClass("fadeInLeft").animate({
+                "opacity": "0"
+            }, 500);
+            this.sleep(500).then(function () {
+                $(event.target).next().css("display", "none");
+            });
+        }
+    };
+    ResolverActividadComponent.prototype.clickPalabra = function (event, palabra) {
+        if (this.verboMarcado && !this.faseVerbo) {
+            this.verboMarcado = false;
+            $(event.target).removeClass("marcada");
+        }
+        else if (!this.faseVerbo) {
+            if (palabra == this.verbo) {
+                this.verboMarcado = true;
+                alert("Es el verbo!");
+                $(event.target).addClass("marcada");
+            }
+            else {
+                alert("No es el verbo");
+                $(event.target).removeClass("marcada");
+            }
+        }
+    };
+    ResolverActividadComponent.prototype.dropVerbo = function (event, palabra) {
+        //alert(palabra + " " + event.dragData);
+        if (this.faseVerbo)
+            alert("Ya has encontrado el verbo anteriormente");
+        else {
+            if (palabra == this.verbo) {
+                alert("Has acertado, es el verbo");
+                this.faseVerbo = true;
+                if (this.argumentos == 1 && event.dragData == "monovalente") {
+                    this.monovalente.activa = true;
+                }
+                else if (this.argumentos == 2 && event.dragData == "bivalente") {
+                    this.bivalente.activa = true;
+                    $(event.nativeEvent.target).addClass("marcada");
+                }
+                else if (this.argumentos == 3 && event.dragData == "trivalente") {
+                    this.bivalente.activa = true;
+                }
+                else {
+                    alert("Pero no es la ficha adecuada");
+                    this.faseVerbo = false;
+                }
+            }
+            else {
+                alert("No es el verbo");
+                this.faseVerbo = false;
+            }
+        }
+    };
+    ResolverActividadComponent.prototype.dragPentagono = function (event) {
+        //alert($(event.nativeEvent.target).attr("src"));
+        this.srcDraggedPentagono = $(event.target).attr("src");
+    };
+    ResolverActividadComponent.prototype.dropPentagono = function (event, posicion) {
+        if (event.dragData) {
+            alert(event.dragData);
+        }
+        else {
+            $(event.nativeEvent.target).children().css("display", "block");
+            $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
+        }
+    };
+    ResolverActividadComponent.prototype.quitaPentagono = function (event) {
+        $(event.target).children().removeAttr("src");
+        $(event.target).children().css("display", "none");
+    };
+    ResolverActividadComponent.prototype.sleep = function (ms) {
+        if (ms === void 0) { ms = 0; }
+        return new Promise(function (r) { return setTimeout(r, ms); });
     };
     return ResolverActividadComponent;
 }());
