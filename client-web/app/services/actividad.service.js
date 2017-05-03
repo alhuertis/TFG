@@ -28,6 +28,15 @@ var ActividadService = (function () {
     ActividadService.prototype.getDisponibles = function () {
         return this._http.get(this.url + 'actividad-disponibles').map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.getPropuestas = function () {
+        return this._http.get(this.url + 'actividad-propuestas').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getPropuestasByApertura = function () {
+        return this._http.get(this.url + 'actividad-propuestasByApertura').map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getPropuestasByCierre = function () {
+        return this._http.get(this.url + 'actividad-propuestasByCierre').map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.getDisponiblesNB = function () {
         return this._http.get(this.url + 'actividad-disponiblesNB').map(function (res) { return res.json(); });
     };

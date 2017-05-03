@@ -119,7 +119,7 @@ function getActividadesResueltas(req, res) {
 
 function getDisponibles(req, res){
 
-	Actividad.find({"visible": "true"}).exec((err, actividades)=>{
+	Actividad.find({"visible": "true", "propuesta": "false"}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -139,7 +139,7 @@ function getDisponibles(req, res){
 
 function getDisponiblesNBajo(req, res){
 
-	Actividad.find({"visible": "true", "nivel":"Bajo"}).exec((err, actividades)=>{
+	Actividad.find({"visible": "true", "nivel":"Bajo","propuesta": "false"}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -159,7 +159,7 @@ function getDisponiblesNBajo(req, res){
 
 function getDisponiblesNMedio(req, res){
 
-	Actividad.find({"visible": "true", "nivel":"Medio"}).exec((err, actividades)=>{
+	Actividad.find({"visible": "true", "nivel":"Medio", "propuesta": "false"}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -179,7 +179,7 @@ function getDisponiblesNMedio(req, res){
 
 function getDisponiblesNAlto(req, res){
 
-	Actividad.find({"visible": "true", "nivel":"Avanzado"}).exec((err, actividades)=>{
+	Actividad.find({"visible": "true", "nivel":"Avanzado", "propuesta": "false"}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -187,6 +187,65 @@ function getDisponiblesNAlto(req, res){
 
 			if(!actividades){
 				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+}
+
+function getPropuestas(req, res){
+
+	Actividad.find({"propuesta": "true", "visible": "true","fecha_prop_fin": {$gt:new Date()}}).exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades propuestas'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades propuestas'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
+function getPropuestasByApertura(req, res){
+
+	Actividad.find({"propuesta": "true", "visible": "true","fecha_prop_fin": {$gt:new Date()}}).sort('+fecha_creacion').exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades propuestas por apertura'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades propuestas por apertura'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
+function getPropuestasByCierre(req, res){
+
+	Actividad.find({"propuesta": "true", "visible": "true","fecha_prop_fin": {$gt:new Date()}}).sort('+fecha_prop_fin').exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades propuestas por cierre'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades propuestas por cierre'});
 			}
 			else{
 				res.status(200).send({actividades});
@@ -208,5 +267,8 @@ module.exports= {
 	getDisponiblesNBajo,
 	getDisponiblesNMedio,
 	getDisponiblesNAlto,
+	getPropuestas,
+	getPropuestasByApertura,
+	getPropuestasByCierre,
 
 }

@@ -16,6 +16,9 @@ api.get('/actividad-disponibles', ActividadController.getDisponibles);
 api.get('/actividad-disponiblesNB', ActividadController.getDisponiblesNBajo);
 api.get('/actividad-disponiblesNM', ActividadController.getDisponiblesNMedio);
 api.get('/actividad-disponiblesNA', ActividadController.getDisponiblesNAlto);
+api.get('/actividad-propuestas', ActividadController.getPropuestas);
+api.get('/actividad-propuestasByApertura', ActividadController.getPropuestasByApertura);
+api.get('/actividad-propuestasByCierre', ActividadController.getPropuestasByCierre);
 
 
 

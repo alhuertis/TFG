@@ -24,6 +24,11 @@ var PanelAlumnoComponent = (function () {
         this.disponiblesNBajo = new Array();
         this.disponiblesNMedio = new Array();
         this.disponiblesNAlto = new Array();
+        this.propuestas = new Array();
+        this.propuestasByApertura = new Array();
+        this.propuestasByCierre = new Array();
+        this.actividadesAMostrar = new Array();
+        this.datosAMostrar = new String();
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -107,6 +112,45 @@ var PanelAlumnoComponent = (function () {
                 alert(_this.errorMessage);
             }
         });
+        this._actividadService.getPropuestas().subscribe(function (result) {
+            console.log(result);
+            _this.propuestas = result.actividades;
+            if (!_this.propuestas) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getPropuestasByApertura().subscribe(function (result) {
+            console.log(result);
+            _this.propuestasByApertura = result.actividades;
+            if (!_this.propuestasByApertura) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._actividadService.getPropuestasByCierre().subscribe(function (result) {
+            console.log(result);
+            _this.propuestasByCierre = result.actividades;
+            if (!_this.propuestasByCierre) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
     }; //fin ngOnInit
     PanelAlumnoComponent.prototype.ngAfterViewInit = function () {
         //Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery
@@ -166,6 +210,30 @@ var PanelAlumnoComponent = (function () {
         //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
         //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
     }; //fin ngAfterViewInit
+    PanelAlumnoComponent.prototype.seleccionaDatos = function (datos, profesor) {
+        if (profesor) {
+        }
+        else {
+            switch (datos) {
+                case 'disponibles':
+                    this.actividadesAMostrar = this.disponibles;
+                    this.datosAMostrar = "Total disponibles";
+                    break;
+                case 'disponibles nb':
+                    this.actividadesAMostrar = this.disponiblesNBajo;
+                    this.datosAMostrar = "Disponibles nivel bajo";
+                    break;
+                case 'disponibles nm':
+                    this.actividadesAMostrar = this.disponiblesNMedio;
+                    this.datosAMostrar = "Disponibles nivel medio";
+                    break;
+                case 'disponibles na':
+                    this.actividadesAMostrar = this.disponiblesNAlto;
+                    this.datosAMostrar = "Disponibles nivel avanzado";
+                    break;
+            }
+        }
+    };
     return PanelAlumnoComponent;
 }());
 PanelAlumnoComponent = __decorate([
