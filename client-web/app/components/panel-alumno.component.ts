@@ -28,6 +28,11 @@ export class  PanelAlumnoComponent implements OnInit{
 	public disponiblesNBajo: Actividad[];
 	public disponiblesNMedio: Actividad[];
 	public disponiblesNAlto: Actividad[];
+	public propuestas: Actividad[];
+	public propuestasByApertura: Actividad[];
+	public propuestasByCierre: Actividad[];
+	public actividadesAMostrar: Actividad[];
+	public datosAMostrar: String;
 
 	public errorMessage: string;
 
@@ -48,6 +53,11 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.disponiblesNBajo=new Array<Actividad>();
 		this.disponiblesNMedio=new Array<Actividad>();
 		this.disponiblesNAlto=new Array<Actividad>();
+		this.propuestas=new Array<Actividad>();
+		this.propuestasByApertura=new Array<Actividad>();
+		this.propuestasByCierre=new Array<Actividad>();
+		this.actividadesAMostrar=new Array<Actividad>();
+		this.datosAMostrar= new String();
 		
 	}
 
@@ -165,6 +175,60 @@ export class  PanelAlumnoComponent implements OnInit{
 				}
 			}
 		);
+
+		this._actividadService.getPropuestas().subscribe(
+			result =>{
+				console.log(result);
+				this.propuestas= result.actividades;
+
+				if(!this.propuestas){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+
+		this._actividadService.getPropuestasByApertura().subscribe(
+			result =>{
+				console.log(result);
+				this.propuestasByApertura= result.actividades;
+
+				if(!this.propuestasByApertura){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+
+		this._actividadService.getPropuestasByCierre().subscribe(
+			result =>{
+				console.log(result);
+				this.propuestasByCierre= result.actividades;
+
+				if(!this.propuestasByCierre){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
 		
 
 	}//fin ngOnInit
@@ -235,4 +299,34 @@ export class  PanelAlumnoComponent implements OnInit{
 		//$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
 	}//fin ngAfterViewInit
 
+	seleccionaDatos(datos: String, profesor: boolean){
+		
+		if(profesor){
+
+
+		}else{
+			switch(datos){
+				case 'disponibles':
+					this.actividadesAMostrar=this.disponibles;
+					this.datosAMostrar= "Total disponibles";
+					break;
+				case 'disponibles nb':
+					this.actividadesAMostrar=this.disponiblesNBajo;
+					this.datosAMostrar= "Disponibles nivel bajo";
+					break;
+				case 'disponibles nm':
+					this.actividadesAMostrar=this.disponiblesNMedio;
+					this.datosAMostrar= "Disponibles nivel medio";
+					break;
+				case 'disponibles na':
+					this.actividadesAMostrar=this.disponiblesNAlto;
+					this.datosAMostrar= "Disponibles nivel avanzado";
+					break;	
+
+			}
+
+		}
+		
+		
+	}
 }

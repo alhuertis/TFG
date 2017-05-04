@@ -7,10 +7,10 @@
 
       <ul id="tree1">
 
-        <li><a href="#"> Actividades </a><span class="badge badge-small"> {{actividades.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
+        <li><a href="#"> Actividades </a><span class="badge badge-small"> {{disponibles.length + propuestas.length }}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
 
           <ul>
-            <li><a href="#"> Mis actividades hechas </a> <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
+            <li><a href="#"> Mis actividades hechas </a> <span class="badge badge-small">?</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
                 <li><a href="#"> Nivel</a>
                   <ul>
@@ -19,7 +19,7 @@
                     <li> Avanzado <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
-                <li><a href="#"> Profesor </a>
+                <li><a href="#"> Profesores </a>
                   <ul *ngIf="profesores.length > 0">
                     <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
@@ -27,69 +27,44 @@
                 <li><a href="#"> Estadísticas</a></li>
               </ul>
             </li>
-            <li> Actividades propuestas <span class="badge badge-small"> x</span>
+            <li> Actividades propuestas <span class="badge badge-small"> {{propuestas.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
-                <li><a href="#"> Profesor </a>
-                  <ul>
-                    <li><a href="#"> Profesor 1 <span class="badge badge-small">x</span></a>
-                      <ul>
-                        <li> Nivel Inicial <span class="badge badge-small">x</span></li>
-                        <li> Nivel Medio <span class="badge badge-small">x</span></li>
-                        <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
-                      </ul>
-                    </li>
-                    <li><a href="#"> Profesor 2 <span class="badge badge-small">x</span></a>
-                      <ul>
-                        <li> Nivel Inicial <span class="badge badge-small">x</span></li>
-                        <li> Nivel Medio <span class="badge badge-small">x</span></li>
-                        <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
-                      </ul>
-                    </li>
+                <li><a href="#"> Profesores </a>
+                  <ul *ngIf="profesores.length > 0">
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor.nombre)" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
-                <li><a href="#"> Fecha de apertura (orden cronológico)<span class="badge badge-small">x</span></a>
-                  <li><a href="#"> Fecha de cierre (orden cronológico)<span class="badge badge-small">x</span></a>
+                <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                <li>Fecha de cierre (o.cronológico) <span class="badge badge-small"> {{propuestasByCierre.length}}</span> <i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>             
               </ul>
-              </li>
-              <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
-                <ul>
-                  <li> Nivel
-                    <ul>
-                      <li> Nivel Inicial <span class="badge badge-small">{{disponiblesNBajo.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                      <li> Nivel Medio <span class="badge badge-small">{{disponiblesNMedio.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                      <li> Nivel Avanzado <span class="badge badge-small">{{disponiblesNAlto.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    </ul>
-                  </li>
-                  <li><a href="#"> Profesor </a>
-                    <ul>
-                      <li><a href="#"> Profesor 1 <span class="badge badge-small">x</span></a>
-                        <ul>
-                          <li> Nivel Inicial <span class="badge badge-small">x</span></li>
-                          <li> Nivel Medio <span class="badge badge-small">x</span></li>
-                          <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
-                        </ul>
-                      </li>
-                      <li><a href="#"> Profesor 2 <span class="badge badge-small">x</span></a>
-                        <ul>
-                          <li> Nivel Inicial <span class="badge badge-small">x</span></li>
-                          <li> Nivel Medio <span class="badge badge-small">x</span></li>
-                          <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
-                        </ul>
-                      </li>
-                      <li><a href="#"> Profesor 3 <span class="badge badge-small">x</span></a>
-                        <ul>
-                          <li> Nivel Inicial <span class="badge badge-small">x</span></li>
-                          <li> Nivel Medio <span class="badge badge-small">x</span></li>
-                          <li> Nivel Avanzado <span class="badge badge-small">x</span></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
+            </li>
+            <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i (click)="seleccionaDatos('disponibles')" class="glyphicon glyphicon-eye-open ojo"></i>
+              <ul>
+                <li> Nivel
+                  <ul>
+                    <li> Nivel Inicial <span class="badge badge-small">{{disponiblesNBajo.length}}</span><i *ngIf="disponiblesNBajo.length" (click)="seleccionaDatos('disponibles nb')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Nivel Medio <span class="badge badge-small">{{disponiblesNMedio.length}}</span><i *ngIf="disponiblesNMedio.length" (click)="seleccionaDatos('disponibles nm')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Nivel Avanzado <span class="badge badge-small">{{disponiblesNAlto.length}}</span><i *ngIf="disponiblesNAlto.length" (click)="seleccionaDatos('disponibles na')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                  </ul>
+                </li>
+                <li><a href="#"> Profesores </a>
+                      <ul *ngIf="profesores.length > 0">
+                        <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor.nombre)" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                      </ul>
+                </li>
+              </ul>
           </ul>
-          </li>
+        </li>
       </ul>
 
+    </div>
+
+    <div class="col-md-8">
+      <h2 *ngIf="datosAMostrar">{{datosAMostrar}}</h2>
+      <ul *ngFor="let actividad of actividadesAMostrar">
+        <li>{{actividad.titulo}}</li>
+        <li>{{actividad.profesor}}</li>
+      </ul>
     </div>
 
   </div>

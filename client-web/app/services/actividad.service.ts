@@ -32,6 +32,18 @@ export class ActividadService{
 		return this._http.get(this.url+'actividad-disponibles').map(res => res.json());
 	}
 
+    getPropuestas(){
+		return this._http.get(this.url+'actividad-propuestas').map(res => res.json());
+	}
+
+    getPropuestasByApertura(){
+		return this._http.get(this.url+'actividad-propuestasByApertura').map(res => res.json());
+	}
+
+    getPropuestasByCierre(){
+		return this._http.get(this.url+'actividad-propuestasByCierre').map(res => res.json());
+	}
+
     getDisponiblesNB(){
 		return this._http.get(this.url+'actividad-disponiblesNB').map(res => res.json());
 	}
