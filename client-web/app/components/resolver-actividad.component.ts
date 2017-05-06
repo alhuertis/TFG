@@ -25,7 +25,7 @@ export class  ResolverActividadComponent implements OnInit{
     id_actividad: string;
 
     actividad: Ejercicio[];
-    ejercicios: Ejercicio[];
+    infoActividad: Actividad;
     ejercicio: Ejercicio;
     ejerSel: number;
     anterior: Boolean;
@@ -181,7 +181,7 @@ export class  ResolverActividadComponent implements OnInit{
 			result =>{
 				console.log(result);
 				this.actividad= result.actividad.ejercicios;
-
+                this.infoActividad= result.actividad;
 				if(!this.actividad){
 					alert('Error en el servidor');
 				}else{

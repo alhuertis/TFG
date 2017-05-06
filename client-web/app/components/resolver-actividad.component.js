@@ -125,6 +125,7 @@ var ResolverActividadComponent = (function () {
         this._actividadService.cargarActividad(this.id_actividad).subscribe(function (result) {
             console.log(result);
             _this.actividad = result.actividad.ejercicios;
+            _this.infoActividad = result.actividad;
             if (!_this.actividad) {
                 alert('Error en el servidor');
             }

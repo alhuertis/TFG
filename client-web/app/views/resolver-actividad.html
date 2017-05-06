@@ -9,11 +9,12 @@
     </div>
 
     <div class="col-md-5">
-        <div class="info-actividad">
-            <h3 class="text-center">Actividad: toma de contacto</h3>
+        <div class="info-actividad" *ngIf="actividad.length > 0">
+            <h3 class="text-center">Actividad: {{infoActividad.titulo}}</h3>
             <ul class="text-center">
-                <li><i class="glyphicon glyphicon-signal"></i> Medio</li>
-                <li><i class="glyphicon glyphicon-user"></i> Antonio Sarasa</li>
+                <li><i class="glyphicon glyphicon-user"></i> {{infoActividad.profesor}}</li>
+                <li><i class="glyphicon glyphicon-signal"></i> {{infoActividad.nivel}}</li>
+                <li><i class="glyphicon glyphicon-calendar"></i> {{infoActividad.fecha_creacion | truncate: 10}}</li>
             </ul>
         </div>
       
