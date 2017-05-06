@@ -5,8 +5,8 @@ var DiccionarioController =  require('../controllers/diccionario');
 var api = express.Router();
 
 
-api.get('/', DiccionarioController.saveDiccionario);
-api.get('/get', DiccionarioController.getDiccionario);
+api.get('/saveDiccionario', DiccionarioController.saveDiccionario);
+api.get('/getDiccionario', DiccionarioController.getDiccionario);
 
 
 module.exports = api;
