@@ -63,7 +63,7 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.propuestas=new Array<Actividad>();
 		this.propuestasByApertura=new Array<Actividad>();
 		this.propuestasByCierre=new Array<Actividad>();
-		this.actividadesAMostrar=new Array<Actividad>();
+		this.actividadesAMostrar=[];
 		this.datosAMostrar= new String();
 		this.mostrarLista=false;
 		
@@ -319,6 +319,8 @@ export class  PanelAlumnoComponent implements OnInit{
 							alert('Error en el servidor');
 						}else{
 							this.datosAMostrar= "Actividades disponibles de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
+							this.mostrarLista=true;
+							this.setPage(1);
 						}
 					
 					},
@@ -339,6 +341,8 @@ export class  PanelAlumnoComponent implements OnInit{
 							alert('Error en el servidor');
 						}else{
 							this.datosAMostrar= "Actividades propuestas de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
+							this.mostrarLista=true;
+							this.setPage(1);
 						}
 					
 					},
@@ -386,10 +390,11 @@ export class  PanelAlumnoComponent implements OnInit{
 					this.datosAMostrar= "Actividades propuestas por orden cierre";
 					break;	
 			}
+			this.mostrarLista=true;
+			this.setPage(1);
 		}
 		
-		this.mostrarLista=true;
-		this.setPage(1);
+		
 	}
 
 	setPage(page: number) {

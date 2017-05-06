@@ -29,7 +29,7 @@ var PanelAlumnoComponent = (function () {
         this.propuestas = new Array();
         this.propuestasByApertura = new Array();
         this.propuestasByCierre = new Array();
-        this.actividadesAMostrar = new Array();
+        this.actividadesAMostrar = [];
         this.datosAMostrar = new String();
         this.mostrarLista = false;
     }
@@ -224,6 +224,8 @@ var PanelAlumnoComponent = (function () {
                     }
                     else {
                         _this.datosAMostrar = "Actividades disponibles de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
+                        _this.mostrarLista = true;
+                        _this.setPage(1);
                     }
                 }, function (error) {
                     _this.errorMessage = error;
@@ -241,6 +243,8 @@ var PanelAlumnoComponent = (function () {
                     }
                     else {
                         _this.datosAMostrar = "Actividades propuestas de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
+                        _this.mostrarLista = true;
+                        _this.setPage(1);
                     }
                 }, function (error) {
                     _this.errorMessage = error;
@@ -282,9 +286,9 @@ var PanelAlumnoComponent = (function () {
                     this.datosAMostrar = "Actividades propuestas por orden cierre";
                     break;
             }
+            this.mostrarLista = true;
+            this.setPage(1);
         }
-        this.mostrarLista = true;
-        this.setPage(1);
     };
     PanelAlumnoComponent.prototype.setPage = function (page) {
         if (page < 1 || page > this.pager.totalPages) {
