@@ -6,6 +6,7 @@ import {ActividadService} from '../services/actividad.service';
 import {ProfesorService} from '../services/profesor.service';
 import {Actividad} from '../models/actividad';
 import {Profesor} from '../models/profesor';
+import {TruncatePipe} from './truncate-pipe.component';
 
 import * as _ from 'underscore';
 declare var $:any;
@@ -36,6 +37,12 @@ export class  PanelAlumnoComponent implements OnInit{
 
 	public errorMessage: string;
 
+	// pager object
+    pager: any = {};
+    // paged items
+    public pagedItems: Actividad[];
+	public mostrarLista: Boolean;
+
 	
 
 	
@@ -58,6 +65,7 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.propuestasByCierre=new Array<Actividad>();
 		this.actividadesAMostrar=new Array<Actividad>();
 		this.datosAMostrar= new String();
+		this.mostrarLista=false;
 		
 	}
 
@@ -299,10 +307,50 @@ export class  PanelAlumnoComponent implements OnInit{
 		//$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
 	}//fin ngAfterViewInit
 
-	seleccionaDatos(datos: String, profesor: boolean){
+	seleccionaDatos(datos: any, profesor: boolean, tipo: String){
 		
 		if(profesor){
+			if(tipo == 'D'){
+				this._actividadService.getByIdProfesorDisp(datos._id).subscribe(
+					result =>{
+						this.actividadesAMostrar= result.actividades;
 
+						if(!this.actividadesAMostrar){
+							alert('Error en el servidor');
+						}else{
+							this.datosAMostrar= "Actividades disponibles de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
+						}
+					
+					},
+					error => {
+						this.errorMessage= <any>error;
+						if(this.errorMessage != null){
+							console.log(this.errorMessage);
+							alert(this.errorMessage);
+						}
+					}
+				);
+			}else if(tipo == 'P'){
+				this._actividadService.getByIdProfesorProp(datos._id).subscribe(
+					result =>{
+						this.actividadesAMostrar= result.actividades;
+
+						if(!this.actividadesAMostrar){
+							alert('Error en el servidor');
+						}else{
+							this.datosAMostrar= "Actividades propuestas de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
+						}
+					
+					},
+					error => {
+						this.errorMessage= <any>error;
+						if(this.errorMessage != null){
+							console.log(this.errorMessage);
+							alert(this.errorMessage);
+						}
+					}
+				);
+			}
 
 		}else{
 			switch(datos){
@@ -321,12 +369,40 @@ export class  PanelAlumnoComponent implements OnInit{
 				case 'disponibles na':
 					this.actividadesAMostrar=this.disponiblesNAlto;
 					this.datosAMostrar= "Disponibles nivel avanzado";
+					break;
+
+				case 'propuestas':
+					this.actividadesAMostrar=this.propuestas;
+					this.datosAMostrar= "Actividades propuestas";
+					break;
+
+				case 'propuestas apertura':
+					this.actividadesAMostrar=this.propuestasByApertura;
+					this.datosAMostrar= "Actividades propuestas por orden de apertura";
+					break;
+
+				case 'propuestas cierre':
+					this.actividadesAMostrar=this.propuestasByCierre;
+					this.datosAMostrar= "Actividades propuestas por orden cierre";
 					break;	
-
 			}
-
 		}
 		
-		
+		this.mostrarLista=true;
+		this.setPage(1);
 	}
+
+	setPage(page: number) {
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+
+        // get pager object from service
+       	this.pager = this._actividadService.getPager(this.actividadesAMostrar.length, page);
+        // get current page of items
+        this.pagedItems = this.actividadesAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+	
+		//alert(this.ejercicios.slice(1,5));
+		
+    }
 }

@@ -19,6 +19,8 @@ api.get('/actividad-disponiblesNA', ActividadController.getDisponiblesNAlto);
 api.get('/actividad-propuestas', ActividadController.getPropuestas);
 api.get('/actividad-propuestasByApertura', ActividadController.getPropuestasByApertura);
 api.get('/actividad-propuestasByCierre', ActividadController.getPropuestasByCierre);
+api.get('/actividad-idProfesorDisp/:id', ActividadController.getByIdProfesorDisp);
+api.get('/actividad-idProfesorProp/:id', ActividadController.getByIdProfesorProp);
 
 
 

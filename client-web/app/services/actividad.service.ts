@@ -56,6 +56,14 @@ export class ActividadService{
 		return this._http.get(this.url+'actividad-disponiblesNA').map(res => res.json());
 	}
 
+    getByIdProfesorDisp(id: String){
+		return this._http.get(this.url+'actividad-idProfesorDisp/'+id).map(res => res.json());
+	}
+
+    getByIdProfesorProp(id: String){
+		return this._http.get(this.url+'actividad-idProfesorProp/'+id).map(res => res.json());
+	}
+
     addActividad(actividad: Actividad){
 		let json = JSON.stringify(actividad);
 		let params= json;
@@ -65,7 +73,7 @@ export class ActividadService{
 		return this._http.post(this.url+'actividad', params, {headers: headers}).map(res=> res.json());
 	}
 
-   /* getPager(totalItems: number, currentPage: number = 1, pageSize: number = 4) {
+    getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
         // calculate total pages
         let totalPages = Math.ceil(totalItems / pageSize);
  
@@ -107,7 +115,7 @@ export class ActividadService{
             endIndex: endIndex,
             pages: pages
         };
-    }*/
+    }
 
 
 }

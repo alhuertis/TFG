@@ -110,13 +110,6 @@ function deleteActividad(req, res) {
 	});
 }
 
-function getActividadesResueltas(req, res) {
-	var id_alumno = req.params.id_alumno;
-
-	Actividad.find({"id_alumno":id_alumno,})
-
-}
-
 function getDisponibles(req, res){
 
 	Actividad.find({"visible": "true", "propuesta": "false"}).exec((err, actividades)=>{
@@ -256,6 +249,50 @@ function getPropuestasByCierre(req, res){
 
 }
 
+function getByIdProfesorDisp(req, res){
+
+	var id= req.params.id;
+	console.log(id);
+	Actividad.find({"id_profesor": id, "visible": "true"}).exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades del profesor por id'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades disponibles con ese id'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
+function getByIdProfesorProp(req, res){
+
+	var id= req.params.id;
+	console.log(id);
+	Actividad.find({"id_profesor": id, "propuesta": "true", "visible":"true"}).exec((err, actividades)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades del profesor por id'});
+		}
+		else{
+
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades disponibles con ese id'});
+			}
+			else{
+				res.status(200).send({actividades});
+			}	
+		}
+
+	});
+
+}
+
 
 
 //Exportamos las funciones que tengamos, para poder usar en routes
@@ -270,5 +307,7 @@ module.exports= {
 	getPropuestas,
 	getPropuestasByApertura,
 	getPropuestasByCierre,
+	getByIdProfesorDisp,
+	getByIdProfesorProp,
 
 }

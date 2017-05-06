@@ -11,7 +11,7 @@ var TruncatePipe = (function () {
     function TruncatePipe() {
     }
     TruncatePipe.prototype.transform = function (value, args) {
-        var limit = args.length > 0 ? parseInt(args[0], 8) : 8;
+        var limit = args.length > 0 ? parseInt(args[0], 10) : 10;
         var trail = args.length > 1 ? args[1] : '...';
         return value.length > limit ? value.substring(0, limit) + trail : value;
     };

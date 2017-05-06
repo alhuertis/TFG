@@ -17,6 +17,8 @@ var PanelAlumnoComponent = (function () {
     function PanelAlumnoComponent(_actividadService, _profesorService) {
         this._actividadService = _actividadService;
         this._profesorService = _profesorService;
+        // pager object
+        this.pager = {};
         this.title = "Panel de alumno";
         this.actividades = [];
         this.profesores = [];
@@ -29,6 +31,7 @@ var PanelAlumnoComponent = (function () {
         this.propuestasByCierre = new Array();
         this.actividadesAMostrar = new Array();
         this.datosAMostrar = new String();
+        this.mostrarLista = false;
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -210,8 +213,43 @@ var PanelAlumnoComponent = (function () {
         //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
         //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
     }; //fin ngAfterViewInit
-    PanelAlumnoComponent.prototype.seleccionaDatos = function (datos, profesor) {
+    PanelAlumnoComponent.prototype.seleccionaDatos = function (datos, profesor, tipo) {
+        var _this = this;
         if (profesor) {
+            if (tipo == 'D') {
+                this._actividadService.getByIdProfesorDisp(datos._id).subscribe(function (result) {
+                    _this.actividadesAMostrar = result.actividades;
+                    if (!_this.actividadesAMostrar) {
+                        alert('Error en el servidor');
+                    }
+                    else {
+                        _this.datosAMostrar = "Actividades disponibles de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
+                    }
+                }, function (error) {
+                    _this.errorMessage = error;
+                    if (_this.errorMessage != null) {
+                        console.log(_this.errorMessage);
+                        alert(_this.errorMessage);
+                    }
+                });
+            }
+            else if (tipo == 'P') {
+                this._actividadService.getByIdProfesorProp(datos._id).subscribe(function (result) {
+                    _this.actividadesAMostrar = result.actividades;
+                    if (!_this.actividadesAMostrar) {
+                        alert('Error en el servidor');
+                    }
+                    else {
+                        _this.datosAMostrar = "Actividades propuestas de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
+                    }
+                }, function (error) {
+                    _this.errorMessage = error;
+                    if (_this.errorMessage != null) {
+                        console.log(_this.errorMessage);
+                        alert(_this.errorMessage);
+                    }
+                });
+            }
         }
         else {
             switch (datos) {
@@ -231,8 +269,32 @@ var PanelAlumnoComponent = (function () {
                     this.actividadesAMostrar = this.disponiblesNAlto;
                     this.datosAMostrar = "Disponibles nivel avanzado";
                     break;
+                case 'propuestas':
+                    this.actividadesAMostrar = this.propuestas;
+                    this.datosAMostrar = "Actividades propuestas";
+                    break;
+                case 'propuestas apertura':
+                    this.actividadesAMostrar = this.propuestasByApertura;
+                    this.datosAMostrar = "Actividades propuestas por orden de apertura";
+                    break;
+                case 'propuestas cierre':
+                    this.actividadesAMostrar = this.propuestasByCierre;
+                    this.datosAMostrar = "Actividades propuestas por orden cierre";
+                    break;
             }
         }
+        this.mostrarLista = true;
+        this.setPage(1);
+    };
+    PanelAlumnoComponent.prototype.setPage = function (page) {
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+        // get pager object from service
+        this.pager = this._actividadService.getPager(this.actividadesAMostrar.length, page);
+        // get current page of items
+        this.pagedItems = this.actividadesAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        //alert(this.ejercicios.slice(1,5));
     };
     return PanelAlumnoComponent;
 }());

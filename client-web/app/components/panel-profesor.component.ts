@@ -97,7 +97,7 @@ export class  PanelProfesorComponent implements OnInit{
 	){
 		this.title= "Panel de profesores";
 		this.user="Antonio Sarasa";
-		this.id_profesor= "000001";
+		this.id_profesor= "00001";
 		this.mostrarLista=false;
 		this.datosAMostrar="";
 		this.actividad=[];

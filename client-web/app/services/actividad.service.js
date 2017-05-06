@@ -12,6 +12,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
+var _ = require("underscore");
 //Ponemos esto antes de exportar la clase para que sea injectable
 var ActividadService = (function () {
     function ActividadService(_http) {
@@ -46,11 +47,61 @@ var ActividadService = (function () {
     ActividadService.prototype.getDisponiblesNA = function () {
         return this._http.get(this.url + 'actividad-disponiblesNA').map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.getByIdProfesorDisp = function (id) {
+        return this._http.get(this.url + 'actividad-idProfesorDisp/' + id).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getByIdProfesorProp = function (id) {
+        return this._http.get(this.url + 'actividad-idProfesorProp/' + id).map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.addActividad = function (actividad) {
         var json = JSON.stringify(actividad);
         var params = json;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'actividad', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getPager = function (totalItems, currentPage, pageSize) {
+        if (currentPage === void 0) { currentPage = 1; }
+        if (pageSize === void 0) { pageSize = 5; }
+        // calculate total pages
+        var totalPages = Math.ceil(totalItems / pageSize);
+        var startPage, endPage;
+        if (totalPages <= 10) {
+            // less than 10 total pages so show all
+            startPage = 1;
+            endPage = totalPages;
+        }
+        else {
+            // more than 10 total pages so calculate start and end pages
+            if (currentPage <= 6) {
+                startPage = 1;
+                endPage = 10;
+            }
+            else if (currentPage + 4 >= totalPages) {
+                startPage = totalPages - 9;
+                endPage = totalPages;
+            }
+            else {
+                startPage = currentPage - 5;
+                endPage = currentPage + 4;
+            }
+        }
+        // calculate start and end item indexes
+        var startIndex = (currentPage - 1) * pageSize;
+        var endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+        // create an array of pages to ng-repeat in the pager control
+        var pages = _.range(startPage, endPage + 1);
+        // return object with all pager properties required by the view
+        return {
+            totalItems: totalItems,
+            currentPage: currentPage,
+            pageSize: pageSize,
+            totalPages: totalPages,
+            startPage: startPage,
+            endPage: endPage,
+            startIndex: startIndex,
+            endIndex: endIndex,
+            pages: pages
+        };
     };
     return ActividadService;
 }());

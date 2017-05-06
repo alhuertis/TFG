@@ -7,7 +7,7 @@
 
       <ul id="tree1">
 
-        <li><a href="#"> Actividades </a><span class="badge badge-small"> {{disponibles.length + propuestas.length }}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
+        <li><a href="#"> Actividades </a><span class="badge badge-small"> {{disponibles.length + propuestas.length }}</span>
 
           <ul>
             <li><a href="#"> Mis actividades hechas </a> <span class="badge badge-small">?</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
@@ -27,15 +27,15 @@
                 <li><a href="#"> Estadísticas</a></li>
               </ul>
             </li>
-            <li> Actividades propuestas <span class="badge badge-small"> {{propuestas.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
+            <li> Actividades propuestas <span class="badge badge-small"> {{propuestas.length}}</span><i (click)="seleccionaDatos('propuestas')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
                 <li><a href="#"> Profesores </a>
                   <ul *ngIf="profesores.length > 0">
-                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor.nombre)" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(seleccionaDatos(profesor, true,'P'))" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
-                <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                <li>Fecha de cierre (o.cronológico) <span class="badge badge-small"> {{propuestasByCierre.length}}</span> <i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>             
+                <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i (click)="seleccionaDatos('propuestas apertura')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                <li>Fecha de cierre (o.cronológico) <span class="badge badge-small"> {{propuestasByCierre.length}}</span> <i (click)="seleccionaDatos('propuestas cierre')" class="glyphicon glyphicon-eye-open ojo"></i></li>             
               </ul>
             </li>
             <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i (click)="seleccionaDatos('disponibles')" class="glyphicon glyphicon-eye-open ojo"></i>
@@ -49,7 +49,7 @@
                 </li>
                 <li><a href="#"> Profesores </a>
                       <ul *ngIf="profesores.length > 0">
-                        <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor.nombre)" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                        <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor, true,'D')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                       </ul>
                 </li>
               </ul>
@@ -59,20 +59,67 @@
 
     </div>
 
-    <div class="col-md-8">
-      <h2 *ngIf="datosAMostrar">{{datosAMostrar}}</h2>
-      <ul *ngFor="let actividad of actividadesAMostrar">
-        <li>{{actividad.titulo}}</li>
-        <li>{{actividad.profesor}}</li>
-      </ul>
+    <div class="col-md-7 col-sm-5 panel-actividades">
+       <div class="row">
+          <div class="col-sm-12">
+            <h3 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h3>
+          </div>
+      </div>
+
+      <div class="row" *ngIf="mostrarLista">
+        <div class="col-md-12 act-lista animated fadeInLeft" *ngFor="let actividad of pagedItems; let i=index">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-5">
+                  <ul>
+                    <li><i class="glyphicon glyphicon-pencil"></i> título: {{actividad.titulo | truncate : 25}}</li>
+                    <li><i class="glyphicon glyphicon-user"></i> profesor: {{actividad.profesor}}</li>     
+                  </ul>
+                </div>
+            
+                <div class="col-md-5">
+                  <ul>
+                    <li><i class="glyphicon glyphicon-signal"></i> nivel: {{actividad.nivel}}</li>
+                    <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{actividad.fecha_creacion | truncate : 10}}</li>
+                    <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{actividad.fecha_prop_fin | truncate : 10}}</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-1 botones-lista">
+            <a class="btn btn-resolver btn-xs" routerLink="/resolver-actividad">Resolver actividad</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+          </li>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+          </li>
+        </ul>
+      </div>
     </div>
 
   </div>
 
-  <div class="row">
-    <div class="col-md-2">
-      <a class="btn btn-default btn-md" routerLink="/resolver-actividad">Resolver actividad</a>
-    </div>
-  </div>
 
+  </div>
 </div>
