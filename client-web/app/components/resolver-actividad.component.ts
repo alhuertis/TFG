@@ -1,5 +1,5 @@
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
-import{Component, OnInit} from '@angular/core';
+import{Component, OnInit, Input} from '@angular/core';
 import{NgForm} from '@angular/forms';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
@@ -22,7 +22,10 @@ import * as _ from 'underscore';
 
 export class  ResolverActividadComponent implements OnInit{
 
+    id_actividad: string;
+
     actividad: Ejercicio[];
+    ejercicios: Ejercicio[];
     ejercicio: Ejercicio;
     ejerSel: number;
     anterior: Boolean;
@@ -51,16 +54,22 @@ export class  ResolverActividadComponent implements OnInit{
     solucion: Solucion;
     resueltos: number;
 
+    errorMessage: String;
+
  
 	
 	
 
 	constructor(
-			private _actividadService: ActividadService
+			private _actividadService: ActividadService, 
+            private route:  ActivatedRoute
 
 	){
+        this.id_actividad= this.route.snapshot.params['id_actividad'];
+        alert(this.id_actividad);
 
-        this.actividad=
+        this.actividad=[];
+        /*this.actividad=
         [
             {   
                 "_id": "",
@@ -134,13 +143,12 @@ export class  ResolverActividadComponent implements OnInit{
                 "solucionPLatin": "",
                 "marcado": false 
             }
-        ];
+        ];*/
 
         this.ejercicio= new Ejercicio("","","","",null,"","",null,null,"","","","","","",false);
         this.ejerSel=0;
-        this.anterior=this.ejerSel >0 ;
-        this.siguiente=this.ejerSel < this.actividad.length;
-        this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        
+       
         this.calificaciones=[];
         this.solucion=new Solucion();
         this.respuesta="";
@@ -157,10 +165,11 @@ export class  ResolverActividadComponent implements OnInit{
         this.verde= new Ficha(false,"", "");
         this.argumentos=0;
         this.faseVerbo=false;
-        this.verbo= this.extraerVerbo();
+        
         this.verboMarcado=false;
         this.srcDraggedPentagono="adios";
         this.resueltos=0;
+        
 
 	
 	}
@@ -168,9 +177,34 @@ export class  ResolverActividadComponent implements OnInit{
 
 	ngOnInit(){
 
-        for(let i=0; i < this.actividad.length; i++){
+        this._actividadService.cargarActividad(this.id_actividad).subscribe(
+			result =>{
+				console.log(result);
+				this.actividad= result.actividad.ejercicios;
+
+				if(!this.actividad){
+					alert('Error en el servidor');
+				}else{
+                    this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
+                    this.verbo= this.extraerVerbo();
+                    this.anterior=this.ejerSel >0 ;
+                    this.siguiente=this.ejerSel < this.actividad.length;
+                }
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+        //this.ejercicios= this.actividad2.ejercicios;
+
+        /*for(let i=0; i < this.actividad.length; i++){
             
-        }
+        }*/
 	}//fin ngOnInit
 
     extraerVerbo(){

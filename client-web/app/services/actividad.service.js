@@ -26,6 +26,10 @@ var ActividadService = (function () {
         console.log('Llamando a ' + this.url + 'actividad/' + id);
         return this._http.get(this.url + 'actividad/' + id).map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.cargarActividad = function (id) {
+        console.log('Llamando a ' + this.url + 'cargarActividad/' + id);
+        return this._http.get(this.url + 'cargarActividad/' + id).map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.getDisponibles = function () {
         return this._http.get(this.url + 'actividad-disponibles').map(function (res) { return res.json(); });
     };

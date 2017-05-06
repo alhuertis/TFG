@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="col-md-10">
+            <div class="col-md-10" *ngIf="actividad.length > 0">
                 <div class="panel-resolver-centro">
                     <div class="enunciado">
                         <p><span><i class="glyphicon glyphicon-pencil"></i></span> {{actividad[ejerSel].enunciado}}</p>

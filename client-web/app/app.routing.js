@@ -20,7 +20,7 @@ var appRoutes = [
     { path: 'alumno', component: panel_alumno_component_1.PanelAlumnoComponent,
         children: []
     },
-    { path: 'resolver-actividad', component: resolver_actividad_component_1.ResolverActividadComponent },
+    { path: 'resolver-actividad/:id_actividad', component: resolver_actividad_component_1.ResolverActividadComponent },
     //Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
     { path: '**', component: panel_profesor_component_1.PanelProfesorComponent },
 ];

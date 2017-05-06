@@ -2,7 +2,8 @@
 //Aqui vamos a tener las funcones de rutas
 'use strict'
 
-var Actividad= require('../models/actividad')
+var Actividad= require('../models/actividad');
+var Ejercicio= require('../models/ejercicio');
 
 
 //Recuperar una actividad
@@ -25,6 +26,28 @@ function getActividad(req, res){
 			}
 
 		
+		}
+	});	
+}
+
+function cargarActividad(req, res){
+
+	var actividadId= req.params.id;
+
+	Actividad.findById(actividadId, function(err, actividad){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver el ejercicio'});
+		}
+		else{
+			if(!actividad){
+				res.status(404).send({message:'No hay ejercicio'});	
+			}
+			else{
+				Ejercicio.populate(actividad, {path:"ejercicios"}, function(err,actividad){
+					res.status(200).send({actividad});
+				});
+			}
 		}
 	});	
 }
@@ -298,6 +321,7 @@ function getByIdProfesorProp(req, res){
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {
 	getActividad,
+	cargarActividad,
 	getActividades,
 	saveActividad,
 	getDisponibles,

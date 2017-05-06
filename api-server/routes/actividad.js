@@ -10,6 +10,7 @@ var ActividadController = require('../controllers/actividad');
 var api= express.Router();
 
 api.get('/actividad/:id', ActividadController.getActividad); //Con esto puedo dirigir al controlador cuando llamemos a favrito.
+api.get('/cargarActividad/:id', ActividadController.cargarActividad);
 api.get('/actividades', ActividadController.getActividades);
 api.post('/actividad', ActividadController.saveActividad);
 api.get('/actividad-disponibles', ActividadController.getDisponibles);

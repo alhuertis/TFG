@@ -10,94 +10,96 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var actividad_service_1 = require("../services/actividad.service");
 var ejercicio_1 = require("../models/ejercicio");
 var ficha_1 = require("../models/ficha");
 var solucion_1 = require("../models/solucion");
 var _ = require("underscore");
 var ResolverActividadComponent = (function () {
-    function ResolverActividadComponent(_actividadService) {
+    function ResolverActividadComponent(_actividadService, route) {
         this._actividadService = _actividadService;
-        this.actividad =
-            [
-                {
-                    "_id": "",
-                    "id_profesor": "000001",
-                    "titulo": "Titulo 1",
-                    "nivel": "Medio",
-                    "tipo": 1,
-                    "autor": "Antonio Sarasa",
-                    "institucion_profesor": "Universidad complutense",
-                    "fechaCreacion": new Date(),
-                    "fechaModificacion": new Date(),
-                    "enunciado": "Traducir la siguiente frase al español",
-                    "fraseATraducir": "Dei sacrificium accipiunt",
-                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                    "solucionFPatron": "dioses + reciben + sacrificio",
-                    "solucionPEspanol": "Los dioses reciben el sacrificio",
-                    "solucionPLatin": "",
-                    "marcado": false
-                },
-                {
-                    "_id": "",
-                    "id_profesor": "000001",
-                    "titulo": "Titulo 2",
-                    "nivel": "Medio",
-                    "tipo": 1,
-                    "autor": "Antonio Sarasa",
-                    "institucion_profesor": "Universidad complutense",
-                    "fechaCreacion": new Date(),
-                    "fechaModificacion": new Date(),
-                    "enunciado": "Traducir toda la frase",
-                    "fraseATraducir": "Magister sapientiam amat",
-                    "solucionFLogico": "Nominativo(magister), Acusativo(sapientiam),Verbo(amat)",
-                    "solucionFPatron": "maestro + ama + sabiduria",
-                    "solucionPEspanol": "El maestro ama la sabiduría",
-                    "solucionPLatin": "",
-                    "marcado": false
-                },
-                {
-                    "_id": "",
-                    "id_profesor": "000001",
-                    "titulo": "Titulo 3",
-                    "nivel": "Medio",
-                    "tipo": 1,
-                    "autor": "Antonio Sarasa",
-                    "institucion_profesor": "Universidad complutense",
-                    "fechaCreacion": new Date(),
-                    "fechaModificacion": new Date(),
-                    "enunciado": "Aprende latin con este ejercicio",
-                    "fraseATraducir": "Dei sacrificium accipiunt",
-                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                    "solucionFPatron": "dioses + reciben + sacrificio",
-                    "solucionPEspanol": "Los dioses reciben el sacrificio",
-                    "solucionPLatin": "",
-                    "marcado": false
-                },
-                {
-                    "_id": "",
-                    "id_profesor": "000001",
-                    "titulo": "Titulo 4",
-                    "nivel": "Medio",
-                    "tipo": 1,
-                    "autor": "Antonio Sarasa",
-                    "institucion_profesor": "Universidad complutense",
-                    "fechaCreacion": new Date(),
-                    "fechaModificacion": new Date(),
-                    "enunciado": "Traduce lo que puedas",
-                    "fraseATraducir": "Dei sacrificium accipiunt",
-                    "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                    "solucionFPatron": "dioses + reciben + sacrificio",
-                    "solucionPEspanol": "Los dioses reciben el sacrificio",
-                    "solucionPLatin": "",
-                    "marcado": false
-                }
-            ];
+        this.route = route;
+        this.id_actividad = this.route.snapshot.params['id_actividad'];
+        alert(this.id_actividad);
+        this.actividad = [];
+        /*this.actividad=
+        [
+            {
+                "_id": "",
+                "id_profesor": "000001",
+                "titulo": "Titulo 1",
+                "nivel": "Medio",
+                "tipo": 1,
+                "autor": "Antonio Sarasa",
+                "institucion_profesor": "Universidad complutense",
+                "fechaCreacion": new Date(),
+                "fechaModificacion": new Date(),
+                "enunciado": "Traducir la siguiente frase al español",
+                "fraseATraducir": "Dei sacrificium accipiunt",
+                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
+                "solucionFPatron": "dioses + reciben + sacrificio",
+                "solucionPEspanol": "Los dioses reciben el sacrificio",
+                "solucionPLatin": "",
+                "marcado": false
+            },
+            {
+                "_id": "",
+                "id_profesor": "000001",
+                "titulo": "Titulo 2",
+                "nivel": "Medio",
+                "tipo": 1,
+                "autor": "Antonio Sarasa",
+                "institucion_profesor": "Universidad complutense",
+                "fechaCreacion": new Date(),
+                "fechaModificacion": new Date(),
+                "enunciado": "Traducir toda la frase",
+                "fraseATraducir": "Magister sapientiam amat",
+                "solucionFLogico": "Nominativo(magister), Acusativo(sapientiam),Verbo(amat)",
+                "solucionFPatron": "maestro + ama + sabiduria",
+                "solucionPEspanol": "El maestro ama la sabiduría",
+                "solucionPLatin": "",
+                "marcado": false
+            },
+            {
+                "_id": "",
+                "id_profesor": "000001",
+                "titulo": "Titulo 3",
+                "nivel": "Medio",
+                "tipo": 1,
+                "autor": "Antonio Sarasa",
+                "institucion_profesor": "Universidad complutense",
+                "fechaCreacion": new Date(),
+                "fechaModificacion": new Date(),
+                "enunciado": "Aprende latin con este ejercicio",
+                "fraseATraducir": "Dei sacrificium accipiunt",
+                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
+                "solucionFPatron": "dioses + reciben + sacrificio",
+                "solucionPEspanol": "Los dioses reciben el sacrificio",
+                "solucionPLatin": "",
+                "marcado": false
+            },
+            {
+                "_id": "",
+                "id_profesor": "000001",
+                "titulo": "Titulo 4",
+                "nivel": "Medio",
+                "tipo": 1,
+                "autor": "Antonio Sarasa",
+                "institucion_profesor": "Universidad complutense",
+                "fechaCreacion": new Date(),
+                "fechaModificacion": new Date(),
+                "enunciado": "Traduce lo que puedas",
+                "fraseATraducir": "Dei sacrificium accipiunt",
+                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
+                "solucionFPatron": "dioses + reciben + sacrificio",
+                "solucionPEspanol": "Los dioses reciben el sacrificio",
+                "solucionPLatin": "",
+                "marcado": false
+            }
+        ];*/
         this.ejercicio = new ejercicio_1.Ejercicio("", "", "", "", null, "", "", null, null, "", "", "", "", "", "", false);
         this.ejerSel = 0;
-        this.anterior = this.ejerSel > 0;
-        this.siguiente = this.ejerSel < this.actividad.length;
-        this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.calificaciones = [];
         this.solucion = new solucion_1.Solucion();
         this.respuesta = "";
@@ -114,14 +116,35 @@ var ResolverActividadComponent = (function () {
         this.verde = new ficha_1.Ficha(false, "", "");
         this.argumentos = 0;
         this.faseVerbo = false;
-        this.verbo = this.extraerVerbo();
         this.verboMarcado = false;
         this.srcDraggedPentagono = "adios";
         this.resueltos = 0;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
-        for (var i = 0; i < this.actividad.length; i++) {
-        }
+        var _this = this;
+        this._actividadService.cargarActividad(this.id_actividad).subscribe(function (result) {
+            console.log(result);
+            _this.actividad = result.actividad.ejercicios;
+            if (!_this.actividad) {
+                alert('Error en el servidor');
+            }
+            else {
+                _this.fraseSplit = _this.actividad[_this.ejerSel].fraseATraducir.split(" ");
+                _this.verbo = _this.extraerVerbo();
+                _this.anterior = _this.ejerSel > 0;
+                _this.siguiente = _this.ejerSel < _this.actividad.length;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        //this.ejercicios= this.actividad2.ejercicios;
+        /*for(let i=0; i < this.actividad.length; i++){
+            
+        }*/
     }; //fin ngOnInit
     ResolverActividadComponent.prototype.extraerVerbo = function () {
         var args = this.actividad[this.ejerSel].solucionFLogico.split(",");
@@ -392,7 +415,8 @@ ResolverActividadComponent = __decorate([
         providers: [actividad_service_1.ActividadService],
         styleUrls: ['../../assets/css/styles.css'],
     }),
-    __metadata("design:paramtypes", [actividad_service_1.ActividadService])
+    __metadata("design:paramtypes", [actividad_service_1.ActividadService,
+        router_1.ActivatedRoute])
 ], ResolverActividadComponent);
 exports.ResolverActividadComponent = ResolverActividadComponent;
 //# sourceMappingURL=resolver-actividad.component.js.map

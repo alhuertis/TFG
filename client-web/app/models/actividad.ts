@@ -1,3 +1,4 @@
+import {Ejercicio} from '../models/ejercicio';
 export class Actividad{
 
 	constructor(
@@ -7,7 +8,7 @@ export class Actividad{
         public profesor: String,
         public fecha_creacion: Date,
         public nivel: String,
-        public ejercicios: String[],
+        public ejercicios: Ejercicio[],
         public visible: Boolean,
         public propuesta: Boolean,
         public fecha_prop_fin: Date

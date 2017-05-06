@@ -29,7 +29,7 @@ const appRoutes: Routes = [
 			//{path:'mostrar-ejercicios', component: EjercicioMostrarComponent}
 		]	
 	},
-	{path:'resolver-actividad', component: ResolverActividadComponent},
+	{path:'resolver-actividad/:id_actividad', component: ResolverActividadComponent},
 	
 	//Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
 	{path:'**', component: PanelProfesorComponent},
