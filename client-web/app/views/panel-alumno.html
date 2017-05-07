@@ -31,7 +31,7 @@
               <ul>
                 <li><a href="#"> Profesores </a>
                   <ul *ngIf="profesores.length > 0">
-                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(seleccionaDatos(profesor, true,'P'))" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor, true,'P')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i (click)="seleccionaDatos('propuestas apertura')" class="glyphicon glyphicon-eye-open ojo"></i></li>
@@ -96,7 +96,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12" *ngIf="mostrarLista">
         <!-- pager -->
         <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
           <li [ngClass]="{disabled:pager.currentPage === 1}">

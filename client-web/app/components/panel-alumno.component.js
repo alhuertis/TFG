@@ -215,6 +215,7 @@ var PanelAlumnoComponent = (function () {
     }; //fin ngAfterViewInit
     PanelAlumnoComponent.prototype.seleccionaDatos = function (datos, profesor, tipo) {
         var _this = this;
+        this.mostrarLista = false;
         if (profesor) {
             if (tipo == 'D') {
                 this._actividadService.getByIdProfesorDisp(datos._id).subscribe(function (result) {
@@ -223,9 +224,11 @@ var PanelAlumnoComponent = (function () {
                         alert('Error en el servidor');
                     }
                     else {
-                        _this.datosAMostrar = "Actividades disponibles de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
-                        _this.mostrarLista = true;
-                        _this.setPage(1);
+                        if (_this.actividadesAMostrar.length > 0) {
+                            _this.datosAMostrar = "Actividades disponibles de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
+                            _this.mostrarLista = true;
+                            _this.setPage(1);
+                        }
                     }
                 }, function (error) {
                     _this.errorMessage = error;
@@ -242,9 +245,11 @@ var PanelAlumnoComponent = (function () {
                         alert('Error en el servidor');
                     }
                     else {
-                        _this.datosAMostrar = "Actividades propuestas de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
-                        _this.mostrarLista = true;
-                        _this.setPage(1);
+                        if (_this.actividadesAMostrar.length > 0) {
+                            _this.datosAMostrar = "Actividades propuestas de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
+                            _this.mostrarLista = true;
+                            _this.setPage(1);
+                        }
                     }
                 }, function (error) {
                     _this.errorMessage = error;

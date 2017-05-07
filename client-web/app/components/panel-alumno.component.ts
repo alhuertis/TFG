@@ -308,7 +308,7 @@ export class  PanelAlumnoComponent implements OnInit{
 	}//fin ngAfterViewInit
 
 	seleccionaDatos(datos: any, profesor: boolean, tipo: String){
-		
+		this.mostrarLista=false;
 		if(profesor){
 			if(tipo == 'D'){
 				this._actividadService.getByIdProfesorDisp(datos._id).subscribe(
@@ -318,9 +318,11 @@ export class  PanelAlumnoComponent implements OnInit{
 						if(!this.actividadesAMostrar){
 							alert('Error en el servidor');
 						}else{
-							this.datosAMostrar= "Actividades disponibles de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
-							this.mostrarLista=true;
-							this.setPage(1);
+							if(this.actividadesAMostrar.length > 0){
+								this.datosAMostrar= "Actividades disponibles de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
+								this.mostrarLista=true;
+								this.setPage(1);
+							}
 						}
 					
 					},
@@ -340,9 +342,11 @@ export class  PanelAlumnoComponent implements OnInit{
 						if(!this.actividadesAMostrar){
 							alert('Error en el servidor');
 						}else{
-							this.datosAMostrar= "Actividades propuestas de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
-							this.mostrarLista=true;
-							this.setPage(1);
+							if(this.actividadesAMostrar.length > 0){
+								this.datosAMostrar= "Actividades propuestas de " + datos.nombre + " ("+ this.actividadesAMostrar.length+")";
+								this.mostrarLista=true;
+								this.setPage(1);
+							}
 						}
 					
 					},
