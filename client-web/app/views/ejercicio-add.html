@@ -27,97 +27,85 @@
 		<form #formEjercicio="ngForm" (ngSubmit)="onSubmit()" class="form-add-ejer animated aparecer">
 
 			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
+				<div class="col-md-3 col-md-offset-1">
 					<input type="text" class="form-control"  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejercicio.titulo">
-				</div>
-			</div>
+					
+					<div class="row" style="margin-top: 10px">
+						<div class="col-md-6" >
+							<label for="power">Nivel</label>
+							<select class="form-control" id="nivel"
+									required
+									[(ngModel)]="ejercicio.nivel" name="nivel"
+									#nivel="ngModel" >
+							<option *ngFor="let niv of niveles" [value]="niv">{{niv}}</option>
+							</select>
+							<div [hidden]="nivel.valid || nivel.pristine" class="alert alert-danger">
+							Nivel requerida
+							</div>
+						</div>
 
-			<div class="row">
-				<div class="col-md-2 col-md-offset-4">
-					<label for="power">Nivel</label>
-					<select class="form-control" id="nivel"
-							required
-							[(ngModel)]="ejercicio.nivel" name="nivel"
-							#nivel="ngModel" >
-					<option *ngFor="let niv of niveles" [value]="niv">{{niv}}</option>
-					</select>
-					<div [hidden]="nivel.valid || nivel.pristine" class="alert alert-danger">
-					Nivel requerida
+						<div class="col-md-6">
+							<label for="power">Tipo</label>
+							<select class="form-control" id="tipo"
+									required
+									[(ngModel)]="ejercicio.tipo" name="tipo"
+									#tipo="ngModel" >
+							<option *ngFor="let tip of tipos" [value]="tip">{{tip}}</option>
+							</select>
+							<div [hidden]="tipo.valid || tipo.pristine" class="alert alert-danger">
+							Tipo requerido
+							</div>
+						</div>
 					</div>
+
+					<textarea style="margin-top: 25px" class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado"> </textarea>
+					
 				</div>
-
-
-				<div class="col-md-2">
-					<label for="power">Tipo</label>
-					<select class="form-control" id="tipo"
-							required
-							[(ngModel)]="ejercicio.tipo" name="tipo"
-							#tipo="ngModel" >
-					<option *ngFor="let tip of tipos" [value]="tip">{{tip}}</option>
-					</select>
-					<div [hidden]="tipo.valid || tipo.pristine" class="alert alert-danger">
-					Tipo requerido
-					</div>
-				</div>
-
-			</div>
-
-
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
-					<textarea class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado"> </textarea>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
-					<textarea class="form-control" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
-				</div>
-			</div>
 			
-			<div class="row">
-				<div class="col-md-1 col-md-offset-4">
-					<label for="power">Tipo</label>
-					<select class="form-control" id="tipoLogico" name="tipoLogic" [(ngModel)]="tipoLogico"
-							#tipoLogic="ngModel" >
-					<option value="Verbo">Verbo</option>
-					<option value="Nominativo">Nominativo</option>
-					<option value="Acusativo">Acusativo</option>
-					</select>
-				</div>
+			
+				
+				
 
-				<div class="col-md-2">
-					<label for="power">Valor</label>
-					<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">
-				</div>
-				<div class="col-md-1" style="padding-top: 17px">
-					<a class="btn btn-success" (click)="addFLogico()"><i class="glyphicon glyphicon-plus"></i></a>
-				</div>
-			</div>
+				
+				<div class="col-md-3">
+					<textarea class="form-control" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
 
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
+					<div class="row" style="margin-top: 10px">
+						<div class="col-md-4">
+							<label for="power">Tipo</label>
+							<select class="form-control" id="tipoLogico" name="tipoLogic" [(ngModel)]="tipoLogico"
+									#tipoLogic="ngModel" >
+							<option value="Verbo">Verbo</option>
+							<option value="Nominativo">Nominativo</option>
+							<option value="Acusativo">Acusativo</option>
+							</select>
+						</div>
+
+						<div class="col-md-6">
+							<label for="power">Valor</label>
+							<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">
+						</div>
+
+						<div class="col-md-2" style="padding-top: 20px">
+							<a class="btn btn-success" (click)="addFLogico()"><i class="glyphicon glyphicon-plus"></i></a>
+						</div>
+					</div>
+
 					<textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico"> </textarea>
 				</div>
-			</div>
+				
 
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
+				
+				<div class="col-md-3">
 					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
-					<textarea class="form-control" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
+					<textarea style="margin-top: 20px" class="form-control" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
+					
+					<button style="margin-top: 10px" type="submit" class="btn btn-success">Crear</button> <a style="margin-top: 10px" [routerLink]="['/']" class="btn btn-danger">Salir</a>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4 botones">
-					<button type="submit" class="btn btn-success">Crear</button> <a [routerLink]="['/']" class="btn btn-danger">Salir</a>
-				</div>
 			</div>
+			
 		</form>
 	</div>
 </div>
