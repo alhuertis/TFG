@@ -26,10 +26,15 @@ var EjercicioAddComponent = (function () {
         this.id_profesor = "00001";
         this.tipoLogico = "";
         this.valorLogico = "";
+        this.valoresLogico = [];
     }
     EjercicioAddComponent.prototype.ngOnInit = function () {
         //Lo ponemos asi para rellenarlo con el chuwidatabindin
         this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", null, "Antonio Sarasa", "UCM", new Date(), new Date(), "", "", "", "", "", "", false);
+    };
+    EjercicioAddComponent.prototype.aplicaValoresLogicos = function () {
+        var frase = this.ejercicio.fraseATraducir;
+        this.valoresLogico = frase.split(" ");
     };
     EjercicioAddComponent.prototype.addFLogico = function () {
         if (this.tipoLogico != "" && this.valorLogico != "") {

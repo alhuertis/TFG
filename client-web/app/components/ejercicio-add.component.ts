@@ -39,6 +39,7 @@ export class EjercicioAddComponent implements OnInit{
 	public solucionPEspanol: string;
 	public solucionPLatin: string;
 
+	public valoresLogico: String[];
 	public tipoLogico: string;
 	public valorLogico: string;
 
@@ -53,6 +54,7 @@ export class EjercicioAddComponent implements OnInit{
 		this.id_profesor= "00001";
 		this.tipoLogico="";
 		this.valorLogico="";
+		this.valoresLogico=[];
 		
 	}
 
@@ -61,6 +63,11 @@ export class EjercicioAddComponent implements OnInit{
 		//Lo ponemos asi para rellenarlo con el chuwidatabindin
 		this.ejercicio= new Ejercicio("",this.id_profesor,"","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","", false);
 		
+	}
+
+	aplicaValoresLogicos(){
+		let frase= this.ejercicio.fraseATraducir;
+		this.valoresLogico = frase.split(" ");
 	}
 
 	addFLogico(){

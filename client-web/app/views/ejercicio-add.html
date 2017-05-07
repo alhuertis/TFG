@@ -68,7 +68,7 @@
 
 				
 				<div class="col-md-3">
-					<textarea [style.visibility]="(ejercicio.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
+					<textarea (blur)="aplicaValoresLogicos()" [style.visibility]="(ejercicio.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
 
 					<div class="row" style="margin-top: 10px">
 						<div class="col-md-4">
@@ -83,7 +83,12 @@
 
 						<div class="col-md-6">
 							<label for="power">Valor</label>
-							<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">
+							<select class="form-control" id="valorLogico" name="valorLogic" [(ngModel)]="valorLogico"
+									#valorLogic="ngModel" >
+							<option *ngFor="let palabra of valoresLogico" [value]="palabra">{{palabra}}</option>
+							</select>
+
+							<!--<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">-->
 						</div>
 
 						<div class="col-md-2" style="padding-top: 20px">
@@ -93,8 +98,6 @@
 
 					<textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico"> </textarea>
 				</div>
-				
-
 				
 				<div class="col-md-3">
 					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
