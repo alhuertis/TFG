@@ -74,6 +74,26 @@
 					<textarea class="form-control" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col-md-1 col-md-offset-4">
+					<label for="power">Tipo</label>
+					<select class="form-control" id="tipoLogico" name="tipoLogic" [(ngModel)]="tipoLogico"
+							#tipoLogic="ngModel" >
+					<option value="Verbo">Verbo</option>
+					<option value="Nominativo">Nominativo</option>
+					<option value="Acusativo">Acusativo</option>
+					</select>
+				</div>
+
+				<div class="col-md-2">
+					<label for="power">Valor</label>
+					<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">
+				</div>
+				<div class="col-md-1" style="padding-top: 17px">
+					<a class="btn btn-success" (click)="addFLogico()"><i class="glyphicon glyphicon-plus"></i></a>
+				</div>
+			</div>
 
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
@@ -83,7 +103,7 @@
 
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4">
-					<textarea class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
+					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
 				</div>
 			</div>
 

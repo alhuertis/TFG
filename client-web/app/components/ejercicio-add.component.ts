@@ -39,6 +39,9 @@ export class EjercicioAddComponent implements OnInit{
 	public solucionPEspanol: string;
 	public solucionPLatin: string;
 
+	public tipoLogico: string;
+	public valorLogico: string;
+
 	constructor(
 		private _ejercicioService: EjercicioService,
 		private _route: ActivatedRoute,
@@ -47,7 +50,9 @@ export class EjercicioAddComponent implements OnInit{
 
 		this.titulo= "Crear ejercicio";
 		this.user="Antonio Sarasa";
-		this.id_profesor= "000001"
+		this.id_profesor= "00001";
+		this.tipoLogico="";
+		this.valorLogico="";
 		
 	}
 
@@ -56,6 +61,24 @@ export class EjercicioAddComponent implements OnInit{
 		//Lo ponemos asi para rellenarlo con el chuwidatabindin
 		this.ejercicio= new Ejercicio("",this.id_profesor,"","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","", false);
 		
+	}
+
+	addFLogico(){
+		if(this.tipoLogico != "" && this.valorLogico != ""){
+			if(this.ejercicio.solucionFLogico != "")
+				this.ejercicio.solucionFLogico+=",";
+			this.ejercicio.solucionFLogico+=this.tipoLogico + "(" + this.valorLogico + ")";
+			this.tipoLogico="";
+			this.valorLogico="";
+		}
+	}
+
+	addSeparator(event: KeyboardEvent){
+		let key = event.key;
+		if(event.keyCode == 32) {
+            this.ejercicio.solucionFPatron+=" + ";
+        }
+
 	}
 
 	public onSubmit(){

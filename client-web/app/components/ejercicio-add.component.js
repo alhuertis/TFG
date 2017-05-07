@@ -23,11 +23,28 @@ var EjercicioAddComponent = (function () {
         this.tipos = [1, 2, 3, 4];
         this.titulo = "Crear ejercicio";
         this.user = "Antonio Sarasa";
-        this.id_profesor = "000001";
+        this.id_profesor = "00001";
+        this.tipoLogico = "";
+        this.valorLogico = "";
     }
     EjercicioAddComponent.prototype.ngOnInit = function () {
         //Lo ponemos asi para rellenarlo con el chuwidatabindin
         this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", null, "Antonio Sarasa", "UCM", new Date(), new Date(), "", "", "", "", "", "", false);
+    };
+    EjercicioAddComponent.prototype.addFLogico = function () {
+        if (this.tipoLogico != "" && this.valorLogico != "") {
+            if (this.ejercicio.solucionFLogico != "")
+                this.ejercicio.solucionFLogico += ",";
+            this.ejercicio.solucionFLogico += this.tipoLogico + "(" + this.valorLogico + ")";
+            this.tipoLogico = "";
+            this.valorLogico = "";
+        }
+    };
+    EjercicioAddComponent.prototype.addSeparator = function (event) {
+        var key = event.key;
+        if (event.keyCode == 32) {
+            this.ejercicio.solucionFPatron += " + ";
+        }
     };
     EjercicioAddComponent.prototype.onSubmit = function () {
         var _this = this;
