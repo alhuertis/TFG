@@ -234,7 +234,7 @@ function getPropuestas(req, res){
 
 function getPropuestasByApertura(req, res){
 
-	Actividad.find({"propuesta": "true", "visible": "true","fecha_prop_fin": {$gt:new Date()}}).sort('+fecha_creacion').exec((err, actividades)=>{
+	Actividad.find({"propuesta": "true", "visible": "true","fecha_prop_fin": {$gt:new Date()}}).sort({fecha_creacion:1}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades propuestas por apertura'});
 		}
@@ -254,7 +254,7 @@ function getPropuestasByApertura(req, res){
 
 function getPropuestasByCierre(req, res){
 
-	Actividad.find({"propuesta": "true", "visible": "true","fecha_prop_fin": {$gt:new Date()}}).sort('+fecha_prop_fin').exec((err, actividades)=>{
+	Actividad.find({"propuesta": "true", "visible": "true","fecha_prop_fin": {$gt:new Date()}}).sort({fecha_prop_fin:1}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades propuestas por cierre'});
 		}
