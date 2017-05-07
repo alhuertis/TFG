@@ -68,7 +68,7 @@
 
 				
 				<div class="col-md-3">
-					<textarea class="form-control" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
+					<textarea [style.visibility]="(ejercicio.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
 
 					<div class="row" style="margin-top: 10px">
 						<div class="col-md-4">
@@ -99,9 +99,10 @@
 				<div class="col-md-3">
 					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
 
-					<textarea style="margin-top: 20px" class="form-control" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
+					<textarea *ngIf="ejercicio.tipo <= 1 " style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
+					<textarea *ngIf="ejercicio.tipo > 1" style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>
 					
-					<button style="margin-top: 10px" type="submit" class="btn btn-success">Crear</button> <a style="margin-top: 10px" [routerLink]="['/']" class="btn btn-danger">Salir</a>
+					<button style="margin-top: 20px" type="submit" class="btn btn-success">Crear</button> <a style="margin-top: 20px" [routerLink]="['/']" class="btn btn-danger">Salir</a>
 				</div>
 
 			</div>
