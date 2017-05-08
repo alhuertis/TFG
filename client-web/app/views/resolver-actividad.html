@@ -98,7 +98,7 @@
                             <img *ngIf="bivalente.activa" id="bivalente" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': bivalente.top}">    
                             <img *ngIf="trivalente.activa" id="trivalente" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': trivalente.top}">
 
-                            <div id="izq" (click)="quitaPentagono($event)" *ngIf="argumentos == 3" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'izquierda')">
+                            <div id="izq" (click)="quitaPentagono($event)" *ngIf="argumentos >= 2" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'izquierda')">
                                 <img class="img-responsive izquierda">
                             </div>
                                 
@@ -106,7 +106,7 @@
                                 <img class="img-responsive superior">
                             </div>
 
-                            <div id="der" (click)="quitaPentagono($event)" *ngIf="argumentos >= 2"  droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'derecha')">
+                            <div id="der" (click)="quitaPentagono($event)" *ngIf="argumentos == 3"  droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'derecha')">
                                 <img class="img-responsive derecha">
                             </div>  
                         </div>
