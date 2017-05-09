@@ -16,7 +16,8 @@ export class ActividadService{
 	public url: string;
 
 	constructor(private _http: Http){
-		this.url= 'http://localhost:3678/api2/';
+		//this.url= 'http://localhost:3678/api2/';
+        this.url= 'http://'+window.location.hostname+':3678/api2/';
 	}
 
 	getActividades(){

@@ -17,7 +17,8 @@ var _ = require("underscore");
 var EjercicioService = (function () {
     function EjercicioService(_http) {
         this._http = _http;
-        this.url = 'http://localhost:3678/api/';
+        //this.url= 'http://localhost:3678/api/';
+        this.url = 'http://' + window.location.hostname + ':3678/api/';
     }
     EjercicioService.prototype.getEjercicios = function () {
         return this._http.get(this.url + 'ejercicios').map(function (res) { return res.json(); });

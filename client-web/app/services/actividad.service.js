@@ -17,7 +17,8 @@ var _ = require("underscore");
 var ActividadService = (function () {
     function ActividadService(_http) {
         this._http = _http;
-        this.url = 'http://localhost:3678/api2/';
+        //this.url= 'http://localhost:3678/api2/';
+        this.url = 'http://' + window.location.hostname + ':3678/api2/';
     }
     ActividadService.prototype.getActividades = function () {
         return this._http.get(this.url + 'actividades').map(function (res) { return res.json(); });

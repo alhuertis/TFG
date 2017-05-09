@@ -16,7 +16,8 @@ require("rxjs/add/operator/map");
 var ProfesorService = (function () {
     function ProfesorService(_http) {
         this._http = _http;
-        this.url = 'http://localhost:3678/apiProfesor/';
+        //this.url= 'http://localhost:3678/apiProfesor/';
+        this.url = 'http://' + window.location.hostname + ':3678/apiProfesor/';
     }
     ProfesorService.prototype.getProfesores = function () {
         return this._http.get(this.url + 'profesores').map(function (res) { return res.json(); });
