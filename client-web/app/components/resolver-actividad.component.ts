@@ -66,7 +66,7 @@ export class  ResolverActividadComponent implements OnInit{
 
 	){
         this.id_actividad= this.route.snapshot.params['id_actividad'];
-        alert(this.id_actividad);
+        //alert(this.id_actividad);
 
         this.actividad=[];
         /*this.actividad=
@@ -493,5 +493,13 @@ export class  ResolverActividadComponent implements OnInit{
     	return new Promise(r => setTimeout(r, ms));
 	}
 
+    //guarda la solucion en cualquier momento
+    guardarSolucion(){
+
+    }
+
+    //cuando terminas, guarda y sale
+    guardarYSalir(){
+    }
     
 }

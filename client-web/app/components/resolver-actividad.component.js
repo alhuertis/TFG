@@ -21,7 +21,7 @@ var ResolverActividadComponent = (function () {
         this._actividadService = _actividadService;
         this.route = route;
         this.id_actividad = this.route.snapshot.params['id_actividad'];
-        alert(this.id_actividad);
+        //alert(this.id_actividad);
         this.actividad = [];
         /*this.actividad=
         [
@@ -406,6 +406,12 @@ var ResolverActividadComponent = (function () {
     ResolverActividadComponent.prototype.sleep = function (ms) {
         if (ms === void 0) { ms = 0; }
         return new Promise(function (r) { return setTimeout(r, ms); });
+    };
+    //guarda la solucion en cualquier momento
+    ResolverActividadComponent.prototype.guardarSolucion = function () {
+    };
+    //cuando terminas, guarda y sale
+    ResolverActividadComponent.prototype.guardarYSalir = function () {
     };
     return ResolverActividadComponent;
 }());

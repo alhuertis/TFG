@@ -89,7 +89,8 @@
 
                     <div class="solucion">
                         <input type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
-                        <button class="btn btn-default" [disabled]="respuesta.length == 0" (click)="calificar()">Calificar</button>
+                        <button class="btn btn-default" [disabled]="respuesta.length == 0" (click)="calificar()">Enviar</button>
+                        <button class="btn btn-success animated aparecer" *ngIf="progreso == 100" (click)="guardarYSalir()">Terminar</button>
                     </div>
 
                     <div class="puzle">

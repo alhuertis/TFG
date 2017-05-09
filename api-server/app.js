@@ -7,6 +7,7 @@ var api = require('./routes/ejercicio'); //carga todo lo que haya en el fichero 
 var api2= require('./routes/actividad');
 var apiProfesor= require('./routes/profesor');
 var apiDiccionario= require('./routes/diccionario');
+var apiSolucion= require('./routes/solucion');
 
 var bodyParser= require('body-parser'); //Esto es un midelware que se carga antes de nuestro script
 var express= require('express'); 
@@ -33,5 +34,6 @@ app.use('/api', api);//Lo cargamo dentro de express. El primer parametro es el p
 app.use('/api2', api2);
 app.use('/apiProfesor', apiProfesor);
 app.use('/apiDiccionario', apiDiccionario);
+app.use('/apiSolucion', apiSolucion);
 //Con esto permitimos que este modulo sea importado con require en otros modulos
 module.exports= app;
