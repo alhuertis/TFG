@@ -4,6 +4,7 @@ import{NgForm} from '@angular/forms';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {ActividadService} from '../services/actividad.service';
+import {SolucionService} from '../services/solucion.service';
 import {Actividad} from '../models/actividad';
 import {Ejercicio} from '../models/ejercicio';
 import {Ficha} from '../models/ficha';
@@ -16,7 +17,7 @@ import * as _ from 'underscore';
 
 	selector: 'resolver-actividad',
 	templateUrl: 'app/views/resolver-actividad.html',
-	providers: [ActividadService], //Necesitamos esto para poder usar los metodos
+	providers: [ActividadService, SolucionService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/styles.css'],
 }) 
 
@@ -61,7 +62,8 @@ export class  ResolverActividadComponent implements OnInit{
 	
 
 	constructor(
-			private _actividadService: ActividadService, 
+			private _actividadService: ActividadService,
+            private _solucionService: SolucionService, 
             private route:  ActivatedRoute
 
 	){
@@ -500,6 +502,27 @@ export class  ResolverActividadComponent implements OnInit{
 
     //cuando terminas, guarda y sale
     guardarYSalir(){
+        this.solucion.notaFinal=7;
+        this._solucionService.saveSolucion(this.solucion).subscribe(
+			result =>{
+				console.log(result);
+				this.solucion._id= result;
+
+				if(this.solucion._id == ""){
+					alert('Error en el servidor guardando la solucion');
+				}else{
+                    alert(this.solucion._id);
+                }
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
     }
     
 }

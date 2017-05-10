@@ -1,6 +1,7 @@
 "use strict";
 var Solucion = (function () {
     function Solucion() {
+        this._id = "";
         this.terminado = false;
         this.calificacion = new Array();
         ;

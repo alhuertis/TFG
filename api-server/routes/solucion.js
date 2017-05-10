@@ -10,5 +10,7 @@ var SolucionController = require('../controllers/solucion');
 var api= express.Router();
 
 api.get('/solucion/:id', SolucionController.getSolucion);
+api.get('/soluciones', SolucionController.getSoluciones);
+api.post('/solucion', SolucionController.saveSolucion);
 
 module.exports= api;

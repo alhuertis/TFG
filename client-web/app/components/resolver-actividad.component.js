@@ -12,13 +12,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var actividad_service_1 = require("../services/actividad.service");
+var solucion_service_1 = require("../services/solucion.service");
 var ejercicio_1 = require("../models/ejercicio");
 var ficha_1 = require("../models/ficha");
 var solucion_1 = require("../models/solucion");
 var _ = require("underscore");
 var ResolverActividadComponent = (function () {
-    function ResolverActividadComponent(_actividadService, route) {
+    function ResolverActividadComponent(_actividadService, _solucionService, route) {
         this._actividadService = _actividadService;
+        this._solucionService = _solucionService;
         this.route = route;
         this.id_actividad = this.route.snapshot.params['id_actividad'];
         //alert(this.id_actividad);
@@ -412,6 +414,24 @@ var ResolverActividadComponent = (function () {
     };
     //cuando terminas, guarda y sale
     ResolverActividadComponent.prototype.guardarYSalir = function () {
+        var _this = this;
+        this.solucion.notaFinal = 7;
+        this._solucionService.saveSolucion(this.solucion).subscribe(function (result) {
+            console.log(result);
+            _this.solucion._id = result;
+            if (_this.solucion._id == "") {
+                alert('Error en el servidor guardando la solucion');
+            }
+            else {
+                alert(_this.solucion._id);
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
     };
     return ResolverActividadComponent;
 }());
@@ -419,10 +439,11 @@ ResolverActividadComponent = __decorate([
     core_1.Component({
         selector: 'resolver-actividad',
         templateUrl: 'app/views/resolver-actividad.html',
-        providers: [actividad_service_1.ActividadService],
+        providers: [actividad_service_1.ActividadService, solucion_service_1.SolucionService],
         styleUrls: ['../../assets/css/styles.css'],
     }),
     __metadata("design:paramtypes", [actividad_service_1.ActividadService,
+        solucion_service_1.SolucionService,
         router_1.ActivatedRoute])
 ], ResolverActividadComponent);
 exports.ResolverActividadComponent = ResolverActividadComponent;

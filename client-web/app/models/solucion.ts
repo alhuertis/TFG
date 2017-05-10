@@ -2,6 +2,7 @@ import {Ficha} from '../models/ficha';
 
 export class Solucion{
 
+    public _id: String;
     public id_actividad: String;
     public id_alumno: String;
     public nombreAlumno: String;
@@ -14,6 +15,7 @@ export class Solucion{
     
     
     constructor(){
+        this._id="";
         this.terminado=false;
         this.calificacion=new Array();;
         this.respuesta=new Array();
