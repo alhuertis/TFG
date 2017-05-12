@@ -6,12 +6,12 @@ var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
 var cabecera_profesor_component_1 = require("./components/cabecera-profesor.component");
 var resolver_actividad_component_1 = require("./components/resolver-actividad.component");
+var login_component_1 = require("./components/login.component");
+var auth_guard_1 = require("./guards/auth.guard");
 var appRoutes = [
-    //{path: '', component: FavoritosListComponent},
-    //{path:'marcador/:id', component: FavoritoDetailComponent},
-    //{path:'crear-marcador', component: PanelProfesorComponent},
+    { path: 'login', component: login_component_1.LoginComponent },
     { path: '', redirectTo: 'profesor', pathMatch: 'full' },
-    { path: 'profesor', component: panel_profesor_component_1.PanelProfesorComponent,
+    { path: 'profesor', component: panel_profesor_component_1.PanelProfesorComponent, canActivate: [auth_guard_1.AuthGuard],
         children: [
             { path: 'cabecera-profesor', component: cabecera_profesor_component_1.CabeceraProfesorComponent },
         ]

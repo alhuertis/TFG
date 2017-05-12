@@ -21,13 +21,24 @@ function emailSignup(req, res){
 }
 
 function emailLogin(req, res){
-     User.findOne({email: req.body.email.toLowerCase()}, function(err, user) {
+     User.findOne({username: req.body.username}, function(err, user) {
         // Comprobar si hay errores
         // Si el usuario existe o no
         // Y si la contraseña es correcta
-        return res
-            .status(200)
-            .send({token: service.createToken(user)});
+        console.log("userrrr: " + user);
+
+        if(err){
+			res.status(500).send({message:'Error al devolver el ejercicio'});
+		}
+		else{
+			if(!user){
+				res.status(404).send({token:''});	
+			}else{
+                return res.status(200).send({token: service.createToken(user)});
+            }
+        }    
+        
+        
     });
 
 }

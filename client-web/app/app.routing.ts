@@ -8,14 +8,15 @@ import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component';
 import {CabeceraProfesorComponent} from './components/cabecera-profesor.component';
 import {ResolverActividadComponent} from './components/resolver-actividad.component';
+import {LoginComponent} from './components/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
 
-	//{path: '', component: FavoritosListComponent},
-	//{path:'marcador/:id', component: FavoritoDetailComponent},
-	//{path:'crear-marcador', component: PanelProfesorComponent},
+	{ path: 'login', component: LoginComponent },
+
 	{path:'', redirectTo:'profesor', pathMatch:'full'},
-	{path: 'profesor', component: PanelProfesorComponent,
+	{path: 'profesor', component: PanelProfesorComponent,canActivate: [AuthGuard],
 		children:[
 				{path:'cabecera-profesor', component: CabeceraProfesorComponent},
 			]

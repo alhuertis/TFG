@@ -13,6 +13,7 @@ import {CabeceraProfesorComponent} from './components/cabecera-profesor.componen
 import {TruncatePipe} from './components/truncate-pipe.component';
 import {CabeceraAlumnoComponent} from './components/cabecera-alumno.component';
 import {ResolverActividadComponent} from './components/resolver-actividad.component';
+import {LoginComponent} from './components/login.component';
 
 
 
@@ -37,7 +38,8 @@ CabeceraAlumnoComponent
         CabeceraProfesorComponent,
         TruncatePipe,
         CabeceraAlumnoComponent,
-        ResolverActividadComponent
+        ResolverActividadComponent,
+        LoginComponent
 
    ],
   providers: [appRoutingProviders],
