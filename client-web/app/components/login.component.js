@@ -26,11 +26,15 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function () {
         var _this = this;
         this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
+        this.authenticationService.login(this.model.alias, this.model.password)
             .subscribe(function (result) {
             if (result === true) {
                 // login successful
-                _this.router.navigate(['/profesor']);
+                _this.user = JSON.parse(localStorage.getItem('currentUser')).user;
+                if (_this.user.role == 'profesor')
+                    _this.router.navigate(['/profesor']);
+                else if (_this.user.role == 'alumno')
+                    _this.router.navigate(['/alumno']);
             }
             else {
                 // login failed

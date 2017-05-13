@@ -17,7 +17,6 @@ function getActividad(req, res){
 			res.status(500).send({message:'Error al devolver el ejercicio'});
 		}
 		else{
-
 			if(!actividad){
 				res.status(404).send({message:'No hay ejercicio'});	
 			}

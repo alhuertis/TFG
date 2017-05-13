@@ -15,8 +15,9 @@ export class CabeceraProfesorComponent{
 
 	constructor(){
         this.titulo= "Panel de profesor";
-        this.user= "Antonio Sarasa";
+        //this.user= JSON.parse(localStorage.getItem('currentUser')).username;
 
+        this.user= "Antonio Sarasa";
 	}
 
 }

@@ -23,8 +23,10 @@ var PanelProfesorComponent = (function () {
         // pager object
         this.pager = {};
         this.title = "Panel de profesores";
-        this.user = "Antonio Sarasa";
-        this.id_profesor = "00001";
+        //this.user="Antonio Sarasa";
+        this.user = JSON.parse(localStorage.getItem('currentUser')).user;
+        ///this.id_profesor= "00001";
+        this.id_profesor = this.user._id;
         this.mostrarLista = false;
         this.datosAMostrar = "";
         this.actividad = [];
@@ -530,7 +532,7 @@ var PanelProfesorComponent = (function () {
                 var ej = _a[_i];
                 ids.push(ej._id);
             }
-            this.nuevaActividad = new actividad_1.Actividad("", this.id_profesor, this.user, new Date(), "", ids, false, false, null);
+            this.nuevaActividad = new actividad_1.Actividad("", this.id_profesor, this.user.nombre + " " + this.user.apellidos, new Date(), "", ids, false, false, null);
         }
         this.modalActividad = true;
         setTimeout(function () { return _this.visibleAnimate = true; });

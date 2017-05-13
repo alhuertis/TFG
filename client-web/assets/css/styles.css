@@ -144,7 +144,7 @@
 	-webkit-animation-name: aparecer;
 	animation-name: aparecer;
 } 
-/*********HEADER PROFESOR**********/
+/*********HEADER PROFESOR / ALUMNO**********/
 
 .navbar-brand, .navbar-header span {
 	color: #27292B !important;
@@ -172,6 +172,14 @@
 	color:white !important;
 }
 
+.logout a{
+	color: white !important;
+	font-size: 14px;
+}
+
+.logout a:hover{
+	color: #ccc !important;
+}
 
 /********FIN HEADER PROFESOR************/
 

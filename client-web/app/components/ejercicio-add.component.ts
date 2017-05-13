@@ -6,6 +6,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {EjercicioService} from '../services/ejercicio.service';
 import {Ejercicio} from '../models/ejercicio';
+import {User} from '../models/user';
  
 // Decorador component, indicamos en que etiqueta se va a cargar la plantilla
 @Component({
@@ -21,7 +22,9 @@ export class EjercicioAddComponent implements OnInit{
 	public errorMessage: string;
 	public niveles= ['Bajo', 'Medio', 'Avanzado'];
 	public tipos=[1,2,3,4];
-	public user: string;
+	//public user: string;
+
+	public user: User;
 
 	public _id: string;
 	public id_profesor: string;
@@ -50,8 +53,10 @@ export class EjercicioAddComponent implements OnInit{
 	){
 
 		this.titulo= "Crear ejercicio";
-		this.user="Antonio Sarasa";
-		this.id_profesor= "00001";
+		//this.user="Antonio Sarasa";
+		this.user= JSON.parse(localStorage.getItem('currentUser')).user;
+		//this.id_profesor= "00001";
+		this.id_profesor= this.user._id;
 		this.tipoLogico="";
 		this.valorLogico="";
 		this.valoresLogico=[];
@@ -61,7 +66,7 @@ export class EjercicioAddComponent implements OnInit{
 	ngOnInit(){
 
 		//Lo ponemos asi para rellenarlo con el chuwidatabindin
-		this.ejercicio= new Ejercicio("",this.id_profesor,"","",null,"Antonio Sarasa","UCM",new Date(),new Date(),"","","","","","", false);
+		this.ejercicio= new Ejercicio("",this.id_profesor,"","",null, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa,new Date(),new Date(),"","","","","","", false);
 		
 	}
 

@@ -6,6 +6,7 @@ import {EjercicioService} from '../services/ejercicio.service';
 import {ActividadService} from '../services/actividad.service';
 import {Ejercicio} from '../models/ejercicio';
 import {Actividad} from '../models/actividad';
+import {User} from '../models/user';
 
 import {TruncatePipe} from './truncate-pipe.component';
 
@@ -25,7 +26,7 @@ declare var $:any;
 export class  PanelProfesorComponent implements OnInit{
 
 	public title: string;
-	public user: string;
+	public user: User;
 	public id_profesor: string;
 	public ejercicios: Ejercicio[];
 	public loading: boolean;
@@ -96,8 +97,10 @@ export class  PanelProfesorComponent implements OnInit{
 
 	){
 		this.title= "Panel de profesores";
-		this.user="Antonio Sarasa";
-		this.id_profesor= "00001";
+		//this.user="Antonio Sarasa";
+		this.user= JSON.parse(localStorage.getItem('currentUser')).user; 
+		///this.id_profesor= "00001";
+		this.id_profesor= this.user._id;
 		this.mostrarLista=false;
 		this.datosAMostrar="";
 		this.actividad=[];
@@ -770,7 +773,7 @@ export class  PanelProfesorComponent implements OnInit{
 			for(let ej of this.actividad)
 				ids.push(ej._id);
 			
-			this.nuevaActividad =new Actividad("",this.id_profesor, this.user, new Date(), "", ids,false,false,null);
+			this.nuevaActividad =new Actividad("",this.id_profesor, this.user.nombre + " " + this.user.apellidos , new Date(), "", ids,false,false,null);
 
 		}
 

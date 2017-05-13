@@ -9,7 +9,7 @@ var AuthController = require('../controllers/auth');
 //Cargamos el router de express
 var api= express.Router();
 
-api.post('/auth/signup', AuthController.emailSignup);  
-api.post('/auth/login', AuthController.emailLogin);
+api.post('/auth/signup', AuthController.signup);  
+api.post('/auth/login', AuthController.login);
 
 module.exports= api;

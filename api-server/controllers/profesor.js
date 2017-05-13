@@ -2,7 +2,8 @@
 //Aqui vamos a tener las funcones de rutas
 'use strict'
 
-var Profesor= require('../models/profesor')
+var Profesor= require('../models/profesor');
+var User= require('../models/user')
 
 
 //Recuperar una actividad
@@ -53,7 +54,7 @@ function saveProfesor(req, res){
 }
 function getProfesores(req, res){
 
-	Profesor.find({}).sort('-_id').exec((err, profesores)=>{
+	User.find({role: 'profesor'}).sort('-_id').exec((err, profesores)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}

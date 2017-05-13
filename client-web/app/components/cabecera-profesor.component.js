@@ -14,6 +14,7 @@ var core_1 = require("@angular/core");
 var CabeceraProfesorComponent = (function () {
     function CabeceraProfesorComponent() {
         this.titulo = "Panel de profesor";
+        //this.user= JSON.parse(localStorage.getItem('currentUser')).username;
         this.user = "Antonio Sarasa";
     }
     return CabeceraProfesorComponent;

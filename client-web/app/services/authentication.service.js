@@ -19,20 +19,21 @@ var AuthenticationService = (function () {
         this.token = currentUser && currentUser.token;
         this.url = 'http://' + window.location.hostname + ':3678/apiAuth/';
     }
-    AuthenticationService.prototype.login = function (username, password) {
+    AuthenticationService.prototype.login = function (alias, password) {
         var _this = this;
-        var json = JSON.stringify({ username: username, password: password });
+        var json = JSON.stringify({ alias: alias, password: password });
         var params = json;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.http.post(this.url + 'auth/login', params, { headers: headers })
             .map(function (response) {
             // login successful if there's a jwt token in the response
             var token = response.json() && response.json().token;
+            var user = response.json() && response.json().user;
             if (token) {
                 // set token property
                 _this.token = token;
                 // store username and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+                localStorage.setItem('currentUser', JSON.stringify({ user: user, token: token }));
                 // return true to indicate successful login
                 return true;
             }

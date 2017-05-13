@@ -14,11 +14,7 @@ import {TruncatePipe} from './components/truncate-pipe.component';
 import {CabeceraAlumnoComponent} from './components/cabecera-alumno.component';
 import {ResolverActividadComponent} from './components/resolver-actividad.component';
 import {LoginComponent} from './components/login.component';
-
-
-
-CabeceraAlumnoComponent 
-
+import {AuthGuard} from './guards/auth.guard';
 
 
 @NgModule({
@@ -42,7 +38,7 @@ CabeceraAlumnoComponent
         LoginComponent
 
    ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders,AuthGuard],
   bootstrap:    [ AppComponent ]
 })
  

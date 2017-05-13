@@ -9,28 +9,28 @@ import {EjercicioAddComponent} from './components/ejercicio-add.component';
 import {CabeceraProfesorComponent} from './components/cabecera-profesor.component';
 import {ResolverActividadComponent} from './components/resolver-actividad.component';
 import {LoginComponent} from './components/login.component';
-import { AuthGuard } from './guards/auth.guard';
+import {AuthGuard} from './guards/auth.guard';
 
 const appRoutes: Routes = [
 
 	{ path: 'login', component: LoginComponent },
 
-	{path:'', redirectTo:'profesor', pathMatch:'full'},
+	{path:'', redirectTo:'profesor', pathMatch:'full', canActivate: [AuthGuard]},
 	{path: 'profesor', component: PanelProfesorComponent,canActivate: [AuthGuard],
-		children:[
+		/*children:[
 				{path:'cabecera-profesor', component: CabeceraProfesorComponent},
-			]
+			]*/
 	},		
-	{path:'crear-ejercicio', component: EjercicioAddComponent},
+	{path:'crear-ejercicio', component: EjercicioAddComponent,canActivate: [AuthGuard]},
 
-	{path: 'alumno', component: PanelAlumnoComponent,
+	{path: 'alumno', component: PanelAlumnoComponent,canActivate: [AuthGuard],
 		children:[
 			//{path:'', redirectTo:'alumno', pathMatch:'full'}
 			//{path:'crear-ejercicio', component: EjercicioAddComponent},
 			//{path:'mostrar-ejercicios', component: EjercicioMostrarComponent}
 		]	
 	},
-	{path:'resolver-actividad/:id_actividad', component: ResolverActividadComponent},
+	{path:'resolver-actividad/:id_actividad', component: ResolverActividadComponent,canActivate: [AuthGuard]},
 	
 	//Esto es cuando da error(404), y le decimos que nos lleve a la de listar favoritos.
 	{path:'**', component: PanelProfesorComponent},
