@@ -79,6 +79,71 @@ export class ActividadService{
 		return this._http.post(this.url+'actividad', params, {headers: headers}).map(res=> res.json());
 	}
 
+     //Profesores
+    getActsMiColeccion(id_profesor: string){
+		return this._http.get(this.url+'actividades-miColeccion/'+id_profesor).map(res => res.json());
+	}
+
+    getActsMiColeccionNivelA(id_profesor: string){
+		return this._http.get(this.url+'actividades-miColeccionNivelA/'+id_profesor).map(res => res.json());
+	}
+
+    getActsMiColeccionNivelM(id_profesor: string){
+		return this._http.get(this.url+'actividades-miColeccionNivelM/'+id_profesor).map(res => res.json());
+	}
+
+    getActsMiColeccionNivelB(id_profesor: string){
+		return this._http.get(this.url+'actividades-miColeccionNivelB/'+id_profesor).map(res => res.json());
+	}
+
+    getActsVisibles(id_profesor: string){
+		return this._http.get(this.url+'actividades-actVisibles/'+id_profesor).map(res => res.json());
+	}
+
+    getActsVisiblesNivelA(id_profesor: string){
+		return this._http.get(this.url+'actividades-actVisiblesnivelA/'+id_profesor).map(res => res.json());
+	}
+
+    getActsVisiblesNivelM(id_profesor: string){
+		return this._http.get(this.url+'actividades-actVisiblesnivelM/'+id_profesor).map(res => res.json());
+	}
+
+    getActsVisiblesNivelB(id_profesor: string){
+		return this._http.get(this.url+'actividades-actVisiblesnivelB/'+id_profesor).map(res => res.json());
+	}
+
+    getActsNoVisibles(id_profesor: string){
+		return this._http.get(this.url+'actividades-actNoVisibles/'+id_profesor).map(res => res.json());
+	}
+
+    getActsNoVisiblesNivelA(id_profesor: string){
+		return this._http.get(this.url+'actividades-ActNoVisiblesNivelA/'+id_profesor).map(res => res.json());
+	}
+
+    getActsNoVisiblesNivelM(id_profesor: string){
+		return this._http.get(this.url+'actividades-actNoVisiblesNivelM/'+id_profesor).map(res => res.json());
+	}
+
+    getActsNoVisiblesNivelB(id_profesor: string){
+		return this._http.get(this.url+'actividades-actNoVisiblesNivelB/'+id_profesor).map(res => res.json());
+	}
+
+    getActsOtrasColecciones(id_profesor: string){
+		return this._http.get(this.url+'actividades-otrasColecciones/'+id_profesor).map(res => res.json());
+	}
+
+    getActsOtrasColeccionesNivelA(id_profesor: string){
+		return this._http.get(this.url+'actividades-otrasColeccionesNivelA/'+id_profesor).map(res => res.json());
+	}
+
+    getActsOtrasColeccionesNivelM(id_profesor: string){
+		return this._http.get(this.url+'actividades-otrasColeccionesNivelM/'+id_profesor).map(res => res.json());
+	}
+
+    getActsOtrasColeccionesNivelB(id_profesor: string){
+		return this._http.get(this.url+'actividades-otrasColeccionesNivelB/'+id_profesor).map(res => res.json());
+	}
+
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
         // calculate total pages
         let totalPages = Math.ceil(totalItems / pageSize);

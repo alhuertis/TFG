@@ -4,10 +4,11 @@
 //Cargamos express
 var express= require('express');
 //cargamos el controlador
-var ActividadController = require('../controllers/actividad');
+var ActividadController = require('../controllers/actividad.js');
 
 //Cargamos el router de express
 var api= express.Router();
+
 
 api.get('/actividad/:id', ActividadController.getActividad); //Con esto puedo dirigir al controlador cuando llamemos a favrito.
 api.get('/cargarActividad/:id', ActividadController.cargarActividad);
@@ -22,7 +23,22 @@ api.get('/actividad-propuestasByApertura', ActividadController.getPropuestasByAp
 api.get('/actividad-propuestasByCierre', ActividadController.getPropuestasByCierre);
 api.get('/actividad-idProfesorDisp/:id', ActividadController.getByIdProfesorDisp);
 api.get('/actividad-idProfesorProp/:id', ActividadController.getByIdProfesorProp);
+//Profesores
+api.get('/actividad-miColeccion/:id_profesor', ActividadController.getActsMiColeccion);
+api.get('/actividad-miColeccionNivelA/:id_profesor', ActividadController.getActsMiColeccionNivelA);
+api.get('/actividad-miColeccionNivelM/:id_profesor', ActividadController.getActsMiColeccionNivelM);
+api.get('/actividad-miColeccionNivelB/:id_profesor', ActividadController.getActsMiColeccionNivelB);
+api.get('/actividad-actVisibles/:id_profesor', ActividadController.getActsVisibles);
+api.get('/actividad-actVisiblesNivelA/:id_profesor', ActividadController.getActsVisiblesNivelA);
+api.get('/actividad-actVisiblesNivelM/:id_profesor', ActividadController.getActsVisiblesNivelM);
+api.get('/actividad-actVisiblesNivelB/:id_profesor', ActividadController.getActsVisiblesNivelB);
+api.get('/actividad-actNoVisibles/:id_profesor', ActividadController.getActsNoVisibles);
+api.get('/actividad-actNoVisiblesNivelA/:id_profesor', ActividadController.getActsNoVisiblesNivelA);
+api.get('/actividad-actNoVisiblesNivelM/:id_profesor', ActividadController.getActsNoVisiblesNivelM);
+api.get('/actividad-actNoVisiblesNivelB/:id_profesor', ActividadController.getActsNoVisiblesNivelB);
+api.get('/actividad-otrasColecciones/:id_profesor', ActividadController.getActsOtrasColecciones);
+api.get('/actividad-otrasColeccionesNivelA/:id_profesor', ActividadController.getActsOtrasColeccionesNivelA);
+api.get('/actividad-otrasColeccionesNivelM/:id_profesor', ActividadController.getActsOtrasColeccionesNivelM);
+api.get('/actividad-otrasColeccionesNivelB/:id_profesor', ActividadController.getActsOtrasColeccionesNivelB); 
 
-
-
-module.exports= api;
+module.exports= api; 
