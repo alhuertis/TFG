@@ -10,12 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var AuthGuard = (function () {
-    function AuthGuard(router) {
+var AuthGuardAlumno = (function () {
+    function AuthGuardAlumno(router) {
         this.router = router;
     }
-    AuthGuard.prototype.canActivate = function () {
-        if (localStorage.getItem('currentUser')) {
+    AuthGuardAlumno.prototype.canActivate = function () {
+        if (localStorage.getItem('currentUser') && JSON.parse(localStorage.getItem('currentUser')).user.role == 'alumno') {
             // logged in so return true
             return true;
         }
@@ -23,11 +23,11 @@ var AuthGuard = (function () {
         this.router.navigate(['/login']);
         return false;
     };
-    return AuthGuard;
+    return AuthGuardAlumno;
 }());
-AuthGuard = __decorate([
+AuthGuardAlumno = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [router_1.Router])
-], AuthGuard);
-exports.AuthGuard = AuthGuard;
-//# sourceMappingURL=auth.guard.js.map
+], AuthGuardAlumno);
+exports.AuthGuardAlumno = AuthGuardAlumno;
+//# sourceMappingURL=authAlumno.guard.js.map

@@ -14,7 +14,8 @@ import {TruncatePipe} from './components/truncate-pipe.component';
 import {CabeceraAlumnoComponent} from './components/cabecera-alumno.component';
 import {ResolverActividadComponent} from './components/resolver-actividad.component';
 import {LoginComponent} from './components/login.component';
-import {AuthGuard} from './guards/auth.guard';
+import {AuthGuardProfesor} from './guards/authProfesor.guard';
+import {AuthGuardAlumno} from './guards/authAlumno.guard';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import {AuthGuard} from './guards/auth.guard';
         LoginComponent
 
    ],
-  providers: [appRoutingProviders,AuthGuard],
+  providers: [appRoutingProviders,AuthGuardProfesor,AuthGuardAlumno],
   bootstrap:    [ AppComponent ]
 })
  

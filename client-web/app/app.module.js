@@ -20,7 +20,8 @@ var truncate_pipe_component_1 = require("./components/truncate-pipe.component");
 var cabecera_alumno_component_1 = require("./components/cabecera-alumno.component");
 var resolver_actividad_component_1 = require("./components/resolver-actividad.component");
 var login_component_1 = require("./components/login.component");
-var auth_guard_1 = require("./guards/auth.guard");
+var authProfesor_guard_1 = require("./guards/authProfesor.guard");
+var authAlumno_guard_1 = require("./guards/authAlumno.guard");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -47,7 +48,7 @@ AppModule = __decorate([
             resolver_actividad_component_1.ResolverActividadComponent,
             login_component_1.LoginComponent
         ],
-        providers: [app_routing_1.appRoutingProviders, auth_guard_1.AuthGuard],
+        providers: [app_routing_1.appRoutingProviders, authProfesor_guard_1.AuthGuardProfesor, authAlumno_guard_1.AuthGuardAlumno],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);
