@@ -15,9 +15,11 @@ var LoginComponent = (function () {
     function LoginComponent(router, authenticationService) {
         this.router = router;
         this.authenticationService = authenticationService;
-        this.model = {};
+        this.modelLogin = {};
+        this.modelRegistro = {};
         this.loading = false;
         this.error = '';
+        this.registro = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
         // reset login status
@@ -26,7 +28,7 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function () {
         var _this = this;
         this.loading = true;
-        this.authenticationService.login(this.model.alias, this.model.password)
+        this.authenticationService.login(this.modelLogin.alias, this.modelLogin.password)
             .subscribe(function (result) {
             if (result === true) {
                 // login successful
@@ -43,6 +45,12 @@ var LoginComponent = (function () {
             }
         });
     };
+    LoginComponent.prototype.mostrarRegistro = function (mostrar) {
+        this.registro = mostrar;
+    };
+    LoginComponent.prototype.registrar = function () {
+        alert("Enviado peticion");
+    };
     return LoginComponent;
 }());
 LoginComponent = __decorate([
@@ -52,8 +60,7 @@ LoginComponent = __decorate([
         templateUrl: 'app/views/login.html',
         providers: [authentication_service_1.AuthenticationService]
     }),
-    __metadata("design:paramtypes", [router_1.Router,
-        authentication_service_1.AuthenticationService])
+    __metadata("design:paramtypes", [router_1.Router, authentication_service_1.AuthenticationService])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

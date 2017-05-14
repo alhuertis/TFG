@@ -12,14 +12,17 @@ import {User} from '../models/user';
 })
  
 export class LoginComponent implements OnInit {
-    model: any = {};
+    modelLogin: any = {};
+    modelRegistro: any= {};
     loading = false;
     error = '';
     user: User;
+    registro: Boolean;
  
-    constructor(
-        private router: Router,
-        private authenticationService: AuthenticationService) { }
+    constructor( private router: Router, private authenticationService: AuthenticationService) {
+            
+        this.registro=false;
+    }
  
     ngOnInit() {
         // reset login status
@@ -28,7 +31,7 @@ export class LoginComponent implements OnInit {
  
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model.alias, this.model.password)
+        this.authenticationService.login(this.modelLogin.alias, this.modelLogin.password)
             .subscribe(result => {
                 if (result === true) {
                     // login successful
@@ -44,5 +47,13 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 }
             });
+    }
+
+    mostrarRegistro(mostrar :Boolean){
+        this.registro= mostrar;
+    }
+
+    registrar(){
+        alert("Enviado peticion");
     }
 }
