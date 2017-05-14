@@ -33,10 +33,12 @@ export class  PanelProfesorComponent implements OnInit{
 	public errorMessage: string;
 	public mostrarLista: boolean;
 	public ejersAMostrar: Ejercicio[];
+	public actividades: Actividad[];
 	public datosAMostrar: string;
+	public actsAMostrar: Actividad[];
 	public actividad: Ejercicio[];
 	public nuevaActividad: Actividad;
-
+	
 	// pager object
     pager: any = {};
     // paged items
@@ -84,11 +86,36 @@ export class  PanelProfesorComponent implements OnInit{
 	public otrasColeccionesTipo4: Ejercicio[];
 	public nOtrasColeccionesTipo4: number;
 
+	//Actividades
+		//Totales
+	//public nActividades: number;
+
+	//Mi coleccion
+	public miColeccionAct: Actividad[];
+	public otrasColeccionesAct: Actividad[];
+	public visibles: Actividad[];
+	public invisibles: Actividad[];
+	
+	//Niveles
+	public miColeccionNivelAAct: Actividad[];
+	public miColeccionNivelMAct: Actividad[];
+	public miColeccionNivelBAct: Actividad[];
+	public otrasColeccionesNivelAAct: Actividad[];
+	public otrasColeccionesNivelMAct: Actividad[];
+	public otrasColeccionesNivelBAct: Actividad[];
+	public visiblesNivelAAct: Actividad[];
+	public visiblesNivelMAct: Actividad[];
+	public visiblesNivelBAct: Actividad[];
+	public invisiblesNivelAAct: Actividad[];
+	public invisiblesNivelMAct: Actividad[];
+	public invisiblesNivelBAct: Actividad[];
+	
 	//Modales
   	public modalEjercicio: Boolean;
 	public modalActividad: Boolean;
   	private visibleAnimate: Boolean;
 	public ejerAbrir: Ejercicio;
+	public actAbrir: Actividad;
 
 
 	constructor(
@@ -101,9 +128,28 @@ export class  PanelProfesorComponent implements OnInit{
 		this.user= JSON.parse(localStorage.getItem('currentUser')).user; 
 		///this.id_profesor= "00001";
 		this.id_profesor= this.user._id;
+		//this.user="Antonio Sarasa";
+		this.id_profesor= "000001";
 		this.mostrarLista=false;
 		this.datosAMostrar="";
 		this.actividad=[];
+		this.miColeccionAct=new Array<Actividad>();
+		this.miColeccionNivelAAct=new Array<Actividad>();
+		this.miColeccionNivelMAct=new Array<Actividad>();
+		this.miColeccionNivelBAct=new Array<Actividad>();
+		this.otrasColeccionesAct=new Array<Actividad>();
+		this.otrasColeccionesNivelAAct=new Array<Actividad>();
+		this.otrasColeccionesNivelMAct=new Array<Actividad>();
+		this.otrasColeccionesNivelBAct=new Array<Actividad>();
+		this.visibles=new Array<Actividad>();
+		this.visiblesNivelAAct=new Array<Actividad>();
+		this.visiblesNivelMAct=new Array<Actividad>();
+		this.visiblesNivelBAct=new Array<Actividad>();
+		this.invisibles=new Array<Actividad>();
+		this.invisiblesNivelAAct=new Array<Actividad>();
+		this.invisiblesNivelMAct=new Array<Actividad>();
+		this.invisiblesNivelBAct=new Array<Actividad>();
+		//this.actividad=[];
 		this.modalEjercicio=false;
 		this.modalActividad=false;
 		this.visibleAnimate=false;
@@ -538,6 +584,206 @@ export class  PanelProfesorComponent implements OnInit{
 			}
 		);//fin getEjercicios de mi coleccion tipo 4
 
+		//Actividades
+				this._actividadService.getActividades().subscribe(
+			result =>{
+				console.log(result);
+				this.actividades= result.actividades;
+
+				if(!this.actividades){
+					alert('Error en el servidor');
+				}
+			//	else{
+			//		this.loading=false;
+			//		this.nActividades= this.actividades.length;
+					/*this.ejersAMostrar= this.ejercicios;
+					this.datosAMostrar="Todos los ejercicios";
+					this.mostrarLista=true;*/
+			//	}
+
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion');
+				}
+			}
+
+		); //fin getEjercicios (Todos)
+
+		this._actividadService.getActsMiColeccion(this.id_profesor).subscribe(
+
+			result => {
+				this.miColeccionAct= result.miColeccionAct;
+
+				if(!this.miColeccionAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);
+
+		this._actividadService.getActsMiColeccionNivelA(this.id_profesor).subscribe(
+
+			result => {
+				this.miColeccionNivelAAct= result.miColeccionNivelAAct;
+
+				if(!this.miColeccionNivelA){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);//fin getEjercicios de mi coleccion nivel Avanzado
+
+		this._actividadService.getActsMiColeccionNivelM(this.id_profesor).subscribe(
+
+			result => {
+				this.miColeccionNivelMAct= result.miColeccionNivelMAct;
+
+				if(!this.miColeccionNivelMAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);//fin getEjercicios de mi coleccion nivel Medio
+
+		this._actividadService.getActsMiColeccionNivelB(this.id_profesor).subscribe(
+
+			result => {
+				this.miColeccionNivelBAct= result.miColeccionNivelBAct;
+				if(!this.miColeccionNivelBAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);//fin getEjercicios de mi coleccion nivel bajo
+
+		this._actividadService.getActsVisibles(this.id_profesor).subscribe(
+
+			result => {
+				this.miColeccionNivelBAct= result.miColeccionNivelBAct;
+
+				if(!this.miColeccionNivelBAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);//fin getEjercicios de mi coleccion nivel bajo
+
+		//Otras colecciones
+		this._actividadService.getActsOtrasColecciones(this.id_profesor).subscribe( 
+
+			result => {
+				this.otrasColeccionesAct= result.otrasColeccionesAct;
+
+				if(!this.otrasColeccionesAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);
+
+		this._actividadService.getActsOtrasColeccionesNivelA(this.id_profesor).subscribe(
+
+			result => {
+				this.otrasColeccionesNivelAAct= result.otrasColeccionesNivelAAct;
+
+				if(!this.otrasColeccionesNivelAAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);//fin getEjercicios de mi coleccion nivel Avanzado
+
+		this._actividadService.getActsOtrasColeccionesNivelM(this.id_profesor).subscribe(
+
+			result => {
+				this.otrasColeccionesNivelMAct= result.otrasColeccionesNivelMAct;
+
+				if(!this.otrasColeccionesNivelMAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);//fin getEjercicios de mi coleccion nivel Medio
+
+		this._actividadService.getActsOtrasColeccionesNivelB(this.id_profesor).subscribe(
+
+			result => {
+				this.otrasColeccionesNivelBAct= result.otrasColeccionesNivelBAct;
+
+				if(!this.otrasColeccionesNivelBAct){
+					alert('Error en el servidor');
+				}
+			},
+			error => {
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+			}
+		);//fin getEjercicios de mi coleccion nivel bajo
+
 	}//fin ngOnInit
 
 	ngAfterViewInit(){
@@ -621,6 +867,7 @@ export class  PanelProfesorComponent implements OnInit{
 
 	public seleccionaDatos(datos){
 		switch(datos){
+			//Ejercicios
 			case 'ejercicios': 
 				this.ejersAMostrar= this.ejercicios;
 				this.datosAMostrar="Todos los ejercicios";
@@ -689,7 +936,75 @@ export class  PanelProfesorComponent implements OnInit{
 				this.ejersAMostrar= this.otrasColeccionesTipo4;
 				this.datosAMostrar="Coleccion ejercicios tipo 4";
 				break;
-
+			//Actividades
+			case 'actividades': 
+				this.actsAMostrar= this.actividades;
+				this.datosAMostrar="Todos las actividades";
+				break;
+			case 'mias': 
+				this.actsAMostrar= this.miColeccionAct;
+				this.datosAMostrar="Mi Coleccion actividades";
+				break;
+			case 'mias bajas': 
+				this.actsAMostrar= this.miColeccionNivelBAct;
+				this.datosAMostrar="Mi Coleccion actividades nivel bajo";
+				break;
+			case 'mias medias': 
+				this.actsAMostrar= this.miColeccionNivelMAct;
+				this.datosAMostrar="Mi Coleccion actividades nivel medio";
+				break;
+			case 'mias avanzadas': 
+				this.actsAMostrar= this.miColeccionNivelAAct;
+				this.datosAMostrar="Mi Coleccion actividades nivel avanzado";
+				break;
+			case 'visibles': 
+				this.actsAMostrar= this.visibles;
+				this.datosAMostrar="Visibles actividades";
+				break;
+			case 'visibles bajas': 
+				this.actsAMostrar= this.visiblesNivelBAct;
+				this.datosAMostrar="Visibles actividades nivel bajo";
+				break;
+			case 'visibles medias': 
+				this.actsAMostrar= this.visiblesNivelMAct;
+				this.datosAMostrar="Visibles actividades nivel medio";
+				break;
+			case 'visibles avanzadas': 
+				this.actsAMostrar= this.visiblesNivelAAct;
+				this.datosAMostrar="Visibles actividades nivel avanzado";
+				break;
+			case 'invisibles': 
+				this.actsAMostrar= this.invisibles;
+				this.datosAMostrar="No visibles actividades";
+				break;
+			case 'invisibles bajas': 
+				this.actsAMostrar= this.invisiblesNivelBAct;
+				this.datosAMostrar="No visibles actividades nivel bajo";
+				break;
+			case 'invisibles medias': 
+				this.actsAMostrar= this.invisiblesNivelMAct;
+				this.datosAMostrar="No visibles actividades nivel medio";
+				break;
+			case 'invisibles avanzadas': 
+				this.actsAMostrar= this.invisiblesNivelAAct;
+				this.datosAMostrar="No visibles actividades nivel avanzado";
+				break;
+			case 'otras': 
+				this.actsAMostrar= this.otrasColeccionesAct;
+				this.datosAMostrar="Coleccion actividades";
+				break;
+			case 'otras bajas': 
+				this.actsAMostrar= this.otrasColeccionesNivelBAct;
+				this.datosAMostrar="Coleccion actividades nivel bajo";
+				break;
+			case 'otras medias': 
+				this.actsAMostrar= this.otrasColeccionesNivelMAct;
+				this.datosAMostrar="Coleccion actividades nivel medio";
+				break;
+			case 'otras avanzadas': 
+				this.actsAMostrar= this.otrasColeccionesNivelAAct;
+				this.datosAMostrar="Coleccion actividades nivel avanzado";
+				break;
 
 		}
 

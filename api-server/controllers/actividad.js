@@ -315,7 +315,359 @@ function getByIdProfesorProp(req, res){
 
 }
 
+//Profesores
 
+function getActsMiColeccion(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor}).exec((err, miColeccionAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!miColeccionAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({miColeccionAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsMiColeccionNivelA(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "nivel":"Avanzado"}).exec((err, nMiColeccionNivelAAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!nMiColeccionNivelAAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({nMiColeccionNivelAAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsMiColeccionNivelM(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "nivel":"Medio"}).exec((err, nMiColeccionNivelMAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!nMiColeccionNivelMAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({nMiColeccionNivelMAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsMiColeccionNivelB(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "nivel":"Bajo"}).exec((err, nMiColeccionNivelBAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!nMiColeccionNivelBAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({nMiColeccionNivelBAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsVisibles(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "true"}).exec((err, visibles)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!visibles){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({visibles});
+			}	
+		}
+
+	});
+
+}
+
+function getActsVisiblesNivelA(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "true", "nivel": "Avanzado"}).exec((err, visiblesNivelAAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!visiblesNivelAAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({visiblesNivelAAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsVisiblesNivelM(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "true",  "nivel": "Medio"}).exec((err, visiblesNivelMAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!visiblesNivelMAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({visiblesNivelMAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsVisiblesNivelB(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "true",  "nivel": "Bajo"}).exec((err, visiblesNivelBAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!visiblesNivelBAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({visiblesNivelBAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsNoVisibles(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "false"}).exec((err, invisibles)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!invisibles){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({invisibles});
+			}	
+		}
+
+	});
+
+}
+
+function getActsNoVisiblesNivelA(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "false",  "nivel": "Avanzado"}).exec((err, invisiblesNivelAAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!invisiblesNivelAAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({invisiblesNivelAAct});
+			}	 
+		}
+
+	});
+
+}
+
+function getActsNoVisiblesNivelM(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "false",  "nivel": "Medio"}).exec((err, invisiblesNivelMAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!invisiblesNivelMAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({invisiblesNivelMAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsNoVisiblesNivelB(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor": id_profesor, "visible": "false",  "nivel": "Bajo"}).exec((err, invisiblesNivelBAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!invisiblesNivelBAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({invisiblesNivelBAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsOtrasColecciones(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor":{$ne: id_profesor}, "visible": "true"}).exec((err, otrasColeccionesAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!otrasColeccionesAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({otrasColeccionesAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsOtrasColeccionesNivelA(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor":{$ne: id_profesor}, "nivel":"Avanzado", "visible": "true"}).exec((err, otrasColeccionesNivelAAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!otrasColeccionesNivelAAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({otrasColeccionesNivelAAct});
+			}	
+		}
+
+	});
+
+}
+
+function getActsOtrasColeccionesNivelM(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor":{$ne: id_profesor}, "nivel":"Medio", "visible": "true"}).exec((err, otrasColeccionesNivelMAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+
+			if(!otrasColeccionesNivelMAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({otrasColeccionesNivelMAct});
+			}	
+		}
+
+	});
+ 
+}
+
+function getActsOtrasColeccionesNivelB(req, res){
+
+	var id_profesor= req.params.id_profesor;
+
+	Actividad.find({"id_profesor":{$ne: id_profesor}, "nivel":"Bajo", "visible": "true"}).exec((err, otrasColeccionesNivelBAct)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las actividades'});
+		}
+		else{
+ 
+			if(!otrasColeccionesNivelBAct){
+				res.status(404).send({message:'No hay actividades'});
+			}
+			else{
+				res.status(200).send({otrasColeccionesNivelBAct});
+			}	
+		}
+
+	});
+
+} 
 
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {
@@ -332,5 +684,20 @@ module.exports= {
 	getPropuestasByCierre,
 	getByIdProfesorDisp,
 	getByIdProfesorProp,
-
+	getActsMiColeccion,
+	getActsMiColeccionNivelA,
+	getActsMiColeccionNivelB,
+	getActsMiColeccionNivelM,
+	getActsVisibles,
+	getActsVisiblesNivelA,
+	getActsVisiblesNivelM,
+	getActsVisiblesNivelB,
+	getActsNoVisibles,
+	getActsNoVisiblesNivelA,
+	getActsNoVisiblesNivelB,
+	getActsNoVisiblesNivelM,
+	getActsOtrasColecciones,
+	getActsOtrasColeccionesNivelA,
+	getActsOtrasColeccionesNivelB,
+	getActsOtrasColeccionesNivelM
 }

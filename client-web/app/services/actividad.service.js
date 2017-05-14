@@ -64,6 +64,55 @@ var ActividadService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'actividad', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    //Profesores
+    ActividadService.prototype.getActsMiColeccion = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-miColeccion/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsMiColeccionNivelA = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-miColeccionNivelA/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsMiColeccionNivelM = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-miColeccionNivelM/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsMiColeccionNivelB = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-miColeccionNivelB/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsVisibles = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-actVisibles/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsVisiblesNivelA = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-actVisiblesnivelA/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsVisiblesNivelM = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-actVisiblesnivelM/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsVisiblesNivelB = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-actVisiblesnivelB/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsNoVisibles = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-actNoVisibles/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsNoVisiblesNivelA = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-ActNoVisiblesNivelA/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsNoVisiblesNivelM = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-actNoVisiblesNivelM/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsNoVisiblesNivelB = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-actNoVisiblesNivelB/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsOtrasColecciones = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-otrasColecciones/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsOtrasColeccionesNivelA = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-otrasColeccionesNivelA/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsOtrasColeccionesNivelM = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-otrasColeccionesNivelM/' + id_profesor).map(function (res) { return res.json(); });
+    };
+    ActividadService.prototype.getActsOtrasColeccionesNivelB = function (id_profesor) {
+        return this._http.get(this.url + 'actividades-otrasColeccionesNivelB/' + id_profesor).map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

@@ -8,7 +8,7 @@
                 <li> Ejercicios <span class="badge badge-small"> {{nEjercicios}}</span><i (click)="seleccionaDatos('ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
 
                     <ul>
-                      <li> Mi Coleccion <span class="badge badge-small"> {{nMiColeccion}}</span><i (click)="seleccionaDatos('mios')" class="glyphicon glyphicon-eye-open ojo"></i>
+                      <li> Mi Coleccion <span class="badge badge-small"> {{nMiColeccion.}}</span><i (click)="seleccionaDatos('mios')" class="glyphicon glyphicon-eye-open ojo"></i>
                         <ul>
                           <li><a href="#"> Nivel</a>
                             <ul>
@@ -50,57 +50,49 @@
                 </li>
                 
 
-                <li><a href="#"> Actividades</a>
+                <li> Actividades<span class="badge badge-small"> {{actividades.length}}</span><i (click)="seleccionaDatos('actividades')" class="glyphicon glyphicon-eye-open ojo"></i>
 
                     <ul>
-                      <li> Mi Coleccion
+                      <li> Mi Coleccion <span class="badge badge-small"> {{miColeccionAct.length}}</span><i (click)="seleccionaDatos('mias')" class="glyphicon glyphicon-eye-open ojo"></i> 
                         <ul>
                           <li> Nivel
                             <ul>
-                              <li> Bajo</li>
-                              <li> Medio</li>
-                              <li> Avanzado</li>
+                              <li> Bajo <span class="badge badge-small"> {{miColeccionNivelBAct.length}}</span><i (click)="seleccionaDatos('mias bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Medio <span class="badge badge-small"> {{miColeccionNivelMAct.length}}</span><i (click)="seleccionaDatos('mias medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Avanzado <span class="badge badge-small"> {{miColeccionNivelAAct.length}}</span><i (click)="seleccionaDatos('mias avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li>
-                          <li> Actividades visibles
+                          <li> Actividades visibles <span class="badge badge-small"> {{visibles.length}}</span><i (click)="seleccionaDatos('visibles')" class="glyphicon glyphicon-eye-open ojo"></i>
                             <ul>
                               <li> Nivel
                                 <ul>
-                                  <li> Bajo</li>
-                                  <li> Medio</li>
-                                  <li> Avanzado</li>
+                                  <li> Bajo <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('visibles bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                                  <li> Medio <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('visibles medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                                  <li> Avanzado <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('visibles avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                                 </ul>
                               </li>
                             </ul>
                           </li>
-                          <li> Actividades no visibles
+                          <li> Actividades no visibles <span class="badge badge-small"> {{invisibles.length}}</span><i (click)="seleccionaDatos('invisibles')" class="glyphicon glyphicon-eye-open ojo"></i>
                             <ul>
                               <li> Nivel
                                 <ul>
-                                  <li> Bajo</li>
-                                  <li> Medio</li>
-                                  <li> Avanzado</li>
+                                  <li> Bajo <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('invisibles bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                                  <li> Medio <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('invisibles medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                                  <li> Avanzado <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('invisibles avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                                 </ul>
                               </li>
                             </ul>
                           </li> 
                           </ul>
                         </li>
-                        <li> Otras Colecciones
+                        <li> Otras Colecciones <span class="badge badge-small"> {{otrasColeccionAct.length}}</span><i (click)="seleccionaDatos('otras')" class="glyphicon glyphicon-eye-open ojo"></i> 
                         <ul>
                           <li> Nivel
                             <ul>
-                              <li> Bajo</li>
-                              <li> Medio</li>
-                              <li> Avanzado</li>
-                            </ul>
-                          </li>
-                          <li> Tipo
-                            <ul>
-                              <li> Tipo 1</li>
-                              <li> Tipo 2</li>
-                              <li> Tipo 3</li>
-                              <li> Tipo 4</li>
+                              <li> Bajo <span class="badge badge-small"> {{otrasColeccionNivelBAct.length}}</span><i (click)="seleccionaDatos('otras bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Medio <span class="badge badge-small"> {{otrasColeccionNivelMAct.length}}</span><i (click)="seleccionaDatos('otras medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Avanzado <span class="badge badge-small"> {{otrasColeccionNivelAAct.length}}</span><i (click)="seleccionaDatos('otras avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li>
                           <li> Profesor
