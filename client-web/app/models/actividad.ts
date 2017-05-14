@@ -11,7 +11,9 @@ export class Actividad{
         public ejercicios: String[],
         public visible: Boolean,
         public propuesta: Boolean,
-        public fecha_prop_fin: Date
+        public fecha_prop_fin: Date,
+        public marcado: boolean
+
 
 	){}
 }

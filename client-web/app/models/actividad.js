@@ -2,7 +2,7 @@
 var Actividad = (function () {
     function Actividad(
         //El id es el interno que asigna solo mongo, pero nos viene bien para recuperarlo
-        titulo, id_profesor, profesor, fecha_creacion, nivel, ejercicios, visible, propuesta, fecha_prop_fin) {
+        titulo, id_profesor, profesor, fecha_creacion, nivel, ejercicios, visible, propuesta, fecha_prop_fin, marcado) {
         this.titulo = titulo;
         this.id_profesor = id_profesor;
         this.profesor = profesor;
@@ -12,6 +12,7 @@ var Actividad = (function () {
         this.visible = visible;
         this.propuesta = propuesta;
         this.fecha_prop_fin = fecha_prop_fin;
+        this.marcado = marcado;
     }
     return Actividad;
 }());

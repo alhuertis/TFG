@@ -343,17 +343,17 @@ function getActsMiColeccionNivelA(req, res){
 
 	var id_profesor= req.params.id_profesor;
 
-	Actividad.find({"id_profesor": id_profesor, "nivel":"Avanzado"}).exec((err, nMiColeccionNivelAAct)=>{
+	Actividad.find({"id_profesor": id_profesor, "nivel":"Avanzado"}).exec((err, miColeccionNivelAAct)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
 		else{
 
-			if(!nMiColeccionNivelAAct){
+			if(!miColeccionNivelAAct){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({nMiColeccionNivelAAct});
+				res.status(200).send({miColeccionNivelAAct});
 			}	
 		}
 
@@ -365,17 +365,17 @@ function getActsMiColeccionNivelM(req, res){
 
 	var id_profesor= req.params.id_profesor;
 
-	Actividad.find({"id_profesor": id_profesor, "nivel":"Medio"}).exec((err, nMiColeccionNivelMAct)=>{
+	Actividad.find({"id_profesor": id_profesor, "nivel":"Medio"}).exec((err, miColeccionNivelMAct)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
 		else{
 
-			if(!nMiColeccionNivelMAct){
+			if(!miColeccionNivelMAct){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({nMiColeccionNivelMAct});
+				res.status(200).send({miColeccionNivelMAct});
 			}	
 		}
 
@@ -387,17 +387,17 @@ function getActsMiColeccionNivelB(req, res){
 
 	var id_profesor= req.params.id_profesor;
 
-	Actividad.find({"id_profesor": id_profesor, "nivel":"Bajo"}).exec((err, nMiColeccionNivelBAct)=>{
+	Actividad.find({"id_profesor": id_profesor, "nivel":"Bajo"}).exec((err, miColeccionNivelBAct)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
 		else{
 
-			if(!nMiColeccionNivelBAct){
+			if(!miColeccionNivelBAct){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({nMiColeccionNivelBAct});
+				res.status(200).send({miColeccionNivelBAct});
 			}	
 		}
 

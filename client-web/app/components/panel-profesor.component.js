@@ -28,18 +28,15 @@ var PanelProfesorComponent = (function () {
         ///this.id_profesor= "00001";
         this.id_profesor = this.user._id;
         //this.user="Antonio Sarasa";
-        this.id_profesor = "000001";
-        this.mostrarLista = false;
+        //this.id_profesor= "000001";
+        this.mostrarListaEjers = false;
+        this.mostrarListaActs = false;
         this.datosAMostrar = "";
         this.actividad = [];
         this.miColeccionAct = new Array();
         this.miColeccionNivelAAct = new Array();
         this.miColeccionNivelMAct = new Array();
         this.miColeccionNivelBAct = new Array();
-        this.otrasColeccionesAct = new Array();
-        this.otrasColeccionesNivelAAct = new Array();
-        this.otrasColeccionesNivelMAct = new Array();
-        this.otrasColeccionesNivelBAct = new Array();
         this.visibles = new Array();
         this.visiblesNivelAAct = new Array();
         this.visiblesNivelMAct = new Array();
@@ -48,6 +45,7 @@ var PanelProfesorComponent = (function () {
         this.invisiblesNivelAAct = new Array();
         this.invisiblesNivelMAct = new Array();
         this.invisiblesNivelBAct = new Array();
+        this.actsAMostrar = [];
         //this.actividad=[];
         this.modalEjercicio = false;
         this.modalActividad = false;
@@ -345,26 +343,6 @@ var PanelProfesorComponent = (function () {
             }
         }); //fin getEjercicios de mi coleccion tipo 4
         //Actividades
-        this._actividadService.getActividades().subscribe(function (result) {
-            console.log(result);
-            _this.actividades = result.actividades;
-            if (!_this.actividades) {
-                alert('Error en el servidor');
-            }
-            //	else{
-            //		this.loading=false;
-            //		this.nActividades= this.actividades.length;
-            /*this.ejersAMostrar= this.ejercicios;
-            this.datosAMostrar="Todos los ejercicios";
-            this.mostrarLista=true;*/
-            //	}
-        }, function (error) {
-            _this.errorMessage = error;
-            if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
-                alert('Error en la peticion');
-            }
-        }); //fin getEjercicios (Todos)
         this._actividadService.getActsMiColeccion(this.id_profesor).subscribe(function (result) {
             _this.miColeccionAct = result.miColeccionAct;
             if (!_this.miColeccionAct) {
@@ -379,7 +357,7 @@ var PanelProfesorComponent = (function () {
         });
         this._actividadService.getActsMiColeccionNivelA(this.id_profesor).subscribe(function (result) {
             _this.miColeccionNivelAAct = result.miColeccionNivelAAct;
-            if (!_this.miColeccionNivelA) {
+            if (!_this.miColeccionNivelAAct) {
                 alert('Error en el servidor');
             }
         }, function (error) {
@@ -412,23 +390,10 @@ var PanelProfesorComponent = (function () {
                 console.log(_this.errorMessage);
                 alert('Error en la peticion de mi coleccion');
             }
-        }); //fin getEjercicios de mi coleccion nivel bajo
+        });
         this._actividadService.getActsVisibles(this.id_profesor).subscribe(function (result) {
-            _this.miColeccionNivelBAct = result.miColeccionNivelBAct;
-            if (!_this.miColeccionNivelBAct) {
-                alert('Error en el servidor');
-            }
-        }, function (error) {
-            _this.errorMessage = error;
-            if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
-                alert('Error en la peticion de mi coleccion');
-            }
-        }); //fin getEjercicios de mi coleccion nivel bajo
-        //Otras colecciones
-        this._actividadService.getActsOtrasColecciones(this.id_profesor).subscribe(function (result) {
-            _this.otrasColeccionesAct = result.otrasColeccionesAct;
-            if (!_this.otrasColeccionesAct) {
+            _this.visibles = result.visibles;
+            if (!_this.visibles) {
                 alert('Error en el servidor');
             }
         }, function (error) {
@@ -438,42 +403,90 @@ var PanelProfesorComponent = (function () {
                 alert('Error en la peticion de mi coleccion');
             }
         });
-        this._actividadService.getActsOtrasColeccionesNivelA(this.id_profesor).subscribe(function (result) {
-            _this.otrasColeccionesNivelAAct = result.otrasColeccionesNivelAAct;
-            if (!_this.otrasColeccionesNivelAAct) {
+        this._actividadService.getActsVisiblesNivelA(this.id_profesor).subscribe(function (result) {
+            _this.visiblesNivelAAct = result.visiblesNivelAAct;
+            if (!_this.visiblesNivelAAct) {
                 alert('Error en el servidor');
             }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
-                alert('Error en la peticion de mi coleccion');
+                alert('Error en la peticion de actividades visibles nivel alto');
             }
-        }); //fin getEjercicios de mi coleccion nivel Avanzado
-        this._actividadService.getActsOtrasColeccionesNivelM(this.id_profesor).subscribe(function (result) {
-            _this.otrasColeccionesNivelMAct = result.otrasColeccionesNivelMAct;
-            if (!_this.otrasColeccionesNivelMAct) {
+        });
+        this._actividadService.getActsVisiblesNivelM(this.id_profesor).subscribe(function (result) {
+            _this.visiblesNivelMAct = result.visiblesNivelMAct;
+            if (!_this.visiblesNivelMAct) {
                 alert('Error en el servidor');
             }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
-                alert('Error en la peticion de mi coleccion');
+                alert('Error en la peticion de actividades visibles nivel medio');
             }
-        }); //fin getEjercicios de mi coleccion nivel Medio
-        this._actividadService.getActsOtrasColeccionesNivelB(this.id_profesor).subscribe(function (result) {
-            _this.otrasColeccionesNivelBAct = result.otrasColeccionesNivelBAct;
-            if (!_this.otrasColeccionesNivelBAct) {
+        });
+        this._actividadService.getActsVisiblesNivelB(this.id_profesor).subscribe(function (result) {
+            _this.visiblesNivelBAct = result.visiblesNivelBAct;
+            if (!_this.visiblesNivelBAct) {
                 alert('Error en el servidor');
             }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
-                alert('Error en la peticion de mi coleccion');
+                alert('Error en la peticion de actividades visibles nivel bajo');
             }
-        }); //fin getEjercicios de mi coleccion nivel bajo
+        });
+        this._actividadService.getActsNoVisibles(this.id_profesor).subscribe(function (result) {
+            _this.invisibles = result.invisibles;
+            if (!_this.invisibles) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion actividades invisibles');
+            }
+        });
+        this._actividadService.getActsNoVisiblesNivelA(this.id_profesor).subscribe(function (result) {
+            _this.invisiblesNivelAAct = result.invisiblesNivelAAct;
+            if (!_this.invisiblesNivelAAct) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion actividades invisibles nivel alto');
+            }
+        });
+        this._actividadService.getActsNoVisiblesNivelM(this.id_profesor).subscribe(function (result) {
+            _this.invisiblesNivelMAct = result.invisiblesNivelMAct;
+            if (!_this.invisiblesNivelMAct) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion actividades invisibles nivel medio');
+            }
+        });
+        this._actividadService.getActsNoVisiblesNivelB(this.id_profesor).subscribe(function (result) {
+            _this.invisiblesNivelBAct = result.invisiblesNivelBAct;
+            if (!_this.invisiblesNivelBAct) {
+                alert('Error en el servidor');
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion actividades invisibles nivel bajo');
+            }
+        });
     }; //fin ngOnInit
     PanelProfesorComponent.prototype.ngAfterViewInit = function () {
         //Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery
@@ -545,7 +558,7 @@ var PanelProfesorComponent = (function () {
             }, 100, "linear");
         });*/
     }; //fin ngAfterViewInit
-    PanelProfesorComponent.prototype.seleccionaDatos = function (datos) {
+    PanelProfesorComponent.prototype.seleccionaDatos = function (datos, tipo) {
         switch (datos) {
             //Ejercicios
             case 'ejercicios':
@@ -617,10 +630,6 @@ var PanelProfesorComponent = (function () {
                 this.datosAMostrar = "Coleccion ejercicios tipo 4";
                 break;
             //Actividades
-            case 'actividades':
-                this.actsAMostrar = this.actividades;
-                this.datosAMostrar = "Todos las actividades";
-                break;
             case 'mias':
                 this.actsAMostrar = this.miColeccionAct;
                 this.datosAMostrar = "Mi Coleccion actividades";
@@ -669,34 +678,36 @@ var PanelProfesorComponent = (function () {
                 this.actsAMostrar = this.invisiblesNivelAAct;
                 this.datosAMostrar = "No visibles actividades nivel avanzado";
                 break;
-            case 'otras':
-                this.actsAMostrar = this.otrasColeccionesAct;
-                this.datosAMostrar = "Coleccion actividades";
-                break;
-            case 'otras bajas':
-                this.actsAMostrar = this.otrasColeccionesNivelBAct;
-                this.datosAMostrar = "Coleccion actividades nivel bajo";
-                break;
-            case 'otras medias':
-                this.actsAMostrar = this.otrasColeccionesNivelMAct;
-                this.datosAMostrar = "Coleccion actividades nivel medio";
-                break;
-            case 'otras avanzadas':
-                this.actsAMostrar = this.otrasColeccionesNivelAAct;
-                this.datosAMostrar = "Coleccion actividades nivel avanzado";
-                break;
         }
-        this.mostrarLista = true;
-        this.setPage(1);
+        if (tipo == 'ejercicios') {
+            this.mostrarListaActs = false;
+            this.mostrarListaEjers = true;
+            this.setPageEjers(1);
+        }
+        else if (tipo == 'actividades') {
+            this.mostrarListaEjers = false;
+            this.mostrarListaActs = true;
+            this.setPageActs(1);
+        }
     };
-    PanelProfesorComponent.prototype.setPage = function (page) {
+    PanelProfesorComponent.prototype.setPageEjers = function (page) {
         if (page < 1 || page > this.pager.totalPages) {
             return;
         }
         // get pager object from service
         this.pager = this._ejercicioService.getPager(this.ejersAMostrar.length, page);
         // get current page of items
-        this.pagedItems = this.ejersAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        this.pagedItemsEjers = this.ejersAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        //alert(this.ejercicios.slice(1,5));
+    };
+    PanelProfesorComponent.prototype.setPageActs = function (page) {
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+        // get pager object from service
+        this.pager = this._ejercicioService.getPager(this.actsAMostrar.length, page);
+        // get current page of items
+        this.pagedItemsActs = this.actsAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
         //alert(this.ejercicios.slice(1,5));
     };
     PanelProfesorComponent.prototype.addActividad = function (event, id) {

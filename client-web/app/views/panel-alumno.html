@@ -16,7 +16,7 @@
                   <ul>
                     <li> Inicial <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                     <li> Medio <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    <li> Avanzado <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Avanzado <span class="badge badge-small">x</span><i  (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <li><a href="#"> Profesores </a>
@@ -24,21 +24,21 @@
                     <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
-                <li><a href="#"> Estadísticas</a></li>
+                <!--<li><a href="#"> Estadísticas</a></li>-->
               </ul>
             </li>
-            <li> Actividades propuestas <span class="badge badge-small"> {{propuestas.length}}</span><i (click)="seleccionaDatos('propuestas')" class="glyphicon glyphicon-eye-open ojo"></i>
+            <li> Actividades propuestas <span class="badge badge-small"> {{propuestas.length}}</span><i *ngIf="propuestas.length" (click)="seleccionaDatos('propuestas')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
                 <li><a href="#"> Profesores </a>
                   <ul *ngIf="profesores.length > 0">
                     <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor, true,'P')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
-                <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i (click)="seleccionaDatos('propuestas apertura')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                <li>Fecha de cierre (o.cronológico) <span class="badge badge-small"> {{propuestasByCierre.length}}</span> <i (click)="seleccionaDatos('propuestas cierre')" class="glyphicon glyphicon-eye-open ojo"></i></li>             
+                <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i *ngIf="propuestasByApertura.length" (click)="seleccionaDatos('propuestas apertura')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                <li>Fecha de cierre (o.cronológico) <span class="badge badge-small"> {{propuestasByCierre.length}}</span> <i *ngIf="propuestasByCierre.length" (click)="seleccionaDatos('propuestas cierre')" class="glyphicon glyphicon-eye-open ojo"></i></li>             
               </ul>
             </li>
-            <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i (click)="seleccionaDatos('disponibles')" class="glyphicon glyphicon-eye-open ojo"></i>
+            <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i *ngIf="disponibles.length" (click)="seleccionaDatos('disponibles')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
                 <li> Nivel
                   <ul>

@@ -5,43 +5,43 @@
     <div class="row">
         <div class="col-md-3 col-sm-3 menu-profesor-arbol">
             <ul id="tree1">
-                <li> Ejercicios <span class="badge badge-small"> {{nEjercicios}}</span><i (click)="seleccionaDatos('ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
+                <li> Ejercicios <span class="badge badge-small"> {{nEjercicios}}</span><i *ngIf="nEjercicios" (click)="seleccionaDatos('ejercicios', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
 
                     <ul>
-                      <li> Mi Coleccion <span class="badge badge-small"> {{nMiColeccion.}}</span><i (click)="seleccionaDatos('mios')" class="glyphicon glyphicon-eye-open ojo"></i>
+                      <li> Mi Coleccion <span class="badge badge-small"> {{nMiColeccion}}</span><i *ngIf="nMiColeccion" (click)="seleccionaDatos('mios', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
                         <ul>
                           <li><a href="#"> Nivel</a>
                             <ul>
-                              <li> Bajo <span class="badge badge-small">{{nMiColeccionNivelB}}</span><i (click)="seleccionaDatos('mios bajo')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span><i (click)="seleccionaDatos('mios medio')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span><i (click)="seleccionaDatos('mios avanzado')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Bajo <span class="badge badge-small">{{nMiColeccionNivelB}}</span><i *ngIf="nMiColeccionNivelB" (click)="seleccionaDatos('mios bajo', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span><i *ngIf="nMiColeccionNivelM" (click)="seleccionaDatos('mios medio', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Avanzado <span class="badge badge-small">{{nMiColeccionNivelA}}</span><i *ngIf="nMiColeccionNivelA" (click)="seleccionaDatos('mios avanzado', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li>
                           <li> Tipo
                             <ul>
-                              <li> Tipo 1 <span class="badge badge-small">{{nMiColeccionTipo1}}</span><i (click)="seleccionaDatos('mios T1')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Tipo 2 <span class="badge badge-small">{{nMiColeccionTipo2}}</span><i (click)="seleccionaDatos('mios T2')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Tipo 3 <span class="badge badge-small">{{nMiColeccionTipo3}}</span><i (click)="seleccionaDatos('mios T3')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Tipo 4 <span class="badge badge-small">{{nMiColeccionTipo4}}</span><i (click)="seleccionaDatos('mios T4')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 1 <span class="badge badge-small">{{nMiColeccionTipo1}}</span><i *ngIf="nMiColeccionTipo1" (click)="seleccionaDatos('mios T1', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 2 <span class="badge badge-small">{{nMiColeccionTipo2}}</span><i *ngIf="nMiColeccionTipo2" (click)="seleccionaDatos('mios T2', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 3 <span class="badge badge-small">{{nMiColeccionTipo3}}</span><i *ngIf="nMiColeccionTipo3" (click)="seleccionaDatos('mios T3', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 4 <span class="badge badge-small">{{nMiColeccionTipo4}}</span><i *ngIf="nMiColeccionTipo4" (click)="seleccionaDatos('mios T4', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li> 
                           </ul>
                         </li>
-                        <li> Otras Colecciones <span class="badge badge-small"> {{nEjercicios-nMiColeccion}}</span><i (click)="seleccionaDatos('otros')" class="glyphicon glyphicon-eye-open ojo"></i>
+                        <li> Otras Colecciones <span class="badge badge-small"> {{nEjercicios-nMiColeccion}}</span><i *ngIf="nEjercicios-nMiColeccion" (click)="seleccionaDatos('otros', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
                         <ul>
                           <li> Nivel
                             <ul>
-                              <li> Bajo <span class="badge badge-small">{{nOtrasColeccionesNivelB}}</span><i (click)="seleccionaDatos('otros bajo')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Medio <span class="badge badge-small">{{nOtrasColeccionesNivelM}}</span><i (click)="seleccionaDatos('otros medio')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Avanzado <span class="badge badge-small">{{nOtrasColeccionesNivelA}}</span><i (click)="seleccionaDatos('otros avanzado')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Bajo <span class="badge badge-small">{{nOtrasColeccionesNivelB}}</span><i *ngIf="nOtrasColeccionesNivelB" (click)="seleccionaDatos('otros bajo', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Medio <span class="badge badge-small">{{nOtrasColeccionesNivelM}}</span><i *ngIf="nOtrasColeccionesNivelM" (click)="seleccionaDatos('otros medio', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Avanzado <span class="badge badge-small">{{nOtrasColeccionesNivelA}}</span><i *ngIf="nOtrasColeccionesNivelA" (click)="seleccionaDatos('otros avanzado', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li>
                           <li> Tipo
                             <ul>
-                              <li> Tipo 1 <span class="badge badge-small">{{nOtrasColeccionesTipo1}}</span><i (click)="seleccionaDatos('otros T1')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Tipo 2 <span class="badge badge-small">{{nOtrasColeccionesTipo2}}</span><i (click)="seleccionaDatos('otros T2')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Tipo 3 <span class="badge badge-small">{{nOtrasColeccionesTipo3}}</span><i (click)="seleccionaDatos('otros T3')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Tipo 4 <span class="badge badge-small">{{nOtrasColeccionesTipo4}}</span><i (click)="seleccionaDatos('otros T4')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 1 <span class="badge badge-small">{{nOtrasColeccionesTipo1}}</span><i *ngIf="nOtrasColeccionesTipo1" (click)="seleccionaDatos('otros T1', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 2 <span class="badge badge-small">{{nOtrasColeccionesTipo2}}</span><i *ngIf="nOtrasColeccionesTipo2" (click)="seleccionaDatos('otros T2', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 3 <span class="badge badge-small">{{nOtrasColeccionesTipo3}}</span><i *ngIf="nOtrasColeccionesTipo3" (click)="seleccionaDatos('otros T3', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                              <li> Tipo 4 <span class="badge badge-small">{{nOtrasColeccionesTipo4}}</span><i *ngIf="nOtrasColeccionesTipo4" (click)="seleccionaDatos('otros T4', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
                           </li> 
                           </ul>
@@ -50,59 +50,37 @@
                 </li>
                 
 
-                <li> Actividades<span class="badge badge-small"> {{actividades.length}}</span><i (click)="seleccionaDatos('actividades')" class="glyphicon glyphicon-eye-open ojo"></i>
-
-                    <ul>
-                      <li> Mi Coleccion <span class="badge badge-small"> {{miColeccionAct.length}}</span><i (click)="seleccionaDatos('mias')" class="glyphicon glyphicon-eye-open ojo"></i> 
-                        <ul>
-                          <li> Nivel
-                            <ul>
-                              <li> Bajo <span class="badge badge-small"> {{miColeccionNivelBAct.length}}</span><i (click)="seleccionaDatos('mias bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Medio <span class="badge badge-small"> {{miColeccionNivelMAct.length}}</span><i (click)="seleccionaDatos('mias medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Avanzado <span class="badge badge-small"> {{miColeccionNivelAAct.length}}</span><i (click)="seleccionaDatos('mias avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                            </ul>
-                          </li>
-                          <li> Actividades visibles <span class="badge badge-small"> {{visibles.length}}</span><i (click)="seleccionaDatos('visibles')" class="glyphicon glyphicon-eye-open ojo"></i>
-                            <ul>
-                              <li> Nivel
-                                <ul>
-                                  <li> Bajo <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('visibles bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                                  <li> Medio <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('visibles medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                                  <li> Avanzado <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('visibles avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </li>
-                          <li> Actividades no visibles <span class="badge badge-small"> {{invisibles.length}}</span><i (click)="seleccionaDatos('invisibles')" class="glyphicon glyphicon-eye-open ojo"></i>
-                            <ul>
-                              <li> Nivel
-                                <ul>
-                                  <li> Bajo <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('invisibles bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                                  <li> Medio <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('invisibles medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                                  <li> Avanzado <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i (click)="seleccionaDatos('invisibles avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </li> 
+                <li> Actividades<span class="badge badge-small"> {{miColeccionAct.length}}</span><i *ngIf="miColeccionAct.length" (click)="seleccionaDatos('mias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i> 
+                  <ul>
+                    <li> Nivel
+                      <ul>
+                        <li> Bajo <span class="badge badge-small"> {{miColeccionNivelBAct.length}}</span><i *ngIf="miColeccionNivelBAct.length" (click)="seleccionaDatos('mias bajas', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                        <li> Medio <span class="badge badge-small"> {{miColeccionNivelMAct.length}}</span><i *ngIf="miColeccionNivelMAct.length" (click)="seleccionaDatos('mias medias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                        <li> Avanzado <span class="badge badge-small"> {{miColeccionNivelAAct.length}}</span><i *ngIf="miColeccionNivelAAct.length" (click)="seleccionaDatos('mias avanzadas', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                      </ul>
+                    </li>
+                    <li> Actividades visibles <span class="badge badge-small"> {{visibles.length}}</span><i *ngIf="visibles.length" (click)="seleccionaDatos('visibles', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i>
+                      <ul>
+                        <li> Nivel
+                          <ul>
+                            <li> Bajo <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i *ngIf="visiblesNivelBAct.length" (click)="seleccionaDatos('visibles bajas', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                            <li> Medio <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i *ngIf="visiblesNivelBAct.length" (click)="seleccionaDatos('visibles medias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                            <li> Avanzado <span class="badge badge-small"> {{visiblesNivelBAct.length}}</span><i *ngIf="visiblesNivelBAct.length" (click)="seleccionaDatos('visibles avanzadas', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                           </ul>
                         </li>
-                        <li> Otras Colecciones <span class="badge badge-small"> {{otrasColeccionAct.length}}</span><i (click)="seleccionaDatos('otras')" class="glyphicon glyphicon-eye-open ojo"></i> 
-                        <ul>
-                          <li> Nivel
-                            <ul>
-                              <li> Bajo <span class="badge badge-small"> {{otrasColeccionNivelBAct.length}}</span><i (click)="seleccionaDatos('otras bajas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Medio <span class="badge badge-small"> {{otrasColeccionNivelMAct.length}}</span><i (click)="seleccionaDatos('otras medias')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                              <li> Avanzado <span class="badge badge-small"> {{otrasColeccionNivelAAct.length}}</span><i (click)="seleccionaDatos('otras avanzadas')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                            </ul>
-                          </li>
-                          <li> Profesor
-                            <ul>
-                              <li> Antonio Sarasa</li>
-                              <li> Ana</li>
-                            </ul>
-                          </li>  
+                      </ul>
+                    </li>
+                    <li> Actividades no visibles <span class="badge badge-small"> {{invisibles.length}}</span><i *ngIf="invisibles.length" (click)="seleccionaDatos('invisibles', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i>
+                      <ul>
+                        <li> Nivel
+                          <ul>
+                            <li> Bajo <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i *ngIf="invisiblesNivelBAct.length" (click)="seleccionaDatos('invisibles bajas', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                            <li> Medio <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i *ngIf="invisiblesNivelBAct.length" (click)="seleccionaDatos('invisibles medias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                            <li> Avanzado <span class="badge badge-small"> {{invisiblesNivelBAct.length}}</span><i *ngIf="invisiblesNivelBAct.length" (click)="seleccionaDatos('invisibles avanzadas', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                           </ul>
                         </li>
+                      </ul>
+                    </li> 
                     </ul>
                 </li>
             </ul>                
@@ -111,13 +89,13 @@
         <div class="col-md-5 col-sm-5 panel-ejercicios">
           <div class="row">
             <div class="col-sm-12">
-              <h3 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h3>
+              <h3 class="text-center" *ngIf="mostrarListaEjers || mostrarListaActs ">{{datosAMostrar}}</h3>
             </div>
           </div>
           
-          <div class="row" *ngIf="mostrarLista">
+          <div class="row" *ngIf="mostrarListaEjers">
          
-              <div class="col-md-12 ejer-lista animated fadeInLeft" *ngFor="let ejercicio of pagedItems; let i=index">
+              <div class="col-md-12 ejer-lista animated fadeInLeft" *ngFor="let ejercicio of pagedItemsEjers; let i=index">
                 <div class="row">
                   <div class="col-sm-1">
                       <input type="checkbox" [checked]="ejercicio.marcado" (click)="addActividad($event, ejercicio._id)">
@@ -149,32 +127,66 @@
             
           </div>
 
-            <div class="row">
-              <div class="col-sm-12">
-                <!-- pager -->
-                <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-                  <li [ngClass]="{disabled:pager.currentPage === 1}">
-                    <a (click)="setPage(1)">First</a>
-                  </li>
-                  <li [ngClass]="{disabled:pager.currentPage === 1}">
-                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-                  </li>
-                  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                    <a (click)="setPage(page)">{{page}}</a>
-                  </li>
-                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
-                  </li>
-                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                    <a (click)="setPage(pager.totalPages)">Last</a>
-                  </li>
-                </ul>
+          <div class="row" *ngIf="mostrarListaActs">
+         
+              <div class="col-md-12 ejer-lista animated fadeInLeft" *ngFor="let actividad of pagedItemsActs; let i=index">
+                <div class="row">
+                  <div class="col-sm-1">
+                      <input type="checkbox" [checked]="actividad.marcado">
+                  </div>
+                  <div class="col-sm-7">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <ul>
+                          <li><i class="glyphicon glyphicon-pencil"></i> {{actividad.titulo | truncate : 25}}</li>
+                          <li><i class="glyphicon glyphicon-user"></i> {{actividad.profesor}}</li>     
+                        </ul>
+                      </div>
+                    
+                    <div class="col-md-6">
+                      <ul>
+                        <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | truncate : 25}}</li>
+                        <li><i class="glyphicon glyphicon-signal"></i> {{actividad.nivel}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  </div>
+
+                  <div class="col-sm-4 botones-lista">
+                      <a class="btn btn-xs btn-info">Abrir</a>
+                      <a class="btn btn-xs btn-warning">Modificar</a>
+                  </div>
+                </div>
               </div>
+            
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <!-- pager -->
+              <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
         
 
-        <div class="col-md-4 col-sm-4 panel-actividad" *ngIf="mostrarLista">
+        <div class="col-md-4 col-sm-4 panel-actividad" *ngIf="mostrarListaEjers || mostrarListaActs">
           <div class="row">
             <div class="col-md-12">
               <h4 class="text-center">Seleccion para actividad</h4>
