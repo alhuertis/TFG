@@ -42,58 +42,58 @@
 </div>
 
 
-<div *ngIf="registro" id="signupbox" style="margin-top:50px" class="mainbox col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+<div *ngIf="registro" id="signupbox" style="margin-top:20px" class="mainbox col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
     <div class="panel panel-info">
         <div class="panel-heading">
             <div class="panel-title">TEFEGE - registro</div>
             <div style="float:right; font-size: 85%; position: relative; top:-10px; cursor: pointer"><a id="signinlink" (click)="mostrarRegistro(false)">Volver</a></div>
         </div>  
         <div class="panel-body" >
-            <form id="signupform" class="form-horizontal" role="form" (ngSubmit)="registrar()" novalidate>
+            <form id="signupform" class="form-horizontal" name="form" (ngSubmit)="f2.form.valid && registrar()" #f2="ngForm" novalidate>
                 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
                     <span></span>
                 </div>
                     
-                
-                <div class="input-group" style="margin-bottom: 15px">
+                <!--<div *ngIf="f2.submitted && !alias.valid">Alias is required</div>-->
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !alias.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-sunglasses"></i></span>
                     <input type="text" class="form-control" name="alias" [(ngModel)]="modelRegistro.alias" #alias="ngModel"  placeholder="Alias" required />
                 </div>
-
-                <div class="input-group" style="margin-bottom: 15px">
+                
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !password.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input type="password" class="form-control" name="password" [(ngModel)]="modelRegistro.password" #password="ngModel"  placeholder="Password" required />
                 </div>
-
-                <div class="input-group" style="margin-bottom: 15px">
+                
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !nombre.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" class="form-control" name="nombre" [(ngModel)]="modelRegistro.nombre" #nombre="ngModel"  placeholder="Nombre" required />
                 </div>
 
-                <div class="input-group" style="margin-bottom: 15px">
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !apellidos.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" class="form-control" name="apellidos" [(ngModel)]="modelRegistro.apellidos" #apellidos="ngModel"  placeholder="Apellidos" required />
                 </div>
 
-                <div class="input-group" style="margin-bottom: 15px">
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !email.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                     <input type="text" class="form-control" name="email" [(ngModel)]="modelRegistro.email" #email="ngModel"  placeholder="Email" required />
                 </div>
 
-                <div class="input-group" style="margin-bottom: 15px">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !dni.valid }">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
                     <input type="text" class="form-control" name="dni" [(ngModel)]="modelRegistro.dni" #dni="ngModel"  placeholder="Dni" required />
                 </div>
 
 
-                <div class="input-group" style="margin-bottom: 15px">
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !fecha.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     <input type="date" class="form-control" name="fecha" [(ngModel)]="modelRegistro.fecha_nacimiento" #fecha="ngModel"  required />
                 </div>
 
-                <div class="input-group" style="margin-bottom: 15px">
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !institucion.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                     <input type="text" class="form-control" name="institucion" [(ngModel)]="modelRegistro.institucion_educativa" #institucion="ngModel"  placeholder="Institucion educativa" required />
                 </div>
@@ -116,5 +116,24 @@
                 </div>
             </form>
             </div>
+    </div>
+</div>
+
+
+<!-- modal registro -->
+<div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalRegistro ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h4>Solicitud de registro</h4>  
+        </div>
+        <div class="modal-body">
+            <p *ngIf="msg != '' " class="info">{{msg}}</p>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModal()" class="btn">Cerrar</button>
+        </div>
+        </div>
     </div>
 </div>

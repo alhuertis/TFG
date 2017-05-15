@@ -1116,7 +1116,7 @@ export class  PanelProfesorComponent implements OnInit{
 			for(let ej of this.actividad)
 				ids.push(ej._id);
 			
-			this.nuevaActividad =new Actividad("",this.id_profesor, this.user.nombre + " " + this.user.apellidos , new Date(), "", ids,false,false,null);
+			this.nuevaActividad =new Actividad("",this.id_profesor, this.user.nombre + " " + this.user.apellidos , new Date(), "", ids,false,false,null, false);
 
 		}
 

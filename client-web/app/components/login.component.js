@@ -20,6 +20,9 @@ var LoginComponent = (function () {
         this.loading = false;
         this.error = '';
         this.registro = false;
+        this.msg = "";
+        this.modalRegistro = false;
+        this.visibleAnimate = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
         // reset login status
@@ -49,7 +52,25 @@ var LoginComponent = (function () {
         this.registro = mostrar;
     };
     LoginComponent.prototype.registrar = function () {
-        alert("Enviado peticion");
+        var _this = this;
+        this.loading = true;
+        this.authenticationService.registro(this.modelRegistro).subscribe(function (result) {
+            _this.msg = result.message;
+            _this.modalRegistro = true;
+            setTimeout(function () { return _this.visibleAnimate = true; });
+            _this.loading = false;
+        }, function (error) {
+            _this.msg = error.message;
+            _this.modalRegistro = true;
+            setTimeout(function () { return _this.visibleAnimate = true; });
+            _this.loading = false;
+        });
+    };
+    LoginComponent.prototype.cerrarModal = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalRegistro = false; }, 300);
+        this.msg = "";
     };
     return LoginComponent;
 }());

@@ -762,7 +762,7 @@ var PanelProfesorComponent = (function () {
                 var ej = _a[_i];
                 ids.push(ej._id);
             }
-            this.nuevaActividad = new actividad_1.Actividad("", this.id_profesor, this.user.nombre + " " + this.user.apellidos, new Date(), "", ids, false, false, null);
+            this.nuevaActividad = new actividad_1.Actividad("", this.id_profesor, this.user.nombre + " " + this.user.apellidos, new Date(), "", ids, false, false, null, false);
         }
         this.modalActividad = true;
         setTimeout(function () { return _this.visibleAnimate = true; });

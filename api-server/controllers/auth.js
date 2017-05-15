@@ -1,6 +1,7 @@
 'use strict'
 
 var User= require('../models/user');
+var Registro= require('../models/registro');
 var Alumno= require('../models/alumno');
 var Profesor= require('../models/profesor');
 var service = require('./tokenService');
@@ -35,11 +36,6 @@ function signup(req, res){
             }
     
         });
-
-
-
-        
-
 }
 
 function login(req, res){
@@ -57,18 +53,46 @@ function login(req, res){
 			}else{
                 return res.status(200).send({token: service.createToken(user), user: user});
             }
-        }    
-        
-        
+        }     
     });
-
 }
 
-
+function registro(req, res){
+    
+        var registro = new Registro();
+        var params = req.body;
+        registro.alias= params.alias;
+        registro.nombre = params.nombre;
+        registro.apellidos = params.apellidos;
+        registro.password= params.password;
+        registro.dni = params.dni;
+        registro.email = params.email;
+        registro.fecha_nacimiento = params.fecha_nacimiento;
+        registro.institucion_educativa= params.institucion_educativa;
+        registro.role= params.role;
+        
+        Registro.findOne({alias: req.body.alias, password: req.body.password}, function(err, userDB) {
+            
+            if(!userDB){
+                registro.save((err, userStored)=>{
+                    if(err){
+                        res.status(500).send({message:'Error al guardar el usuario'});
+                    }
+                    else{
+                        return res.status(200).send({message:'Usuario registrado correctamente. Espere a que el administrador acepte su solicitud'});
+                    }
+                 });	
+            }else{
+                return res.status(200).send({message:'El usuario ya existe'});
+            }
+    
+        });
+}
 
 
 module.exports= {
 	signup,
     login,
+    registro,
 
 }

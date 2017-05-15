@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
  
 @Injectable()
@@ -41,6 +41,16 @@ export class AuthenticationService {
                     return false;
                 }
             });
+    }
+
+    registro(model : any){
+
+        let json = JSON.stringify(model);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this.http.post(this.url+'auth/registro', params, {headers: headers}).map(res => res.json());
     }
  
     logout(): void {

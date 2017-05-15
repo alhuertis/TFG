@@ -18,10 +18,17 @@ export class LoginComponent implements OnInit {
     error = '';
     user: User;
     registro: Boolean;
+    modalRegistro: Boolean;
+    visibleAnimate: Boolean;
+
+    msg: String;
  
     constructor( private router: Router, private authenticationService: AuthenticationService) {
             
         this.registro=false;
+        this.msg="";
+        this.modalRegistro=false;
+        this.visibleAnimate= false;
     }
  
     ngOnInit() {
@@ -54,6 +61,28 @@ export class LoginComponent implements OnInit {
     }
 
     registrar(){
-        alert("Enviado peticion");
+        this.loading = true;
+        this.authenticationService.registro(this.modelRegistro).subscribe(
+            result => {
+                this.msg=result.message;
+                this.modalRegistro=true;
+                setTimeout(() => this.visibleAnimate = true);
+                this.loading = false;
+            },
+            
+            error =>{
+                this.msg=error.message;
+                this.modalRegistro=true;
+                setTimeout(() => this.visibleAnimate = true);
+                this.loading = false;
+            }
+            
+            );
+    }
+
+    cerrarModal(){
+        this.visibleAnimate=false;
+        setTimeout(() => this.modalRegistro = false, 300);
+        this.msg="";
     }
 }

@@ -43,6 +43,12 @@ var AuthenticationService = (function () {
             }
         });
     };
+    AuthenticationService.prototype.registro = function (model) {
+        var json = JSON.stringify(model);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(this.url + 'auth/registro', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     AuthenticationService.prototype.logout = function () {
         // clear token remove user from local storage to log user out
         this.token = null;
