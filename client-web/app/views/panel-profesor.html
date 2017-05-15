@@ -215,7 +215,7 @@
   </div>
 
   <!-- modal mostrar ejercicio -->
-  <div (click)="hideEjercicio()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+  <div style="background: rgba(63,63,61,0.8);" (click)="hideEjercicio()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalEjercicio ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -237,7 +237,7 @@
   </div>
 
   <!-- modal crear actividad -->
-  <div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalActividad ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
       <div class="modal-dialog">
         <div class="modal-content">

@@ -121,12 +121,12 @@
 
 
 <!-- modal registro -->
-<div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
     [ngStyle]="{'display': modalRegistro ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-body">
-            <p *ngIf="msg != '' " class="info">{{msg}}</p>
+        <div class="modal-body" >
+            <p *ngIf="msg != '' ">{{msg}}</p>
         </div>
         <div class="modal-footer">
             <button (click)="cerrarModal()" class="btn">Cerrar</button>
