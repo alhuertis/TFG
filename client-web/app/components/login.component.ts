@@ -45,7 +45,10 @@ export class LoginComponent implements OnInit {
                     // login successful
                     this.user= JSON.parse(localStorage.getItem('currentUser')).user;
 
-                    if(this.user.role == 'profesor')
+                    if(this.user.role == 'admin'){
+                        this.router.navigate(['/admin']);
+                    }
+                    else if(this.user.role == 'profesor')
                         this.router.navigate(['/profesor']);
                     else if(this.user.role == 'alumno')
                         this.router.navigate(['/alumno']);

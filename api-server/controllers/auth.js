@@ -6,7 +6,7 @@ var Alumno= require('../models/alumno');
 var Profesor= require('../models/profesor');
 var service = require('./tokenService');
 
-function signup(req, res){
+function guardarUsuario(req, res){
     
         var user = new User();
         var params = req.body;
@@ -25,14 +25,14 @@ function signup(req, res){
             if(!userDB){
                 user.save((err, userStored)=>{
                     if(err){
-                        res.status(500).send({message:'Error al guardar el usuario'});
+                        res.status(500).send({message:'Error al guardar el usuario', resultado:'ko'});
                     }
                     else{
-                        return res.status(200).send({token: service.createToken(user)});
+                        return res.status(200).send({message:'Usuario guardado correctamente', resultado:'ok'});
                     }
                  });	
             }else{
-                return res.status(200).send({message:'El usuario ya existe'});
+                return res.status(200).send({message:'El usuario ya existe', resultado:'ko'});
             }
     
         });
@@ -87,12 +87,50 @@ function registro(req, res){
             }
     
         });
-}
+    }
+
+    function getRegistros(req, res){
+        Registro.find({}).sort('-_id').exec((err, registros)=>{
+            if(err){
+                res.status(500).send({message:'Error al devolver los registros'});
+            }
+            else{
+
+                if(!registros){
+                    res.status(404).send({message:'No hay registros'});
+                }
+                else{
+                    res.status(200).send({registros});
+                }	
+            }
+         });
+    }
+
+    function borrarRegistro(req, res){
+        var user= new User();
+        var params = req.body;
+
+        Registro.findByIdAndRemove(params._id, function (err, registro) {
+            if(err){
+                res.status(500).send({message:'Error al borrar el registro. El usuario ha sido aceptado', resultado:'ko'});
+            }
+
+            if(!registro)
+                res.status(400).send({message:'No existe un registro con ese id', resultado: 'ko'});
+            else{
+                res.status(200).send({message:'Registro borrado correctamente', resultado: 'ok'});
+            }
+        });     
+                  
+    
+      
+    }
 
 
 module.exports= {
-	signup,
+	guardarUsuario,
     login,
     registro,
-
+    getRegistros,
+    borrarRegistro,
 }

@@ -1,6 +1,7 @@
 "use strict";
 var router_1 = require("@angular/router");
 //Aqui vamos a importar todos los componentes que necesitemos
+var panel_admin_component_1 = require("./components/panel-admin.component");
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
@@ -8,9 +9,11 @@ var resolver_actividad_component_1 = require("./components/resolver-actividad.co
 var login_component_1 = require("./components/login.component");
 var authProfesor_guard_1 = require("./guards/authProfesor.guard");
 var authAlumno_guard_1 = require("./guards/authAlumno.guard");
+var authAdmin_guard_1 = require("./guards/authAdmin.guard");
 var appRoutes = [
     { path: 'login', component: login_component_1.LoginComponent },
     { path: '', redirectTo: 'profesor', pathMatch: 'full', canActivate: [authProfesor_guard_1.AuthGuardProfesor] },
+    { path: 'admin', component: panel_admin_component_1.PanelAdminComponent, canActivate: [authAdmin_guard_1.AuthGuardAdmin] },
     { path: 'profesor', component: panel_profesor_component_1.PanelProfesorComponent, canActivate: [authProfesor_guard_1.AuthGuardProfesor],
     },
     { path: 'crear-ejercicio', component: ejercicio_add_component_1.EjercicioAddComponent, canActivate: [authProfesor_guard_1.AuthGuardProfesor] },

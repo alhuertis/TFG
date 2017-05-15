@@ -3,6 +3,7 @@ import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 //Aqui vamos a importar todos los componentes que necesitemos
+import {PanelAdminComponent} from './components/panel-admin.component';
 import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component';
@@ -11,12 +12,16 @@ import {ResolverActividadComponent} from './components/resolver-actividad.compon
 import {LoginComponent} from './components/login.component';
 import {AuthGuardProfesor} from './guards/authProfesor.guard';
 import {AuthGuardAlumno} from './guards/authAlumno.guard';
+import {AuthGuardAdmin} from './guards/authAdmin.guard';
 
 const appRoutes: Routes = [
 
 	{ path: 'login', component: LoginComponent },
 
 	{path:'', redirectTo:'profesor', pathMatch:'full', canActivate: [AuthGuardProfesor]},
+
+	{path: 'admin', component: PanelAdminComponent,canActivate: [AuthGuardAdmin]},
+
 	{path: 'profesor', component: PanelProfesorComponent,canActivate: [AuthGuardProfesor],
 		/*children:[
 				{path:'cabecera-profesor', component: CabeceraProfesorComponent},

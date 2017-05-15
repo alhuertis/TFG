@@ -1,0 +1,58 @@
+<cabecera-admin></cabecera-admin>
+
+<div class="panel-alumno container-fluid">
+
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3 animated aparecer" *ngIf="users.length > 0">
+        <h3 class="text-center">Hay <span>{{users.length}}</span> solicitudes de registro</h3>
+        <p class="text-center">Haz clic para ver mas información</p>
+        <div *ngFor="let usuario of pagedItems" class="usu-registro">
+
+          <div class="row">
+
+            <div class="col-md-2">
+              <img src="../../assets/images/users.png" alt="">
+            </div>
+
+            <div class="col-md-4">
+              <p>{{usuario.nombre}} {{usuario.apellidos}} "{{usuario.alias}}"</p>
+            </div>
+
+            <div class="col-md-3">
+              <p>{{usuario.role}}</p>
+            </div>
+
+            <div class="col-md-3">
+              <i class="glyphicon glyphicon-ok"></i>
+              <i class="glyphicon glyphicon-remove"></i>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <!-- pager -->
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+          <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

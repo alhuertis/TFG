@@ -12,16 +12,19 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_routing_1 = require("./app.routing");
 var ng2_drag_drop_1 = require("ng2-drag-drop");
+var panel_admin_component_1 = require("./components/panel-admin.component");
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
 var cabecera_profesor_component_1 = require("./components/cabecera-profesor.component");
 var truncate_pipe_component_1 = require("./components/truncate-pipe.component");
 var cabecera_alumno_component_1 = require("./components/cabecera-alumno.component");
+var cabecera_admin_component_1 = require("./components/cabecera-admin.component");
 var resolver_actividad_component_1 = require("./components/resolver-actividad.component");
 var login_component_1 = require("./components/login.component");
 var authProfesor_guard_1 = require("./guards/authProfesor.guard");
 var authAlumno_guard_1 = require("./guards/authAlumno.guard");
+var authAdmin_guard_1 = require("./guards/authAdmin.guard");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,16 +42,18 @@ AppModule = __decorate([
         //Aqui cargamos todos los componentes que vamos a usar en la aplicacion.(Es un array).
         declarations: [
             app_component_1.AppComponent,
+            panel_admin_component_1.PanelAdminComponent,
             panel_profesor_component_1.PanelProfesorComponent,
             ejercicio_add_component_1.EjercicioAddComponent,
             panel_alumno_component_1.PanelAlumnoComponent,
             cabecera_profesor_component_1.CabeceraProfesorComponent,
             truncate_pipe_component_1.TruncatePipe,
             cabecera_alumno_component_1.CabeceraAlumnoComponent,
+            cabecera_admin_component_1.CabeceraAdminComponent,
             resolver_actividad_component_1.ResolverActividadComponent,
             login_component_1.LoginComponent
         ],
-        providers: [app_routing_1.appRoutingProviders, authProfesor_guard_1.AuthGuardProfesor, authAlumno_guard_1.AuthGuardAlumno],
+        providers: [app_routing_1.appRoutingProviders, authProfesor_guard_1.AuthGuardProfesor, authAlumno_guard_1.AuthGuardAlumno, authAdmin_guard_1.AuthGuardAdmin],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

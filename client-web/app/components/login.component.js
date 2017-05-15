@@ -37,7 +37,10 @@ var LoginComponent = (function () {
             if (result === true) {
                 // login successful
                 _this.user = JSON.parse(localStorage.getItem('currentUser')).user;
-                if (_this.user.role == 'profesor')
+                if (_this.user.role == 'admin') {
+                    _this.router.navigate(['/admin']);
+                }
+                else if (_this.user.role == 'profesor')
                     _this.router.navigate(['/profesor']);
                 else if (_this.user.role == 'alumno')
                     _this.router.navigate(['/alumno']);

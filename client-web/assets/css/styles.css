@@ -167,6 +167,11 @@
 	border-bottom: 1px solid #3b9b86;
 }
 
+.navbar-admin {
+    background-color: #878787;
+	border-bottom: 1px solid #4f4704;
+}
+
 .btn-crear-eje{
 	background-color: #544f4f !important;
 	color:white !important;
@@ -691,5 +696,43 @@
 	color: white;
 }
 /*********FIN PANEL ALUMNO**********/
+
+/*********PANEL ADMIN**********/
+
+.usu-registro{
+	position: relative;
+	background: #560303;
+	margin-bottom: 5px;
+	min-height: 50px;
+	border-radius: 7px;
+	color: white;
+}
+
+.usu-registro p, .usu-registro i{
+	margin-top: 10px;
+}
+
+.usu-registro img{
+	position: absolute;
+	top: -6px;
+	left: 30px;
+}
+
+ .usu-registro i{
+	 font-size: 20px;
+	 margin-right: 20px;
+	 cursor: pointer;
+ }
+
+ .usu-registro i:hover{
+	 color: #ccc;
+ }
+
+
+
+
+
+
+/*********FIN PANEL ADMIN**********/
 
 
