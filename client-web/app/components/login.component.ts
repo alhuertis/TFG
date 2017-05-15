@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     registro: Boolean;
     modalRegistro: Boolean;
     visibleAnimate: Boolean;
+    screenHeight = screen.height + "px";
 
     msg: String;
  

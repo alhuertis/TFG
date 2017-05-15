@@ -19,6 +19,7 @@ var LoginComponent = (function () {
         this.modelRegistro = {};
         this.loading = false;
         this.error = '';
+        this.screenHeight = screen.height + "px";
         this.registro = false;
         this.msg = "";
         this.modalRegistro = false;

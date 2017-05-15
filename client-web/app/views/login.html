@@ -1,8 +1,11 @@
+<div class="container-fluid" style="background: rgba(3,155,46,0.5);" [style.height]="screenHeight">
+
+
 <div *ngIf="!registro" id="loginbox" style="margin-top:110px;" class="mainbox col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
      <div class="panel panel-info" >
 
          <div class="panel-heading">
-            <div class="panel-title">TEFEGE</div>
+            <div class="panel-title">LOGIN</div>
             <!--<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>-->
         </div>
 
@@ -45,7 +48,7 @@
 <div *ngIf="registro" id="signupbox" style="margin-top:20px" class="mainbox col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
     <div class="panel panel-info">
         <div class="panel-heading">
-            <div class="panel-title">TEFEGE - registro</div>
+            <div class="panel-title">REGISTRO</div>
             <div style="float:right; font-size: 85%; position: relative; top:-10px; cursor: pointer"><a id="signinlink" (click)="mostrarRegistro(false)">Volver</a></div>
         </div>  
         <div class="panel-body" >
@@ -117,6 +120,7 @@
             </form>
             </div>
     </div>
+</div>
 </div>
 
 
