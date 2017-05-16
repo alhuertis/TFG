@@ -10,21 +10,21 @@
 
           <div class="row">
 
-            <div class="col-md-2">
+            <div class="col-md-2" (click)="verUsuario(usuario)">
               <img src="../../assets/images/users.png" alt="">
             </div>
 
-            <div class="col-md-4">
-              <p>{{usuario.nombre}} {{usuario.apellidos}} "{{usuario.alias}}"</p>
+            <div class="col-md-4" (click)="verUsuario(usuario)">
+              <p class="ver-info">{{usuario.nombre}} {{usuario.apellidos}} "{{usuario.alias}}"</p>
+            </div>
+
+            <div class="col-md-3" (click)="verUsuario(usuario)">
+              <p class="ver-info">{{usuario.role}}</p>
             </div>
 
             <div class="col-md-3">
-              <p>{{usuario.role}}</p>
-            </div>
-
-            <div class="col-md-3">
-              <i class="glyphicon glyphicon-ok"></i>
-              <i class="glyphicon glyphicon-remove"></i>
+              <i class="glyphicon glyphicon-ok" (click)="aprobarRegistro(usuario)"></i>
+              <i class="glyphicon glyphicon-remove" (click)="desaprobarRegistro(usuario)"></i>
             </div>
 
           </div>
@@ -32,7 +32,13 @@
       </div>
   </div>
 
-  <div class="row">
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3 animated aparecer" *ngIf="users.length == 0">
+        <h3 class="text-center">No hay solicitudes de registro</h3>
+      </div>
+   </div>
+
+  <div class="row" *ngIf="users.length > 0">
     <div class="col-md-6 col-md-offset-3">
       <!-- pager -->
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
@@ -55,4 +61,49 @@
     </div>
   </div>
 
+</div>
+
+<!-- modal registro -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalRegistro ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body" >
+            <p *ngIf="msg != '' ">{{msg}}</p>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModal()" class="btn">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal info -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalUsuario ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+              <ul class="user-info">
+                <li><i class="glyphicon glyphicon-sunglasses"></i> Alias: {{userInfo.alias}}</li>
+                <li><i class="glyphicon glyphicon-user"></i> Nombre: {{userInfo.nombre}}</li>
+                <li><i class="glyphicon glyphicon-user"></i> Apellidos: {{userInfo.apellidos}}</li>
+                <li><i class="glyphicon glyphicon-envelope"></i> Email: {{userInfo.email}}</li>
+                <li><i class="glyphicon glyphicon-credit-card"></i> DNI: {{userInfo.dni}}</li>
+                <li><i class="glyphicon glyphicon-calendar"></i> Fecha de nacimiento: {{userInfo.fecha_nacimiento | date: 'dd/MM/yyyy'}}</li>
+                <li><i class="glyphicon glyphicon-education"></i> Institucion educativa: {{userInfo.institucion_educativa}}</li>
+                <li><i class="glyphicon glyphicon-tag"></i> Role: {{userInfo.role}}</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModalInfo()" class="btn">Cerrar</button>
+        </div>
+        </div>
+    </div>
 </div>

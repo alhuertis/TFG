@@ -728,6 +728,18 @@
 	 color: #ccc;
  }
 
+ .usu-registro .ver-info:hover{
+	 cursor: pointer;
+	 text-decoration: underline;
+ }
+
+ .user-info li{
+	 list-style-type: none;
+	 font-size: 18px;
+	 margin-bottom: 5px;
+
+ }
+
 
 
 

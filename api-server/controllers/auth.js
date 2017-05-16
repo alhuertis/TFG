@@ -112,7 +112,7 @@ function registro(req, res){
 
         Registro.findByIdAndRemove(params._id, function (err, registro) {
             if(err){
-                res.status(500).send({message:'Error al borrar el registro. El usuario ha sido aceptado', resultado:'ko'});
+                res.status(500).send({message:'Error al borrar el registro.', resultado:'ko'});
             }
 
             if(!registro)
