@@ -145,7 +145,7 @@
                     
                     <div class="col-md-6">
                       <ul>
-                        <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | truncate : 25}}</li>
+                        <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date : 'dd/mm/yyyy'}}</li>
                         <li><i class="glyphicon glyphicon-signal"></i> {{actividad.nivel}}</li>
                       </ul>
                     </div>

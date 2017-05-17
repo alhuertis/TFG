@@ -30,17 +30,14 @@ function getSolucion(req, res){
 function saveSolucion(req, res){
 	var solucion = new Solucion();
 	var params = req.body;
-	solucion.id_actividad="59122899cdf9af1fbc43eccf";
+	solucion.actividad=params.id_actividad;
 	solucion.notaFinal= params.notaFinal;
-	solucion.nombreAlumno="Alberto";
-	//solucion.id_alumno="59122899cdf9af1fbc43rccf"; (cuando tengamos id de usario se podra meter)
-	solucion.id_ejercicios=["5912281bcdf9af1fbc43eccd","59122879cdf9af1fbc43ecce"];
-	solucion.calificacion=[2,4];
-	solucion.msgCalificacion=["sadsad","fgdfgs"];
-	solucion.respuesta=["sadsad","fgdfgs"];
-	solucion.terminado= false;
-
-	console.log("Soluciooooonnn: " + solucion.notaFinal);
+	solucion.alumno=params.id_alumno;
+	solucion.ejercicios=params.id_ejercicios;
+	solucion.calificaciones=params.calificaciones;
+	solucion.msgCalificaciones=params.msgCalificaciones;
+	solucion.respuestas=params.respuestas;
+	solucion.terminado= params.terminado;
 
 	solucion.save((err, solucionStored)=>{
 		if(err){
@@ -76,11 +73,52 @@ function getSoluciones(req, res){
 
 }
 
+function getTerminadasById(req, res){
+
+	
+
+	Solucion.find({alumno: req.body.id_alumno, terminado: true}).sort('-_id').exec((err, soluciones)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las soluciones'});
+		}
+		else{
+
+			if(!soluciones){
+				res.status(404).send({message:'No hay soluciones'});
+			}
+			else{
+				res.status(200).send({soluciones});
+			}	
+		}
+	});
+}
+
+function getSinTerminarById(req, res){
+
+	Solucion.find({alumno: req.body.id_alumno, terminado: false}).sort('-_id').exec((err, soluciones)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver las soluciones'});
+		}
+		else{
+
+			if(!soluciones){
+				res.status(404).send({message:'No hay soluciones'});
+			}
+			else{
+				res.status(200).send({soluciones});
+			}	
+		}
+
+	});
+}
+
 
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {
 	getSolucion,
 	getSoluciones,
 	saveSolucion,
+	getTerminadasById,
+	getSinTerminarById,
 
 }

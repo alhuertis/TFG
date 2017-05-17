@@ -37,6 +37,26 @@ export class SolucionService{
 		return this._http.get(this.url+'solucion/'+id).map(res => res.json());
 	}
 
+    getTerminadasById(model: any){
+        let json = JSON.stringify(model);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasId', params, {headers: headers}).map(res => res.json());
+
+    }
+
+    getSinTerminarById(model: any){
+        let json = JSON.stringify(model);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarId', params, {headers: headers}).map(res => res.json());
+
+    }
+
     
 
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
