@@ -47,9 +47,9 @@ function  getPalabra(req, res){
  		if(!lr){
  			res.status(404).send({message: 'No hay datos'});
  		}else{
-            var le= lr.Lexicon.LexicalEntry[0]; 
-               console.log(JSON.stringify(le.id)); 
- 				res.status(200).send({lr});
+            var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate; 
+             
+ 				res.status(200).send({Caracterizacion});
  		}
 
  		}
