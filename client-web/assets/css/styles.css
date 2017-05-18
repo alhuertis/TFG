@@ -695,6 +695,14 @@
 	background: #39a890;
 	color: white;
 }
+
+.btn-salir-act{
+	margin-left: 4px;
+	margin-top: -16px;
+	background: #a33535;
+	color: white;
+	padding: 4px;
+}
 /*********FIN PANEL ALUMNO**********/
 
 /*********PANEL ADMIN**********/

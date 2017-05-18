@@ -12,6 +12,7 @@ var api= express.Router();
 api.get('/solucion/:id', SolucionController.getSolucion);
 api.get('/soluciones', SolucionController.getSoluciones);
 api.post('/solucion', SolucionController.saveSolucion);
+api.put('/solucion/:id', SolucionController.updateSolucion);
 api.post('/soluciones-terminadasId', SolucionController.getTerminadasById);
 api.post('/soluciones-sinTerminarId', SolucionController.getSinTerminarById);
 

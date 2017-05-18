@@ -2,10 +2,22 @@
 
 <div class="row">
     <div class="col-md-3">
-        <ol class="breadcrumb" style="width: 230px">
-            <li><a routerLink="/alumno">Alumno</a></li>
-            <li class="active">Resolver actividad</li>
-        </ol>
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb" style="width: 230px">
+                    <li><a routerLink="/alumno">Alumno</a></li>
+                    <li class="active">Resolver actividad</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-salir-act" (click)="guardarYSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Salir</button>  
+            </div>
+            
+        </div>
+        
     </div>
 
     <div class="col-md-5">
@@ -27,6 +39,7 @@
                 <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"  aria-valuemin="0" aria-valuemax="100" [style.width]="progreso + '%'">
                     {{progreso}}%
                 </div>
+        
             </div>
 
             <div class="nota-final animated aparecer" *ngIf="progreso == 100">
@@ -90,7 +103,7 @@
                     <div class="solucion">
                         <input type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
                         <button class="btn btn-default" [disabled]="respuesta.length == 0" (click)="calificar()">Enviar</button>
-                        <button class="btn btn-success animated aparecer" *ngIf="progreso == 100" (click)="guardarYSalir()">Terminar</button>
+                        <button class="btn btn-success animated aparecer" *ngIf="terminado" (click)="guardarSolucion()">Terminar</button>
                     </div>
 
                     <div class="puzle">

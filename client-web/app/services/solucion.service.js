@@ -26,6 +26,12 @@ var SolucionService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'solucion', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.updateSolucion = function (solucion) {
+        var json = JSON.stringify(solucion);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.put(this.url + 'solucion/' + solucion._id, params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getSoluciones = function () {
         return this._http.get(this.url + 'soluciones').map(function (res) { return res.json(); });
     };

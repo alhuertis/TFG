@@ -28,6 +28,15 @@ export class SolucionService{
 
 		return this._http.post(this.url+'solucion', params, {headers: headers}).map(res=> res.json());
     }
+    
+    updateSolucion(solucion : Solucion){
+        let json = JSON.stringify(solucion);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.put(this.url+'solucion/'+solucion._id, params, {headers: headers}).map(res=> res.json());
+    }
 
 	getSoluciones(){
 		return this._http.get(this.url+'soluciones').map(res => res.json());

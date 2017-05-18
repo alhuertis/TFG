@@ -24,8 +24,8 @@ import * as _ from 'underscore';
 
 export class  ResolverActividadComponent implements OnInit{
 
-    id_actividad: string;
-    user: User;
+    id_actividad: string; //Le pasamos el id de actividad a esta variable
+    user: User; //Captura el usuario actual en localStorage
 
     actividad: Ejercicio[];
     infoActividad: Actividad;
@@ -39,6 +39,8 @@ export class  ResolverActividadComponent implements OnInit{
     msgCalificacion: String;
     progreso: number;
     calificacionFinal: number;
+    
+    //Fichas
     monovalente: Ficha;
     bivalente: Ficha;
     trivalente: Ficha;
@@ -47,6 +49,8 @@ export class  ResolverActividadComponent implements OnInit{
     naranja: Ficha;
     roja: Ficha;
     verde: Ficha;
+
+    //Atributos de frase
     argumentos: number;
     verbo: string;
     faseVerbo: Boolean;
@@ -55,8 +59,10 @@ export class  ResolverActividadComponent implements OnInit{
 
     //solucion: Array<Solucion>;
     solucion: Solucion;
-    resueltos: number;
+    resueltos: number; //Para saber el numero de ejers que se han resulto
+    terminado: Boolean; //Se ha terminado la actividad
 
+    //Para mensajes de error
     errorMessage: String;
 
  
@@ -66,11 +72,11 @@ export class  ResolverActividadComponent implements OnInit{
 	constructor(
 			private _actividadService: ActividadService,
             private _solucionService: SolucionService, 
-            private route:  ActivatedRoute
+            private route:  ActivatedRoute,
+            private _router: Router
 
 	){
         this.id_actividad= this.route.snapshot.params['id_actividad'];
-        //alert(this.id_actividad);
 
         this.actividad=[];
         this.user= JSON.parse(localStorage.getItem('currentUser')).user;
@@ -174,6 +180,8 @@ export class  ResolverActividadComponent implements OnInit{
         this.verboMarcado=false;
         this.srcDraggedPentagono="adios";
         this.resueltos=0;
+
+        this.terminado=false;
         
 
 	
@@ -247,6 +255,8 @@ export class  ResolverActividadComponent implements OnInit{
         $('span.marcada').removeClass("marcada");
         $('.izquierda, .superior, .derecha').removeAttr("src");
         $('.izquierda, .superior, .derecha').css("display", "none");
+
+        this.guardarSolucion();
     }
 
     anteriorEjer(){
@@ -256,6 +266,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta="";
         this.verbo= this.extraerVerbo();
+        this.guardarSolucion();
     }
 
     calificar(){
@@ -299,6 +310,7 @@ export class  ResolverActividadComponent implements OnInit{
                 this.calificacionFinal+=this.solucion.calificaciones[i];
             }
             this.solucion.notaFinal=this.calificacionFinal;
+            this.terminado=true;
         }
         
     }
@@ -498,37 +510,70 @@ export class  ResolverActividadComponent implements OnInit{
     	return new Promise(r => setTimeout(r, ms));
 	}
 
-    //guarda la solucion en cualquier momento
-    guardarSolucion(){
+    
+    //cuando terminas, guarda y sale
+    guardarYSalir(){
+        this.guardarSolucion();
+        this._router.navigate(['/alumno']);
 
     }
 
-    //cuando terminas, guarda y sale
-    guardarYSalir(){
+    //guarda la solucion en cualquier momento
+    guardarSolucion(){
         this.solucion.id_actividad= this.id_actividad;
         this.solucion.id_alumno= this.user._id;
         this.solucion.id_ejercicios= this.infoActividad.ejercicios;
-        this.solucion.terminado=true;
-        this._solucionService.saveSolucion(this.solucion).subscribe(
-			result =>{
-				console.log(result);
-				this.solucion._id= result;
+        this.solucion.terminado=this.terminado;
 
-				if(this.solucion._id == ""){
-					alert('Error en el servidor guardando la solucion');
-				}else{
-                    alert(this.solucion._id);
+        if(this.solucion._id == ""){
+
+            this._solucionService.saveSolucion(this.solucion).subscribe(
+                result =>{
+                    console.log(result);
+                    this.solucion._id= result;
+
+                    if(this.solucion._id == ""){
+                        alert('Error en el servidor guardando la solucion');
+                    }else{
+                        alert("Se ha guardado la actividad con id: " + this.solucion._id);
+                    }
+                },
+                error => {
+                    this.errorMessage= <any>error;
+
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert(this.errorMessage);
+                    }
                 }
-			},
-			error => {
-				this.errorMessage= <any>error;
+            );
 
-				if(this.errorMessage != null){
-					console.log(this.errorMessage);
-					alert(this.errorMessage);
-				}
-			}
-		);
+        }
+        else {
+
+            this._solucionService.updateSolucion(this.solucion).subscribe(
+                result =>{
+                    console.log(result);
+                    this.solucion._id= result;
+
+                    if(this.solucion._id == ""){
+                        alert('Error en el servidor actualizando la solucion');
+                    }else{
+                        alert("Se ha actualizado la actividad con id: " + this.solucion._id);
+                    }
+                },
+                error => {
+                    this.errorMessage= <any>error;
+
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert(this.errorMessage);
+                    }
+                }
+            );
+
+
+        }
     }
     
 }

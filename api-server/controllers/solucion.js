@@ -42,16 +42,31 @@ function saveSolucion(req, res){
 	solucion.save((err, solucionStored)=>{
 		if(err){
 			res.status(500).send({message:'Error al guardar la solucion'});
-			console.log("Error al guardar");
 		}
 		else{
 			res.status(200).send(solucionStored._id);
-			console.log("Guardado");
 		}
 	});
 
 
 }
+
+function updateSolucion(req, res){
+	var solucionId= req.params.id;
+	var update= req.body; //Recoge todos los parametros
+
+	//Busca un objeto y lo actualiza
+	//Recibe el id a actualizar, los datos nuevos y despues una función calback
+	Solucion.findByIdAndUpdate(solucionId, update, (err, solucionUpdated) =>{
+
+		if(err)
+			res.status(500).send({message: 'Error al actualizar la solucion'});
+		else
+			res.status(200).send(solucionUpdated._id);//favoritoUpdated no devuelve los datos actualizados pero en base de datos si estará actualizado
+	});
+	
+}
+
 function getSoluciones(req, res){
 
 	Solucion.find({}).sort('-_id').exec((err, soluciones)=>{
@@ -118,6 +133,7 @@ module.exports= {
 	getSolucion,
 	getSoluciones,
 	saveSolucion,
+	updateSolucion,
 	getTerminadasById,
 	getSinTerminarById,
 
