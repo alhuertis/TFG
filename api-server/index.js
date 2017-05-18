@@ -1,5 +1,5 @@
 'use strict'
-
+var DiccionarioController =  require('./controllers/diccionario');
 //importamos mongoose
 var mongoose= require('mongoose');
 
@@ -17,7 +17,9 @@ mongoose.connect('mongodb://localhost:27017/tfg', (err,res)=>{
 	}
 	else{
 
+
 		console.log('Conexion a Mongo correcta');
+		DiccionarioController.saveDiccionario();
 
 		app.listen(port, function(){
 			console.log("API REST TFG funcionado en http://localhost:"+port);
