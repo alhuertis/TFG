@@ -37,10 +37,35 @@ function  getDiccionario(req, res){
  	});
 }
 
+function  getPalabra(req, res){
+    var palabra= req.params.palabra;
+     	LexicalResource.findOne({'Lexicon.LexicalEntry.Sense.Definition.feat.val':palabra},(err, lr) => {
+ 		if(err){
+ 			res.status(500).send({message: 'Error al devolver los datos'});
+ 		}else{
+
+ 		if(!lr){
+ 			res.status(404).send({message: 'No hay datos'});
+ 		}else{
+            var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate; 
+             
+ 				res.status(200).send({Caracterizacion});
+ 		}
+
+ 		}
+
+ 	
+ 	});
+}
+
 
  function saveDiccionario(req, res) {
 
-    lr = new LexicalResource();
+ 
+
+     for (var i = 2; i < LexicalEntry.length - 1; i++) {
+
+            lr = new LexicalResource();
      //Datos que se puede pasar por parametro
      lr.GlobalInformation.feat.push({
          att: "languageCoding",
@@ -60,21 +85,22 @@ function  getDiccionario(req, res){
      });
 
 
-     for (var i = 2; i < LexicalEntry.length - 1; i++) {
-
          introducirCategoria(LexicalEntry[i], LexicalEntry[0].split("|"));
+         console.log(i);
+           lr.save((err, lrStored) =>{
+ 		if(err){
+ 			//res.status(500).send({message: 'Error al guardar'});
+ 		}else{
+ 			//res.status(200).send({lr: lrStored})
+ 		}
+ 		
+ 	});
+    
 
     };
 
 
-     lr.save((err, lrStored) =>{
- 		if(err){
- 			res.status(500).send({message: 'Error al guardar'});
- 		}else{
- 			res.status(200).send({lr: lrStored})
- 		}
- 		
- 	});
+   
 
  }
 
@@ -540,5 +566,6 @@ function  getDiccionario(req, res){
  module.exports = {
 
     saveDiccionario,
-     getDiccionario
+     getDiccionario,
+     getPalabra
  }
