@@ -43,13 +43,14 @@ function  getPalabra(req, res){
  		if(err){
  			res.status(500).send({message: 'Error al devolver los datos'});
  		}else{
-
- 		if(!lr){
- 			res.status(404).send({message: 'No hay datos'});
- 		}else{
-            var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate; 
+             
+ 		if(lr!=null && lr.Lexicon.LexicalEntry[0].feat[0].val=="verb"){
+             var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate; 
              
  				res.status(200).send({Caracterizacion});
+ 			
+ 		}else{
+            res.status(404).send({message: 'No hay datos'});
  		}
 
  		}
@@ -62,7 +63,7 @@ function  getPalabra(req, res){
  function saveDiccionario(req, res) {
 
  
-
+    var save=true;
      for (var i = 2; i < LexicalEntry.length - 1; i++) {
 
             lr = new LexicalResource();
@@ -86,10 +87,13 @@ function  getPalabra(req, res){
 
 
          introducirCategoria(LexicalEntry[i], LexicalEntry[0].split("|"));
-         console.log(i);
-           lr.save((err, lrStored) =>{
+            var id="id"+LexicalEntry[i].split("|")[0];
+      	
+           	LexicalResource.update({'Lexicon.LexicalEntry.id':id},{$setOnInsert: lr}, 
+    {upsert: true}, (err, lrStored) =>{
  		if(err){
- 			//res.status(500).send({message: 'Error al guardar'});
+ 			//res.status(500).send({message: 'Error al guardar'}); 
+             save=false;
  		}else{
  			//res.status(200).send({lr: lrStored})
  		}
@@ -99,7 +103,12 @@ function  getPalabra(req, res){
 
     };
 
-
+if(save){
+    console.log("Diccionario cargado correctamente");
+}else
+{
+    console.log("Error al cargar el diccionario");
+}
    
 
  }
