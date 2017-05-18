@@ -3,7 +3,7 @@ export class Actividad{
 
 	constructor(
 		//El id es el interno que asigna solo mongo, pero nos viene bien para recuperarlo
-		public titulo: String,
+		public titulo: string,
         public id_profesor: String,
         public profesor: String,
         public fecha_creacion: Date,

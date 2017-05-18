@@ -3,9 +3,12 @@ import{Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {ActividadService} from '../services/actividad.service';
+import {SolucionService} from '../services/solucion.service';
 import {ProfesorService} from '../services/profesor.service';
 import {Actividad} from '../models/actividad';
 import {Profesor} from '../models/profesor';
+import {User} from '../models/user';
+import {Solucion} from '../models/solucion';
 import {TruncatePipe} from './truncate-pipe.component';
 
 import * as _ from 'underscore';
@@ -16,11 +19,13 @@ declare var $:any;
 
 	selector: 'panel-alumno',
 	templateUrl: 'app/views/panel-alumno.html',
-	providers: [ActividadService, ProfesorService], //Necesitamos esto para poder usar los metodos
+	providers: [ActividadService, ProfesorService, SolucionService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/menu-profesor.css'],
 }) 
 
 export class  PanelAlumnoComponent implements OnInit{
+
+	public user: User;
 
 	public title: string;
 	public profesores: Profesor[];
@@ -32,14 +37,18 @@ export class  PanelAlumnoComponent implements OnInit{
 	public propuestas: Actividad[];
 	public propuestasByApertura: Actividad[];
 	public propuestasByCierre: Actividad[];
-	public actividadesAMostrar: Actividad[];
+
+	public actividadesResueltas: Solucion[];
+	
 	public datosAMostrar: String;
 
 	public errorMessage: string;
 
-	// pager object
+	// pager object (paginador)
     pager: any = {};
-    // paged items
+	//Las que se muestran
+	public actividadesAMostrar: Actividad[];
+    // Las que se muestran (paginadas)
     public pagedItems: Actividad[];
 	public mostrarLista: Boolean;
 
@@ -50,9 +59,11 @@ export class  PanelAlumnoComponent implements OnInit{
 
 	constructor(
 			private _actividadService: ActividadService,
-			private _profesorService: ProfesorService
+			private _profesorService: ProfesorService,
+			private _solucionService: SolucionService
 
 	){
+		this.user= JSON.parse(localStorage.getItem('currentUser')).user;
 		this.title= "Panel de alumno";
 		this.actividades=[];
 		this.profesores=[];
@@ -63,6 +74,7 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.propuestas=new Array<Actividad>();
 		this.propuestasByApertura=new Array<Actividad>();
 		this.propuestasByCierre=new Array<Actividad>();
+		this.actividadesResueltas=[];
 		this.actividadesAMostrar=[];
 		this.datosAMostrar= new String();
 		this.mostrarLista=false;
@@ -72,7 +84,23 @@ export class  PanelAlumnoComponent implements OnInit{
 
 	ngOnInit(){
 
-		//Obtencion de datos
+
+		this._solucionService.getTerminadasById(this.user._id).subscribe(
+
+			result=>{
+				this.actividadesResueltas= result.soluciones;
+			},
+
+			error=>{
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert(this.errorMessage);
+				}
+			}
+		);
+		
 		this._actividadService.getActividades().subscribe(
 			result =>{
 				console.log(result);

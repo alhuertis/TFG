@@ -92,7 +92,7 @@ function getTerminadasById(req, res){
 
 	
 
-	Solucion.find({alumno: req.body.id_alumno, terminado: true}).sort('-_id').exec((err, soluciones)=>{
+	Solucion.find({alumno: req.body._id, terminado: true}).sort('-_id').exec((err, soluciones)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las soluciones'});
 		}

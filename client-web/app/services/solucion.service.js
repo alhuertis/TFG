@@ -39,14 +39,12 @@ var SolucionService = (function () {
         return this._http.get(this.url + 'solucion/' + id).map(function (res) { return res.json(); });
     };
     SolucionService.prototype.getTerminadasById = function (model) {
-        var json = JSON.stringify(model);
-        var params = json;
+        var params = { _id: model };
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'soluciones-terminadasId', params, { headers: headers }).map(function (res) { return res.json(); });
     };
     SolucionService.prototype.getSinTerminarById = function (model) {
-        var json = JSON.stringify(model);
-        var params = json;
+        var params = { _id: model };
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'soluciones-sinTerminarId', params, { headers: headers }).map(function (res) { return res.json(); });
     };

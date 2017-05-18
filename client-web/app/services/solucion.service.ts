@@ -47,8 +47,8 @@ export class SolucionService{
 	}
 
     getTerminadasById(model: any){
-        let json = JSON.stringify(model);
-		let params= json;
+        
+		let params= {_id: model};
 
 		let headers= new Headers({'Content-Type': 'application/json'});
 
@@ -57,9 +57,8 @@ export class SolucionService{
     }
 
     getSinTerminarById(model: any){
-        let json = JSON.stringify(model);
-		let params= json;
 
+        let params= {_id: model};
 		let headers= new Headers({'Content-Type': 'application/json'});
 
         return this._http.post(this.url+'soluciones-sinTerminarId', params, {headers: headers}).map(res => res.json());

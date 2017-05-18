@@ -37,7 +37,7 @@
 
             <div class="progress">
                 <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"  aria-valuemin="0" aria-valuemax="100" [style.width]="progreso + '%'">
-                    {{progreso}}%
+                    {{progreso | number:'2.0-0'}}%
                 </div>
         
             </div>

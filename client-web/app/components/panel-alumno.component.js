@@ -11,14 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //OnInit es como un constructor pero para meter logica. Los constructores solo inicializan variables
 var core_1 = require("@angular/core");
 var actividad_service_1 = require("../services/actividad.service");
+var solucion_service_1 = require("../services/solucion.service");
 var profesor_service_1 = require("../services/profesor.service");
 //los decoradores no tienen punto y coma
 var PanelAlumnoComponent = (function () {
-    function PanelAlumnoComponent(_actividadService, _profesorService) {
+    function PanelAlumnoComponent(_actividadService, _profesorService, _solucionService) {
         this._actividadService = _actividadService;
         this._profesorService = _profesorService;
-        // pager object
+        this._solucionService = _solucionService;
+        // pager object (paginador)
         this.pager = {};
+        this.user = JSON.parse(localStorage.getItem('currentUser')).user;
         this.title = "Panel de alumno";
         this.actividades = [];
         this.profesores = [];
@@ -29,13 +32,22 @@ var PanelAlumnoComponent = (function () {
         this.propuestas = new Array();
         this.propuestasByApertura = new Array();
         this.propuestasByCierre = new Array();
+        this.actividadesResueltas = [];
         this.actividadesAMostrar = [];
         this.datosAMostrar = new String();
         this.mostrarLista = false;
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
-        //Obtencion de datos
+        this._solucionService.getTerminadasById(this.user._id).subscribe(function (result) {
+            _this.actividadesResueltas = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
         this._actividadService.getActividades().subscribe(function (result) {
             console.log(result);
             _this.actividades = result.actividades;
@@ -311,11 +323,12 @@ PanelAlumnoComponent = __decorate([
     core_1.Component({
         selector: 'panel-alumno',
         templateUrl: 'app/views/panel-alumno.html',
-        providers: [actividad_service_1.ActividadService, profesor_service_1.ProfesorService],
+        providers: [actividad_service_1.ActividadService, profesor_service_1.ProfesorService, solucion_service_1.SolucionService],
         styleUrls: ['../../assets/css/menu-profesor.css'],
     }),
     __metadata("design:paramtypes", [actividad_service_1.ActividadService,
-        profesor_service_1.ProfesorService])
+        profesor_service_1.ProfesorService,
+        solucion_service_1.SolucionService])
 ], PanelAlumnoComponent);
 exports.PanelAlumnoComponent = PanelAlumnoComponent;
 //# sourceMappingURL=panel-alumno.component.js.map
