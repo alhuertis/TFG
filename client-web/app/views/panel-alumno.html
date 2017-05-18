@@ -81,8 +81,8 @@
                 <div class="col-md-5">
                   <ul>
                     <li><i class="glyphicon glyphicon-signal"></i> nivel: {{actividad.nivel}}</li>
-                    <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{actividad.fecha_creacion | truncate : 10}}</li>
-                    <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{actividad.fecha_prop_fin | truncate : 10}}</li>
+                    <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{actividad.fecha_creacion |  date : 'dd/mm/yyyy'}}</li>
+                    <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{actividad.fecha_prop_fin | date : 'dd/mm/yyyy'}}</li>
                   </ul>
               </div>
             </div>

@@ -32,6 +32,18 @@ var SolucionService = (function () {
     SolucionService.prototype.getSolucion = function (id) {
         return this._http.get(this.url + 'solucion/' + id).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.getTerminadasById = function (model) {
+        var json = JSON.stringify(model);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-terminadasId', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getSinTerminarById = function (model) {
+        var json = JSON.stringify(model);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-sinTerminarId', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

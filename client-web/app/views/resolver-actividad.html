@@ -14,7 +14,7 @@
             <ul class="text-center">
                 <li><i class="glyphicon glyphicon-user"></i> {{infoActividad.profesor}}</li>
                 <li><i class="glyphicon glyphicon-signal"></i> {{infoActividad.nivel}}</li>
-                <li><i class="glyphicon glyphicon-calendar"></i> {{infoActividad.fecha_creacion | truncate: 10}}</li>
+                <li><i class="glyphicon glyphicon-calendar"></i> {{infoActividad.fecha_creacion | date : 'dd/mm/yyyy'}}</li>
             </ul>
         </div>
       
@@ -120,10 +120,10 @@
     </div>
 
     <div class="col-md-4">
-        <div *ngIf="solucion.calificacion[ejerSel] != null" class="calificacion animated fadeInRigth">
-            <p>Nota: {{solucion.calificacion[ejerSel]}}</p>
-            <p>Respuesta: {{solucion.respuesta[ejerSel]}}</p>
-            <p>{{solucion.msgCalificacion[ejerSel]}}</p>
+        <div *ngIf="solucion.calificaciones[ejerSel] != null" class="calificacion animated fadeInRigth">
+            <p>Nota: {{solucion.calificaciones[ejerSel]}}</p>
+            <p>Respuesta: {{solucion.respuestas[ejerSel]}}</p>
+            <p>{{solucion.msgCalificaciones[ejerSel]}}</p>
         </div>
         
     </div>

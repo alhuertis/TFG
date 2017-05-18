@@ -3,14 +3,13 @@ var Solucion = (function () {
     function Solucion() {
         this._id = "";
         this.terminado = false;
-        this.calificacion = new Array();
+        this.calificaciones = new Array();
         ;
-        this.respuesta = new Array();
-        this.msgCalificacion = new Array();
+        this.respuestas = new Array();
+        this.msgCalificaciones = new Array();
         this.id_actividad = null;
         this.id_alumno = null;
         this.notaFinal = 0;
-        this.nombreAlumno = null;
     }
     return Solucion;
 }());

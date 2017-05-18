@@ -9,6 +9,7 @@ import {Actividad} from '../models/actividad';
 import {Ejercicio} from '../models/ejercicio';
 import {Ficha} from '../models/ficha';
 import {Solucion} from '../models/solucion';
+import {User} from '../models/user';
 
 declare var $:any;
 import * as _ from 'underscore';
@@ -24,6 +25,7 @@ import * as _ from 'underscore';
 export class  ResolverActividadComponent implements OnInit{
 
     id_actividad: string;
+    user: User;
 
     actividad: Ejercicio[];
     infoActividad: Actividad;
@@ -71,6 +73,7 @@ export class  ResolverActividadComponent implements OnInit{
         //alert(this.id_actividad);
 
         this.actividad=[];
+        this.user= JSON.parse(localStorage.getItem('currentUser')).user;
         /*this.actividad=
         [
             {   
@@ -257,8 +260,8 @@ export class  ResolverActividadComponent implements OnInit{
 
     calificar(){
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
-            this.solucion.msgCalificacion[this.ejerSel]="!!Enhorabuena¡¡ La respuesta es correcta";
-            this.solucion.calificacion[this.ejerSel]= 1;
+            this.solucion.msgCalificaciones[this.ejerSel]="!!Enhorabuena¡¡ La respuesta es correcta";
+            this.solucion.calificaciones[this.ejerSel]= 1;
         }else{
             let patron: String[];
             let res: String[];
@@ -268,32 +271,32 @@ export class  ResolverActividadComponent implements OnInit{
             res= _.intersection(res,patron);
 
            if(_.isEqual(patron, res)){
-               this.solucion.msgCalificacion[this.ejerSel]="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
-               this.solucion.calificacion[this.ejerSel]= 1;
+               this.solucion.msgCalificaciones[this.ejerSel]="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
+               this.solucion.calificaciones[this.ejerSel]= 1;
            }
            else{
                
 
                if(res.length == patron.length){
-                    this.solucion.msgCalificacion[this.ejerSel]="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
-                    this.solucion.calificacion[this.ejerSel]= 1/2;
+                    this.solucion.msgCalificaciones[this.ejerSel]="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
+                    this.solucion.calificaciones[this.ejerSel]= 1/2;
                }
                else if(res.length > patron.length/2){
-                    this.solucion.msgCalificacion[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                    this.solucion.calificacion[this.ejerSel]= 1/4;
+                    this.solucion.msgCalificaciones[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.calificaciones[this.ejerSel]= 1/4;
                }else{
-                    this.solucion.msgCalificacion[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                    this.solucion.calificacion[this.ejerSel]= 0;
+                    this.solucion.msgCalificaciones[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.calificaciones[this.ejerSel]= 0;
                }
            }
         }
-        this.solucion.respuesta[this.ejerSel]= this.respuesta;
+        this.solucion.respuestas[this.ejerSel]= this.respuesta;
         this.resueltos++;
         this.progreso= (this.resueltos * 100) / this.actividad.length;
 
         if(this.progreso == 100){
-            for(var i=0; i < this.solucion.calificacion.length; i++){
-                this.calificacionFinal+=this.solucion.calificacion[i];
+            for(var i=0; i < this.solucion.calificaciones.length; i++){
+                this.calificacionFinal+=this.solucion.calificaciones[i];
             }
             this.solucion.notaFinal=this.calificacionFinal;
         }
@@ -502,7 +505,10 @@ export class  ResolverActividadComponent implements OnInit{
 
     //cuando terminas, guarda y sale
     guardarYSalir(){
-        this.solucion.notaFinal=7;
+        this.solucion.id_actividad= this.id_actividad;
+        this.solucion.id_alumno= this.user._id;
+        this.solucion.id_ejercicios= this.infoActividad.ejercicios;
+        this.solucion.terminado=true;
         this._solucionService.saveSolucion(this.solucion).subscribe(
 			result =>{
 				console.log(result);
