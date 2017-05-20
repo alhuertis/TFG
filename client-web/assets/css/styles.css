@@ -241,25 +241,29 @@
 	border: none;
 }
 
-.ejer-lista, .act-lista{
+.ejer-lista, .act-lista, .sol-lista{
 	background: rgba(73, 68, 68,0.9);
 	/*padding: 7px !important;*/
 	border-radius: 10px;
 	margin-bottom: 8px !important;
 }
 
-.ejer-lista ul, .act-lista ul{
+.sol-lista{
+	background: rgba(23,157,168,0.9);
+}
+
+.ejer-lista ul, .act-lista ul,  .sol-lista ul{
 	list-style-type: none;
 	padding: 10px;
 }
 
-.ejer-lista ul li, .act-lista ul li{
+.ejer-lista ul li, .act-lista ul li, .sol-lista ul li{
 	color: white;
 	font-size: 1em;
 	margin-bottom:3px;
 }
 
-.ejer-lista .botones-lista, .act-lista .botones-lista{
+.ejer-lista .botones-lista, .act-lista .botones-lista, .sol-lista .botones-lista{
 	padding-top: 20px;
 }
 
@@ -693,6 +697,11 @@
 
 .btn-resolver{
 	background: #39a890;
+	color: white;
+}
+
+.btn-resolver-sol{
+	background: #27292B;
 	color: white;
 }
 

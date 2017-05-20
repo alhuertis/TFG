@@ -15,5 +15,11 @@ api.post('/solucion', SolucionController.saveSolucion);
 api.put('/solucion/:id', SolucionController.updateSolucion);
 api.post('/soluciones-terminadasId', SolucionController.getTerminadasById);
 api.post('/soluciones-sinTerminarId', SolucionController.getSinTerminarById);
+api.post('/soluciones-terminadasIdNB', SolucionController.getTerminadasByIdNB);
+api.post('/soluciones-terminadasIdNM', SolucionController.getTerminadasByIdNM);
+api.post('/soluciones-terminadasIdNA', SolucionController.getTerminadasByIdNA);
+api.post('/soluciones-sinTerminarIdNB', SolucionController.getSinTerminarByIdNB);
+api.post('/soluciones-sinTerminarIdNM', SolucionController.getSinTerminarByIdNM);
+api.post('/soluciones-sinTerminarIdNA', SolucionController.getSinTerminarByIdNA);
 
 module.exports= api;

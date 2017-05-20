@@ -21,6 +21,7 @@ var PanelAlumnoComponent = (function () {
         this._solucionService = _solucionService;
         // pager object (paginador)
         this.pager = {};
+        this.pagerSolucion = {};
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
         this.title = "Panel de alumno";
         this.actividades = [];
@@ -33,14 +34,85 @@ var PanelAlumnoComponent = (function () {
         this.propuestasByApertura = new Array();
         this.propuestasByCierre = new Array();
         this.actividadesResueltas = [];
+        this.actividadesResueltasNB = [];
+        this.actividadesResueltasNM = [];
+        this.actividadesResueltasNA = [];
+        this.actividadesSinResolver = [];
+        this.actividadesSinResolverNB = [];
+        this.actividadesSinResolverNM = [];
+        this.actividadesSinResolverNA = [];
         this.actividadesAMostrar = [];
         this.datosAMostrar = new String();
-        this.mostrarLista = false;
+        this.mostrarActividades = false;
+        this.mostrarSoluciones = false;
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._solucionService.getTerminadasById(this.user._id).subscribe(function (result) {
             _this.actividadesResueltas = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._solucionService.getTerminadasByIdNB(this.user._id).subscribe(function (result) {
+            _this.actividadesResueltasNB = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._solucionService.getTerminadasByIdNM(this.user._id).subscribe(function (result) {
+            _this.actividadesResueltasNM = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._solucionService.getTerminadasByIdNA(this.user._id).subscribe(function (result) {
+            _this.actividadesResueltasNA = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._solucionService.getSinTerminarById(this.user._id).subscribe(function (result) {
+            _this.actividadesSinResolver = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._solucionService.getSinTerminarByIdNB(this.user._id).subscribe(function (result) {
+            _this.actividadesSinResolverNB = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._solucionService.getSinTerminarByIdNM(this.user._id).subscribe(function (result) {
+            _this.actividadesSinResolverNM = result.soluciones;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert(_this.errorMessage);
+            }
+        });
+        this._solucionService.getSinTerminarByIdNA(this.user._id).subscribe(function (result) {
+            _this.actividadesSinResolverNA = result.soluciones;
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
@@ -225,9 +297,10 @@ var PanelAlumnoComponent = (function () {
         //$('#tree2').treed({openedClass:'glyphicon-folder-open', closedClass:'glyphicon-folder-close'});
         //$('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
     }; //fin ngAfterViewInit
-    PanelAlumnoComponent.prototype.seleccionaDatos = function (datos, profesor, tipo) {
+    PanelAlumnoComponent.prototype.seleccionaDatosActividades = function (datos, profesor, tipo) {
         var _this = this;
-        this.mostrarLista = false;
+        this.mostrarActividades = false;
+        this.mostrarSoluciones = false;
         if (profesor) {
             if (tipo == 'D') {
                 this._actividadService.getByIdProfesorDisp(datos._id).subscribe(function (result) {
@@ -238,7 +311,7 @@ var PanelAlumnoComponent = (function () {
                     else {
                         if (_this.actividadesAMostrar.length > 0) {
                             _this.datosAMostrar = "Actividades disponibles de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
-                            _this.mostrarLista = true;
+                            _this.mostrarActividades = true;
                             _this.setPage(1);
                         }
                     }
@@ -259,7 +332,7 @@ var PanelAlumnoComponent = (function () {
                     else {
                         if (_this.actividadesAMostrar.length > 0) {
                             _this.datosAMostrar = "Actividades propuestas de " + datos.nombre + " (" + _this.actividadesAMostrar.length + ")";
-                            _this.mostrarLista = true;
+                            _this.mostrarActividades = true;
                             _this.setPage(1);
                         }
                     }
@@ -303,8 +376,56 @@ var PanelAlumnoComponent = (function () {
                     this.datosAMostrar = "Actividades propuestas por orden cierre";
                     break;
             }
-            this.mostrarLista = true;
+            this.mostrarActividades = true;
             this.setPage(1);
+        }
+    };
+    PanelAlumnoComponent.prototype.seleccionaDatosSoluciones = function (datos, profesor, tipo) {
+        this.mostrarActividades = false;
+        this.mostrarSoluciones = false;
+        if (profesor) {
+            if (tipo == 'R') {
+            }
+            else if (tipo == 'SR') {
+            }
+        }
+        else {
+            switch (datos) {
+                case 'resueltas':
+                    this.solucionesAMostrar = this.actividadesResueltas;
+                    this.datosAMostrar = "Mis actividades resueltas";
+                    break;
+                case 'resueltasNB':
+                    this.solucionesAMostrar = this.actividadesResueltasNB;
+                    this.datosAMostrar = "Mis actividades resueltas (nivel bajo)";
+                    break;
+                case 'resueltasNM':
+                    this.solucionesAMostrar = this.actividadesResueltasNM;
+                    this.datosAMostrar = "Mis actividades resueltas (nivel medio)";
+                    break;
+                case 'resueltasNA':
+                    this.solucionesAMostrar = this.actividadesResueltasNA;
+                    this.datosAMostrar = "Mis actividades resueltas (nivel avanzado)";
+                    break;
+                case 'sin-resolver':
+                    this.solucionesAMostrar = this.actividadesSinResolver;
+                    this.datosAMostrar = "Mis actividades resueltas (nivel avanzado)";
+                    break;
+                case 'sin-resolverNB':
+                    this.solucionesAMostrar = this.actividadesSinResolverNB;
+                    this.datosAMostrar = "Mis actividades sin terminar (nivel avanzado)";
+                    break;
+                case 'sin-resolverNM':
+                    this.solucionesAMostrar = this.actividadesSinResolverNM;
+                    this.datosAMostrar = "Mis actividades sin terminar (nivel avanzado)";
+                    break;
+                case 'sin-resolverNA':
+                    this.solucionesAMostrar = this.actividadesSinResolverNA;
+                    this.datosAMostrar = "Mis actividades sin resolver (nivel avanzado)";
+                    break;
+            }
+            this.mostrarSoluciones = true;
+            this.setPageSoluciones(1);
         }
     };
     PanelAlumnoComponent.prototype.setPage = function (page) {
@@ -314,7 +435,17 @@ var PanelAlumnoComponent = (function () {
         // get pager object from service
         this.pager = this._actividadService.getPager(this.actividadesAMostrar.length, page);
         // get current page of items
-        this.pagedItems = this.actividadesAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        this.pagedActividades = this.actividadesAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        //alert(this.ejercicios.slice(1,5));
+    };
+    PanelAlumnoComponent.prototype.setPageSoluciones = function (page) {
+        if (page < 1 || page > this.pagerSolucion.totalPages) {
+            return;
+        }
+        // get pager object from service
+        this.pagerSolucion = this._actividadService.getPager(this.solucionesAMostrar.length, page);
+        // get current page of items
+        this.pagedSoluciones = this.solucionesAMostrar.slice(this.pagerSolucion.startIndex, this.pagerSolucion.endIndex + 1);
         //alert(this.ejercicios.slice(1,5));
     };
     return PanelAlumnoComponent;

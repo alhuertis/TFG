@@ -426,6 +426,8 @@ var ResolverActividadComponent = (function () {
         this.solucion.id_alumno = this.user._id;
         this.solucion.id_ejercicios = this.infoActividad.ejercicios;
         this.solucion.terminado = this.terminado;
+        this.solucion.nivel = this.infoActividad.nivel;
+        this.solucion.profesor = this.infoActividad.profesor;
         if (this.solucion._id == "") {
             this._solucionService.saveSolucion(this.solucion).subscribe(function (result) {
                 console.log(result);

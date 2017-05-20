@@ -2,7 +2,8 @@
 //Aqui vamos a tener las funcones de rutas
 'use strict'
 
-var Solucion= require('../models/solucion')
+var Solucion= require('../models/solucion');
+var Actividad= require('../models/actividad')
 
 
 function getSolucion(req, res){
@@ -38,6 +39,7 @@ function saveSolucion(req, res){
 	solucion.msgCalificaciones=params.msgCalificaciones;
 	solucion.respuestas=params.respuestas;
 	solucion.terminado= params.terminado;
+	solucion.nivel= params.nivel;
 
 	solucion.save((err, solucionStored)=>{
 		if(err){
@@ -93,39 +95,182 @@ function getTerminadasById(req, res){
 	
 
 	Solucion.find({alumno: req.body._id, terminado: true}).sort('-_id').exec((err, soluciones)=>{
-		if(err){
-			res.status(500).send({message:'Error al devolver las soluciones'});
-		}
-		else{
-
-			if(!soluciones){
-				res.status(404).send({message:'No hay soluciones'});
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
 			}
 			else{
-				res.status(200).send({soluciones});
-			}	
-		}
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
+function getTerminadasByIdNB(req, res){
+
+	Solucion.find({alumno: req.body._id, terminado: true, nivel:'Bajo'}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
+function getTerminadasByIdNM(req, res){
+
+	Solucion.find({alumno: req.body._id, terminado: true, nivel:'Medio'}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
+function getTerminadasByIdNA(req, res){
+
+	Solucion.find({alumno: req.body._id, terminado: true, nivel:'Avanzado'}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
 	});
 }
 
 function getSinTerminarById(req, res){
 
-	Solucion.find({alumno: req.body.id_alumno, terminado: false}).sort('-_id').exec((err, soluciones)=>{
-		if(err){
-			res.status(500).send({message:'Error al devolver las soluciones'});
-		}
-		else{
-
-			if(!soluciones){
-				res.status(404).send({message:'No hay soluciones'});
+	Solucion.find({alumno: req.body._id, terminado: false}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
 			}
 			else{
-				res.status(200).send({soluciones});
-			}	
-		}
 
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
 	});
 }
+
+function getSinTerminarByIdNB(req, res){
+
+	Solucion.find({alumno: req.body._id, terminado: false, nivel:'Bajo'}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
+
+function getSinTerminarByIdNM(req, res){
+
+	Solucion.find({alumno: req.body._id, terminado: false, nivel:'Medio'}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
+
+function getSinTerminarByIdNA(req, res){
+
+	Solucion.find({alumno: req.body._id, terminado: false, nivel:'Avanzado'}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
+
 
 
 //Exportamos las funciones que tengamos, para poder usar en routes
@@ -136,5 +281,11 @@ module.exports= {
 	updateSolucion,
 	getTerminadasById,
 	getSinTerminarById,
+	getTerminadasByIdNB,
+	getTerminadasByIdNM,
+	getTerminadasByIdNA,
+	getSinTerminarByIdNB,
+	getSinTerminarByIdNM,
+	getSinTerminarByIdNA
 
 }

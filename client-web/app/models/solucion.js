@@ -1,6 +1,7 @@
 "use strict";
 var Solucion = (function () {
     function Solucion() {
+        this.id_actividad = {};
         this._id = "";
         this.terminado = false;
         this.calificaciones = new Array();
@@ -9,7 +10,9 @@ var Solucion = (function () {
         this.msgCalificaciones = new Array();
         this.id_actividad = null;
         this.id_alumno = null;
+        this.nivel = "";
         this.notaFinal = 0;
+        this.profesor = "";
     }
     return Solucion;
 }());

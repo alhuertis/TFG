@@ -56,6 +56,36 @@ export class SolucionService{
 
     }
 
+    getTerminadasByIdNB(model: any){
+        
+		let params= {_id: model};
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasIdNB', params, {headers: headers}).map(res => res.json());
+
+    }
+
+     getTerminadasByIdNM(model: any){
+        
+		let params= {_id: model};
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasIdNM', params, {headers: headers}).map(res => res.json());
+
+    }
+
+     getTerminadasByIdNA(model: any){
+        
+		let params= {_id: model};
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasIdNA', params, {headers: headers}).map(res => res.json());
+
+    }
+
     getSinTerminarById(model: any){
 
         let params= {_id: model};
@@ -64,6 +94,38 @@ export class SolucionService{
         return this._http.post(this.url+'soluciones-sinTerminarId', params, {headers: headers}).map(res => res.json());
 
     }
+
+
+    getSinTerminarByIdNB(model: any){
+
+        let params= {_id: model};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarIdNB', params, {headers: headers}).map(res => res.json());
+
+    }
+
+
+    getSinTerminarByIdNM(model: any){
+
+        let params= {_id: model};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarIdNM', params, {headers: headers}).map(res => res.json());
+
+    }
+
+
+    getSinTerminarByIdNA(model: any){
+
+        let params= {_id: model};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarIdNA', params, {headers: headers}).map(res => res.json());
+
+    }
+
+    
 
     
 
