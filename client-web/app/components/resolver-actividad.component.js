@@ -23,7 +23,13 @@ var ResolverActividadComponent = (function () {
         this._solucionService = _solucionService;
         this.route = route;
         this._router = _router;
-        this.id_actividad = this.route.snapshot.params['id_actividad'];
+        var parametros = this.route.snapshot.params['id_actividad'];
+        parametros = parametros.split('-');
+        this.id_actividad = parametros[0];
+        if (parametros.length > 1)
+            this.id_solucion = parametros[1];
+        else
+            this.id_solucion = "";
         this.actividad = [];
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
         /*this.actividad=
@@ -127,7 +133,6 @@ var ResolverActividadComponent = (function () {
     ResolverActividadComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._actividadService.cargarActividad(this.id_actividad).subscribe(function (result) {
-            console.log(result);
             _this.actividad = result.actividad.ejercicios;
             _this.infoActividad = result.actividad;
             if (!_this.actividad) {
@@ -146,10 +151,23 @@ var ResolverActividadComponent = (function () {
                 alert(_this.errorMessage);
             }
         });
-        //this.ejercicios= this.actividad2.ejercicios;
-        /*for(let i=0; i < this.actividad.length; i++){
-            
-        }*/
+        if (this.id_solucion != "") {
+            this._solucionService.getSolucion(this.id_solucion).subscribe(function (result) {
+                _this.solucion = result.solucion;
+                if (!_this.solucion)
+                    alert("No se han podidos cargar los datos de solucion anteriores");
+                else {
+                    _this.calificaciones = _this.solucion.calificaciones;
+                    _this.resueltos = _this.calificaciones.length;
+                    _this.progreso = (_this.resueltos * 100) / _this.actividad.length;
+                }
+            }, function (error) {
+                _this.errorMessage = error;
+                if (_this.errorMessage != null) {
+                    alert(_this.errorMessage);
+                }
+            });
+        }
     }; //fin ngOnInit
     ResolverActividadComponent.prototype.extraerVerbo = function () {
         var args = this.actividad[this.ejerSel].solucionFLogico.split(",");
@@ -427,7 +445,7 @@ var ResolverActividadComponent = (function () {
         this.solucion.id_ejercicios = this.infoActividad.ejercicios;
         this.solucion.terminado = this.terminado;
         this.solucion.nivel = this.infoActividad.nivel;
-        this.solucion.profesor = this.infoActividad.profesor;
+        this.solucion.profesor = this.infoActividad.id_profesor;
         if (this.solucion._id == "") {
             this._solucionService.saveSolucion(this.solucion).subscribe(function (result) {
                 console.log(result);

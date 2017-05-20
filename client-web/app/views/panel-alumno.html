@@ -146,7 +146,7 @@
 
           <div class="col-md-1 botones-lista">
             <a *ngIf="solucion.actividad.terminada" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id]">Resolver de nuevo</a>
-            <a *ngIf="!solucion.actividad.terminada" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id]">Continuar</a>
+            <a *ngIf="!solucion.actividad.terminada" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id + '-' + solucion._id]">Continuar</a>
           </div>
         </div>
       </div>

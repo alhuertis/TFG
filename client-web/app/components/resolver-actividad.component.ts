@@ -25,6 +25,7 @@ import * as _ from 'underscore';
 export class  ResolverActividadComponent implements OnInit{
 
     id_actividad: string; //Le pasamos el id de actividad a esta variable
+    id_solucion: string;
     user: User; //Captura el usuario actual en localStorage
 
     actividad: Ejercicio[];
@@ -75,8 +76,16 @@ export class  ResolverActividadComponent implements OnInit{
             private route:  ActivatedRoute,
             private _router: Router
 
-	){
-        this.id_actividad= this.route.snapshot.params['id_actividad'];
+	){  
+        
+        let parametros:any = this.route.snapshot.params['id_actividad'];
+        parametros= parametros.split('-');
+        this.id_actividad= parametros[0];
+
+        if(parametros.length > 1)
+            this.id_solucion= parametros[1];
+        else
+            this.id_solucion="";
 
         this.actividad=[];
         this.user= JSON.parse(localStorage.getItem('currentUser')).user;
@@ -192,7 +201,6 @@ export class  ResolverActividadComponent implements OnInit{
 
         this._actividadService.cargarActividad(this.id_actividad).subscribe(
 			result =>{
-				console.log(result);
 				this.actividad= result.actividad.ejercicios;
                 this.infoActividad= result.actividad;
 				if(!this.actividad){
@@ -213,11 +221,30 @@ export class  ResolverActividadComponent implements OnInit{
 				}
 			}
 		);
-        //this.ejercicios= this.actividad2.ejercicios;
 
-        /*for(let i=0; i < this.actividad.length; i++){
-            
-        }*/
+        if(this.id_solucion != ""){
+            this._solucionService.getSolucion(this.id_solucion).subscribe(
+
+                result=>{
+                    this.solucion= result.solucion;
+                    if(!this.solucion)
+                        alert("No se han podidos cargar los datos de solucion anteriores");
+                    else{
+                        this.calificaciones= this.solucion.calificaciones;
+                        this.resueltos= this.calificaciones.length;
+                        this.progreso= (this.resueltos * 100) / this.actividad.length;
+                    }
+                },
+
+                error=>{
+                    this.errorMessage= <any>error;
+                    if(this.errorMessage != null){
+                        alert(this.errorMessage);
+                    }
+                }
+            );
+        }
+        
 	}//fin ngOnInit
 
     extraerVerbo(){
@@ -525,7 +552,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.solucion.id_ejercicios= this.infoActividad.ejercicios;
         this.solucion.terminado=this.terminado;
         this.solucion.nivel= this.infoActividad.nivel;
-        this.solucion.profesor= this.infoActividad.profesor;
+        this.solucion.profesor= this.infoActividad.id_profesor;
 
         if(this.solucion._id == ""){
 

@@ -40,9 +40,11 @@ function saveSolucion(req, res){
 	solucion.respuestas=params.respuestas;
 	solucion.terminado= params.terminado;
 	solucion.nivel= params.nivel;
+	solucion.profesor= params.profesor;
 
 	solucion.save((err, solucionStored)=>{
 		if(err){
+			console.log(err);
 			res.status(500).send({message:'Error al guardar la solucion'});
 		}
 		else{
@@ -57,6 +59,9 @@ function updateSolucion(req, res){
 	var solucionId= req.params.id;
 	var update= req.body; //Recoge todos los parametros
 
+	console.log("ID: " + solucionId);
+	console.log("DATOS: " + update);
+
 	//Busca un objeto y lo actualiza
 	//Recibe el id a actualizar, los datos nuevos y despues una función calback
 	Solucion.findByIdAndUpdate(solucionId, update, (err, solucionUpdated) =>{
@@ -64,7 +69,7 @@ function updateSolucion(req, res){
 		if(err)
 			res.status(500).send({message: 'Error al actualizar la solucion'});
 		else
-			res.status(200).send(solucionUpdated._id);//favoritoUpdated no devuelve los datos actualizados pero en base de datos si estará actualizado
+			res.status(200).send(solucionUpdated._id);
 	});
 	
 }
