@@ -483,6 +483,18 @@ var ResolverActividadComponent = (function () {
             });
         }
     };
+    ResolverActividadComponent.prototype.abrirModalSalir = function () {
+        var _this = this;
+        this.msgSalir = "Estas a punto de salir.\nTus cambios serán guardados";
+        this.modalSalir = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    ResolverActividadComponent.prototype.cancelarModalSalir = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalSalir = false; }, 300);
+        this.msgSalir = "";
+    };
     return ResolverActividadComponent;
 }());
 ResolverActividadComponent = __decorate([

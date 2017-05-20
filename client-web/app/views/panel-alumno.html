@@ -52,7 +52,7 @@
                 </li>
                 <li><a href="#"> Profesores </a>
                   <ul *ngIf="profesores.length > 0">
-                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosActividades(profesor, true, 'R')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosSoluciones(profesor, true, 'R')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <!--<li><a href="#"> Estadísticas</a></li>-->
@@ -70,7 +70,7 @@
                 </li>
                 <li><a> Profesores </a>
                   <ul *ngIf="profesores.length > 0">
-                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosActividades(profesor, true, 'SR')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosSoluciones(profesor, true, 'SR')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <!--<li><a href="#"> Estadísticas</a></li>-->
@@ -145,8 +145,8 @@
           </div>
 
           <div class="col-md-1 botones-lista">
-            <a *ngIf="solucion.actividad.terminada" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id]">Resolver de nuevo</a>
-            <a *ngIf="!solucion.actividad.terminada" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id + '-' + solucion._id]">Continuar</a>
+            <a *ngIf="solucion.terminado" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id]">Resolver de nuevo</a>
+            <a *ngIf="!solucion.terminado" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id + '-' + solucion._id]">Continuar</a>
           </div>
         </div>
       </div>

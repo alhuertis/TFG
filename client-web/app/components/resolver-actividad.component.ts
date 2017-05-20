@@ -66,6 +66,11 @@ export class  ResolverActividadComponent implements OnInit{
     //Para mensajes de error
     errorMessage: String;
 
+    //Modales
+    visibleAnimate: Boolean;
+    modalSalir: Boolean;
+    msgSalir: String;
+
  
 	
 	
@@ -605,4 +610,16 @@ export class  ResolverActividadComponent implements OnInit{
         }
     }
     
+    abrirModalSalir(){
+
+        this.msgSalir="Estas a punto de salir.\nTus cambios serán guardados";
+        this.modalSalir=true;
+        setTimeout(() => this.visibleAnimate = true);
+    }
+
+    cancelarModalSalir(){
+        this.visibleAnimate=false;
+        setTimeout(() => this.modalSalir = false, 300);
+        this.msgSalir="";
+    }
 }

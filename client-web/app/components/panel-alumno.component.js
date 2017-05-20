@@ -381,12 +381,53 @@ var PanelAlumnoComponent = (function () {
         }
     };
     PanelAlumnoComponent.prototype.seleccionaDatosSoluciones = function (datos, profesor, tipo) {
+        var _this = this;
         this.mostrarActividades = false;
         this.mostrarSoluciones = false;
         if (profesor) {
             if (tipo == 'R') {
+                this._solucionService.getTerminadasByProfesor(this.user._id, datos._id).subscribe(function (result) {
+                    _this.solucionesAMostrar = result.soluciones;
+                    if (!_this.solucionesAMostrar) {
+                        alert('Error en el servidor');
+                    }
+                    else {
+                        if (_this.solucionesAMostrar.length > 0) {
+                            _this.datosAMostrar = "Actividades resueltas de " + datos.nombre + " (" + _this.solucionesAMostrar.length + ")";
+                            _this.mostrarActividades = false;
+                            _this.mostrarSoluciones = true;
+                            _this.setPageSoluciones(1);
+                        }
+                    }
+                }, function (error) {
+                    _this.errorMessage = error;
+                    if (_this.errorMessage != null) {
+                        console.log(_this.errorMessage);
+                        alert(_this.errorMessage);
+                    }
+                });
             }
             else if (tipo == 'SR') {
+                this._solucionService.getSinTerminarByProfesor(this.user._id, datos._id).subscribe(function (result) {
+                    _this.solucionesAMostrar = result.soluciones;
+                    if (!_this.solucionesAMostrar) {
+                        alert('Error en el servidor');
+                    }
+                    else {
+                        if (_this.solucionesAMostrar.length > 0) {
+                            _this.datosAMostrar = "Actividades sin terminar de " + datos.nombre + " (" + _this.solucionesAMostrar.length + ")";
+                            _this.mostrarActividades = false;
+                            _this.mostrarSoluciones = true;
+                            _this.setPageSoluciones(1);
+                        }
+                    }
+                }, function (error) {
+                    _this.errorMessage = error;
+                    if (_this.errorMessage != null) {
+                        console.log(_this.errorMessage);
+                        alert(_this.errorMessage);
+                    }
+                });
             }
         }
         else {

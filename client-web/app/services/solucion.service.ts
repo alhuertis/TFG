@@ -125,6 +125,24 @@ export class SolucionService{
 
     }
 
+    getTerminadasByProfesor(id_alumno: any, id_profesor){
+
+        let params= {_id: id_alumno, profesor: id_profesor};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasByProfesor', params, {headers: headers}).map(res => res.json());
+
+    }
+
+    getSinTerminarByProfesor(id_alumno: any, id_profesor){
+
+        let params= {_id: id_alumno, profesor: id_profesor};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarByProfesor', params, {headers: headers}).map(res => res.json());
+
+    }
+
     
 
     

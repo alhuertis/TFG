@@ -78,6 +78,16 @@ var SolucionService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'soluciones-sinTerminarIdNA', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.getTerminadasByProfesor = function (id_alumno, id_profesor) {
+        var params = { _id: id_alumno, profesor: id_profesor };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-terminadasByProfesor', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getSinTerminarByProfesor = function (id_alumno, id_profesor) {
+        var params = { _id: id_alumno, profesor: id_profesor };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-sinTerminarByProfesor', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

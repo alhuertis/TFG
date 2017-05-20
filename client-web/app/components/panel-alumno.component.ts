@@ -569,10 +569,56 @@ export class  PanelAlumnoComponent implements OnInit{
 		if(profesor){
 
 			if(tipo == 'R'){
+				this._solucionService.getTerminadasByProfesor(this.user._id, datos._id).subscribe(
+					result =>{
+						this.solucionesAMostrar= result.soluciones;
 
+						if(!this.solucionesAMostrar){
+							alert('Error en el servidor');
+						}else{
+							if(this.solucionesAMostrar.length > 0){
+								this.datosAMostrar= "Actividades resueltas de " + datos.nombre + " ("+ this.solucionesAMostrar.length+")";
+								this.mostrarActividades=false;
+								this.mostrarSoluciones=true;
+								this.setPageSoluciones(1);
+							}
+						}
+					
+					},
+					error => {
+						this.errorMessage= <any>error;
+						if(this.errorMessage != null){
+							console.log(this.errorMessage);
+							alert(this.errorMessage);
+						}
+					}
+				);
 
 			}else if(tipo == 'SR'){
+				this._solucionService.getSinTerminarByProfesor(this.user._id, datos._id).subscribe(
+					result =>{
+						this.solucionesAMostrar= result.soluciones;
 
+						if(!this.solucionesAMostrar){
+							alert('Error en el servidor');
+						}else{
+							if(this.solucionesAMostrar.length > 0){
+								this.datosAMostrar= "Actividades sin terminar de " + datos.nombre + " ("+ this.solucionesAMostrar.length+")";
+								this.mostrarActividades=false;
+								this.mostrarSoluciones=true;
+								this.setPageSoluciones(1);
+							}
+						}
+					
+					},
+					error => {
+						this.errorMessage= <any>error;
+						if(this.errorMessage != null){
+							console.log(this.errorMessage);
+							alert(this.errorMessage);
+						}
+					}
+				);
 			}
 		}
 		else{

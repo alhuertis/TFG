@@ -44,7 +44,6 @@ function saveSolucion(req, res){
 
 	solucion.save((err, solucionStored)=>{
 		if(err){
-			console.log(err);
 			res.status(500).send({message:'Error al guardar la solucion'});
 		}
 		else{
@@ -275,6 +274,50 @@ function getSinTerminarByIdNA(req, res){
 	});
 }
 
+function getTerminadasByProfesor(req, res){
+
+	Solucion.find({alumno: req.body._id, profesor:req.body.profesor, terminado: true}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
+function getSinTerminarByProfesor(req, res){
+
+	Solucion.find({alumno: req.body._id, profesor:req.body.profesor, terminado: false}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+}
+
 
 
 
@@ -291,6 +334,9 @@ module.exports= {
 	getTerminadasByIdNA,
 	getSinTerminarByIdNB,
 	getSinTerminarByIdNM,
-	getSinTerminarByIdNA
+	getSinTerminarByIdNA,
+	getTerminadasByProfesor,
+	getSinTerminarByProfesor,
+
 
 }

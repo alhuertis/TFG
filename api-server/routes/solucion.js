@@ -21,5 +21,7 @@ api.post('/soluciones-terminadasIdNA', SolucionController.getTerminadasByIdNA);
 api.post('/soluciones-sinTerminarIdNB', SolucionController.getSinTerminarByIdNB);
 api.post('/soluciones-sinTerminarIdNM', SolucionController.getSinTerminarByIdNM);
 api.post('/soluciones-sinTerminarIdNA', SolucionController.getSinTerminarByIdNA);
+api.post('/soluciones-terminadasByProfesor', SolucionController.getTerminadasByProfesor);
+api.post('/soluciones-sinTerminarByProfesor', SolucionController.getSinTerminarByProfesor);
 
 module.exports= api;

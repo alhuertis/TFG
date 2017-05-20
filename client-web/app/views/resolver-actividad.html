@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-salir-act" (click)="guardarYSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Salir</button>  
+                <button class="btn btn-salir-act" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Salir</button>  
             </div>
             
         </div>
@@ -102,8 +102,8 @@
 
                     <div class="solucion">
                         <input type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
-                        <button class="btn btn-default" [disabled]="respuesta.length == 0" (click)="calificar()">Enviar</button>
-                        <button class="btn btn-success animated aparecer" *ngIf="terminado" (click)="guardarSolucion()">Terminar</button>
+                        <button class="btn btn-default" [disabled]="respuesta.length == 0 || terminado" (click)="calificar()">Enviar</button>
+                        <button class="btn btn-success animated aparecer" *ngIf="terminado" (click)="abrirModalSalir()">Terminar</button>
                     </div>
 
                     <div class="puzle">
@@ -158,6 +158,24 @@
         </div>
     </div>
 </div>
+
+
+
+  <!-- modal salir tras terminar -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalSalir ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>{{msgSalir}}</p>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cancelarModalSalir()" class="btn">Cancelar</button>
+            <button (click)="guardarYSalir()" class="btn btn-success">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     
 
