@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-3 col-sm-3 menu-profesor-arbol">
             <ul id="tree1">
-                <li> Ejercicios <span class="badge badge-small"> {{nEjercicios}}</span><i *ngIf="nEjercicios" (click)="seleccionaDatos('ejercicios', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
+                <li class="rama-ejercicios"> Ejercicios <span class="badge badge-small"> {{nEjercicios}}</span><i *ngIf="nEjercicios" (click)="seleccionaDatos('ejercicios', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
 
                     <ul>
                       <li> Mi Coleccion <span class="badge badge-small"> {{nMiColeccion}}</span><i *ngIf="nMiColeccion" (click)="seleccionaDatos('mios', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
@@ -50,7 +50,7 @@
                 </li>
                 
 
-                <li> Actividades <span class="badge badge-small"> {{miColeccionAct.length}}</span><i *ngIf="miColeccionAct.length" (click)="seleccionaDatos('mias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i> 
+                <li class="rama-actividades"> Actividades <span class="badge badge-small"> {{miColeccionAct.length}}</span><i *ngIf="miColeccionAct.length" (click)="seleccionaDatos('mias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i> 
                   <ul>
                     <li> Nivel
                       <ul>

@@ -89,3 +89,12 @@
 	background: rgba(39, 41, 49, 0.8);
 	margin-top: -3px;
 }
+
+.rama-actividades, .rama-actividades li, .rama-actividades .ojo{
+    color:  rgba(12,141,150,1) !important;
+}
+
+.rama-actividades .badge-small {
+    background: rgba(12,141,150,1) !important;
+
+}
