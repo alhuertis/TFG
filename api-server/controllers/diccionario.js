@@ -39,29 +39,60 @@ function  getDiccionario(req, res){
 
 function  getPalabra(req, res){
     
+    var carac= new Array();
+
+     var caracSus= new Array();
     var palabra= req.params.palabra;
-     	LexicalResource.findOne({'Lexicon.LexicalEntry.Lemma.feat.val':{$regex:palabra}},(err, lr) => {
+     	LexicalResource.findOne({'Lexicon.LexicalEntry.Lemma.feat.val':{$regex:palabra+'$'}},(err, lr) => {
  		if(err){
  			res.status(500).send({message: 'Error al devolver los datos'});
  		}else{
              
  		if(lr!=null){
 
-          if(lr.Lexicon.LexicalEntry[0].feat[0].val=="verb"){
-            var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate; 
-             res.status(200).send({Carac});
+          if(lr.Lexicon.LexicalEntry[0].feat[0].val=="Verbo"){
+            var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate[0].SemanticArgument; 
+            
+                for(var i=0; i<Caracterizacion.length;i++){
+                       var caracFeat= new Array();
+                        var arg= {
+                            "argumento": Caracterizacion[i].label,
+                            "case": Caracterizacion[i].feat[0].val
+                        };
+                    
+                   
+                    for(var j=0; j<Caracterizacion[i].fs.length;j++){
+                   
+                        caracFeat.push({
+                            "semanticType": Caracterizacion[i].fs[j].feat[0].val,
+                            "semanticAnimacy": Caracterizacion[i].fs[j].feat[1].val
+                        });
+                    
+                }
+                carac.push({
+                    "tipo": arg,
+                    "Caracterizaciones": caracFeat
+                });
+                    
+                }
+               res.status(200).send(carac);
+           
           }  
-          if(lr.Lexicon.LexicalEntry[0].feat[0].val=="noun"){
+          if(lr.Lexicon.LexicalEntry[0].feat[0].val=="Sustantivo"){
                 var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense;  
 
                 for(var i=0; i<Caracterizacion.length;i++){
-                    if(Caracterizacion[i].Definition[0].feat[0].val==palabra){
+                   
                         var Carac= Caracterizacion[i].fs[0].feat;
-                    }
+                        caracSus.push({
+                            "semanticType": Caracterizacion[i].fs[0].feat[0].val,
+                            "semanticAnimacy": Caracterizacion[i].fs[0].feat[1].val
+                        });
+                    
                 }
-               
+               res.status(200).send(caracSus);
           }     
- 				res.status(200).send({Caracterizacion});
+ 				
  			
  		}else{
             res.status(404).send({message: 'No hay datos'});
@@ -159,6 +190,9 @@ if(save){
              break;
 
      }
+
+     
+  
  }
 
  function categoriaSustantivo(campos) {
@@ -199,18 +233,24 @@ if(save){
          i++;
      };
 
+  var featLemma = new Array();
+     for(var i=0;i<campos[1].split(",").length;i++){
+         featLemma.push({
+                 att: "writtenForm",
+                 val: campos[1].split(",")[i]
+             });
+             
+     }
 
+     
      lr.Lexicon.LexicalEntry.push({
          id: "id" + campos[0],
          feat: [{
              att: "partOfSpeech",
-             val: "noun"
+             val: campos[3]
          }],
          Lemma: {
-             feat: [{
-                 att: "writtenForm",
-                 val: campos[1]
-             }]
+             feat: featLemma
          },
          Sense: sense
      });
@@ -243,17 +283,24 @@ if(save){
      };
 
 
+      var featLemma = new Array();
+     for(var i=0;i<campos[1].split(",").length;i++){
+         featLemma.push({
+                 att: "writtenForm",
+                 val: campos[1].split(",")[i]
+             });
+             
+     }
+
+     
      lr.Lexicon.LexicalEntry.push({
          id: "id" + campos[0],
          feat: [{
              att: "partOfSpeech",
-             val: "tipo"
+             val: campos[3]
          }],
          Lemma: {
-             feat: [{
-                 att: "writtenForm",
-                 val: campos[1]
-             }]
+             feat: featLemma
          },
          Sense: sense
      });
@@ -265,6 +312,7 @@ if(save){
  function categoriaVerbo(campos, encabezado) {
 
 
+     
      var sense = new Array();
      var i = 5;
      var numSignificado = 1;
@@ -357,7 +405,7 @@ if(save){
      }
 
 
-
+     var featLemma = new Array();
      lr.Lexicon.LexicalEntry.push({
          id: "id" + campos[0],
          feat: [{
@@ -561,17 +609,24 @@ if(save){
 
      //console.log(JSON.stringify(sense));
       
+      var featLemma = new Array();
+     for(var i=0;i<campos[1].split(",").length;i++){
+         featLemma.push({
+                 att: "writtenForm",
+                 val: campos[1].split(",")[i]
+             });
+             
+     }
+
+     
      lr.Lexicon.LexicalEntry.push({
          id: "id" + campos[0],
          feat: [{
              att: "partOfSpeech",
-             val: "verb"
+             val: campos[3]
          }],
          Lemma: {
-             feat: [{
-                 att: "writtenForm",
-                 val: campos[1]
-             }]
+             feat: featLemma
          },
          Sense: sense
      });
