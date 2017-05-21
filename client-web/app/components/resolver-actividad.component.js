@@ -18,12 +18,18 @@ var ficha_1 = require("../models/ficha");
 var solucion_1 = require("../models/solucion");
 var _ = require("underscore");
 var ResolverActividadComponent = (function () {
-    function ResolverActividadComponent(_actividadService, _solucionService, route) {
+    function ResolverActividadComponent(_actividadService, _solucionService, route, _router) {
         this._actividadService = _actividadService;
         this._solucionService = _solucionService;
         this.route = route;
-        this.id_actividad = this.route.snapshot.params['id_actividad'];
-        //alert(this.id_actividad);
+        this._router = _router;
+        var parametros = this.route.snapshot.params['id_actividad'];
+        parametros = parametros.split('-');
+        this.id_actividad = parametros[0];
+        if (parametros.length > 1)
+            this.id_solucion = parametros[1];
+        else
+            this.id_solucion = "";
         this.actividad = [];
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
         /*this.actividad=
@@ -122,11 +128,11 @@ var ResolverActividadComponent = (function () {
         this.verboMarcado = false;
         this.srcDraggedPentagono = "adios";
         this.resueltos = 0;
+        this.terminado = false;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._actividadService.cargarActividad(this.id_actividad).subscribe(function (result) {
-            console.log(result);
             _this.actividad = result.actividad.ejercicios;
             _this.infoActividad = result.actividad;
             if (!_this.actividad) {
@@ -145,10 +151,23 @@ var ResolverActividadComponent = (function () {
                 alert(_this.errorMessage);
             }
         });
-        //this.ejercicios= this.actividad2.ejercicios;
-        /*for(let i=0; i < this.actividad.length; i++){
-            
-        }*/
+        if (this.id_solucion != "") {
+            this._solucionService.getSolucion(this.id_solucion).subscribe(function (result) {
+                _this.solucion = result.solucion;
+                if (!_this.solucion)
+                    alert("No se han podidos cargar los datos de solucion anteriores");
+                else {
+                    _this.calificaciones = _this.solucion.calificaciones;
+                    _this.resueltos = _this.calificaciones.length;
+                    _this.progreso = (_this.resueltos * 100) / _this.actividad.length;
+                }
+            }, function (error) {
+                _this.errorMessage = error;
+                if (_this.errorMessage != null) {
+                    alert(_this.errorMessage);
+                }
+            });
+        }
     }; //fin ngOnInit
     ResolverActividadComponent.prototype.extraerVerbo = function () {
         var args = this.actividad[this.ejerSel].solucionFLogico.split(",");
@@ -184,6 +203,7 @@ var ResolverActividadComponent = (function () {
         $('span.marcada').removeClass("marcada");
         $('.izquierda, .superior, .derecha').removeAttr("src");
         $('.izquierda, .superior, .derecha').css("display", "none");
+        this.guardarSolucion();
     };
     ResolverActividadComponent.prototype.anteriorEjer = function () {
         this.ejerSel--;
@@ -192,6 +212,7 @@ var ResolverActividadComponent = (function () {
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta = "";
         this.verbo = this.extraerVerbo();
+        this.guardarSolucion();
     };
     ResolverActividadComponent.prototype.calificar = function () {
         if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
@@ -231,6 +252,7 @@ var ResolverActividadComponent = (function () {
                 this.calificacionFinal += this.solucion.calificaciones[i];
             }
             this.solucion.notaFinal = this.calificacionFinal;
+            this.terminado = true;
         }
     };
     ResolverActividadComponent.prototype.clickMonovalente = function (event) {
@@ -410,32 +432,68 @@ var ResolverActividadComponent = (function () {
         if (ms === void 0) { ms = 0; }
         return new Promise(function (r) { return setTimeout(r, ms); });
     };
-    //guarda la solucion en cualquier momento
-    ResolverActividadComponent.prototype.guardarSolucion = function () {
-    };
     //cuando terminas, guarda y sale
     ResolverActividadComponent.prototype.guardarYSalir = function () {
+        this.guardarSolucion();
+        this._router.navigate(['/alumno']);
+    };
+    //guarda la solucion en cualquier momento
+    ResolverActividadComponent.prototype.guardarSolucion = function () {
         var _this = this;
         this.solucion.id_actividad = this.id_actividad;
         this.solucion.id_alumno = this.user._id;
         this.solucion.id_ejercicios = this.infoActividad.ejercicios;
-        this.solucion.terminado = true;
-        this._solucionService.saveSolucion(this.solucion).subscribe(function (result) {
-            console.log(result);
-            _this.solucion._id = result;
-            if (_this.solucion._id == "") {
-                alert('Error en el servidor guardando la solucion');
-            }
-            else {
-                alert(_this.solucion._id);
-            }
-        }, function (error) {
-            _this.errorMessage = error;
-            if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
-                alert(_this.errorMessage);
-            }
-        });
+        this.solucion.terminado = this.terminado;
+        this.solucion.nivel = this.infoActividad.nivel;
+        this.solucion.profesor = this.infoActividad.id_profesor;
+        if (this.solucion._id == "") {
+            this._solucionService.saveSolucion(this.solucion).subscribe(function (result) {
+                console.log(result);
+                _this.solucion._id = result;
+                if (_this.solucion._id == "") {
+                    alert('Error en el servidor guardando la solucion');
+                }
+                else {
+                    alert("Se ha guardado la actividad con id: " + _this.solucion._id);
+                }
+            }, function (error) {
+                _this.errorMessage = error;
+                if (_this.errorMessage != null) {
+                    console.log(_this.errorMessage);
+                    alert(_this.errorMessage);
+                }
+            });
+        }
+        else {
+            this._solucionService.updateSolucion(this.solucion).subscribe(function (result) {
+                console.log(result);
+                _this.solucion._id = result;
+                if (_this.solucion._id == "") {
+                    alert('Error en el servidor actualizando la solucion');
+                }
+                else {
+                    alert("Se ha actualizado la actividad con id: " + _this.solucion._id);
+                }
+            }, function (error) {
+                _this.errorMessage = error;
+                if (_this.errorMessage != null) {
+                    console.log(_this.errorMessage);
+                    alert(_this.errorMessage);
+                }
+            });
+        }
+    };
+    ResolverActividadComponent.prototype.abrirModalSalir = function () {
+        var _this = this;
+        this.msgSalir = "Estas a punto de salir.\nTus cambios serán guardados";
+        this.modalSalir = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    ResolverActividadComponent.prototype.cancelarModalSalir = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalSalir = false; }, 300);
+        this.msgSalir = "";
     };
     return ResolverActividadComponent;
 }());
@@ -448,7 +506,8 @@ ResolverActividadComponent = __decorate([
     }),
     __metadata("design:paramtypes", [actividad_service_1.ActividadService,
         solucion_service_1.SolucionService,
-        router_1.ActivatedRoute])
+        router_1.ActivatedRoute,
+        router_1.Router])
 ], ResolverActividadComponent);
 exports.ResolverActividadComponent = ResolverActividadComponent;
 //# sourceMappingURL=resolver-actividad.component.js.map

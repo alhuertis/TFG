@@ -10,49 +10,73 @@
         <li><a href="#"> Actividades </a><span class="badge badge-small"> {{disponibles.length + propuestas.length }}</span>
 
           <ul>
-            <li><a href="#"> Mis actividades hechas </a> <span class="badge badge-small">?</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i>
+            <li> Actividades propuestas <span class="badge badge-small"> {{propuestas.length}}</span><i *ngIf="propuestas.length" (click)="seleccionaDatosActividades('propuestas')" class="glyphicon glyphicon-eye-open ojo"></i>
+              <ul>
+                <li><a href="#"> Profesores </a>
+                  <ul *ngIf="profesores.length > 0">
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosActividades(profesor, true,'P')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                  </ul>
+                </li>
+                <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i *ngIf="propuestasByApertura.length" (click)="seleccionaDatosActividades('propuestas apertura')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                <li>Fecha de cierre (o.cronológico) <span class="badge badge-small"> {{propuestasByCierre.length}}</span> <i *ngIf="propuestasByCierre.length" (click)="seleccionaDatosActividades('propuestas cierre')" class="glyphicon glyphicon-eye-open ojo"></i></li>             
+              </ul>
+            </li>
+            <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i *ngIf="disponibles.length" (click)="seleccionaDatosActividades('disponibles')" class="glyphicon glyphicon-eye-open ojo"></i>
+              <ul>
+                <li> Nivel
+                  <ul>
+                    <li> Nivel Inicial <span class="badge badge-small">{{disponiblesNBajo.length}}</span><i *ngIf="disponiblesNBajo.length" (click)="seleccionaDatosActividades('disponibles nb')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Nivel Medio <span class="badge badge-small">{{disponiblesNMedio.length}}</span><i *ngIf="disponiblesNMedio.length" (click)="seleccionaDatosActividades('disponibles nm')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Nivel Avanzado <span class="badge badge-small">{{disponiblesNAlto.length}}</span><i *ngIf="disponiblesNAlto.length" (click)="seleccionaDatosActividades('disponibles na')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                  </ul>
+                </li>
+                <li><a href="#"> Profesores </a>
+                      <ul *ngIf="profesores.length > 0">
+                        <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosActividades(profesor, true,'D')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                      </ul>
+                </li>
+              </ul>
+          </ul>
+        </li>
+
+        <li><a href="#"> Soluciones </a><span class="badge badge-small"> {{actividadesResueltas.length +  actividadesSinResolver.length}}</span>
+          <ul>
+            <li><a href="#"> Mis actividades hechas </a> <span class="badge badge-small">{{actividadesResueltas.length}}</span> <i *ngIf="actividadesResueltas.length" (click)="seleccionaDatosSoluciones('resueltas')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
                 <li><a href="#"> Nivel</a>
                   <ul>
-                    <li> Inicial <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    <li> Medio <span class="badge badge-small">x</span><i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    <li> Avanzado <span class="badge badge-small">x</span><i  (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Inicial <span class="badge badge-small">{{actividadesResueltasNB.length}}</span> <i *ngIf="actividadesResueltasNB.length" (click)="seleccionaDatosSoluciones('resueltasNB')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Medio <span class="badge badge-small">{{actividadesResueltasNM.length}}</span> <i *ngIf="actividadesResueltasNM.length" (click)="seleccionaDatosSoluciones('resueltasNM')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Avanzado <span class="badge badge-small">{{actividadesResueltasNA.length}}</span> <i *ngIf="actividadesResueltasNA.length" (click)="seleccionaDatosSoluciones('resueltasNA')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <li><a href="#"> Profesores </a>
                   <ul *ngIf="profesores.length > 0">
-                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos('')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosSoluciones(profesor, true, 'R')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
                 <!--<li><a href="#"> Estadísticas</a></li>-->
               </ul>
             </li>
-            <li> Actividades propuestas <span class="badge badge-small"> {{propuestas.length}}</span><i *ngIf="propuestas.length" (click)="seleccionaDatos('propuestas')" class="glyphicon glyphicon-eye-open ojo"></i>
+
+            <li><a href="#"> Sin terminar </a> <span class="badge badge-small">{{actividadesSinResolver.length}}</span> <i *ngIf="actividadesSinResolver.length" (click)="seleccionaDatosSoluciones('sin-resolver')" class="glyphicon glyphicon-eye-open ojo"></i>
               <ul>
-                <li><a href="#"> Profesores </a>
-                  <ul *ngIf="profesores.length > 0">
-                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor, true,'P')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                <li><a href="#"> Nivel</a>
+                  <ul>
+                    <li> Inicial <span class="badge badge-small">{{actividadesSinResolverNB.length}}</span> <i *ngIf="actividadesSinResolverNB.length" (click)="seleccionaDatosSoluciones('sin-resolverNB')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Medio <span class="badge badge-small">{{actividadesSinResolverNM.length}}</span> <i *ngIf="actividadesSinResolverNM.length" (click)="seleccionaDatosSoluciones('sin-resolverNM')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Avanzado <span class="badge badge-small">{{actividadesSinResolverNA.length}}</span> <i *ngIf="actividadesSinResolverNA.length" (click)="seleccionaDatosSoluciones('sin-resolverNA')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
                 </li>
-                <li>Fecha de apertura (o.cronológico) <span class="badge badge-small"> {{propuestasByApertura.length}}</span><i *ngIf="propuestasByApertura.length" (click)="seleccionaDatos('propuestas apertura')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                <li>Fecha de cierre (o.cronológico) <span class="badge badge-small"> {{propuestasByCierre.length}}</span> <i *ngIf="propuestasByCierre.length" (click)="seleccionaDatos('propuestas cierre')" class="glyphicon glyphicon-eye-open ojo"></i></li>             
+                <li><a> Profesores </a>
+                  <ul *ngIf="profesores.length > 0">
+                    <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatosSoluciones(profesor, true, 'SR')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                  </ul>
+                </li>
+                <!--<li><a href="#"> Estadísticas</a></li>-->
               </ul>
             </li>
-            <li> Actividades disponibles <span class="badge badge-small">{{disponibles.length}}</span><i *ngIf="disponibles.length" (click)="seleccionaDatos('disponibles')" class="glyphicon glyphicon-eye-open ojo"></i>
-              <ul>
-                <li> Nivel
-                  <ul>
-                    <li> Nivel Inicial <span class="badge badge-small">{{disponiblesNBajo.length}}</span><i *ngIf="disponiblesNBajo.length" (click)="seleccionaDatos('disponibles nb')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    <li> Nivel Medio <span class="badge badge-small">{{disponiblesNMedio.length}}</span><i *ngIf="disponiblesNMedio.length" (click)="seleccionaDatos('disponibles nm')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                    <li> Nivel Avanzado <span class="badge badge-small">{{disponiblesNAlto.length}}</span><i *ngIf="disponiblesNAlto.length" (click)="seleccionaDatos('disponibles na')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                  </ul>
-                </li>
-                <li><a href="#"> Profesores </a>
-                      <ul *ngIf="profesores.length > 0">
-                        <li *ngFor="let profesor of profesores">{{profesor.nombre}} <i (click)="seleccionaDatos(profesor, true,'D')" class="glyphicon glyphicon-eye-open ojo"></i></li>
-                      </ul>
-                </li>
-              </ul>
+
           </ul>
         </li>
       </ul>
@@ -62,18 +86,19 @@
     <div class="col-md-7 col-sm-5 panel-actividades">
        <div class="row">
           <div class="col-sm-12">
-            <h3 class="text-center" *ngIf="mostrarLista">{{datosAMostrar}}</h3>
+            <h3 class="text-center" *ngIf="mostrarActividades || mostrarSoluciones">{{datosAMostrar}}</h3>
           </div>
       </div>
 
-      <div class="row" *ngIf="mostrarLista">
-        <div class="col-md-12 act-lista animated fadeInLeft" *ngFor="let actividad of pagedItems; let i=index">
+      <!-- Para mostrar las actividades a resolver -->
+      <div class="row" *ngIf="mostrarActividades">
+        <div class="col-md-12 act-lista animated fadeInLeft" *ngFor="let actividad of pagedActividades; let i=index">
           <div class="row">
             <div class="col-md-9">
               <div class="row">
                 <div class="col-md-5">
                   <ul>
-                    <li><i class="glyphicon glyphicon-pencil"></i> título: {{actividad.titulo | truncate : 25}}</li>
+                    <li><i class="glyphicon glyphicon-pencil"></i> título: {{actividad.titulo | truncate : 5}}</li>
                     <li><i class="glyphicon glyphicon-user"></i> profesor: {{actividad.profesor}}</li>     
                   </ul>
                 </div>
@@ -94,9 +119,43 @@
         </div>
       </div>
     </div>
+    <!-- ########################### -->
 
+    <!-- Para mostrar las actividades resueltas (soluciones) -->
+      <div class="row" *ngIf="mostrarSoluciones">
+        <div class="col-md-12 sol-lista animated fadeInLeft" *ngFor="let solucion of pagedSoluciones; let i=index">
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-5">
+                  <ul>
+                    <li><i class="glyphicon glyphicon-pencil"></i> título: {{solucion.actividad.titulo | truncate: 12}}</li>
+                    <li><i class="glyphicon glyphicon-user"></i> profesor: {{solucion.actividad.profesor}}</li>     
+                  </ul>
+                </div>
+            
+                <div class="col-md-5">
+                  <ul>
+                    <li><i class="glyphicon glyphicon-signal"></i> nivel: {{solucion.actividad.nivel}}</li>
+                    <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{solucion.actividad.fecha_creacion |  date : 'dd/mm/yyyy'}}</li>
+                    <li *ngIf="solucion.actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{solucion.actividad.fecha_prop_fin | date : 'dd/mm/yyyy'}}</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-1 botones-lista">
+            <a *ngIf="solucion.terminado" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id]">Resolver de nuevo</a>
+            <a *ngIf="!solucion.terminado" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id + '-' + solucion._id]">Continuar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ########################### -->
+
+    <!-- Paginador para actividades-->
     <div class="row">
-      <div class="col-sm-12" *ngIf="mostrarLista">
+      <div class="col-sm-12" *ngIf="mostrarActividades">
         <!-- pager -->
         <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
           <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -117,6 +176,32 @@
         </ul>
       </div>
     </div>
+    <!-- ########################### -->
+
+    <!-- Paginador para actividades-->
+    <div class="row">
+      <div class="col-sm-12" *ngIf="mostrarSoluciones">
+        <!-- pager -->
+        <ul *ngIf="pagerSolucion.pages && pagerSolucion.pages.length" class="pagination">
+          <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
+            <a (click)="setPageSoluciones(1)">First</a>
+          </li>
+          <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
+            <a (click)="setPageSoluciones(pagerSolucion.currentPage - 1)">Previous</a>
+          </li>
+          <li *ngFor="let page of pagerSolucion.pages" [ngClass]="{active:pagerSolucion.currentPage === page}">
+            <a (click)="setPageSoluciones(page)">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pagerSolucion.currentPage === pagerSolucion.totalPages}">
+            <a (click)="setPageSoluciones(pagerSolucion.currentPage + 1)">Next</a>
+          </li>
+          <li [ngClass]="{disabled:pagerSolucion.currentPage === pagerSolucion.totalPages}">
+            <a (click)="setPageSoluciones(pagerSolucion.totalPages)">Last</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- ########################### -->
 
   </div>
 

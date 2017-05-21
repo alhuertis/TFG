@@ -26,6 +26,12 @@ var SolucionService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'solucion', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.updateSolucion = function (solucion) {
+        var json = JSON.stringify(solucion);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.put(this.url + 'solucion/' + solucion._id, params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getSoluciones = function () {
         return this._http.get(this.url + 'soluciones').map(function (res) { return res.json(); });
     };
@@ -33,16 +39,54 @@ var SolucionService = (function () {
         return this._http.get(this.url + 'solucion/' + id).map(function (res) { return res.json(); });
     };
     SolucionService.prototype.getTerminadasById = function (model) {
-        var json = JSON.stringify(model);
-        var params = json;
+        var params = { _id: model };
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'soluciones-terminadasId', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.getTerminadasByIdNB = function (model) {
+        var params = { _id: model };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-terminadasIdNB', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getTerminadasByIdNM = function (model) {
+        var params = { _id: model };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-terminadasIdNM', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getTerminadasByIdNA = function (model) {
+        var params = { _id: model };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-terminadasIdNA', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getSinTerminarById = function (model) {
-        var json = JSON.stringify(model);
-        var params = json;
+        var params = { _id: model };
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'soluciones-sinTerminarId', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getSinTerminarByIdNB = function (model) {
+        var params = { _id: model };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-sinTerminarIdNB', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getSinTerminarByIdNM = function (model) {
+        var params = { _id: model };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-sinTerminarIdNM', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getSinTerminarByIdNA = function (model) {
+        var params = { _id: model };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-sinTerminarIdNA', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getTerminadasByProfesor = function (id_alumno, id_profesor) {
+        var params = { _id: id_alumno, profesor: id_profesor };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-terminadasByProfesor', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getSinTerminarByProfesor = function (id_alumno, id_profesor) {
+        var params = { _id: id_alumno, profesor: id_profesor };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-sinTerminarByProfesor', params, { headers: headers }).map(function (res) { return res.json(); });
     };
     SolucionService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }

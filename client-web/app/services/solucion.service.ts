@@ -28,6 +28,15 @@ export class SolucionService{
 
 		return this._http.post(this.url+'solucion', params, {headers: headers}).map(res=> res.json());
     }
+    
+    updateSolucion(solucion : Solucion){
+        let json = JSON.stringify(solucion);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.put(this.url+'solucion/'+solucion._id, params, {headers: headers}).map(res=> res.json());
+    }
 
 	getSoluciones(){
 		return this._http.get(this.url+'soluciones').map(res => res.json());
@@ -38,8 +47,8 @@ export class SolucionService{
 	}
 
     getTerminadasById(model: any){
-        let json = JSON.stringify(model);
-		let params= json;
+        
+		let params= {_id: model};
 
 		let headers= new Headers({'Content-Type': 'application/json'});
 
@@ -47,15 +56,94 @@ export class SolucionService{
 
     }
 
-    getSinTerminarById(model: any){
-        let json = JSON.stringify(model);
-		let params= json;
+    getTerminadasByIdNB(model: any){
+        
+		let params= {_id: model};
 
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasIdNB', params, {headers: headers}).map(res => res.json());
+
+    }
+
+     getTerminadasByIdNM(model: any){
+        
+		let params= {_id: model};
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasIdNM', params, {headers: headers}).map(res => res.json());
+
+    }
+
+     getTerminadasByIdNA(model: any){
+        
+		let params= {_id: model};
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasIdNA', params, {headers: headers}).map(res => res.json());
+
+    }
+
+    getSinTerminarById(model: any){
+
+        let params= {_id: model};
 		let headers= new Headers({'Content-Type': 'application/json'});
 
         return this._http.post(this.url+'soluciones-sinTerminarId', params, {headers: headers}).map(res => res.json());
 
     }
+
+
+    getSinTerminarByIdNB(model: any){
+
+        let params= {_id: model};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarIdNB', params, {headers: headers}).map(res => res.json());
+
+    }
+
+
+    getSinTerminarByIdNM(model: any){
+
+        let params= {_id: model};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarIdNM', params, {headers: headers}).map(res => res.json());
+
+    }
+
+
+    getSinTerminarByIdNA(model: any){
+
+        let params= {_id: model};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarIdNA', params, {headers: headers}).map(res => res.json());
+
+    }
+
+    getTerminadasByProfesor(id_alumno: any, id_profesor){
+
+        let params= {_id: id_alumno, profesor: id_profesor};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-terminadasByProfesor', params, {headers: headers}).map(res => res.json());
+
+    }
+
+    getSinTerminarByProfesor(id_alumno: any, id_profesor){
+
+        let params= {_id: id_alumno, profesor: id_profesor};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-sinTerminarByProfesor', params, {headers: headers}).map(res => res.json());
+
+    }
+
+    
 
     
 

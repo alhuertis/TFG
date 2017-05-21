@@ -13,7 +13,9 @@ var SolucionSchema = Schema({
     msgCalificaciones: [String],
     respuestas: [String],
     notaFinal: Number,
+    nivel: String,
     terminado: Boolean,
+    profesor: {type: Schema.ObjectId, ref: "User"},
 
 });
 
