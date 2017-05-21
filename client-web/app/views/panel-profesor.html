@@ -50,7 +50,7 @@
                 </li>
                 
 
-                <li> Actividades<span class="badge badge-small"> {{miColeccionAct.length}}</span><i *ngIf="miColeccionAct.length" (click)="seleccionaDatos('mias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i> 
+                <li> Actividades <span class="badge badge-small"> {{miColeccionAct.length}}</span><i *ngIf="miColeccionAct.length" (click)="seleccionaDatos('mias', 'actividades')" class="glyphicon glyphicon-eye-open ojo"></i> 
                   <ul>
                     <li> Nivel
                       <ul>
@@ -100,7 +100,7 @@
                   <div class="col-sm-1">
                       <input type="checkbox" [checked]="ejercicio.marcado" (click)="addActividad($event, ejercicio._id)">
                   </div>
-                  <div class="col-sm-7">
+                  <div class="col-sm-9">
                     <div class="row">
                       <div class="col-md-6">
                         <ul>
@@ -118,9 +118,10 @@
                   </div>
                   </div>
 
-                  <div class="col-sm-4 botones-lista">
-                      <a class="btn btn-xs btn-info" (click)="showEjercicio(ejercicio)">Abrir</a>
-                      <a class="btn btn-xs btn-warning" (click)="showEjercicio(ejercicio)">Modificar</a>
+                  <div class="col-sm-2 botones-lista">
+                      <i class="glyphicon glyphicon-info-sign" id="info-ejer" (click)="showEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="showEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="modalBorrarEjercicio(ejercicio)"></i>
                   </div>
                 </div>
               </div>
@@ -129,12 +130,12 @@
 
           <div class="row" *ngIf="mostrarListaActs">
          
-              <div class="col-md-12 ejer-lista animated fadeInLeft" *ngFor="let actividad of pagedItemsActs; let i=index">
+              <div class="col-md-12 act-lista animated fadeInLeft" *ngFor="let actividad of pagedItemsActs; let i=index">
                 <div class="row">
                   <div class="col-sm-1">
                       <input type="checkbox" [checked]="actividad.marcado">
                   </div>
-                  <div class="col-sm-7">
+                  <div class="col-sm-9">
                     <div class="row">
                       <div class="col-md-6">
                         <ul>
@@ -152,9 +153,10 @@
                   </div>
                   </div>
 
-                  <div class="col-sm-4 botones-lista">
-                      <a class="btn btn-xs btn-info">Abrir</a>
-                      <a class="btn btn-xs btn-warning">Modificar</a>
+                  <div class="col-sm-2 botones-lista">
+                      <i class="glyphicon glyphicon-info-sign" id="info-act" (click)="showEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-cog" id="modificar-act" (click)="showEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-trash" id="borrar-act" (click)="modalBorrarEjercicio(ejercicio)"></i>
                   </div>
                 </div>
               </div>

@@ -209,7 +209,7 @@
 	padding: 0;
 }
 
-.ejer-lista input[type=checkbox]{
+.ejer-lista input[type=checkbox], .act-lista input[type=checkbox]{
 	margin-top: 25px;
 	width: 10px;
 	height: 10px;
@@ -222,22 +222,23 @@
 	position: relative;
 }
 
-.ejer-lista input[type=checkbox]:checked{
+.ejer-lista input[type=checkbox]:checked, .act-lista input[type=checkbox]:checked {
 	background-color: #3df4cd;
 }
 
-.ejer-lista input[type=checkbox]:hover{
+.ejer-lista input[type=checkbox]:hover, .act-lista input[type=checkbox]:hover{
 	background-color: #3df4cd;
 	cursor: pointer;
 }
 
-.ejer-lista input[type=checkbox]:focus{
+.ejer-lista input[type=checkbox]:focus, .act-lista input[type=checkbox]:hover{
 	outline: none;
 }
 
 
 
-.ejer-lista input[type=checkbox]:checked:active, .ejer-lista input[type=checkbox]:active{
+.ejer-lista input[type=checkbox]:checked:active, .ejer-lista input[type=checkbox]:active, .act-lista input[type=checkbox]:checked:active
+, .act-lista input[type=checkbox]:active{
 	border: none;
 }
 
@@ -249,6 +250,10 @@
 }
 
 .sol-lista{
+	background: rgba(23,157,168,0.9);
+}
+
+.act-lista{
 	background: rgba(23,157,168,0.9);
 }
 
@@ -264,7 +269,31 @@
 }
 
 .ejer-lista .botones-lista, .act-lista .botones-lista, .sol-lista .botones-lista{
-	padding-top: 20px;
+	padding-top: 8px;
+	padding-left: 0px;
+	padding-right: 0x;
+	cursor: pointer;
+}
+
+.botones-lista i{
+	padding-right: 4px;
+	font-size: 16px;
+}
+
+.botones-lista #info-ejer{
+	color: #00c7ff;
+}
+
+.botones-lista #modificar-ejer, .botones-lista #modificar-act{
+	color: #f2c524;
+}
+
+.botones-lista #borrar-ejer, .botones-lista #borrar-act{
+	color: #680202;
+}
+
+.botones-lista #info-act{
+	color: #02335b;
 }
 
 .pagination a{
@@ -381,11 +410,12 @@
 /********PANEL ALUMNO***************/
 
 .info-actividad{
-	border: 1px solid #eee;
+	/*border: 1px solid #777;*/
 	border-radius: 7px;
-	padding: 5px 5px 0px 5px;
-	background: #F5F5F5;
-	color: #444;
+	padding: 5px 5px 1px 5px;
+	/*background: #F5F5F5;*/
+	background: #39a890;
+	color: #222;
 }
 
 .info-actividad h3{
@@ -475,7 +505,7 @@
 	padding-bottom: 10px;
 	margin-top: 30px;
 	width:60px;
-	margin-left: 44px;
+	margin-left: -10px;
 }
 
 
@@ -550,11 +580,11 @@
 .solucion input{
 	margin-left: 20px;
 	margin-top: 10px;
-	width: 300px;
+	width: 350px;
 	height: 30px;
 	padding: 7px;
 	color: #555;
-	font-size: 16px;
+	font-size: 18px;
 	border: none;
 	border-bottom: 1px solid #63b1ed;
 
@@ -705,12 +735,43 @@
 	color: white;
 }
 
-.btn-salir-act{
-	margin-left: 4px;
-	margin-top: -16px;
-	background: #a33535;
+
+.botones-resolver{
+	/*border: 1px solid #ccc;*/
+	/*background: #99CC99;*/
+	margin-left: -4px;
+	margin-top: 45px;
+	border-radius: 0px 6px 6px 0px;
+	padding: 10px 5px 10px 0px;
+	 
+}
+
+.botones-resolver ul{
+	list-style-type: none;
+	padding: 0px;
+	display: inline-block;
+}
+
+.botones-resolver ul li{
+	background: #e0a03a;
+	padding: 5px 5px 5px 48px;
+	margin-bottom: 2px;
+	border-radius: 0px 6px 6px 0px;
 	color: white;
-	padding: 4px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.botones-resolver ul li:hover{
+	background: #db9429;
+}
+
+.botones-resolver ul li:last-child{
+	background: #e53232;
+}
+
+.botones-resolver ul li:last-child:hover{
+	background: #c61919;
 }
 /*********FIN PANEL ALUMNO**********/
 

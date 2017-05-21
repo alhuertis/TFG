@@ -385,7 +385,7 @@ var ResolverActividadComponent = (function () {
     ResolverActividadComponent.prototype.dropVerbo = function (event, palabra) {
         //alert(palabra + " " + event.dragData);
         if (this.faseVerbo)
-            alert("Ya has encontrado el verbo anteriormente");
+            alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
         else {
             if (palabra == this.verbo) {
                 alert("Has acertado, es el verbo");
@@ -416,12 +416,30 @@ var ResolverActividadComponent = (function () {
         this.srcDraggedPentagono = $(event.target).attr("src");
     };
     ResolverActividadComponent.prototype.dropPentagono = function (event, posicion) {
-        if (event.dragData) {
-            alert(event.dragData);
+        var data = event.dragData;
+        var sonFichas = data == '-animado +definido' || data == '-animado -definido' || data == '+animado -humano' || data == '+animado +humano' || data == 'lugar';
+        if (!sonFichas) {
+            alert(data);
         }
         else {
-            $(event.nativeEvent.target).children().css("display", "block");
-            $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
+            if (posicion == 'izquierda') {
+                if (data == '+animado +humano') {
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
+                }
+                else {
+                    alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                }
+            }
+            else {
+                if (data == '+animado +humano') {
+                    alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                }
+                else {
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
+                }
+            }
         }
     };
     ResolverActividadComponent.prototype.quitaPentagono = function (event) {
@@ -494,6 +512,26 @@ var ResolverActividadComponent = (function () {
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalSalir = false; }, 300);
         this.msgSalir = "";
+    };
+    ResolverActividadComponent.prototype.cancelarModalDiccionario = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalDiccionario = false; }, 300);
+    };
+    ResolverActividadComponent.prototype.cancelarModalAyuda = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalAyuda = false; }, 300);
+    };
+    ResolverActividadComponent.prototype.abrirModalDiccionario = function () {
+        var _this = this;
+        this.modalDiccionario = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    ResolverActividadComponent.prototype.abrirModalAyuda = function () {
+        var _this = this;
+        this.modalAyuda = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
     };
     return ResolverActividadComponent;
 }());

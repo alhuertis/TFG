@@ -4,18 +4,11 @@
     <div class="col-md-3">
         <div class="row">
             <div class="col-md-12">
-                <ol class="breadcrumb" style="width: 230px">
+                <ol class="breadcrumb" style="width: 230px; background:#eee">
                     <li><a routerLink="/alumno">Alumno</a></li>
                     <li class="active">Resolver actividad</li>
                 </ol>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <button class="btn btn-salir-act" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Salir</button>  
-            </div>
-            
         </div>
         
     </div>
@@ -51,41 +44,50 @@
 
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-2 resolver"> 
+    <div class="col-md-3">
+        <div class="botones-resolver">
+            <ul>
+                <li (click)="abrirModalDiccionario()"><i class="glyphicon glyphicon-search"></i> Abrir diccionario</li>
+                <li (click)="abrirModalAyuda()"><i class="glyphicon glyphicon-question-sign"></i> Mostrar ayuda</li>
+                <li (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar y salir</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-5 resolver"> 
         <div class="row">
-            <div class="col-md-2" style="padding-right: 0px;">
+            <div class="col-md-1" style="padding-right: 0px;">
                 <div class="panel-resolver-fichas">
                     <h4>Fichas</h4>
-                    <div>
+                    <div data-toggle="tooltip" data-placement="left" title="monovalente">
                         <img draggable="true" [dragData]="'monovalente'" [dragOverClass]="'drag-ficha'" (click)="clickMonovalente($event)" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive" id="monovalente"> 
                     </div>
 
-                    <div>
+                    <div data-toggle="tooltip" data-placement="left" title="bivalente">
                         <img draggable="true" [dragData]="'bivalente'" (click)="clickBivalente($event)" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive">    
                     </div>
 
-                    <div>
+                    <div data-toggle="tooltip" data-placement="left" title="trivalente">
                         <img draggable="true" [dragData]="'trivalente'" (click)="clickTrivalente($event)" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive">
                     </div>
 
-                    <div>
-                        <img draggable="true" [dragOverClass]="'drag-ficha'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_amarillo.png" alt="monovalente" class="img-responsive">
+                    <div data-toggle="tooltip" data-placement="left" title="-animado +definido">
+                        <img draggable="true" [dragData]="'-animado +definido'" [dragOverClass]="'drag-ficha'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_amarillo.png" alt="amarilla" class="img-responsive">
                     </div>
 
-                    <div>
-                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_azul.png" alt="monovalente" class="img-responsive">
+                    <div data-toggle="tooltip" data-placement="left" title="-animado -definido">
+                        <img draggable="true" [dragData]="'-animado -definido'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_azul.png" alt="azul" class="img-responsive">
                     </div>
 
-                    <div>
-                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_naranja.png" alt="monovalente" class="img-responsive">
+                    <div data-toggle="tooltip" data-placement="left" title="+animado -humano">
+                        <img draggable="true" [dragData]="'+animado -humano'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_naranja.png" alt="naranja" class="img-responsive">
                     </div>
                     
-                    <div>
-                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_rojo.png" alt="monovalente" class="img-responsive">
+                    <div data-toggle="tooltip" data-placement="left" title="+animado +humano">
+                        <img draggable="true" [dragData]="'+animado +humano'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_rojo.png" alt="roja" class="img-responsive">
                     </div>
 
-                    <div>
-                        <img draggable="true" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_verde.png" alt="monovalente" class="img-responsive">                       
+                    <div data-toggle="tooltip" data-placement="left" title="lugar">
+                        <img draggable="true" [dragData]="'lugar'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_verde.png" alt="verde" class="img-responsive">                       
                     </div>
                 </div>
             </div>
@@ -112,15 +114,15 @@
                             <img *ngIf="bivalente.activa" id="bivalente" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': bivalente.top}">    
                             <img *ngIf="trivalente.activa" id="trivalente" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': trivalente.top}">
 
-                            <div id="izq" (click)="quitaPentagono($event)" *ngIf="argumentos >= 2" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'izquierda')">
+                            <div id="izq" (click)="quitaPentagono($event)" *ngIf="argumentos >= 2 && faseVerbo" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'izquierda')">
                                 <img class="img-responsive izquierda">
                             </div>
                                 
-                            <div id="superior" (click)="quitaPentagono($event)" *ngIf="argumentos >= 1" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'superior')">
+                            <div id="superior" (click)="quitaPentagono($event)" *ngIf="argumentos >= 1 && faseVerbo" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'superior')">
                                 <img class="img-responsive superior">
                             </div>
 
-                            <div id="der" (click)="quitaPentagono($event)" *ngIf="argumentos == 3"  droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'derecha')">
+                            <div id="der" (click)="quitaPentagono($event)" *ngIf="argumentos == 3 && faseVerbo"  droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'derecha')">
                                 <img class="img-responsive derecha">
                             </div>  
                         </div>
@@ -172,6 +174,40 @@
         <div class="modal-footer">
             <button (click)="cancelarModalSalir()" class="btn">Cancelar</button>
             <button (click)="guardarYSalir()" class="btn btn-success">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- modal diccionario -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalDiccionario ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4><i class="glyphicon glyphicon-book"></i> Bienvenido al diccionario Latin</h4>
+        </div>  
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+            <button (click)="cancelarModalDiccionario()" class="btn">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalAyuda ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">  
+        <div class="modal-body">
+          Ayuda...
+        </div>
+        <div class="modal-footer">
+            <button (click)="cancelarModalAyuda()" class="btn">Cerrar</button>
         </div>
       </div>
     </div>

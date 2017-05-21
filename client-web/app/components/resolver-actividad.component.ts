@@ -69,6 +69,8 @@ export class  ResolverActividadComponent implements OnInit{
     //Modales
     visibleAnimate: Boolean;
     modalSalir: Boolean;
+    modalDiccionario: Boolean;
+    modalAyuda: Boolean;
     msgSalir: String;
 
  
@@ -485,7 +487,7 @@ export class  ResolverActividadComponent implements OnInit{
     dropVerbo(event: any, palabra: String){
         //alert(palabra + " " + event.dragData);
         if(this.faseVerbo)
-            alert("Ya has encontrado el verbo anteriormente");
+            alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
         else{
 
             if(palabra == this.verbo){
@@ -522,13 +524,31 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     dropPentagono(event: any, posicion : String){
-        if(event.dragData){ //Si lo hacemos drop con las palabras
-            alert(event.dragData);
+        var data= event.dragData;
+        var sonFichas:Boolean= data == '-animado +definido' || data == '-animado -definido' || data == '+animado -humano' || data == '+animado +humano' || data == 'lugar';
+        if(!sonFichas){ //Si lo que se arrastran son las palabras
+            alert(data);
 
         }
         else{ //Si hacemos drop con las fichas
-            $(event.nativeEvent.target).children().css("display", "block");
-            $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
+            if(posicion == 'izquierda'){
+                if(data == '+animado +humano'){
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
+                }
+                else{
+                    alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                }
+
+            }else{
+                if(data == '+animado +humano'){
+                    alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                }else{
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
+                }
+            }
+            
         }
     }
 
@@ -621,5 +641,25 @@ export class  ResolverActividadComponent implements OnInit{
         this.visibleAnimate=false;
         setTimeout(() => this.modalSalir = false, 300);
         this.msgSalir="";
+    }
+
+    cancelarModalDiccionario(){
+        this.visibleAnimate=false;
+        setTimeout(() => this.modalDiccionario = false, 300);
+    }
+
+    cancelarModalAyuda(){
+        this.visibleAnimate=false;
+        setTimeout(() => this.modalAyuda = false, 300);
+    }
+
+    abrirModalDiccionario(){
+        this.modalDiccionario=true;
+        setTimeout(() => this.visibleAnimate = true);
+    }
+
+    abrirModalAyuda(){
+        this.modalAyuda=true;
+        setTimeout(() => this.visibleAnimate = true);
     }
 }
