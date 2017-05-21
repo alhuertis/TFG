@@ -38,15 +38,29 @@ function  getDiccionario(req, res){
 }
 
 function  getPalabra(req, res){
+    
     var palabra= req.params.palabra;
-     	LexicalResource.findOne({'Lexicon.LexicalEntry.Sense.Definition.feat.val':palabra},(err, lr) => {
+     	LexicalResource.findOne({'Lexicon.LexicalEntry.Lemma.feat.val':{$regex:palabra}},(err, lr) => {
  		if(err){
  			res.status(500).send({message: 'Error al devolver los datos'});
  		}else{
              
- 		if(lr!=null && lr.Lexicon.LexicalEntry[0].feat[0].val=="verb"){
-             var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate; 
-             
+ 		if(lr!=null){
+
+          if(lr.Lexicon.LexicalEntry[0].feat[0].val=="verb"){
+            var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense[0].PredicativeRepresentation[0].SemanticPredicate; 
+             res.status(200).send({Carac});
+          }  
+          if(lr.Lexicon.LexicalEntry[0].feat[0].val=="noun"){
+                var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense;  
+
+                for(var i=0; i<Caracterizacion.length;i++){
+                    if(Caracterizacion[i].Definition[0].feat[0].val==palabra){
+                        var Carac= Caracterizacion[i].fs[0].feat;
+                    }
+                }
+               
+          }     
  				res.status(200).send({Caracterizacion});
  			
  		}else{
