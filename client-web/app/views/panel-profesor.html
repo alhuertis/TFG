@@ -121,7 +121,7 @@
                   <div class="col-sm-2 botones-lista">
                       <i class="glyphicon glyphicon-info-sign" id="info-ejer" (click)="showEjercicio(ejercicio)"></i>
                       <i class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="showEjercicio(ejercicio)"></i>
-                      <i class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="modalBorrarEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="abrirBorrarEjercicio(ejercicio)"></i>
                   </div>
                 </div>
               </div>
@@ -156,7 +156,7 @@
                   <div class="col-sm-2 botones-lista">
                       <i class="glyphicon glyphicon-info-sign" id="info-act" (click)="showEjercicio(ejercicio)"></i>
                       <i class="glyphicon glyphicon-cog" id="modificar-act" (click)="showEjercicio(ejercicio)"></i>
-                      <i class="glyphicon glyphicon-trash" id="borrar-act" (click)="modalBorrarEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-trash" id="borrar-act" (click)="abrirBorrarEjercicio(ejercicio)"></i>
                   </div>
                 </div>
               </div>
@@ -286,6 +286,26 @@
           </div>
         </div>
       </div>
+  </div>
+
+
+  <!-- modal borrar ejercicio -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalBorrarEjercicio ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4><i class="glyphicon glyphicon-trash"></i>Borrar ejercicio</h4>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro que desea borrar este ejercicio?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="borrarEjercicio()">Aceptar</button>
+          <button class="btn btn-danger" (click)="cerrarBorrarEjercicio()">Cancelar</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>

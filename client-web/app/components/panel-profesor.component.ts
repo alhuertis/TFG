@@ -109,9 +109,11 @@ export class  PanelProfesorComponent implements OnInit{
 	//Modales
   	public modalEjercicio: Boolean;
 	public modalActividad: Boolean;
+	public modalBorrarEjercicio: Boolean;
   	private visibleAnimate: Boolean;
 	public ejerAbrir: Ejercicio;
 	public actAbrir: Actividad;
+	public ejerBorrar: Ejercicio;
 
 
 	constructor(
@@ -1159,6 +1161,7 @@ export class  PanelProfesorComponent implements OnInit{
 
 		this.visibleAnimate = false;
     	setTimeout(() => this.modalActividad = false, 300);
+		this.ngOnInit();
 	}
 
 	showEjercicio(ejercicio: Ejercicio){
@@ -1171,5 +1174,55 @@ export class  PanelProfesorComponent implements OnInit{
     	this.visibleAnimate = false;
     	setTimeout(() => this.modalEjercicio = false, 300);
   	}
+
+	abrirBorrarEjercicio(ejercicio: Ejercicio){
+		this.ejerBorrar= ejercicio;
+		this.modalBorrarEjercicio = true;
+    	setTimeout(() => this.visibleAnimate = true);
+	}
+
+	borrarEjercicio(){
+		this._ejercicioService.borrarEjercicio(this.ejerBorrar._id).subscribe(
+
+			result=>{
+				if(result.respuesta == 'ok'){
+					for(var i=0; i < this.pagedItemsEjers.length; i++){
+						if(this.pagedItemsEjers[i]._id == this.ejerBorrar._id){
+							this.pagedItemsEjers.splice(i,1);
+						}
+					}
+
+					for(var i=0; i < this.ejersAMostrar.length; i++){
+						if(this.ejersAMostrar[i]._id == this.ejerBorrar._id){
+							this.ejersAMostrar.splice(i,1);
+						}
+					}
+					this.cerrarBorrarEjercicio();
+					this.ngOnInit();
+
+				}else{
+					this.cerrarBorrarEjercicio();
+					alert(result.message);
+				}
+			},
+
+			error=>{
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de borrado en el servidor');
+				}
+
+			}
+
+		);
+	}
 	
+
+	cerrarBorrarEjercicio(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalBorrarEjercicio = false, 300);
+		this.ejerBorrar=null;
+	}
 }

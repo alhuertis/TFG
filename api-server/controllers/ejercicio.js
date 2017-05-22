@@ -107,15 +107,15 @@ function deleteEjercicio(req, res){
 		}
 
 		if(!ejercicio){
-			res.status(404).send({message:'No hay ejercicio'});	
+			res.status(404).send({message:'No hay ejercicio', respuesta: 'ko'});	
 		}
 		else
 			ejercicio.remove(err =>{
 
 			if(err)
-				res.status(500).send({message:'Error al borrar el ejercicio'});
+				res.status(500).send({message:'Error al borrar el ejercicio', respuesta: 'ko'});
 			else
-				res.status(200).send({message:'Ejercicio borrado correctamente'});
+				res.status(200).send({message:'Ejercicio borrado correctamente', respuesta:'ok'});
 		})
 
 

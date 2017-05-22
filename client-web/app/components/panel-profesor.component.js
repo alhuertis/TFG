@@ -792,6 +792,7 @@ var PanelProfesorComponent = (function () {
         });
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalActividad = false; }, 300);
+        this.ngOnInit();
     };
     PanelProfesorComponent.prototype.showEjercicio = function (ejercicio) {
         var _this = this;
@@ -803,6 +804,47 @@ var PanelProfesorComponent = (function () {
         var _this = this;
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalEjercicio = false; }, 300);
+    };
+    PanelProfesorComponent.prototype.abrirBorrarEjercicio = function (ejercicio) {
+        var _this = this;
+        this.ejerBorrar = ejercicio;
+        this.modalBorrarEjercicio = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelProfesorComponent.prototype.borrarEjercicio = function () {
+        var _this = this;
+        this._ejercicioService.borrarEjercicio(this.ejerBorrar._id).subscribe(function (result) {
+            if (result.respuesta == 'ok') {
+                for (var i = 0; i < _this.pagedItemsEjers.length; i++) {
+                    if (_this.pagedItemsEjers[i]._id == _this.ejerBorrar._id) {
+                        _this.pagedItemsEjers.splice(i, 1);
+                    }
+                }
+                for (var i = 0; i < _this.ejersAMostrar.length; i++) {
+                    if (_this.ejersAMostrar[i]._id == _this.ejerBorrar._id) {
+                        _this.ejersAMostrar.splice(i, 1);
+                    }
+                }
+                _this.cerrarBorrarEjercicio();
+                _this.ngOnInit();
+            }
+            else {
+                _this.cerrarBorrarEjercicio();
+                alert(result.message);
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de borrado en el servidor');
+            }
+        });
+    };
+    PanelProfesorComponent.prototype.cerrarBorrarEjercicio = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalBorrarEjercicio = false; }, 300);
+        this.ejerBorrar = null;
     };
     return PanelProfesorComponent;
 }());
