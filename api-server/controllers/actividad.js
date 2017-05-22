@@ -671,6 +671,7 @@ function getActsOtrasColeccionesNivelB(req, res){
 
 //Borra de todas las actividades un ejer pasado por id
 function borrarEjercicio(req, res){
+	
 	var id = req.params;
 	console.log(id);
 
