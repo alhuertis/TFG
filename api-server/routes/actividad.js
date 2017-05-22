@@ -39,6 +39,8 @@ api.get('/actividad-actNoVisiblesNivelB/:id_profesor', ActividadController.getAc
 api.get('/actividad-otrasColecciones/:id_profesor', ActividadController.getActsOtrasColecciones);
 api.get('/actividad-otrasColeccionesNivelA/:id_profesor', ActividadController.getActsOtrasColeccionesNivelA);
 api.get('/actividad-otrasColeccionesNivelM/:id_profesor', ActividadController.getActsOtrasColeccionesNivelM);
-api.get('/actividad-otrasColeccionesNivelB/:id_profesor', ActividadController.getActsOtrasColeccionesNivelB); 
+api.get('/actividad-otrasColeccionesNivelB/:id_profesor', ActividadController.getActsOtrasColeccionesNivelB);
+api.put('/actividad/:id', ActividadController.updateActividad); 
+api.put('/actividad-ejercicio/:id', ActividadController.borrarEjercicio);  
 
 module.exports= api; 

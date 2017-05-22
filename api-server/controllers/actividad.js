@@ -669,6 +669,24 @@ function getActsOtrasColeccionesNivelB(req, res){
 
 } 
 
+//Borra de todas las actividades un ejer pasado por id
+function borrarEjercicio(req, res){
+	var id = req.params;
+	console.log(id);
+
+	Actividad.update({},{ $pull:{"ejercicios":id}}, { multi: true },(err, item)=>{
+		if(err){
+			res.status(500).send({message:'Error al actualizar las actividades'});
+		}
+		else if(!item){
+				res.status(404).send({message:'Ninguna actividad contiene ese ejercicio'});	
+		}else
+			res.status(200).send({message:'Se han actualizado los ejercicios'});
+
+	});
+
+}
+
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {
 	getActividad,
@@ -699,5 +717,7 @@ module.exports= {
 	getActsOtrasColecciones,
 	getActsOtrasColeccionesNivelA,
 	getActsOtrasColeccionesNivelB,
-	getActsOtrasColeccionesNivelM
+	getActsOtrasColeccionesNivelM,
+	updateActividad,
+	borrarEjercicio
 }

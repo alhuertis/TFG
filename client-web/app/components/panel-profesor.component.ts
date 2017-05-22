@@ -1183,7 +1183,6 @@ export class  PanelProfesorComponent implements OnInit{
 
 	borrarEjercicio(){
 		this._ejercicioService.borrarEjercicio(this.ejerBorrar._id).subscribe(
-
 			result=>{
 				if(result.respuesta == 'ok'){
 					for(var i=0; i < this.pagedItemsEjers.length; i++){
