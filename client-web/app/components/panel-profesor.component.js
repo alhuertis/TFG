@@ -799,10 +799,15 @@ var PanelProfesorComponent = (function () {
         var _this = this;
         this._actividadService.addActividad(this.nuevaActividad).subscribe(function (result) {
             if (!result.respuesta) {
-                alert('Error en el servidor');
+                _this.message = "Error en el servidor creando la actividad";
+                _this.modalMessage = true;
+                setTimeout(function () { return _this.visibleAnimate = true; }, 300);
             }
             else {
-                alert('Se ha guardado correctamente');
+                _this.message = "Se ha creado la actividad";
+                _this.modalMessage = true;
+                setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+                _this.ngOnInit();
                 _this.vaciarLista();
             }
         }, function (error) {

@@ -1176,10 +1176,15 @@ export class  PanelProfesorComponent implements OnInit{
 			result => {
 				
 				if(!result.respuesta){
-					alert('Error en el servidor');
+					this.message="Error en el servidor creando la actividad";
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
 				}
 				else{
-					alert('Se ha guardado correctamente');
+					this.message="Se ha creado la actividad";
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
+					this.ngOnInit();
 					this.vaciarLista();
 				}
 			},
