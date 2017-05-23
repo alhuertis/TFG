@@ -91,7 +91,7 @@ function updateEjercicio(req, res){
 		if(err)
 			res.status(500).send({message: 'Error al actualizar el ejercicio'});
 		else
-			res.status(200).send({ejercicioUpdated});//favoritoUpdated no devuelve los datos actualizados pero en base de datos si estará actualizado
+			res.status(200).send({mesagge: 'El ejercicio ha sido modificado',respuesta:'ok',ejercicioUpdated});
 	});
 	
 }

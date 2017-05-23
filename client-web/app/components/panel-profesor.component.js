@@ -24,6 +24,12 @@ var PanelProfesorComponent = (function () {
         this.pager = {};
         //objeto update
         this.ejerUpdate = {};
+        //Modificar ejer panel
+        this.niveles = ['Bajo', 'Medio', 'Avanzado'];
+        this.tipos = [1, 2, 3, 4];
+        this.valoresLogico = [];
+        this.tipoLogico = "";
+        this.valorLogico = "";
         this.title = "Panel de profesores";
         //this.user="Antonio Sarasa";
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
@@ -48,10 +54,14 @@ var PanelProfesorComponent = (function () {
         this.invisiblesNivelMAct = new Array();
         this.invisiblesNivelBAct = new Array();
         this.actsAMostrar = [];
+        this.datosSeleccionados = "";
+        this.tipoSeleccionado = "";
         //this.actividad=[];
         this.modalEjercicio = false;
         this.modalActividad = false;
+        this.modalMessage = false;
         this.visibleAnimate = false;
+        this.message = "";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -560,7 +570,11 @@ var PanelProfesorComponent = (function () {
             }, 100, "linear");
         });*/
     }; //fin ngAfterViewInit
-    PanelProfesorComponent.prototype.seleccionaDatos = function (datos, tipo) {
+    PanelProfesorComponent.prototype.seleccionaDatos = function (datos, tipo, page) {
+        this.datosSeleccionados = datos;
+        this.tipoSeleccionado = tipo;
+        this.mostrarListaActs = false;
+        this.mostrarListaEjers = false;
         switch (datos) {
             //Ejercicios
             case 'ejercicios':
@@ -684,12 +698,18 @@ var PanelProfesorComponent = (function () {
         if (tipo == 'ejercicios') {
             this.mostrarListaActs = false;
             this.mostrarListaEjers = true;
-            this.setPageEjers(1);
+            if (page != 'undefined')
+                this.setPageEjers(page);
+            else
+                this.setPageEjers(1);
         }
         else if (tipo == 'actividades') {
             this.mostrarListaEjers = false;
             this.mostrarListaActs = true;
-            this.setPageActs(1);
+            if (page != 'undefined')
+                this.setPageActs(page);
+            else
+                this.setPageActs(1);
         }
     };
     PanelProfesorComponent.prototype.setPageEjers = function (page) {
@@ -816,6 +836,7 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.borrarEjercicio = function () {
         var _this = this;
         this._ejercicioService.borrarEjercicio(this.ejerBorrar._id).subscribe(function (result) {
+            var id = _this.ejerBorrar._id;
             if (result.respuesta == 'ok') {
                 for (var i = 0; i < _this.pagedItemsEjers.length; i++) {
                     if (_this.pagedItemsEjers[i]._id == _this.ejerBorrar._id) {
@@ -829,10 +850,27 @@ var PanelProfesorComponent = (function () {
                 }
                 _this.cerrarBorrarEjercicio();
                 _this.ngOnInit();
+                _this._actividadService.borrarEjercicio(id).subscribe(function (result) {
+                    if (result.respuesta == 'ok') {
+                        _this.ngOnInit();
+                        _this.seleccionaDatos(_this.datosSeleccionados, _this.tipoSeleccionado, _this.pager.currentPage);
+                        _this.message = "El ejercicio ha sido eliminado";
+                        _this.modalMessage = true;
+                        setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+                    }
+                }, function (error) {
+                    _this.errorMessage = error;
+                    if (_this.errorMessage != null) {
+                        console.log(_this.errorMessage);
+                        alert('Error en la peticion de borrado en el servidor');
+                    }
+                });
             }
             else {
                 _this.cerrarBorrarEjercicio();
-                alert(result.message);
+                _this.message = result.message;
+                _this.modalMessage = true;
+                setTimeout(function () { return _this.visibleAnimate = true; }, 300);
             }
         }, function (error) {
             _this.errorMessage = error;
@@ -855,12 +893,53 @@ var PanelProfesorComponent = (function () {
         setTimeout(function () { return _this.visibleAnimate = true; });
     };
     PanelProfesorComponent.prototype.updateEjercicio = function () {
+        var _this = this;
+        this._ejercicioService.updateEjercicio(this.ejerUpdate).subscribe(function (result) {
+            if (result.respuesta == 'ok') {
+                _this.cerrarUpdateEjercicio();
+                _this.seleccionaDatos(_this.datosSeleccionados, _this.tipoSeleccionado, _this.pager.currentPage);
+                _this.message = "El ejercicio ha sido actualizado";
+                _this.modalMessage = true;
+                setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de borrado en el servidor');
+            }
+        });
     };
     PanelProfesorComponent.prototype.cerrarUpdateEjercicio = function () {
         var _this = this;
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalModEjer = false; }, 300);
         this.ejerUpdate = {};
+    };
+    PanelProfesorComponent.prototype.cerrarModalMessage = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalMessage = false; }, 300);
+        this.message = "";
+    };
+    PanelProfesorComponent.prototype.aplicaValoresLogicos = function () {
+        var frase = this.ejerUpdate.fraseATraducir;
+        this.valoresLogico = frase.split(" ");
+    };
+    PanelProfesorComponent.prototype.addFLogico = function () {
+        if (this.tipoLogico != "" && this.valorLogico != "") {
+            if (this.ejerUpdate.solucionFLogico != "")
+                this.ejerUpdate.solucionFLogico += ",";
+            this.ejerUpdate.solucionFLogico += this.tipoLogico + "(" + this.valorLogico + ")";
+            this.tipoLogico = "";
+            this.valorLogico = "";
+        }
+    };
+    PanelProfesorComponent.prototype.addSeparator = function (event) {
+        var key = event.key;
+        if (event.keyCode == 32) {
+            this.ejerUpdate.solucionFPatron += " +";
+        }
     };
     return PanelProfesorComponent;
 }());

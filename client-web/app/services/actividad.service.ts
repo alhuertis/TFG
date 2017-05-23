@@ -34,6 +34,12 @@ export class ActividadService{
 		return this._http.get(this.url+'cargarActividad/'+id).map(res => res.json());
 	}
 
+	borrarEjercicio(id: String){
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.put(this.url+'actividad-ejercicio/'+id, {headers: headers}).map(res=> res.json());
+	}
+
     getDisponibles(){
 		return this._http.get(this.url+'actividad-disponibles').map(res => res.json());
 	}

@@ -36,6 +36,12 @@ var EjercicioService = (function () {
     EjercicioService.prototype.borrarEjercicio = function (id) {
         return this._http.delete(this.url + 'ejercicio/' + id).map(function (res) { return res.json(); });
     };
+    EjercicioService.prototype.updateEjercicio = function (model) {
+        var json = JSON.stringify(model);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.put(this.url + 'ejercicio/' + model._id, params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     EjercicioService.prototype.getEjersMiColeccion = function (id_profesor) {
         return this._http.get(this.url + 'ejercicios/miColeccion/' + id_profesor).map(function (res) { return res.json(); });
     };

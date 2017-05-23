@@ -31,10 +31,16 @@ export class  PanelProfesorComponent implements OnInit{
 	public ejercicios: Ejercicio[];
 	public loading: boolean;
 	public errorMessage: string;
+	public message: string;
 	public mostrarListaEjers: boolean;
 	public mostrarListaActs: boolean;
 	public ejersAMostrar: Ejercicio[];
 	//public actividades: Actividad[];
+
+	//Para poder actualizar las vistas
+	public datosSeleccionados: String;
+	public tipoSeleccionado: String
+	
 	public datosAMostrar: string;
 	public actsAMostrar: Actividad[];
 	public actividad: Ejercicio[];
@@ -114,10 +120,19 @@ export class  PanelProfesorComponent implements OnInit{
 	public modalActividad: Boolean;
 	public modalBorrarEjercicio: Boolean;
 	public modalModEjer: Boolean;
+	public modalMessage: Boolean;
   	private visibleAnimate: Boolean;
 	public ejerAbrir: Ejercicio;
 	public actAbrir: Actividad;
 	public ejerBorrar: Ejercicio;
+
+	//Modificar ejer panel
+	public niveles= ['Bajo', 'Medio', 'Avanzado'];
+	public tipos=[1,2,3,4];
+	public valoresLogico: String[]=[];
+	public tipoLogico: string="";
+	public valorLogico: string="";
+	
 
 
 	constructor(
@@ -150,10 +165,15 @@ export class  PanelProfesorComponent implements OnInit{
 		this.invisiblesNivelBAct=new Array<Actividad>();
 
 		this.actsAMostrar=[];
+		this.datosSeleccionados="";
+		this.tipoSeleccionado="";
 		//this.actividad=[];
 		this.modalEjercicio=false;
 		this.modalActividad=false;
+		this.modalMessage=false;
 		this.visibleAnimate=false;
+
+		this.message="";
 		
 	}
 
@@ -897,7 +917,12 @@ export class  PanelProfesorComponent implements OnInit{
 
 	}//fin ngAfterViewInit
 
-	public seleccionaDatos(datos, tipo){
+	public seleccionaDatos(datos, tipo, page?){
+		this.datosSeleccionados=datos;
+		this.tipoSeleccionado=tipo;
+
+		this.mostrarListaActs=false;
+		this.mostrarListaEjers=false;
 		switch(datos){
 			//Ejercicios
 			case 'ejercicios': 
@@ -1023,11 +1048,17 @@ export class  PanelProfesorComponent implements OnInit{
 		if(tipo == 'ejercicios'){
 			this.mostrarListaActs=false;
 			this.mostrarListaEjers=true;
-			this.setPageEjers(1);
+			if(page != 'undefined')
+				this.setPageEjers(page);
+			else
+				this.setPageEjers(1);
 		}else if(tipo == 'actividades'){
 			this.mostrarListaEjers=false;
 			this.mostrarListaActs=true;
-			this.setPageActs(1);
+			if(page != 'undefined')
+				this.setPageActs(page);
+			else
+				this.setPageActs(1);
 		}
 		
 
@@ -1188,6 +1219,7 @@ export class  PanelProfesorComponent implements OnInit{
 	borrarEjercicio(){
 		this._ejercicioService.borrarEjercicio(this.ejerBorrar._id).subscribe(
 			result=>{
+				var id= this.ejerBorrar._id;
 				if(result.respuesta == 'ok'){
 					for(var i=0; i < this.pagedItemsEjers.length; i++){
 						if(this.pagedItemsEjers[i]._id == this.ejerBorrar._id){
@@ -1203,9 +1235,34 @@ export class  PanelProfesorComponent implements OnInit{
 					this.cerrarBorrarEjercicio();
 					this.ngOnInit();
 
+					this._actividadService.borrarEjercicio(id).subscribe(
+						result=>{
+							if(result.respuesta =='ok'){
+								this.ngOnInit();
+								this.seleccionaDatos(this.datosSeleccionados, this.tipoSeleccionado, this.pager.currentPage);
+								this.message="El ejercicio ha sido eliminado";
+								this.modalMessage=true;
+								setTimeout(() => this.visibleAnimate = true, 300);
+							}
+						},
+						error=>{
+							this.errorMessage= <any>error;
+
+							if(this.errorMessage != null){
+								console.log(this.errorMessage);
+								alert('Error en la peticion de borrado en el servidor');
+							}
+						}
+					);
+
+
+					
+
 				}else{
 					this.cerrarBorrarEjercicio();
-					alert(result.message);
+					this.message=result.message;
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
 				}
 			},
 
@@ -1235,7 +1292,29 @@ export class  PanelProfesorComponent implements OnInit{
 	}
 
 	updateEjercicio(){
+		this._ejercicioService.updateEjercicio(this.ejerUpdate).subscribe(
 
+			result=>{
+				if(result.respuesta == 'ok'){
+					this.cerrarUpdateEjercicio();
+					this.seleccionaDatos(this.datosSeleccionados, this.tipoSeleccionado, this.pager.currentPage);
+					this.message="El ejercicio ha sido actualizado";
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
+					
+				}
+			},
+
+			error=>{
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de borrado en el servidor');
+				}
+			}
+
+		);
 
 	}
 
@@ -1243,5 +1322,34 @@ export class  PanelProfesorComponent implements OnInit{
 		this.visibleAnimate = false;
     	setTimeout(() => this.modalModEjer = false, 300);
 		this.ejerUpdate={};
+	}
+
+	cerrarModalMessage(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalMessage = false, 300);
+		this.message="";
+	}
+
+	aplicaValoresLogicos(){
+		let frase= this.ejerUpdate.fraseATraducir;
+		this.valoresLogico = frase.split(" ");
+	}
+
+	addFLogico(){
+		if(this.tipoLogico != "" && this.valorLogico != ""){
+			if(this.ejerUpdate.solucionFLogico != "")
+				this.ejerUpdate.solucionFLogico+=",";
+			this.ejerUpdate.solucionFLogico+=this.tipoLogico + "(" + this.valorLogico + ")";
+			this.tipoLogico="";
+			this.valorLogico="";
+		}
+	}
+
+	addSeparator(event: KeyboardEvent){
+		let key = event.key;
+		if(event.keyCode == 32) {
+            this.ejerUpdate.solucionFPatron+=" +";
+        }
+
 	}
 }

@@ -163,28 +163,52 @@
             
           </div>
 
-          <div class="row">
+          <div class="row" *ngIf="mostrarListaEjers">
             <div class="col-sm-12">
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPage(1)">First</a>
+                  <a (click)="setPageEjers(1)">First</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                  <a (click)="setPageEjers(pager.currentPage - 1)">Previous</a>
                 </li>
                 <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                  <a (click)="setPage(page)">{{page}}</a>
+                  <a (click)="setPageEjers(page)">{{page}}</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                  <a (click)="setPageEjers(pager.currentPage + 1)">Next</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPage(pager.totalPages)">Last</a>
+                  <a (click)="setPageEjers(pager.totalPages)">Last</a>
                 </li>
               </ul>
             </div>
           </div>
+
+          <div class="row" *ngIf="mostrarListaActs">
+            <div class="col-sm-12">
+              <!-- pager -->
+              <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPageActs(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPageActs(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a (click)="setPageActs(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPageActs(pager.currentPage + 1)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPageActs(pager.totalPages)">Last</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
         </div>
         
 
@@ -313,8 +337,8 @@
         [ngStyle]="{'display': modalModEjer ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4><i class="glyphicon glyphicon-cog"></i> Modificar ejercicio: {{ejerUpdate.titulo}}</h4>
+        <div class="modal-header" style="background: #f7e26f;">
+          <h4><i class="glyphicon glyphicon-cog"></i> Modificar ejercicio</h4>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -322,6 +346,84 @@
               <label for="titulo">Titulo</label>
               <input type="text" class="form-control"  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejerUpdate.titulo">
 
+              <div class="row" style="margin-top: 30px">
+                <div class="col-md-6" >
+                  <label for="power">Nivel</label>
+                  <select class="form-control" id="nivel"
+                      required
+                      [(ngModel)]="ejerUpdate.nivel" name="nivel"
+                      #nivel="ngModel" >
+                  <option *ngFor="let niv of niveles" [value]="niv">{{niv}}</option>
+                  </select>
+                  <div [hidden]="nivel.valid || nivel.pristine" class="alert alert-danger">
+                  Nivel requerida
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="power">Tipo</label>
+                  <select class="form-control" id="tipo"
+                      required
+                      [(ngModel)]="ejerUpdate.tipo" name="tipo"
+                      #tipo="ngModel" >
+                  <option *ngFor="let tip of tipos" [value]="tip">{{tip}}</option>
+                  </select>
+                  <div [hidden]="tipo.valid || tipo.pristine" class="alert alert-danger">
+                  Tipo requerido
+                  </div>
+                </div>
+              </div>
+
+              <label style="margin-top: 25px" for="enunciado">Enunciado</label>
+              <textarea class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejerUpdate.enunciado"> </textarea>
+            </div>
+
+            <div class="col-md-4">
+              <label for="fraseATraducir">Frase a traducir</label>
+              <textarea (blur)="aplicaValoresLogicos()" [style.visibility]="(ejerUpdate.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejerUpdate.fraseATraducir"> </textarea>
+            
+              <div class="row" style="margin-top: 10px">
+                <div class="col-md-4">
+                  <label for="power">Tipo</label>
+                  <select class="form-control" id="tipoLogico" name="tipoLogic" [(ngModel)]="tipoLogico"
+                      #tipoLogic="ngModel" >
+                  <option value="Verbo">Verbo</option>
+                  <option value="Nominativo">Nominativo</option>
+                  <option value="Acusativo">Acusativo</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="power">Valor</label>
+                  <select class="form-control" id="valorLogico" name="valorLogic" [(ngModel)]="valorLogico"
+                      #valorLogic="ngModel" >
+                  <option *ngFor="let palabra of valoresLogico" [value]="palabra">{{palabra}}</option>
+                  </select>
+
+                  <!--<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">-->
+                </div>
+
+                <div class="col-md-2" style="padding-top: 24px; margin-left: -20px !important;">
+                  <a class="btn btn-success" (click)="addFLogico()"><i class="glyphicon glyphicon-plus"></i></a>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+              <label for="fLogico">Solucion en F.lógico</label>
+              <textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejerUpdate.solucionFLogico"> </textarea>
+            
+
+              <label style="margin-top: 10px" for="fPatron">Solución F.patrón</label>
+              <textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejerUpdate.solucionFPatron"> </textarea>
+            
+              <label style="margin-top: 20px" *ngIf="ejerUpdate.tipo <= 1 " for="">Solución posible en Español</label>
+              <label style="margin-top: 20px" *ngIf="ejerUpdate.tipo > 1 " for="">Solución posible en Latin</label>
+              <textarea *ngIf="ejerUpdate.tipo <= 1 " class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejerUpdate.solucionPEspanol"> </textarea>
+				    	<textarea *ngIf="ejerUpdate.tipo > 1" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejerUpdate.solucionPLatin"> </textarea>
+				
             </div>
 
           </div>
@@ -335,8 +437,23 @@
     </div>
   </div>
 
+
+
+
 </div>
 
+
+<!-- modal para mensajes -->
+<div (click)="cerrarModalMessage()" style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+      [ngStyle]="{'display': modalMessage ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-body" style="background: #f7e26f; color: #333; font-size: 16px">
+        <p class="text-center">{{message}}</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 		

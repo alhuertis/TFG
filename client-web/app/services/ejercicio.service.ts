@@ -42,6 +42,15 @@ export class EjercicioService{
 		return this._http.delete(this.url+'ejercicio/'+id).map(res => res.json());
 	}
 
+	updateEjercicio(model: any){
+		let json = JSON.stringify(model);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.put(this.url+'ejercicio/'+model._id, params, {headers: headers}).map(res=> res.json());
+	}
+
 	getEjersMiColeccion(id_profesor: string){
 		return this._http.get(this.url+'ejercicios/miColeccion/'+id_profesor).map(res => res.json());
 	}

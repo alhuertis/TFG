@@ -31,6 +31,10 @@ var ActividadService = (function () {
         console.log('Llamando a ' + this.url + 'cargarActividad/' + id);
         return this._http.get(this.url + 'cargarActividad/' + id).map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.borrarEjercicio = function (id) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.put(this.url + 'actividad-ejercicio/' + id, { headers: headers }).map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.getDisponibles = function () {
         return this._http.get(this.url + 'actividad-disponibles').map(function (res) { return res.json(); });
     };
