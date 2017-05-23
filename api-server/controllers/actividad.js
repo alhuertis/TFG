@@ -675,14 +675,18 @@ function borrarEjercicio(req, res){
 	var id = req.params;
 	console.log(id);
 
-	Actividad.update({},{ $pull:{"ejercicios":id}}, { multi: true },(err, item)=>{
+
+	Actividad.update({},{ $pull:{"ejercicios": id.id}},{multi:true},(err, item)=>{
 		if(err){
 			res.status(500).send({message:'Error al actualizar las actividades'});
 		}
 		else if(!item){
 				res.status(404).send({message:'Ninguna actividad contiene ese ejercicio'});	
-		}else
+		}else{
+			console.log(item);
 			res.status(200).send({message:'Se han actualizado los ejercicios'});
+		}
+			
 
 	});
 
