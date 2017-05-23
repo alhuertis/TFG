@@ -88,6 +88,9 @@ export class  PanelProfesorComponent implements OnInit{
 	public otrasColeccionesTipo4: Ejercicio[];
 	public nOtrasColeccionesTipo4: number;
 
+	//objeto update
+	public ejerUpdate: any= {};
+
 	//Actividades
 
 	//Mi coleccion
@@ -110,6 +113,7 @@ export class  PanelProfesorComponent implements OnInit{
   	public modalEjercicio: Boolean;
 	public modalActividad: Boolean;
 	public modalBorrarEjercicio: Boolean;
+	public modalModEjer: Boolean;
   	private visibleAnimate: Boolean;
 	public ejerAbrir: Ejercicio;
 	public actAbrir: Actividad;
@@ -1217,11 +1221,27 @@ export class  PanelProfesorComponent implements OnInit{
 
 		);
 	}
-	
 
 	cerrarBorrarEjercicio(){
 		this.visibleAnimate = false;
     	setTimeout(() => this.modalBorrarEjercicio = false, 300);
 		this.ejerBorrar=null;
+	}
+
+	abrirModEjercicio(ejercicio: Ejercicio){
+		this.ejerUpdate= ejercicio;
+		this.modalModEjer = true;
+    	setTimeout(() => this.visibleAnimate = true);
+	}
+
+	updateEjercicio(){
+
+
+	}
+
+	cerrarUpdateEjercicio(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalModEjer = false, 300);
+		this.ejerUpdate={};
 	}
 }

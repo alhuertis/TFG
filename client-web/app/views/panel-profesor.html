@@ -120,7 +120,7 @@
 
                   <div class="col-sm-2 botones-lista">
                       <i class="glyphicon glyphicon-info-sign" id="info-ejer" (click)="showEjercicio(ejercicio)"></i>
-                      <i class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="showEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="abrirModEjercicio(ejercicio)"></i>
                       <i class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="abrirBorrarEjercicio(ejercicio)"></i>
                   </div>
                 </div>
@@ -303,6 +303,33 @@
         <div class="modal-footer">
           <button class="btn btn-success" (click)="borrarEjercicio()">Aceptar</button>
           <button class="btn btn-danger" (click)="cerrarBorrarEjercicio()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal modificar ejercicio -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalModEjer ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4><i class="glyphicon glyphicon-cog"></i> Modificar ejercicio: {{ejerUpdate.titulo}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4">
+              <label for="titulo">Titulo</label>
+              <input type="text" class="form-control"  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejerUpdate.titulo">
+
+            </div>
+
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="updateEjercicio()">Aceptar</button>
+          <button class="btn btn-danger" (click)="cerrarUpdateEjercicio()">Cancelar</button>
         </div>
       </div>
     </div>

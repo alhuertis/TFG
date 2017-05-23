@@ -22,6 +22,8 @@ var PanelProfesorComponent = (function () {
         this._actividadService = _actividadService;
         // pager object
         this.pager = {};
+        //objeto update
+        this.ejerUpdate = {};
         this.title = "Panel de profesores";
         //this.user="Antonio Sarasa";
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
@@ -845,6 +847,20 @@ var PanelProfesorComponent = (function () {
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalBorrarEjercicio = false; }, 300);
         this.ejerBorrar = null;
+    };
+    PanelProfesorComponent.prototype.abrirModEjercicio = function (ejercicio) {
+        var _this = this;
+        this.ejerUpdate = ejercicio;
+        this.modalModEjer = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelProfesorComponent.prototype.updateEjercicio = function () {
+    };
+    PanelProfesorComponent.prototype.cerrarUpdateEjercicio = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalModEjer = false; }, 300);
+        this.ejerUpdate = {};
     };
     return PanelProfesorComponent;
 }());

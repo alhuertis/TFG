@@ -675,7 +675,7 @@ function borrarEjercicio(req, res){
 	var id = req.params;
 	console.log(id);
 
-	Actividad.update({},{ $pull:{"ejercicios":id}}, { multi: true },(err, item)=>{
+	Actividad.updateMany({},{ $pull:{"ejercicios":id}}, { multi: true },(err, item)=>{
 		if(err){
 			res.status(500).send({message:'Error al actualizar las actividades'});
 		}
