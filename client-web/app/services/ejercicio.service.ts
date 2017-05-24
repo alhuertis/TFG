@@ -24,6 +24,17 @@ export class EjercicioService{
 		return this._http.get(this.url+'ejercicios').map(res => res.json());
 	}
 
+	getEjerciciosFecha(fecha1: Date, fecha2: Date){
+
+			
+		let params= {"fecha1":JSON.stringify(fecha1),
+					"fecha2": JSON.stringify(fecha2)};
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.post(this.url+'ejercicios', params, {headers: headers}).map(res=> res.json());
+	}
+
 	getEjercicio(id: string){
 		console.log('Llamando a ' + this.url+'ejercicio/'+id);
 		return this._http.get(this.url+'ejercicio/'+id).map(res => res.json());

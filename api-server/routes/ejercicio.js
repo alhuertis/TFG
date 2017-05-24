@@ -20,6 +20,7 @@ api.get('/ejercicios/miColeccionTipo2/:id_profesor', EjercicioController.getEjer
 api.get('/ejercicios/miColeccionTipo3/:id_profesor', EjercicioController.getEjersMiColeccionTipo3);
 api.get('/ejercicios/miColeccionTipo4/:id_profesor', EjercicioController.getEjersMiColeccionTipo4);
 api.post('/ejercicio', EjercicioController.saveEjercicio);
+api.post('/ejercicios',EjercicioController.getEjerciciosFecha);
 api.put('/ejercicio/:id', EjercicioController.updateEjercicio);
 api.delete('/ejercicio/:id', EjercicioController.deleteEjercicio);
 api.get('/ejercicios/otrasColecciones/:id_profesor', EjercicioController.getEjersOtrasColecciones);
