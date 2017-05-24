@@ -31,10 +31,10 @@ var EjercicioService = (function () {
     };
     EjercicioService.prototype.getEjercicio = function (id) {
         console.log('Llamando a ' + this.url + 'ejercicio/' + id);
-        return this._http.get(this.url + 'ejercicioTitulo/' + id).map(function (res) { return res.json(); });
+        return this._http.get(this.url + 'ejercicio/' + id).map(function (res) { return res.json(); });
     };
-    EjercicioService.prototype.getEjercicioTitulo = function (titulo) {
-        return this._http.get(this.url + 'ejercicio/' + titulo).map(function (res) { return res.json(); });
+    EjercicioService.prototype.getEjerciciosTitulo = function (titulo) {
+        return this._http.get(this.url + 'ejercicioTitulo/' + titulo).map(function (res) { return res.json(); });
     };
     EjercicioService.prototype.addEjercicio = function (ejercicio) {
         var json = JSON.stringify(ejercicio);

@@ -37,12 +37,12 @@ export class EjercicioService{
 
 	getEjercicio(id: string){
 		console.log('Llamando a ' + this.url+'ejercicio/'+id);
-		return this._http.get(this.url+'ejercicioTitulo/'+id).map(res => res.json());
+		return this._http.get(this.url+'ejercicio/'+id).map(res => res.json());
 	}
 
-	getEjercicioTitulo(titulo: string){
+	getEjerciciosTitulo(titulo: string){
 		
-		return this._http.get(this.url+'ejercicio/'+titulo).map(res => res.json());
+		return this._http.get(this.url+'ejercicioTitulo/'+titulo).map(res => res.json());
 	}
 
 	addEjercicio(ejercicio: Ejercicio){
