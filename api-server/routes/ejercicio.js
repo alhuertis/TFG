@@ -10,6 +10,7 @@ var EjercicioController = require('../controllers/ejercicio');
 var api= express.Router();
 
 api.get('/ejercicio/:id', EjercicioController.getEjercicio); //Con esto puedo dirigir al controlador cuando llamemos a favrito.
+api.get('/ejercicioTitulo/:titulo',EjercicioController.getEjercicioNombre);
 api.get('/ejercicios', EjercicioController.getEjercicios);
 api.get('/ejercicios/miColeccion/:id_profesor', EjercicioController.getEjersMiColeccion);
 api.get('/ejercicios/miColeccionNivelA/:id_profesor', EjercicioController.getEjersMiColeccionNivelA);

@@ -29,6 +29,29 @@ function getEjercicio(req, res){
 	});	
 }
 
+function getEjercicioNombre(req, res){
+
+	var ejercicio= req.params.titulo;
+
+	Ejercicio.find({titulo:{$regex : ".*"+ejercicio+".*"}}, function(err, ejercicio){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver el ejercicio'});
+		}
+		else{
+
+			if(!ejercicio){
+				res.status(404).send({message:'No hay ejercicio'});	
+			}
+			else{
+				res.status(200).send({ejercicio});
+			}
+
+		
+		}
+	});	
+}
+
 function getEjercicios(req, res){
 
 	Ejercicio.find({}).sort('-_id').exec((err, ejercicios)=>{
@@ -476,6 +499,7 @@ function getEjersOtrasColeccionesTipo4(req, res){
 module.exports= {
 	getEjercicio,
 	getEjercicios,
+	getEjercicioNombre,
 	getEjerciciosFecha,
 	saveEjercicio,
 	updateEjercicio,

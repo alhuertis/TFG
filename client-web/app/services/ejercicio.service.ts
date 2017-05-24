@@ -24,7 +24,7 @@ export class EjercicioService{
 		return this._http.get(this.url+'ejercicios').map(res => res.json());
 	}
 
-	getEjerciciosFecha(fecha1: Date, fecha2: Date){
+	getEjerciciosFecha(fecha1: Date, fecha2: Date){ 
 
 			
 		let params= {"fecha1":JSON.stringify(fecha1),
@@ -37,7 +37,12 @@ export class EjercicioService{
 
 	getEjercicio(id: string){
 		console.log('Llamando a ' + this.url+'ejercicio/'+id);
-		return this._http.get(this.url+'ejercicio/'+id).map(res => res.json());
+		return this._http.get(this.url+'ejercicioTitulo/'+id).map(res => res.json());
+	}
+
+	getEjercicioTitulo(titulo: string){
+		
+		return this._http.get(this.url+'ejercicio/'+titulo).map(res => res.json());
 	}
 
 	addEjercicio(ejercicio: Ejercicio){
