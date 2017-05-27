@@ -41,6 +41,8 @@ function saveSolucion(req, res){
 	solucion.terminado= params.terminado;
 	solucion.nivel= params.nivel;
 	solucion.profesor= params.profesor;
+	solucion.ejercicios= params.ejercicios;
+	console.log(params.ejercicios);
 
 	solucion.save((err, solucionStored)=>{
 		if(err){
@@ -57,9 +59,6 @@ function saveSolucion(req, res){
 function updateSolucion(req, res){
 	var solucionId= req.params.id;
 	var update= req.body; //Recoge todos los parametros
-
-	console.log("ID: " + solucionId);
-	console.log("DATOS: " + update);
 
 	//Busca un objeto y lo actualiza
 	//Recibe el id a actualizar, los datos nuevos y despues una función calback
@@ -318,6 +317,27 @@ function getSinTerminarByProfesor(req, res){
 	});
 }
 
+//Borra de todas las actividades un ejer pasado por id
+function borrarEjercicio(req, res){
+	
+	var id = {_id:req.params.id };
+	console.log("ID: " + id);
+
+	Solucion.update({},{ $pull:{"ejercicios": id}},{multi:true},(err, item)=>{
+		if(err){
+			res.status(500).send({message:'Error al actualizar las soluciones', respuesta:'ko'});
+		}
+		else if(!item){
+				res.status(404).send({message:'Ninguna solucion contiene ese ejercicio', respuesta:'ko'});	
+		}else{
+			res.status(200).send({message:'Se han actualizado las soluciones', respuesta:'ok'});
+		}
+			
+
+	});
+
+}
+
 
 
 
@@ -337,6 +357,7 @@ module.exports= {
 	getSinTerminarByIdNA,
 	getTerminadasByProfesor,
 	getSinTerminarByProfesor,
+	borrarEjercicio,
 
 
 }

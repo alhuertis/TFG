@@ -1,11 +1,12 @@
 import {Ficha} from '../models/ficha';
+import {SolucionEjercicio} from '../models/solucion-ejercicio';
 
 export class Solucion{
 
     public _id: String;
     public id_actividad: any={};
     public id_alumno: String;
-    public id_ejercicios: String[];
+    public ejercicios:SolucionEjercicio[] /*String[]*/;
     public calificaciones: number[];
     public msgCalificaciones: String[];
     public respuestas: String[];
@@ -18,7 +19,7 @@ export class Solucion{
     constructor(){
         this._id="";
         this.terminado=false;
-        this.calificaciones=new Array();;
+        this.calificaciones=new Array();
         this.respuestas=new Array();
         this.msgCalificaciones=new Array();
         this.id_actividad=null;
@@ -26,5 +27,6 @@ export class Solucion{
         this.nivel="";
         this.notaFinal=0;
         this.profesor="";
+        this.ejercicios= new Array();
     }
 }

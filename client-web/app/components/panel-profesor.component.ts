@@ -4,6 +4,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {EjercicioService} from '../services/ejercicio.service';
 import {ActividadService} from '../services/actividad.service';
+import {SolucionService} from '../services/solucion.service';
 import {Ejercicio} from '../models/ejercicio';
 import {Actividad} from '../models/actividad';
 import {User} from '../models/user';
@@ -19,7 +20,7 @@ declare var $:any;
 
 	selector: 'panel-profesor',
 	templateUrl: 'app/views/panel-profesor.html',
-	providers: [EjercicioService, ActividadService], //Necesitamos esto para poder usar los metodos
+	providers: [EjercicioService, ActividadService,SolucionService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/menu-profesor.css'],
 }) 
 
@@ -137,7 +138,8 @@ export class  PanelProfesorComponent implements OnInit{
 
 	constructor(
 			private _ejercicioService: EjercicioService,
-			private _actividadService: ActividadService
+			private _actividadService: ActividadService,
+			private _solucionService: SolucionService
 
 	){
 		this.title= "Panel de profesores";
@@ -1239,6 +1241,22 @@ export class  PanelProfesorComponent implements OnInit{
 					}
 					this.cerrarBorrarEjercicio();
 					this.ngOnInit();
+
+					this._solucionService.borrarEjercicio(id).subscribe(
+						result=>{
+							if(result.respuesta =='ok'){
+								this.ngOnInit();
+							}
+						},
+						error=>{
+							this.errorMessage= <any>error;
+
+							if(this.errorMessage != null){
+								console.log(this.errorMessage);
+								alert('Error en la peticion de borrado del ejercicio en soluciones en el servidor');
+							}
+						}
+					);
 
 					this._actividadService.borrarEjercicio(id).subscribe(
 						result=>{

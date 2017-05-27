@@ -8,10 +8,7 @@ var SolucionSchema = Schema({
 
     actividad:{type: Schema.ObjectId, ref: "Actividad"},
     alumno: {type: Schema.ObjectId, ref: "User"},
-    ejercicios: [{type:Schema.ObjectId, ref: "Ejercicio"}],
-    calificaciones: [Number],
-    msgCalificaciones: [String],
-    respuestas: [String],
+    ejercicios: [{ _id:{type:Schema.ObjectId, ref: "Ejercicio"}, calificacion:Number, msgCalificacion:String, respuesta:String}],
     notaFinal: Number,
     nivel: String,
     terminado: Boolean,

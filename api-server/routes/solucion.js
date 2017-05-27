@@ -23,5 +23,6 @@ api.post('/soluciones-sinTerminarIdNM', SolucionController.getSinTerminarByIdNM)
 api.post('/soluciones-sinTerminarIdNA', SolucionController.getSinTerminarByIdNA);
 api.post('/soluciones-terminadasByProfesor', SolucionController.getTerminadasByProfesor);
 api.post('/soluciones-sinTerminarByProfesor', SolucionController.getSinTerminarByProfesor);
+api.put('/soluciones-ejercicio/:id', SolucionController.borrarEjercicio);
 
 module.exports= api;

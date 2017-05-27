@@ -5,7 +5,6 @@ var Solucion = (function () {
         this._id = "";
         this.terminado = false;
         this.calificaciones = new Array();
-        ;
         this.respuestas = new Array();
         this.msgCalificaciones = new Array();
         this.id_actividad = null;
@@ -13,6 +12,7 @@ var Solucion = (function () {
         this.nivel = "";
         this.notaFinal = 0;
         this.profesor = "";
+        this.ejercicios = new Array();
     }
     return Solucion;
 }());

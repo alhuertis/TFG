@@ -135,10 +135,10 @@
     </div>
 
     <div class="col-md-4">
-        <div *ngIf="solucion.calificaciones[ejerSel] != null" class="calificacion animated fadeInRigth">
-            <p>Nota: {{solucion.calificaciones[ejerSel]}}</p>
-            <p>Respuesta: {{solucion.respuestas[ejerSel]}}</p>
-            <p>{{solucion.msgCalificaciones[ejerSel]}}</p>
+        <div *ngIf="solucion.ejercicios[ejerSel] && solucion.ejercicios[ejerSel].respuesta != ''" class="calificacion animated fadeInRigth">
+            <p *ngIf="solucion.ejercicios[ejerSel].calificacion >= 0">Nota: {{solucion.ejercicios[ejerSel].calificacion}}</p>
+            <p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''">Respuesta: {{solucion.ejercicios[ejerSel].respuesta}}</p>
+            <p *ngIf="solucion.ejercicios[ejerSel].msgCalificacion != ''">{{solucion.ejercicios[ejerSel].msgCalificacion}}</p>
         </div>
         
     </div>

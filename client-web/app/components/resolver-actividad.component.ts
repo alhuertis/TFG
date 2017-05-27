@@ -9,6 +9,7 @@ import {Actividad} from '../models/actividad';
 import {Ejercicio} from '../models/ejercicio';
 import {Ficha} from '../models/ficha';
 import {Solucion} from '../models/solucion';
+import {SolucionEjercicio} from '../models/solucion-ejercicio';
 import {User} from '../models/user';
 
 declare var $:any;
@@ -216,7 +217,11 @@ export class  ResolverActividadComponent implements OnInit{
                     this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
                     this.verbo= this.extraerVerbo();
                     this.anterior=this.ejerSel >0 ;
-                    this.siguiente=this.ejerSel < this.actividad.length;
+                    this.siguiente=this.ejerSel < this.actividad.length -1;
+
+                    for(var i = 0; i < this.actividad.length; i++){
+                        this.solucion.ejercicios[i]= new SolucionEjercicio();
+                    }
                 }
 			},
 			error => {
@@ -237,8 +242,12 @@ export class  ResolverActividadComponent implements OnInit{
                     if(!this.solucion)
                         alert("No se han podidos cargar los datos de solucion anteriores");
                     else{
-                        this.calificaciones= this.solucion.calificaciones;
-                        this.resueltos= this.calificaciones.length;
+                        for(var i= 0; i< this.solucion.ejercicios.length; i++){
+                            if(this.solucion.ejercicios[i].calificacion >= 0){
+                                this.calificaciones[i]= this.solucion.ejercicios[i].calificacion;
+                                this.resueltos++;
+                            }
+                        }
                         this.progreso= (this.resueltos * 100) / this.actividad.length;
                     }
                 },
@@ -296,7 +305,7 @@ export class  ResolverActividadComponent implements OnInit{
     anteriorEjer(){
         this.ejerSel--;
         this.anterior= this.ejerSel > 0;
-        this.siguiente= this.ejerSel < this.actividad.length;
+        this.siguiente= this.ejerSel < this.actividad.length-1;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.respuesta="";
         this.verbo= this.extraerVerbo();
@@ -305,8 +314,8 @@ export class  ResolverActividadComponent implements OnInit{
 
     calificar(){
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
-            this.solucion.msgCalificaciones[this.ejerSel]="!!Enhorabuena¡¡ La respuesta es correcta";
-            this.solucion.calificaciones[this.ejerSel]= 1;
+            this.solucion.ejercicios[this.ejerSel].msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
+            this.solucion.ejercicios[this.ejerSel].calificacion= 1;
         }else{
             let patron: String[];
             let res: String[];
@@ -316,32 +325,32 @@ export class  ResolverActividadComponent implements OnInit{
             res= _.intersection(res,patron);
 
            if(_.isEqual(patron, res)){
-               this.solucion.msgCalificaciones[this.ejerSel]="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
-               this.solucion.calificaciones[this.ejerSel]= 1;
+               this.solucion.ejercicios[this.ejerSel].msgCalificacion="La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
+               this.solucion.ejercicios[this.ejerSel].calificacion= 1;
            }
            else{
                
 
                if(res.length == patron.length){
-                    this.solucion.msgCalificaciones[this.ejerSel]="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
-                    this.solucion.calificaciones[this.ejerSel]= 1/2;
+                    this.solucion.ejercicios[this.ejerSel].msgCalificacion="La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
+                    this.solucion.ejercicios[this.ejerSel].calificacion= 1/2;
                }
                else if(res.length > patron.length/2){
-                    this.solucion.msgCalificaciones[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                    this.solucion.calificaciones[this.ejerSel]= 1/4;
+                    this.solucion.ejercicios[this.ejerSel].msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.ejercicios[this.ejerSel].calificacion= 1/4;
                }else{
-                    this.solucion.msgCalificaciones[this.ejerSel]="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
-                    this.solucion.calificaciones[this.ejerSel]= 0;
+                    this.solucion.ejercicios[this.ejerSel].msgCalificacion="Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.ejercicios[this.ejerSel].calificacion= 0;
                }
            }
         }
-        this.solucion.respuestas[this.ejerSel]= this.respuesta;
+        this.solucion.ejercicios[this.ejerSel].respuesta= this.respuesta;
         this.resueltos++;
         this.progreso= (this.resueltos * 100) / this.actividad.length;
 
         if(this.progreso == 100){
-            for(var i=0; i < this.solucion.calificaciones.length; i++){
-                this.calificacionFinal+=this.solucion.calificaciones[i];
+            for(var i=0; i < this.solucion.ejercicios.length; i++){
+                this.calificacionFinal+=this.solucion.ejercicios[i].calificacion;
             }
             this.solucion.notaFinal=this.calificacionFinal;
             this.terminado=true;
@@ -574,7 +583,11 @@ export class  ResolverActividadComponent implements OnInit{
     guardarSolucion(){
         this.solucion.id_actividad= this.id_actividad;
         this.solucion.id_alumno= this.user._id;
-        this.solucion.id_ejercicios= this.infoActividad.ejercicios;
+
+        for (var i = 0; i < this.infoActividad.ejercicios.length; i++){
+            this.solucion.ejercicios[i]._id= this.infoActividad.ejercicios[i];
+        }
+
         this.solucion.terminado=this.terminado;
         this.solucion.nivel= this.infoActividad.nivel;
         this.solucion.profesor= this.infoActividad.id_profesor;

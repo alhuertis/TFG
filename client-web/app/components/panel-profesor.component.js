@@ -12,14 +12,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var ejercicio_service_1 = require("../services/ejercicio.service");
 var actividad_service_1 = require("../services/actividad.service");
+var solucion_service_1 = require("../services/solucion.service");
 var actividad_1 = require("../models/actividad");
 //Para usar undescore y jquery
 var _ = require("underscore");
 //los decoradores no tienen punto y coma
 var PanelProfesorComponent = (function () {
-    function PanelProfesorComponent(_ejercicioService, _actividadService) {
+    function PanelProfesorComponent(_ejercicioService, _actividadService, _solucionService) {
         this._ejercicioService = _ejercicioService;
         this._actividadService = _actividadService;
+        this._solucionService = _solucionService;
         // pager object
         this.pager = {};
         //objeto update
@@ -855,6 +857,17 @@ var PanelProfesorComponent = (function () {
                 }
                 _this.cerrarBorrarEjercicio();
                 _this.ngOnInit();
+                _this._solucionService.borrarEjercicio(id).subscribe(function (result) {
+                    if (result.respuesta == 'ok') {
+                        _this.ngOnInit();
+                    }
+                }, function (error) {
+                    _this.errorMessage = error;
+                    if (_this.errorMessage != null) {
+                        console.log(_this.errorMessage);
+                        alert('Error en la peticion de borrado del ejercicio en soluciones en el servidor');
+                    }
+                });
                 _this._actividadService.borrarEjercicio(id).subscribe(function (result) {
                     if (result.respuesta == 'ok') {
                         _this.ngOnInit();
@@ -952,11 +965,12 @@ PanelProfesorComponent = __decorate([
     core_1.Component({
         selector: 'panel-profesor',
         templateUrl: 'app/views/panel-profesor.html',
-        providers: [ejercicio_service_1.EjercicioService, actividad_service_1.ActividadService],
+        providers: [ejercicio_service_1.EjercicioService, actividad_service_1.ActividadService, solucion_service_1.SolucionService],
         styleUrls: ['../../assets/css/menu-profesor.css'],
     }),
     __metadata("design:paramtypes", [ejercicio_service_1.EjercicioService,
-        actividad_service_1.ActividadService])
+        actividad_service_1.ActividadService,
+        solucion_service_1.SolucionService])
 ], PanelProfesorComponent);
 exports.PanelProfesorComponent = PanelProfesorComponent;
 //# sourceMappingURL=panel-profesor.component.js.map
