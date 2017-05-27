@@ -10,6 +10,7 @@ var EjercicioController = require('../controllers/ejercicio');
 var api= express.Router();
 
 api.get('/ejercicio/:id', EjercicioController.getEjercicio); //Con esto puedo dirigir al controlador cuando llamemos a favrito.
+api.get('/ejercicioTitulo/:titulo',EjercicioController.getEjercicioNombre);
 api.get('/ejercicios', EjercicioController.getEjercicios);
 api.get('/ejercicios/miColeccion/:id_profesor', EjercicioController.getEjersMiColeccion);
 api.get('/ejercicios/miColeccionNivelA/:id_profesor', EjercicioController.getEjersMiColeccionNivelA);
@@ -20,6 +21,7 @@ api.get('/ejercicios/miColeccionTipo2/:id_profesor', EjercicioController.getEjer
 api.get('/ejercicios/miColeccionTipo3/:id_profesor', EjercicioController.getEjersMiColeccionTipo3);
 api.get('/ejercicios/miColeccionTipo4/:id_profesor', EjercicioController.getEjersMiColeccionTipo4);
 api.post('/ejercicio', EjercicioController.saveEjercicio);
+api.post('/ejercicios',EjercicioController.getEjerciciosFecha);
 api.put('/ejercicio/:id', EjercicioController.updateEjercicio);
 api.delete('/ejercicio/:id', EjercicioController.deleteEjercicio);
 api.get('/ejercicios/otrasColecciones/:id_profesor', EjercicioController.getEjersOtrasColecciones);

@@ -23,9 +23,18 @@ var EjercicioService = (function () {
     EjercicioService.prototype.getEjercicios = function () {
         return this._http.get(this.url + 'ejercicios').map(function (res) { return res.json(); });
     };
+    EjercicioService.prototype.getEjerciciosFecha = function (fecha1, fecha2) {
+        var params = { "fecha1": JSON.stringify(fecha1),
+            "fecha2": JSON.stringify(fecha2) };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'ejercicios', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     EjercicioService.prototype.getEjercicio = function (id) {
         console.log('Llamando a ' + this.url + 'ejercicio/' + id);
         return this._http.get(this.url + 'ejercicio/' + id).map(function (res) { return res.json(); });
+    };
+    EjercicioService.prototype.getEjerciciosTitulo = function (titulo) {
+        return this._http.get(this.url + 'ejercicioTitulo/' + titulo).map(function (res) { return res.json(); });
     };
     EjercicioService.prototype.addEjercicio = function (ejercicio) {
         var json = JSON.stringify(ejercicio);

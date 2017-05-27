@@ -29,9 +29,56 @@ function getEjercicio(req, res){
 	});	
 }
 
+function getEjercicioNombre(req, res){
+
+	var ejercicio= req.params.titulo;
+
+	Ejercicio.find({titulo:{$regex : ".*"+ejercicio+".*"}}, function(err, ejercicio){
+
+		if(err){
+			res.status(500).send({message:'Error al devolver el ejercicio'});
+		}
+		else{
+
+			if(!ejercicio){
+				res.status(404).send({message:'No hay ejercicio'});	
+			}
+			else{
+				res.status(200).send({ejercicio});
+			}
+
+		
+		}
+	});	
+}
+
 function getEjercicios(req, res){
 
 	Ejercicio.find({}).sort('-_id').exec((err, ejercicios)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver los ejercicios'});
+		}
+		else{
+
+			if(!ejercicios){
+				res.status(404).send({message:'No hay ejercicios'});
+			}
+			else{
+				res.status(200).send({ejercicios});
+			}	
+		}
+
+	}); //El primer parametro equivaldria al where, pero no pasamos nada. Despues una cuncion de callback
+
+
+}
+
+function getEjerciciosFecha(req, res){
+
+console.log(req.body);
+var fecha1= req.body.fecha1;
+var fecha2= req.body.fecha2;
+	Ejercicio.find({fechaCreacion:{$gte:fecha1, $lte:fecha2}}).sort('-_id').exec((err, ejercicios)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver los ejercicios'});
 		}
@@ -452,6 +499,8 @@ function getEjersOtrasColeccionesTipo4(req, res){
 module.exports= {
 	getEjercicio,
 	getEjercicios,
+	getEjercicioNombre,
+	getEjerciciosFecha,
 	saveEjercicio,
 	updateEjercicio,
 	deleteEjercicio,
