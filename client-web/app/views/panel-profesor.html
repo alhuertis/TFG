@@ -120,8 +120,8 @@
 
                   <div class="col-sm-2 botones-lista">
                       <i class="glyphicon glyphicon-info-sign" id="info-ejer" (click)="showEjercicio(ejercicio)"></i>
-                      <i class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="abrirModEjercicio(ejercicio)"></i>
-                      <i class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="abrirBorrarEjercicio(ejercicio)"></i>
+                      <i *ngIf="user._id == ejercicio.id_profesor" class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="abrirModEjercicio(ejercicio)"></i>
+                      <i *ngIf="user._id == ejercicio.id_profesor" class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="abrirBorrarEjercicio(ejercicio)"></i>
                   </div>
                 </div>
               </div>
@@ -132,10 +132,7 @@
          
               <div class="col-md-12 act-lista animated fadeInLeft" *ngFor="let actividad of pagedItemsActs; let i=index">
                 <div class="row">
-                  <div class="col-sm-1">
-                      <input type="checkbox" [checked]="actividad.marcado">
-                  </div>
-                  <div class="col-sm-9">
+                  <div class="col-sm-10">
                     <div class="row">
                       <div class="col-md-6">
                         <ul>
@@ -154,9 +151,9 @@
                   </div>
 
                   <div class="col-sm-2 botones-lista">
-                      <i class="glyphicon glyphicon-info-sign" id="info-act" (click)="showEjercicio(ejercicio)"></i>
-                      <i class="glyphicon glyphicon-cog" id="modificar-act" (click)="showEjercicio(ejercicio)"></i>
-                      <i class="glyphicon glyphicon-trash" id="borrar-act" (click)="abrirBorrarEjercicio(ejercicio)"></i>
+                      <i class="glyphicon glyphicon-info-sign" id="info-act" (click)="showActividad(actividad)"></i>
+                      <i class="glyphicon glyphicon-cog" id="modificar-act" (click)="modificarActividad(actividad)"></i>
+                      <i class="glyphicon glyphicon-trash" id="borrar-act" (click)="abrirBorrarActividad(actividad)"></i>
                   </div>
                 </div>
               </div>
@@ -438,11 +435,6 @@
   </div>
 
 
-
-
-</div>
-
-
 <!-- modal para mensajes -->
 <div (click)="cerrarModalMessage()" style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
       [ngStyle]="{'display': modalMessage ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
@@ -455,6 +447,70 @@
   </div>
 </div>
 
+
+
+<!-- modal mostrar actividad -->
+  <div style="background: rgba(63,63,61,0.8);" (click)="hideActividad()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalVerActividad ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog modal-lg" style="width: 90% !important">
+      <div class="modal-content modal-ver-actividad">
+        <div *ngIf="actAbrir != null" class="modal-header">
+          <h3> {{actAbrir.titulo}}</h3>        
+        </div>
+
+        <div *ngIf="actAbrir != null" class="modal-body">
+          <div class="row">
+
+            <div class="col-md-3 datos-ver-actividad">
+              <ul>
+                <li><label><i class="glyphicon glyphicon-user"></i> Autor </label> {{actAbrir.profesor}}</li>
+                <li><label><i class="glyphicon glyphicon-signal"></i> Nivel </label> {{actAbrir.nivel}}</li>
+                <li *ngIf="actAbrir.visible"><label><i class="glyphicon glyphicon-eye-open"></i> Visible </label> Si</li>
+                <li *ngIf="!actAbrir.visible"><label><i class="glyphicon glyphicon-eye-close"></i> Visible </label> No</li>
+                <li><label><i class="glyphicon glyphicon-calendar"></i> Creacion </label> {{actAbrir.fecha_creacion | date: 'dd/mm/yyyy'}} </li>
+                <li *ngIf="actAbrir.propuesta"><label><i class="glyphicon glyphicon-calendar"></i> Propuesta </label> {{actAbrir.fecha_prop_fin | date: 'dd/mm/yyyy'}} </li>
+              </ul>
+
+            </div>
+
+            <div class="col-md-9 ejercicios-ver-actividad">
+              <h4>Ejercicios</h4>
+
+              <table class="table table-striped table-hover">
+                 <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Tipo</th>
+                    <th>Nivel</th>
+                    <th>Enunciado</th>
+                    <th>Frase</th>
+                    <th>Creacion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ej of actAbrir.ejercicios, let i = index">
+                    <td>{{i}}</td>
+                    <td>{{ej.titulo}}</td>
+                    <td>{{ej.autor}}</td>
+                    <td>{{ej.tipo}}</td>
+                    <td>{{ej.nivel}}</td>
+                    <td>{{ej.enunciado}}</td>
+                    <td>{{ej.fraseATraducir}}</td>
+                    <td>{{ej.fechaCreacion | date:'dd/mm/yyyy'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
 
 		
 

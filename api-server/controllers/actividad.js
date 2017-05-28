@@ -21,7 +21,9 @@ function getActividad(req, res){
 				res.status(404).send({message:'No hay ejercicio'});	
 			}
 			else{
-				res.status(200).send({actividad});
+				Ejercicio.populate(actividad, {path:"ejercicios"}, function(err,actividad){
+					res.status(200).send({actividad});
+				});
 			}
 
 		
@@ -90,7 +92,9 @@ function getActividades(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -144,7 +148,9 @@ function getDisponibles(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -164,7 +170,9 @@ function getDisponiblesNBajo(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -184,7 +192,9 @@ function getDisponiblesNMedio(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -204,7 +214,9 @@ function getDisponiblesNAlto(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -223,7 +235,9 @@ function getPropuestas(req, res){
 				res.status(404).send({message:'No hay actividades propuestas'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -243,7 +257,9 @@ function getPropuestasByApertura(req, res){
 				res.status(404).send({message:'No hay actividades propuestas por apertura'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -263,7 +279,9 @@ function getPropuestasByCierre(req, res){
 				res.status(404).send({message:'No hay actividades propuestas por cierre'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -285,7 +303,9 @@ function getByIdProfesorDisp(req, res){
 				res.status(404).send({message:'No hay actividades disponibles con ese id'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -307,7 +327,9 @@ function getByIdProfesorProp(req, res){
 				res.status(404).send({message:'No hay actividades disponibles con ese id'});
 			}
 			else{
-				res.status(200).send({actividades});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
@@ -331,7 +353,9 @@ function getActsMiColeccion(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({miColeccionAct});
+				Ejercicio.populate(miColeccionAct, {path:"ejercicios"}, function(err,miColeccionAct){
+					res.status(200).send({miColeccionAct});
+				});
 			}	
 		}
 
@@ -353,7 +377,9 @@ function getActsMiColeccionNivelA(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({miColeccionNivelAAct});
+				Ejercicio.populate(miColeccionNivelAAct, {path:"ejercicios"}, function(err,miColeccionNivelAAct){
+					res.status(200).send({miColeccionNivelAAct});
+				});
 			}	
 		}
 
@@ -375,7 +401,9 @@ function getActsMiColeccionNivelM(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({miColeccionNivelMAct});
+				Ejercicio.populate(miColeccionNivelMAct, {path:"ejercicios"}, function(err,miColeccionNivelMAct){
+					res.status(200).send({miColeccionNivelMAct});
+				});
 			}	
 		}
 
@@ -397,7 +425,9 @@ function getActsMiColeccionNivelB(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({miColeccionNivelBAct});
+				Ejercicio.populate(miColeccionNivelBAct, {path:"ejercicios"}, function(err,miColeccionNivelBAct){
+					res.status(200).send({miColeccionNivelBAct});
+				});
 			}	
 		}
 
@@ -419,7 +449,9 @@ function getActsVisibles(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({visibles});
+				Ejercicio.populate(visibles, {path:"ejercicios"}, function(err,visibles){
+					res.status(200).send({visibles});
+				});
 			}	
 		}
 
@@ -441,7 +473,9 @@ function getActsVisiblesNivelA(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({visiblesNivelAAct});
+				Ejercicio.populate(visiblesNivelAAct, {path:"ejercicios"}, function(err,visiblesNivelAAct){
+					res.status(200).send({visiblesNivelAAct});
+				});
 			}	
 		}
 
@@ -463,7 +497,9 @@ function getActsVisiblesNivelM(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({visiblesNivelMAct});
+				Ejercicio.populate(visiblesNivelMAct, {path:"ejercicios"}, function(err,visiblesNivelMAct){
+					res.status(200).send({visiblesNivelMAct});
+				});
 			}	
 		}
 
@@ -485,7 +521,9 @@ function getActsVisiblesNivelB(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({visiblesNivelBAct});
+				Ejercicio.populate(visiblesNivelBAct, {path:"ejercicios"}, function(err,visiblesNivelBAct){
+					res.status(200).send({visiblesNivelBAct});
+				});
 			}	
 		}
 
@@ -507,7 +545,9 @@ function getActsNoVisibles(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({invisibles});
+				Ejercicio.populate(invisibles, {path:"ejercicios"}, function(err,invisibles){
+					res.status(200).send({invisibles});
+				});
 			}	
 		}
 
@@ -529,7 +569,9 @@ function getActsNoVisiblesNivelA(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({invisiblesNivelAAct});
+				Ejercicio.populate(invisiblesNivelAAct, {path:"ejercicios"}, function(err,invisiblesNivelAAct){
+					res.status(200).send({invisiblesNivelAAct});
+				});
 			}	 
 		}
 
@@ -551,7 +593,9 @@ function getActsNoVisiblesNivelM(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({invisiblesNivelMAct});
+				Ejercicio.populate(invisiblesNivelMAct, {path:"ejercicios"}, function(err,invisiblesNivelMAct){
+					res.status(200).send({invisiblesNivelMAct});
+				});
 			}	
 		}
 
@@ -573,7 +617,9 @@ function getActsNoVisiblesNivelB(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({invisiblesNivelBAct});
+				Ejercicio.populate(invisiblesNivelBAct, {path:"ejercicios"}, function(err,invisiblesNivelBAct){
+					res.status(200).send({invisiblesNivelBAct});
+				});
 			}	
 		}
 
@@ -595,7 +641,9 @@ function getActsOtrasColecciones(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({otrasColeccionesAct});
+				Ejercicio.populate(otrasColeccionesAct, {path:"ejercicios"}, function(err,otrasColeccionesAct){
+					res.status(200).send({otrasColeccionesAct});
+				});
 			}	
 		}
 
@@ -617,7 +665,9 @@ function getActsOtrasColeccionesNivelA(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({otrasColeccionesNivelAAct});
+				Ejercicio.populate(otrasColeccionesNivelAAct, {path:"ejercicios"}, function(err,otrasColeccionesNivelAAct){
+					res.status(200).send({otrasColeccionesNivelAAct});
+				});
 			}	
 		}
 
@@ -639,7 +689,9 @@ function getActsOtrasColeccionesNivelM(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({otrasColeccionesNivelMAct});
+				Ejercicio.populate(otrasColeccionesNivelMAct, {path:"ejercicios"}, function(err,otrasColeccionesNivelMAct){
+					res.status(200).send({otrasColeccionesNivelMAct});
+				});
 			}	
 		}
 
@@ -661,7 +713,9 @@ function getActsOtrasColeccionesNivelB(req, res){
 				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({otrasColeccionesNivelBAct});
+				Ejercicio.populate(otrasColeccionesNivelBAct, {path:"ejercicios"}, function(err,otrasColeccionesNivelBAct){
+					res.status(200).send({otrasColeccionesNivelBAct});
+				});
 			}	
 		}
 

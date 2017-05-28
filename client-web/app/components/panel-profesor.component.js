@@ -829,10 +829,21 @@ var PanelProfesorComponent = (function () {
         setTimeout(function () { return _this.visibleAnimate = true; });
         this.ejerAbrir = ejercicio;
     };
+    PanelProfesorComponent.prototype.showActividad = function (actividad) {
+        var _this = this;
+        this.modalVerActividad = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+        this.actAbrir = actividad;
+    };
     PanelProfesorComponent.prototype.hideEjercicio = function () {
         var _this = this;
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalEjercicio = false; }, 300);
+    };
+    PanelProfesorComponent.prototype.hideActividad = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalVerActividad = false; }, 300);
     };
     PanelProfesorComponent.prototype.abrirBorrarEjercicio = function (ejercicio) {
         var _this = this;

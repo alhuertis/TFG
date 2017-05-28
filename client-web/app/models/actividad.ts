@@ -8,7 +8,7 @@ export class Actividad{
         public profesor: String,
         public fecha_creacion: Date,
         public nivel: String,
-        public ejercicios: String[],
+        public ejercicios: any[],
         public visible: Boolean,
         public propuesta: Boolean,
         public fecha_prop_fin: Date,

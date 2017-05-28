@@ -271,13 +271,14 @@
 .ejer-lista .botones-lista, .act-lista .botones-lista, .sol-lista .botones-lista{
 	padding-top: 8px;
 	padding-left: 0px;
-	padding-right: 0x;
+	padding-right: 0px;
 	cursor: pointer;
 }
 
 .botones-lista i{
-	padding-right: 4px;
+	padding-right: 8px;
 	font-size: 16px;
+	float: right;
 }
 
 .botones-lista #info-ejer{
@@ -818,11 +819,34 @@
 
  }
 
-
-
-
-
-
 /*********FIN PANEL ADMIN**********/
+
+
+/*********MODALES**********/
+.modal-ver-actividad .modal-header{
+	background: rgba(23,157,168,0.9);
+	color: #015156;
+	text-align: center;
+}
+
+.modal-ver-actividad .modal-header h3{margin: 0px;}
+
+.datos-ver-actividad{
+	background: rgba(23,157,168,0.3);
+}
+
+.datos-ver-actividad ul{
+	list-style-type: none;
+	padding-left: 5px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin: 0px;
+}
+
+.ejercicios-ver-actividad h4{margin: 0px; color:rgba(23,157,168,1);} 
+
+
+
+/*********FIN MODALES**********/
 
 

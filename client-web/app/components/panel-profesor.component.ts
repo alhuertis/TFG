@@ -119,6 +119,7 @@ export class  PanelProfesorComponent implements OnInit{
 	//Modales
   	public modalEjercicio: Boolean;
 	public modalActividad: Boolean;
+	public modalVerActividad: Boolean;
 	public modalBorrarEjercicio: Boolean;
 	public modalModEjer: Boolean;
 	public modalMessage: Boolean;
@@ -1212,9 +1213,20 @@ export class  PanelProfesorComponent implements OnInit{
 		this.ejerAbrir=ejercicio;
   	}
 
+	showActividad(actividad: Actividad){
+		this.modalVerActividad = true;
+		setTimeout(() => this.visibleAnimate = true);
+		this.actAbrir=actividad;
+  	}
+
   	hideEjercicio(){
     	this.visibleAnimate = false;
     	setTimeout(() => this.modalEjercicio = false, 300);
+  	}
+
+	hideActividad(){
+		this.visibleAnimate = false;
+		setTimeout(() => this.modalVerActividad = false, 300);
   	}
 
 	abrirBorrarEjercicio(ejercicio: Ejercicio){
