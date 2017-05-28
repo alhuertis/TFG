@@ -99,6 +99,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public ejerUpdate: any= {};
 
 	//Actividades
+	public modActividad: Actividad;
 
 	//Mi coleccion
 	public miColeccionAct: Actividad[];
@@ -175,6 +176,7 @@ export class  PanelProfesorComponent implements OnInit{
 		this.modalActividad=false;
 		this.modalMessage=false;
 		this.visibleAnimate=false;
+		this.modActividad= new Actividad();
 
 		this.message="";
 		
@@ -1156,8 +1158,11 @@ export class  PanelProfesorComponent implements OnInit{
 			for(let ej of this.actividad)
 				ids.push(ej._id);
 			
-			this.nuevaActividad =new Actividad("",this.id_profesor, this.user.nombre + " " + this.user.apellidos , new Date(), "", ids,false,false,null, false);
-
+			this.nuevaActividad =new Actividad();
+			this.nuevaActividad.id_profesor=this.id_profesor;
+			this.nuevaActividad.profesor= this.user.nombre + " " + this.user.apellidos;
+			this.nuevaActividad.fecha_creacion= new Date();
+			this.nuevaActividad.ejercicios=ids;
 		}
 
 		this.modalActividad = true;
@@ -1386,5 +1391,35 @@ export class  PanelProfesorComponent implements OnInit{
             this.ejerUpdate.solucionFPatron+=" +";
         }
 
+	}
+
+	cargarModificacion(actividad: Actividad){
+		for(var act of this.pagedItemsActs){
+			act.marcado=false;
+		}
+		actividad.marcado=true;
+		this.modActividad= actividad;
+
+	}
+
+	cancelarModificacionActividad(){
+		for(var act of this.pagedItemsActs){
+			act.marcado=false;
+		}
+
+		$('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
+		this.sleep(500).then(()=>{
+			this.modActividad=new Actividad();
+		});
+		
+	}
+
+	dropEjercicio(event, ejercicio:Ejercicio, i:number){
+		let posDragado= event.dragData;
+		//alert("Cambio el de la posicion " +posDragado + " a la posicion " + i);
+
+		let aux= this.modActividad.ejercicios[posDragado];
+		this.modActividad.ejercicios[posDragado]= ejercicio;
+		this.modActividad.ejercicios[i]= aux;
 	}
 }

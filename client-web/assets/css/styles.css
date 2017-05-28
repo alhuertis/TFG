@@ -255,6 +255,7 @@
 
 .act-lista{
 	background: rgba(23,157,168,0.9);
+	transition: 0.2s linear;
 }
 
 .ejer-lista ul, .act-lista ul,  .sol-lista ul{
@@ -285,8 +286,12 @@
 	color: #00c7ff;
 }
 
-.botones-lista #modificar-ejer, .botones-lista #modificar-act{
+.botones-lista #modificar-ejer, .botones-lista #modificar-act, .botones-lista #modificar-act-cancel{
 	color: #f2c524;
+}
+
+.botones-lista #modificar-act-cancel{
+	margin-top: 2px;
 }
 
 .botones-lista #borrar-ejer, .botones-lista #borrar-act{
@@ -304,6 +309,12 @@
 .active a{
 	background: #39a890 !important;
 	border: 1px solid #39a890 !important;
+}
+
+.modActividad{
+	background: #015156;
+	margin-left:20px;
+	transition: 0.2s linear; 
 }
 
 .panel-actividad{

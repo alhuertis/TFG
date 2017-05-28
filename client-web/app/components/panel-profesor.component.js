@@ -63,6 +63,7 @@ var PanelProfesorComponent = (function () {
         this.modalActividad = false;
         this.modalMessage = false;
         this.visibleAnimate = false;
+        this.modActividad = new actividad_1.Actividad();
         this.message = "";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
@@ -786,7 +787,11 @@ var PanelProfesorComponent = (function () {
                 var ej = _a[_i];
                 ids.push(ej._id);
             }
-            this.nuevaActividad = new actividad_1.Actividad("", this.id_profesor, this.user.nombre + " " + this.user.apellidos, new Date(), "", ids, false, false, null, false);
+            this.nuevaActividad = new actividad_1.Actividad();
+            this.nuevaActividad.id_profesor = this.id_profesor;
+            this.nuevaActividad.profesor = this.user.nombre + " " + this.user.apellidos;
+            this.nuevaActividad.fecha_creacion = new Date();
+            this.nuevaActividad.ejercicios = ids;
         }
         this.modalActividad = true;
         setTimeout(function () { return _this.visibleAnimate = true; });
@@ -969,6 +974,32 @@ var PanelProfesorComponent = (function () {
         if (event.keyCode == 32) {
             this.ejerUpdate.solucionFPatron += " +";
         }
+    };
+    PanelProfesorComponent.prototype.cargarModificacion = function (actividad) {
+        for (var _i = 0, _a = this.pagedItemsActs; _i < _a.length; _i++) {
+            var act = _a[_i];
+            act.marcado = false;
+        }
+        actividad.marcado = true;
+        this.modActividad = actividad;
+    };
+    PanelProfesorComponent.prototype.cancelarModificacionActividad = function () {
+        var _this = this;
+        for (var _i = 0, _a = this.pagedItemsActs; _i < _a.length; _i++) {
+            var act = _a[_i];
+            act.marcado = false;
+        }
+        $('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
+        this.sleep(500).then(function () {
+            _this.modActividad = new actividad_1.Actividad();
+        });
+    };
+    PanelProfesorComponent.prototype.dropEjercicio = function (event, ejercicio, i) {
+        var posDragado = event.dragData;
+        //alert("Cambio el de la posicion " +posDragado + " a la posicion " + i);
+        var aux = this.modActividad.ejercicios[posDragado];
+        this.modActividad.ejercicios[posDragado] = ejercicio;
+        this.modActividad.ejercicios[i] = aux;
     };
     return PanelProfesorComponent;
 }());
