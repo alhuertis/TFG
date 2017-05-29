@@ -336,7 +336,7 @@
 	background: #e0dede;
 	width: 345px;
 	margin: 0 auto !important;
-	border-radius: 10px;
+	border-radius: 10px 10px 0px 0px;
 	padding: 7px;
 	margin-top: 5px !important;
 	min-height: 300px;
@@ -350,6 +350,8 @@
 	padding: 2px 5px 5px 5px;
 	border-radius: 5px;
 	margin-bottom: 4px;
+	cursor: move;
+	box-sizing: border-box;
 
 }
 
@@ -379,21 +381,25 @@
 	cursor: pointer;
 }
 
+.drop-ejer{
+	
+	background: rgba(12,156,89,0.2) !important;
+}
+
 .panel-actividad .opciones-actividad{
-	width: 335px;
-	margin: 2px auto;
+	width: 345px;
+	margin: 1px auto;
 	border-radius: 4px;
 	padding: 0 12px 0 12px;
+	background: #3b9b86;
 }
 
 .panel-actividad .opciones-actividad a{
-	font-size: 16px;
-	cursor: default; 
+	font-size: 14px;
+	cursor: pointer;
+	color: white; 
 }
 
-.panel-actividad .opciones-actividad a:last-child{
-	float: right;
-}
 
 .add-ejercicio-tit h3{
 	margin-top: -3px;

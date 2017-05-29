@@ -98,8 +98,8 @@ export class  PanelProfesorComponent implements OnInit{
 	//objeto update
 	public ejerUpdate: any= {};
 
-	//Actividades
-	public modActividad: Actividad;
+	//Estado modificando
+	public modificando: Boolean;
 
 	//Mi coleccion
 	public miColeccionAct: Actividad[];
@@ -176,7 +176,6 @@ export class  PanelProfesorComponent implements OnInit{
 		this.modalActividad=false;
 		this.modalMessage=false;
 		this.visibleAnimate=false;
-		this.modActividad= new Actividad();
 
 		this.message="";
 		
@@ -1117,17 +1116,19 @@ export class  PanelProfesorComponent implements OnInit{
 		
 	}
 
-	descartarEjer(event, id: String){
+	descartarEjer(event, id: String, i:any){
 		$(event.target).parent().removeClass("aparecer").addClass("fadeOut");
 
 		$(event.target).parent().next().addClass("subir");
 
 		this.sleep(300).then(()=>{
-			let indiceAct= _.findIndex(this.actividad, {_id: id});
-			this.actividad.splice(indiceAct, 1);
+			//let indiceAct= _.findIndex(this.actividad, {_id: id});
+			this.actividad.splice(i, 1);
 
 			let indiceEj=  _.findIndex(this.ejersAMostrar, {_id: id});
-			this.ejersAMostrar[indiceEj].marcado=false;
+			if(indiceEj >= 0)
+				this.ejersAMostrar[indiceEj].marcado=false;
+			
 
 			$(event.target).parent().next().removeClass("subir").addClass("aparecer");
 		});
@@ -1394,11 +1395,17 @@ export class  PanelProfesorComponent implements OnInit{
 	}
 
 	cargarModificacion(actividad: Actividad){
+		this.modificando=true;
+
 		for(var act of this.pagedItemsActs){
 			act.marcado=false;
 		}
 		actividad.marcado=true;
-		this.modActividad= actividad;
+		
+		for(var ej of actividad.ejercicios){
+			this.actividad.push(ej);
+		}
+
 
 	}
 
@@ -1407,10 +1414,14 @@ export class  PanelProfesorComponent implements OnInit{
 			act.marcado=false;
 		}
 
+		this.vaciarLista();
+
 		$('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
 		this.sleep(500).then(()=>{
-			this.modActividad=new Actividad();
+			this.actividad=[];
 		});
+
+		this.modificando=false;
 		
 	}
 
@@ -1418,8 +1429,8 @@ export class  PanelProfesorComponent implements OnInit{
 		let posDragado= event.dragData;
 		//alert("Cambio el de la posicion " +posDragado + " a la posicion " + i);
 
-		let aux= this.modActividad.ejercicios[posDragado];
-		this.modActividad.ejercicios[posDragado]= ejercicio;
-		this.modActividad.ejercicios[i]= aux;
+		let aux= this.actividad[posDragado];
+		this.actividad[posDragado]= ejercicio;
+		this.actividad[i]= aux;
 	}
 }

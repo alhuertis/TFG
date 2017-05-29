@@ -63,7 +63,6 @@ var PanelProfesorComponent = (function () {
         this.modalActividad = false;
         this.modalMessage = false;
         this.visibleAnimate = false;
-        this.modActividad = new actividad_1.Actividad();
         this.message = "";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
@@ -751,15 +750,16 @@ var PanelProfesorComponent = (function () {
             });
         }
     };
-    PanelProfesorComponent.prototype.descartarEjer = function (event, id) {
+    PanelProfesorComponent.prototype.descartarEjer = function (event, id, i) {
         var _this = this;
         $(event.target).parent().removeClass("aparecer").addClass("fadeOut");
         $(event.target).parent().next().addClass("subir");
         this.sleep(300).then(function () {
-            var indiceAct = _.findIndex(_this.actividad, { _id: id });
-            _this.actividad.splice(indiceAct, 1);
+            //let indiceAct= _.findIndex(this.actividad, {_id: id});
+            _this.actividad.splice(i, 1);
             var indiceEj = _.findIndex(_this.ejersAMostrar, { _id: id });
-            _this.ejersAMostrar[indiceEj].marcado = false;
+            if (indiceEj >= 0)
+                _this.ejersAMostrar[indiceEj].marcado = false;
             $(event.target).parent().next().removeClass("subir").addClass("aparecer");
         });
     };
@@ -976,12 +976,16 @@ var PanelProfesorComponent = (function () {
         }
     };
     PanelProfesorComponent.prototype.cargarModificacion = function (actividad) {
+        this.modificando = true;
         for (var _i = 0, _a = this.pagedItemsActs; _i < _a.length; _i++) {
             var act = _a[_i];
             act.marcado = false;
         }
         actividad.marcado = true;
-        this.modActividad = actividad;
+        for (var _b = 0, _c = actividad.ejercicios; _b < _c.length; _b++) {
+            var ej = _c[_b];
+            this.actividad.push(ej);
+        }
     };
     PanelProfesorComponent.prototype.cancelarModificacionActividad = function () {
         var _this = this;
@@ -989,17 +993,19 @@ var PanelProfesorComponent = (function () {
             var act = _a[_i];
             act.marcado = false;
         }
+        this.vaciarLista();
         $('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
         this.sleep(500).then(function () {
-            _this.modActividad = new actividad_1.Actividad();
+            _this.actividad = [];
         });
+        this.modificando = false;
     };
     PanelProfesorComponent.prototype.dropEjercicio = function (event, ejercicio, i) {
         var posDragado = event.dragData;
         //alert("Cambio el de la posicion " +posDragado + " a la posicion " + i);
-        var aux = this.modActividad.ejercicios[posDragado];
-        this.modActividad.ejercicios[posDragado] = ejercicio;
-        this.modActividad.ejercicios[i] = aux;
+        var aux = this.actividad[posDragado];
+        this.actividad[posDragado] = ejercicio;
+        this.actividad[i] = aux;
     };
     return PanelProfesorComponent;
 }());

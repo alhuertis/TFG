@@ -210,7 +210,7 @@
         </div>
         
 
-        <div class="col-md-4 col-sm-4 panel-actividad animated aparecer" *ngIf="mostrarListaEjers">
+        <div class="col-md-4 col-sm-4 panel-actividad animated aparecer" *ngIf="mostrarListaEjers || mostrarListaActs">
           <div class="row">
             <div class="col-md-12">
               <h4 class="text-center">Seleccion para actividad</h4>
@@ -220,23 +220,26 @@
           <div class="row"> 
             <div class="col-md-12 listado-actividad">
               <ul>
-                <li *ngFor="let ejer of actividad" class="animated fadeInLeft">
+                <li [dragOverClass]="'drop-ejer'" draggable="true" droppable="true" *ngFor="let ejer of actividad, let i=index" [dragData]="i" (onDrop)="dropEjercicio($event, ejer,i)" [ngClass]="{'aparecer': modificando, 'fadeInLeft': !modificando}" class="animated">
                   <i class="glyphicon glyphicon-pencil"></i> <span>{{ejer.titulo | truncate : 5}}</span>
                   <i class="glyphicon glyphicon-tags"></i> <span>{{ejer.tipo}}</span>
                   <i class="glyphicon glyphicon-signal"></i> <span id="last">{{ejer.nivel}}</span>
-                  <i class="glyphicon glyphicon-remove" (click)="descartarEjer($event, ejer._id)"></i>
+                  <i class="glyphicon glyphicon-remove" (click)="descartarEjer($event, ejer._id, i)"></i>
                 </li>
               </ul>
               <div class="opciones-actividad">
-                <a (click)="vaciarLista()">Vaciar lista</a>
-                <a (click)="crearActividad()">Crear</a>
+                <div class="row">
+                  <div class="col-md-4"><a (click)="crearActividad()">Crear</a></div>
+                  <div class="col-md-4"><a (click)="vaciarLista()">Vaciar lista</a></div>
+                  <div *ngIf="modificando" class="col-md-4"><a (click)="cancelarModificacionActividad()">Cancelar</a></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
 
-        <div class="col-md-4 col-sm-4 panel-actividad animated aparecer" *ngIf="mostrarListaActs">
+        <!--<div class="col-md-4 col-sm-4 panel-actividad animated aparecer" *ngIf="mostrarListaActs">
           <div class="row">
             <div class="col-md-12">
               <h4 class="text-center">Modificar actividad</h4>
@@ -259,7 +262,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
    
 
   </div>
