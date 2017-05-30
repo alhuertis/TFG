@@ -386,6 +386,14 @@
 	background: rgba(12,156,89,0.2) !important;
 }
 
+.modificando{
+	background: #8c7510 !important;
+}
+
+.borde-modificando ul{
+	border: 1px solid #8c7510 !important;
+}
+
 .panel-actividad .opciones-actividad{
 	width: 345px;
 	margin: 1px auto;

@@ -1145,6 +1145,7 @@ export class  PanelProfesorComponent implements OnInit{
 		}
 		
 		$('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
+		$('.listado-actividad li').removeClass("aparecer").addClass("fadeOut");
 		this.sleep(500).then(()=>{
 			this.actividad=[];
 		});

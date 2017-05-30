@@ -213,12 +213,13 @@
         <div class="col-md-4 col-sm-4 panel-actividad animated aparecer" *ngIf="mostrarListaEjers || mostrarListaActs">
           <div class="row">
             <div class="col-md-12">
-              <h4 class="text-center">Seleccion para actividad</h4>
+              <h4 *ngIf="!modificando" class="text-center">Seleccion para actividad</h4>
+              <h4 *ngIf="modificando" class="text-center modificando">Modificar actividad</h4>
             </div>
           </div>
 
           <div class="row"> 
-            <div class="col-md-12 listado-actividad">
+            <div class="col-md-12 listado-actividad" [ngClass]="{'borde-modificando': modificando}">
               <ul>
                 <li [dragOverClass]="'drop-ejer'" draggable="true" droppable="true" *ngFor="let ejer of actividad, let i=index" [dragData]="i" (onDrop)="dropEjercicio($event, ejer,i)" [ngClass]="{'aparecer': modificando, 'fadeInLeft': !modificando}" class="animated">
                   <i class="glyphicon glyphicon-pencil"></i> <span>{{ejer.titulo | truncate : 5}}</span>
@@ -227,11 +228,40 @@
                   <i class="glyphicon glyphicon-remove" (click)="descartarEjer($event, ejer._id, i)"></i>
                 </li>
               </ul>
-              <div class="opciones-actividad">
+              <div class="opciones-actividad" [ngClass]="{'modificando': modificando}">
                 <div class="row">
                   <div class="col-md-4"><a (click)="crearActividad()">Crear</a></div>
                   <div class="col-md-4"><a (click)="vaciarLista()">Vaciar lista</a></div>
                   <div *ngIf="modificando" class="col-md-4"><a (click)="cancelarModificacionActividad()">Cancelar</a></div>
+                </div>
+                <div class="row" *ngIf="modificando">
+                  <div class="col-md-10 aparecer">
+                    <input type="text" class="form-control" placeholder="Titulo actividad"/>
+                    <label for="power">Nivel</label>
+                    <select class="form-control" 
+                        required
+                       >
+                      <option value="Bajo">Bajo</option>
+                      <option value="Medio">Medio</option>
+                      <option value="Avanzado">Avanzado</option>
+                    </select>
+
+                    <div>
+                      <label>
+                        <input type="checkbox" data-toggle="toggle">Visible
+                      </label>
+                    </div>
+                  
+
+                    <div>
+                      <label>
+                      <input type="checkbox" data-toggle="toggle">Propuesta
+                    </label>
+                    <button>Modificar</button>
+                    </div>
+
+                  </div>
+                  
                 </div>
               </div>
             </div>

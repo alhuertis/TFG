@@ -774,6 +774,7 @@ var PanelProfesorComponent = (function () {
             item.marcado = false;
         }
         $('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
+        $('.listado-actividad li').removeClass("aparecer").addClass("fadeOut");
         this.sleep(500).then(function () {
             _this.actividad = [];
         });
