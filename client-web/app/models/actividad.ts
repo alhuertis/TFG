@@ -1,7 +1,7 @@
 import {Ejercicio} from '../models/ejercicio';
 export class Actividad{
 
-
+    public _id: string;
     public titulo: string;
     public id_profesor: String;
     public profesor: String;

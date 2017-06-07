@@ -236,9 +236,10 @@
                 </div>
                 <div class="row" *ngIf="modificando">
                   <div class="col-md-10 aparecer">
-                    <input type="text" class="form-control" placeholder="Titulo actividad"/>
+                    <input type="text" class="form-control" placeholder="Titulo actividad" name="tituloAct" [(ngModel)]="updateActividad.titulo" #tituloAct="ngModel"/>
                     <label for="power">Nivel</label>
-                    <select class="form-control" 
+                    <select class="form-control" [(ngModel)]="updateActividad.nivel" name="nivel"
+									#nivel="ngModel" 
                         required
                        >
                       <option value="Bajo">Bajo</option>
@@ -248,17 +249,25 @@
 
                     <div>
                       <label>
-                        <input type="checkbox" data-toggle="toggle">Visible
+                        <input #updateVisible [(ngModel)]="updateActividad.visible" #updateVisible="ngModel" type="checkbox" data-toggle="toggle">Visible
                       </label>
-                    </div>
-                  
+                    </div> 
 
                     <div>
                       <label>
-                      <input type="checkbox" data-toggle="toggle">Propuesta
+                      <input #updatePropuesta [(ngModel)]="updateActividad.propuesta" #updatePropuesta="ngModel" type="checkbox" data-toggle="toggle">Propuesta
                     </label>
-                    <button>Modificar</button>
                     </div>
+
+                    <div [ngStyle]="{'display': updateActividad.propuesta ? 'block' : 'none'}">
+                      <label for="">Fecha de fin </label>
+                      <input type="date" name="fin-fecha" [(ngModel)]="updateActividad.fecha_prop_fin" useValueAsDate>
+                    </div>
+                    
+                    <div>
+                      <button (click)="actualizarActividad()">Modificar</button>
+                    </div>
+                    
 
                   </div>
                   
@@ -567,10 +576,27 @@
       </div>
     </div>
   </div>
-
-
-
 </div>
 
+
+
+<!-- modal autorizar update actividad -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalUpdateActividad ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4><i class="glyphicon glyphicon-check"></i> Update actividad</h4>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro que desea esta actividad?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="autorizarUpdateActividad()">Aceptar</button>
+          <button class="btn btn-danger" (click)="cerrarUpdateActividad()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 		
 

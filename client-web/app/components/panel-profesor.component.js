@@ -63,6 +63,7 @@ var PanelProfesorComponent = (function () {
         this.modalActividad = false;
         this.modalMessage = false;
         this.visibleAnimate = false;
+        this.updateActividad = new actividad_1.Actividad();
         this.message = "";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
@@ -978,6 +979,7 @@ var PanelProfesorComponent = (function () {
     };
     PanelProfesorComponent.prototype.cargarModificacion = function (actividad) {
         this.modificando = true;
+        this.updateActividad = actividad;
         for (var _i = 0, _a = this.pagedItemsActs; _i < _a.length; _i++) {
             var act = _a[_i];
             act.marcado = false;
@@ -999,7 +1001,52 @@ var PanelProfesorComponent = (function () {
         this.sleep(500).then(function () {
             _this.actividad = [];
         });
+        //this.updateActividad=new Actividad();
         this.modificando = false;
+    };
+    PanelProfesorComponent.prototype.actualizarActividad = function () {
+        var _this = this;
+        if (this.actividad.length > 0) {
+            /*let ids : String[];
+            ids= new Array<String>();
+
+            for(let ej of this.actividad)
+                ids.push(ej._id);*/
+            this.updateActividad.ejercicios = this.actividad;
+            this.modalUpdateActividad = true;
+            setTimeout(function () { return _this.visibleAnimate = true; });
+        }
+    };
+    PanelProfesorComponent.prototype.autorizarUpdateActividad = function () {
+        var _this = this;
+        //Implementar metodo
+        this.cerrarUpdateActividad();
+        this._actividadService.updateActividad(this.updateActividad).subscribe(function (result) {
+            if (result.respuesta == 'ok') {
+                _this.cancelarModificacionActividad();
+                for (var _i = 0, _a = _this.actsAMostrar; _i < _a.length; _i++) {
+                    var a = _a[_i];
+                    if (a._id == result.actividadUpdated._id)
+                        a = result.actividadUpdated;
+                }
+                _this.updateActividad = result.actividadUpdated;
+                _this.message = "La actividad ha sido actualizada";
+                _this.modalMessage = true;
+                setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+                _this.seleccionaDatos(_this.datosSeleccionados, _this.tipoSeleccionado, _this.pager.currentPage);
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de borrado en el servidor');
+            }
+        });
+    };
+    PanelProfesorComponent.prototype.cerrarUpdateActividad = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalUpdateActividad = false; }, 300);
     };
     PanelProfesorComponent.prototype.dropEjercicio = function (event, ejercicio, i) {
         var posDragado = event.dragData;

@@ -46,6 +46,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public actsAMostrar: Actividad[];
 	public actividad: Ejercicio[];
 	public nuevaActividad: Actividad;
+	public updateActividad: Actividad;
 	
 	// pager object
     pager: any = {};
@@ -125,6 +126,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public modalModEjer: Boolean;
 	public modalMessage: Boolean;
   	private visibleAnimate: Boolean;
+	public modalUpdateActividad: Boolean;
 	public ejerAbrir: Ejercicio;
 	public actAbrir: Actividad;
 	public ejerBorrar: Ejercicio;
@@ -176,6 +178,8 @@ export class  PanelProfesorComponent implements OnInit{
 		this.modalActividad=false;
 		this.modalMessage=false;
 		this.visibleAnimate=false;
+		
+		this.updateActividad= new Actividad();
 
 		this.message="";
 		
@@ -1397,6 +1401,7 @@ export class  PanelProfesorComponent implements OnInit{
 
 	cargarModificacion(actividad: Actividad){
 		this.modificando=true;
+		this.updateActividad= actividad;
 
 		for(var act of this.pagedItemsActs){
 			act.marcado=false;
@@ -1422,8 +1427,64 @@ export class  PanelProfesorComponent implements OnInit{
 			this.actividad=[];
 		});
 
+		//this.updateActividad=new Actividad();
 		this.modificando=false;
 		
+	}
+
+	actualizarActividad(){
+		if(this.actividad.length > 0){
+			/*let ids : String[];
+			ids= new Array<String>();
+
+			for(let ej of this.actividad)
+				ids.push(ej._id);*/
+
+			this.updateActividad.ejercicios=this.actividad;
+
+			this.modalUpdateActividad = true;
+    		setTimeout(() => this.visibleAnimate = true);
+
+		}
+
+	}
+
+
+	autorizarUpdateActividad(){
+		//Implementar metodo
+		this.cerrarUpdateActividad();
+		this._actividadService.updateActividad(this.updateActividad).subscribe(
+			result=>{
+				if(result.respuesta == 'ok'){
+					this.cancelarModificacionActividad();
+					for(var a of this.actsAMostrar){
+						if(a._id ==result.actividadUpdated._id)
+							a= result.actividadUpdated;
+					}
+					this.updateActividad= result.actividadUpdated;
+					this.message="La actividad ha sido actualizada";
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
+					this.seleccionaDatos(this.datosSeleccionados, this.tipoSeleccionado, this.pager.currentPage);
+					
+				}
+			},
+			error=>{
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de borrado en el servidor');
+				}
+			}
+		);
+
+	}
+
+	cerrarUpdateActividad(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalUpdateActividad = false, 300);
+
 	}
 
 	dropEjercicio(event, ejercicio:Ejercicio, i:number){

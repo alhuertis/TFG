@@ -68,6 +68,12 @@ var ActividadService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'actividad', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.updateActividad = function (actividad) {
+        var json = JSON.stringify(actividad);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.put(this.url + 'actividad/' + actividad._id, params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     //Profesores
     ActividadService.prototype.getActsMiColeccion = function (id_profesor) {
         return this._http.get(this.url + 'actividad-miColeccion/' + id_profesor).map(function (res) { return res.json(); });

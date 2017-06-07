@@ -112,7 +112,7 @@ function updateActividad(req, res) {
 		if (err)
 			res.status(500).send({message: "Error al actualizar la actividad"});
 		else 
-			res.status(200).send({actividadUpdated});
+			res.status(200).send({respuesta:'ok',actividadUpdated});
 	});
 }
 

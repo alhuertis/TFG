@@ -85,6 +85,15 @@ export class ActividadService{
 		return this._http.post(this.url+'actividad', params, {headers: headers}).map(res=> res.json());
 	}
 
+	 updateActividad(actividad: Actividad){
+		let json = JSON.stringify(actividad);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.put(this.url+'actividad/' + actividad._id , params, {headers: headers}).map(res=> res.json());
+	}
+
      //Profesores
     getActsMiColeccion(id_profesor: string){
 		return this._http.get(this.url+'actividad-miColeccion/'+id_profesor).map(res => res.json());
