@@ -125,7 +125,7 @@ var ActividadService = (function () {
     };
     ActividadService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
-        if (pageSize === void 0) { pageSize = 5; }
+        if (pageSize === void 0) { pageSize = 10; }
         // calculate total pages
         var totalPages = Math.ceil(totalItems / pageSize);
         var startPage, endPage;

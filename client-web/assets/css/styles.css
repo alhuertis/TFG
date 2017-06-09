@@ -319,6 +319,7 @@
 
 .panel-actividad{
 	top:57px;
+	margin-bottom: 50px;
 }
 
 .panel-actividad h4{
@@ -400,14 +401,51 @@
 	border-radius: 4px;
 	padding: 0 12px 0 12px;
 	background: #3b9b86;
+
 }
 
 .panel-actividad .opciones-actividad a{
-	font-size: 14px;
+	font-size: 16px;
 	cursor: pointer;
 	color: white; 
 }
 
+.opciones-actividad .opciones{
+	padding-top: 5px;
+	padding-bottom: 5px;	
+}
+
+.datos-update{
+	padding-bottom: 20px;
+}
+
+
+.datos-update label{
+	padding-top: 10px;
+	color: #000;
+	font-weight: normal;
+}
+
+.datos-update .chk-fechas{margin-top: 5px;}
+
+.datos-update .chk-fechas label{
+	padding-right: 15px;
+}
+
+.datos-update input, .datos-update select{
+	background: #ddd;
+	color: #025257;
+	font-size: 16px;
+}
+
+.datos-update .fecha-fin label{
+	margin-right: 7px;
+}
+
+.datos-update .btn-update-act{
+	float: right;
+	margin-top: 15px;
+}
 
 .add-ejercicio-tit h3{
 	margin-top: -3px;

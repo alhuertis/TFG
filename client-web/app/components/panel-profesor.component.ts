@@ -1094,7 +1094,7 @@ export class  PanelProfesorComponent implements OnInit{
         }
 
         // get pager object from service
-       	this.pager = this._ejercicioService.getPager(this.actsAMostrar.length, page);
+       	this.pager = this._actividadService.getPager(this.actsAMostrar.length, page);
         // get current page of items
         this.pagedItemsActs = this.actsAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
 	

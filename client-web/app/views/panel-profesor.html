@@ -229,13 +229,15 @@
                 </li>
               </ul>
               <div class="opciones-actividad" [ngClass]="{'modificando': modificando}">
-                <div class="row">
-                  <div class="col-md-4"><a (click)="crearActividad()">Crear</a></div>
-                  <div class="col-md-4"><a (click)="vaciarLista()">Vaciar lista</a></div>
-                  <div *ngIf="modificando" class="col-md-4"><a (click)="cancelarModificacionActividad()">Cancelar</a></div>
+                <div class="row" style="border-bottom: 1px solid white">
+                  <div class="col-md-4 opciones"><a (click)="crearActividad()">Crear</a></div>
+                  <div class="col-md-4 opciones"><a (click)="vaciarLista()">Vaciar lista</a></div>
+                  <div *ngIf="modificando" class="col-md-4 opciones"><a (click)="cancelarModificacionActividad()">Cancelar</a></div>
                 </div>
                 <div class="row" *ngIf="modificando">
-                  <div class="col-md-10 aparecer">
+                  <div class="col-md-10 aparecer datos-update">
+
+                    <label for="titulo">Titulo actividad</label>
                     <input type="text" class="form-control" placeholder="Titulo actividad" name="tituloAct" [(ngModel)]="updateActividad.titulo" #tituloAct="ngModel"/>
                     <label for="power">Nivel</label>
                     <select class="form-control" [(ngModel)]="updateActividad.nivel" name="nivel"
@@ -247,25 +249,22 @@
                       <option value="Avanzado">Avanzado</option>
                     </select>
 
-                    <div>
-                      <label>
-                        <input #updateVisible [(ngModel)]="updateActividad.visible" #updateVisible="ngModel" type="checkbox" data-toggle="toggle">Visible
-                      </label>
-                    </div> 
+                    <div class="chk-fechas">
+                      
+                      <input #updateVisible [(ngModel)]="updateActividad.visible" #updateVisible="ngModel" type="checkbox" data-toggle="toggle">
+                      <label>Visible</label>
 
-                    <div>
-                      <label>
-                      <input #updatePropuesta [(ngModel)]="updateActividad.propuesta" #updatePropuesta="ngModel" type="checkbox" data-toggle="toggle">Propuesta
-                    </label>
+                      <input #updatePropuesta [(ngModel)]="updateActividad.propuesta" #updatePropuesta="ngModel" type="checkbox" data-toggle="toggle">
+                      <label>Propuesta</label>
                     </div>
 
-                    <div [ngStyle]="{'display': updateActividad.propuesta ? 'block' : 'none'}">
-                      <label for="">Fecha de fin </label>
+                    <div class="fecha-fin" [ngStyle]="{'display': updateActividad.propuesta ? 'block' : 'none'}">
+                      <label for="fecha-fin">Fecha de fin </label>
                       <input type="date" name="fin-fecha" [(ngModel)]="updateActividad.fecha_prop_fin" useValueAsDate>
                     </div>
                     
-                    <div>
-                      <button (click)="actualizarActividad()">Modificar</button>
+                    <div class="btn-update-act">
+                      <button class="btn btn-lg" (click)="actualizarActividad()">Modificar</button>
                     </div>
                     
 

@@ -159,7 +159,7 @@ export class ActividadService{
 		return this._http.get(this.url+'actividad-otrasColeccionesNivelB/'+id_profesor).map(res => res.json());
 	}
 
-    getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
+    getPager(totalItems: number, currentPage: number = 1, pageSize: number = 10) {
         // calculate total pages
         let totalPages = Math.ceil(totalItems / pageSize);
  
