@@ -126,13 +126,15 @@ function deleteActividad(req, res) {
 			res.status(500).send({message: "Error al devolver la actividad"});
 		if(!actividad)
 			res.status(404).send({message:'No existe la actividad'});	
-		else 
+		else{ 
 			actividad.remove(err => {
 				if(err)
-					res.status(500).send({message:'Error al borrar la actividad'});
-				else
-					res.status(200).send({message:'Actividad borrado correctamente'});
+					res.status(500).send({respuesta: 'ko', message:'Error al borrar la actividad'});
+				else{
+					res.status(200).send({respuesta: 'ok', message:'Actividad borrada correctamente'});
+				}
 			})
+		}
 	});
 }
 
@@ -778,5 +780,6 @@ module.exports= {
 	getActsOtrasColeccionesNivelB,
 	getActsOtrasColeccionesNivelM,
 	updateActividad,
-	borrarEjercicio
+	borrarEjercicio,
+	deleteActividad
 }

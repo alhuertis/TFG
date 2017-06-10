@@ -41,6 +41,7 @@ api.get('/actividad-otrasColeccionesNivelA/:id_profesor', ActividadController.ge
 api.get('/actividad-otrasColeccionesNivelM/:id_profesor', ActividadController.getActsOtrasColeccionesNivelM);
 api.get('/actividad-otrasColeccionesNivelB/:id_profesor', ActividadController.getActsOtrasColeccionesNivelB);
 api.put('/actividad/:id', ActividadController.updateActividad); 
-api.put('/actividad-ejercicio/:id', ActividadController.borrarEjercicio);  
+api.put('/actividad-ejercicio/:id', ActividadController.borrarEjercicio);
+api.delete('/actividad/:id', ActividadController.deleteActividad);  
 
 module.exports= api; 

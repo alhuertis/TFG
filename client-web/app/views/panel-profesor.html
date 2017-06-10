@@ -588,11 +588,29 @@
           <h4><i class="glyphicon glyphicon-check"></i> Update actividad</h4>
         </div>
         <div class="modal-body">
-          <p>¿Estás seguro que desea esta actividad?</p>
+          <p>¿Estás seguro que desea actualizar esta actividad?</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-success" (click)="autorizarUpdateActividad()">Aceptar</button>
           <button class="btn btn-danger" (click)="cerrarUpdateActividad()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- modal autorizar update actividad -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalDeleteActividad ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4><i class="glyphicon glyphicon-trash"></i> Delete actividad</h4>
+          <p>¿Estás seguro que desea eliminar esta actividad?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="deleteActividad()">Aceptar</button>
+          <button class="btn btn-danger" (click)="cerrarDeleteActividad()">Cancelar</button>
         </div>
       </div>
     </div>

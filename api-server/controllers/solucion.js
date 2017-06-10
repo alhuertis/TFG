@@ -338,6 +338,34 @@ function borrarEjercicio(req, res){
 
 }
 
+function deleteSolucionByActividad(req, res){
+
+	var id= req.params.id;
+	console.log("####### " + id);
+	Solucion.remove({"actividad": id}, function(err, solucion) {
+
+		if (err)
+			res.status(500).send({message: "Error al eliminar la solucion"});
+	});
+
+	/*Solucion.find({"actividad": id},function(err, solucion) {
+
+		if (err)
+			res.status(500).send({message: "Error al eliminar la solucion"});
+		if(!solucion)
+			res.status(404).send({respuesta:'ko', message:'No existe la solucion'});	
+		else{ 
+			solucion.remove(err => {
+				if(err)
+					res.status(500).send({respuesta: 'ko', message:'Error al eliminar la solucion'});
+				else{
+					res.status(200).send({respuesta: 'ok', message:'Solucion borrada correctamente'});
+				}
+			})
+		}
+	});*/
+}
+
 
 
 
@@ -358,6 +386,7 @@ module.exports= {
 	getTerminadasByProfesor,
 	getSinTerminarByProfesor,
 	borrarEjercicio,
+	deleteSolucionByActividad,
 
 
 }

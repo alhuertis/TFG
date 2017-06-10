@@ -92,6 +92,10 @@ var SolucionService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.put(this.url + 'soluciones-ejercicio/' + id, { headers: headers }).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.deleteSolucionByActividad = function (id) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.delete(this.url + 'solucionByActividad/' + id, { headers: headers }).map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

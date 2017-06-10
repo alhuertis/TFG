@@ -64,6 +64,7 @@ var PanelProfesorComponent = (function () {
         this.modalMessage = false;
         this.visibleAnimate = false;
         this.updateActividad = new actividad_1.Actividad();
+        this.deleteAct = new actividad_1.Actividad();
         this.message = "";
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
@@ -1054,6 +1055,50 @@ var PanelProfesorComponent = (function () {
         var aux = this.actividad[posDragado];
         this.actividad[posDragado] = ejercicio;
         this.actividad[i] = aux;
+    };
+    PanelProfesorComponent.prototype.abrirBorrarActividad = function (actividad) {
+        var _this = this;
+        this.deleteAct = actividad;
+        this.modalDeleteActividad = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelProfesorComponent.prototype.cerrarDeleteActividad = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalDeleteActividad = false; }, 300);
+    };
+    PanelProfesorComponent.prototype.deleteActividad = function () {
+        var _this = this;
+        this._actividadService.deleteActividad(this.deleteAct._id).subscribe(function (result) {
+            if (result.respuesta == 'ok') {
+                var id = _this.deleteAct._id;
+                for (var i = 0; i < _this.pagedItemsActs.length; i++) {
+                    if (_this.pagedItemsActs[i]._id == _this.deleteAct._id) {
+                        _this.pagedItemsActs.splice(i, 1);
+                    }
+                }
+                for (var i = 0; i < _this.actsAMostrar.length; i++) {
+                    if (_this.actsAMostrar[i]._id == _this.deleteAct._id) {
+                        _this.actsAMostrar.splice(i, 1);
+                    }
+                }
+                _this.cerrarDeleteActividad();
+                _this.ngOnInit();
+                _this.deleteAct = new actividad_1.Actividad();
+                _this.message = "La actividad ha sido eliminada";
+                _this.modalMessage = true;
+                setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+                _this.seleccionaDatos(_this.datosSeleccionados, _this.tipoSeleccionado, _this.pager.currentPage);
+                //se borran las soluciones de dicha actividad si las hubiera
+                _this._solucionService.deleteSolucionByActividad(id).subscribe();
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de borrado en el servidor');
+            }
+        });
     };
     return PanelProfesorComponent;
 }());

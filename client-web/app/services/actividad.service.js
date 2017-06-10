@@ -35,6 +35,10 @@ var ActividadService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.put(this.url + 'actividad-ejercicio/' + id, { headers: headers }).map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.deleteActividad = function (id) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.delete(this.url + 'actividad/' + id, { headers: headers }).map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.getDisponibles = function () {
         return this._http.get(this.url + 'actividad-disponibles').map(function (res) { return res.json(); });
     };

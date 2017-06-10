@@ -47,6 +47,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public actividad: Ejercicio[];
 	public nuevaActividad: Actividad;
 	public updateActividad: Actividad;
+	public deleteAct: Actividad;
 	
 	// pager object
     pager: any = {};
@@ -127,6 +128,7 @@ export class  PanelProfesorComponent implements OnInit{
 	public modalMessage: Boolean;
   	private visibleAnimate: Boolean;
 	public modalUpdateActividad: Boolean;
+	public modalDeleteActividad: Boolean;
 	public ejerAbrir: Ejercicio;
 	public actAbrir: Actividad;
 	public ejerBorrar: Ejercicio;
@@ -180,6 +182,7 @@ export class  PanelProfesorComponent implements OnInit{
 		this.visibleAnimate=false;
 		
 		this.updateActividad= new Actividad();
+		this.deleteAct= new Actividad();
 
 		this.message="";
 		
@@ -1495,4 +1498,66 @@ export class  PanelProfesorComponent implements OnInit{
 		this.actividad[posDragado]= ejercicio;
 		this.actividad[i]= aux;
 	}
+
+
+	abrirBorrarActividad(actividad: Actividad){
+		
+		this.deleteAct= actividad;
+
+		this.modalDeleteActividad = true;
+		setTimeout(() => this.visibleAnimate = true);
+
+	}
+
+	cerrarDeleteActividad(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalDeleteActividad = false, 300);
+	}
+
+	deleteActividad(){
+
+		this._actividadService.deleteActividad(this.deleteAct._id).subscribe(
+
+			result=>{
+				if(result.respuesta == 'ok'){
+					var id= this.deleteAct._id;
+
+					for(var i=0; i < this.pagedItemsActs.length; i++){
+						if(this.pagedItemsActs[i]._id == this.deleteAct._id){
+							this.pagedItemsActs.splice(i,1);
+						}
+					}
+
+					for(var i=0; i < this.actsAMostrar.length; i++){
+						if(this.actsAMostrar[i]._id == this.deleteAct._id){
+							this.actsAMostrar.splice(i,1);
+						}
+					}
+
+					this.cerrarDeleteActividad();
+					this.ngOnInit();					
+					this.deleteAct= new Actividad();
+					
+					this.message="La actividad ha sido eliminada";
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
+					this.seleccionaDatos(this.datosSeleccionados, this.tipoSeleccionado, this.pager.currentPage);
+
+					//se borran las soluciones de dicha actividad si las hubiera
+					this._solucionService.deleteSolucionByActividad(id).subscribe();
+					
+				}
+			},
+			error=>{
+				this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de borrado en el servidor');
+				}
+			}
+		);
+	}
+
+	
 }

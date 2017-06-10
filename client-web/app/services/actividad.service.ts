@@ -40,6 +40,12 @@ export class ActividadService{
 		return this._http.put(this.url+'actividad-ejercicio/'+id, {headers: headers}).map(res=> res.json());
 	}
 
+	deleteActividad(id: String){
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.delete(this.url+'actividad/'+id, {headers: headers}).map(res=> res.json());
+	}
+
     getDisponibles(){
 		return this._http.get(this.url+'actividad-disponibles').map(res => res.json());
 	}

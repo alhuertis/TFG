@@ -149,6 +149,12 @@ export class SolucionService{
 		return this._http.put(this.url+'soluciones-ejercicio/'+id, {headers: headers}).map(res=> res.json());
 	}
 
+    deleteSolucionByActividad(id: String){
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.delete(this.url+'solucionByActividad/'+id, {headers: headers}).map(res=> res.json());
+	}
+
     
 
     
