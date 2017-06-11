@@ -79,6 +79,8 @@ var PanelProfesorComponent = (function () {
             else {
                 _this.loading = false;
                 _this.nEjercicios = _this.ejercicios.length;
+                _this.ejersAMostrar = _this.ejercicios;
+                _this.seleccionaDatos('ejercicios', 'ejercicios', 1);
             }
         }, function (error) {
             _this.errorMessage = error;

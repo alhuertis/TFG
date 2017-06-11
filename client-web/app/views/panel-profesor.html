@@ -143,7 +143,7 @@
                     
                     <div class="col-md-6">
                       <ul>
-                        <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date : 'dd/mm/yyyy'}}</li>
+                        <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date: 'dd/MM/yyyy'}}</li>
                         <li><i class="glyphicon glyphicon-signal"></i> {{actividad.nivel}}</li>
                       </ul>
                     </div>
@@ -222,9 +222,9 @@
             <div class="col-md-12 listado-actividad" [ngClass]="{'borde-modificando': modificando}">
               <ul>
                 <li [dragOverClass]="'drop-ejer'" draggable="true" droppable="true" *ngFor="let ejer of actividad, let i=index" [dragData]="i" (onDrop)="dropEjercicio($event, ejer,i)" [ngClass]="{'aparecer': modificando, 'fadeInLeft': !modificando}" class="animated">
-                  <i class="glyphicon glyphicon-pencil"></i> <span>{{ejer.titulo | truncate : 5}}</span>
-                  <i class="glyphicon glyphicon-tags"></i> <span>{{ejer.tipo}}</span>
-                  <i class="glyphicon glyphicon-signal"></i> <span id="last">{{ejer.nivel}}</span>
+                  <i class="glyphicon glyphicon-pencil" (click)="showEjercicio(ejer)"></i> <span  (click)="showEjercicio(ejer)">{{ejer.titulo | truncate : 5}}</span>
+                  <i class="glyphicon glyphicon-tags" (click)="showEjercicio(ejer)"></i> <span (click)="showEjercicio(ejer)">{{ejer.tipo}}</span>
+                  <i class="glyphicon glyphicon-signal" (click)="showEjercicio(ejer)"></i> <span (click)="showEjercicio(ejer)" id="last">{{ejer.nivel}}</span>
                   <i class="glyphicon glyphicon-remove" (click)="descartarEjer($event, ejer._id, i)"></i>
                 </li>
               </ul>
@@ -308,20 +308,25 @@
   <!-- modal mostrar ejercicio -->
   <div style="background: rgba(63,63,61,0.8);" (click)="hideEjercicio()" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalEjercicio ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-    <div class="modal-dialog">
+    <div class="modal-dialog mostrar-ejercicio modal-lg">
       <div class="modal-content">
         <div *ngIf="ejerAbrir != null" class="modal-header">
-          Titulo: {{ejerAbrir.titulo}}
+          <h3><label>Titulo:</label> {{ejerAbrir.titulo}}</h3>
         </div>
         <div *ngIf="ejerAbrir != null" class="modal-body">
-          <p>Autor: {{ejerAbrir.autor}}</p>
-          <p>Nivel: {{ejerAbrir.nivel}}</p>
-          <p>Tipo: {{ejerAbrir.tipo}}</p>
-          <p>Enunciado: {{ejerAbrir.enunciado}}</p>
-          <p>Frase a traducir: {{ejerAbrir.fraseATraducir}}</p>
-
-        </div>
-        <div class="modal-footer">
+          <ul>
+            <li><label><i class="glyphicon glyphicon-user"></i> Autor:</label> {{ejerAbrir.autor}}</li>
+            <li><label><i class="glyphicon glyphicon-signal"></i> Nivel:</label> {{ejerAbrir.nivel}}</li>
+            <li><label><i class="glyphicon glyphicon-tag"></i> Tipo:</label> {{ejerAbrir.tipo}}</li>
+            <li><label><i class="glyphicon glyphicon-calendar"></i> Fecha de creación:</label> {{ejerAbrir.fechaCreacion | date: 'dd/MM/yyyy'}}</li>
+            <li><label><i class="glyphicon glyphicon-calendar"></i> Ultima modificación:</label> {{ejerAbrir.fechaModificacion | date: 'dd/MM/yyyy'}} a las {{ejerAbrir.fechaModificacion | date: 'hh:mm:ss'}}</li>
+            <li><label><i class="glyphicon glyphicon-pencil"></i> Enunciado:</label> {{ejerAbrir.enunciado}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Frase a traducir:</label> {{ejerAbrir.fraseATraducir}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Solución en formato lógico:</label> {{ejerAbrir.solucionFLogico}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Solución en formato patrón:</label> {{ejerAbrir.solucionFPatron}}</li>
+            <li *ngIf="ejerAbrir.solucionPEspanol"><label><i class="glyphicon glyphicon-th-list"></i> Solución en Español:</label> {{ejerAbrir.solucionPEspanol}}</li>
+            <li *ngIf="ejerAbrir.solucionPLatin"><label><i class="glyphicon glyphicon-th-list"></i> Solución en Latín:</label> {{ejerAbrir.solucionPLatin}}</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -381,12 +386,10 @@
   <!-- modal borrar ejercicio -->
   <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalBorrarEjercicio ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-    <div class="modal-dialog">
+    <div class="modal-dialog mod-borrar-ejer">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4><i class="glyphicon glyphicon-trash"></i>Borrar ejercicio</h4>
-        </div>
         <div class="modal-body">
+          <h4><i class="glyphicon glyphicon-trash"></i> Borrar ejercicio</h4>
           <p>¿Estás seguro que desea borrar este ejercicio?</p>
         </div>
         <div class="modal-footer">
@@ -535,8 +538,8 @@
                 <li><label><i class="glyphicon glyphicon-signal"></i> Nivel </label> {{actAbrir.nivel}}</li>
                 <li *ngIf="actAbrir.visible"><label><i class="glyphicon glyphicon-eye-open"></i> Visible </label> Si</li>
                 <li *ngIf="!actAbrir.visible"><label><i class="glyphicon glyphicon-eye-close"></i> Visible </label> No</li>
-                <li><label><i class="glyphicon glyphicon-calendar"></i> Creacion </label> {{actAbrir.fecha_creacion | date: 'dd/mm/yyyy'}} </li>
-                <li *ngIf="actAbrir.propuesta"><label><i class="glyphicon glyphicon-calendar"></i> Propuesta </label> {{actAbrir.fecha_prop_fin | date: 'dd/mm/yyyy'}} </li>
+                <li><label><i class="glyphicon glyphicon-calendar"></i> Creacion </label> {{actAbrir.fecha_creacion | date: 'dd/MM/yyyy'}} </li>
+                <li *ngIf="actAbrir.propuesta"><label><i class="glyphicon glyphicon-calendar"></i> Propuesta </label> {{actAbrir.fecha_prop_fin | date: 'dd/MM/yyyy'}} </li>
               </ul>
 
             </div>
@@ -566,7 +569,7 @@
                     <td>{{ej.nivel}}</td>
                     <td>{{ej.enunciado}}</td>
                     <td>{{ej.fraseATraducir}}</td>
-                    <td>{{ej.fechaCreacion | date:'dd/mm/yyyy'}}</td>
+                    <td>{{ej.fechaCreacion | date:'dd/MM/yyyy'}}</td>
                   </tr>
                 </tbody>
               </table>

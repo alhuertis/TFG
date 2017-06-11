@@ -202,6 +202,8 @@ export class  PanelProfesorComponent implements OnInit{
 				else{
 					this.loading=false;
 					this.nEjercicios= this.ejercicios.length;
+					this.ejersAMostrar= this.ejercicios;
+					this.seleccionaDatos('ejercicios', 'ejercicios', 1);
 					/*this.ejersAMostrar= this.ejercicios;
 					this.datosAMostrar="Todos los ejercicios";
 					this.mostrarLista=true;*/
@@ -846,6 +848,8 @@ export class  PanelProfesorComponent implements OnInit{
 				}
 			}
 		);
+
+		
 
 	}//fin ngOnInit
 

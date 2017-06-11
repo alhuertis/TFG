@@ -370,12 +370,14 @@
 	border-right: none;
 }
 
+
 .panel-actividad .listado-actividad ul li .glyphicon-remove{
 	color: #f43333;
 	float: right;
 	padding-top: 3px;
 	font-size: 16px;
 }
+
 
 .panel-actividad .listado-actividad ul li .glyphicon-remove:hover{
 	color: #f76262;
@@ -907,6 +909,38 @@
 }
 
 .ejercicios-ver-actividad h4{margin: 0px; color:rgba(23,157,168,1);} 
+
+.mostrar-ejercicio .modal-header{
+	background: #2EA7B1;
+	font-size: 16px;
+	text-align: center;
+	color: #1A5856;	
+}
+
+.mostrar-ejercicio .modal-header h3{
+	margin: 5px 0px 5px 0px;
+}
+
+.mostrar-ejercicio .modal-body ul{
+	list-style-type: none;
+}
+
+.mostrar-ejercicio .modal-body ul li{
+	margin-bottom: 5px;
+}
+
+.mostrar-ejercicio .modal-body ul li label{
+	font-size: 16px;
+}
+
+.mod-borrar-ejer h4{
+	font-size: 20px;
+	color: #632E2E;
+}
+
+.mod-borrar-ejer p{
+	font-size: 16px;
+}
 
 
 
