@@ -1,0 +1,266 @@
+
+> angular2-final-victorroblesweb@1.0.0 start C:\Users\DGON\Documents\Universidad\TFG\client-web
+> tsc && concurrently "npm run tsc:w" "npm run lite" 
+
+[0] 
+[0] > angular2-final-victorroblesweb@1.0.0 tsc:w C:\Users\DGON\Documents\Universidad\TFG\client-web
+[0] > tsc -w
+[0] 
+[1] 
+[1] > angular2-final-victorroblesweb@1.0.0 lite C:\Users\DGON\Documents\Universidad\TFG\client-web
+[1] > lite-server
+[1] 
+[1] Did not detect a `bs-config.json` or `bs-config.js` override file. Using lite-server defaults...
+[1] ** browser-sync config **
+[1] { injectChanges: false,
+[1]   files: [ './**/*.{html,htm,css,js}' ],
+[1]   watchOptions: { ignored: 'node_modules' },
+[1]   server: { baseDir: './', middleware: [ [Function], [Function] ] } }
+[1] [BS] Access URLs:
+[1]  -------------------------------------
+[1]        Local: http://localhost:3000
+[1]     External: http://192.168.1.50:3000
+[1]  -------------------------------------
+[1]           UI: http://localhost:3001
+[1]  UI External: http://192.168.1.50:3001
+[1]  -------------------------------------
+[1] [BS] Serving files from: ./
+[1] [BS] Watching files...
+[1] [90m17.05.24 20:33:19[0m [32m200[0m [35mGET[0m [90m/index.html[0m
+[1] [90m17.05.24 20:33:20[0m [33m404[0m [35mGET[0m [90m/”node_modules/underscore/underscore.js”[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/jquery/dist/jquery.min.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/core-js/client/shim.min.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/reflect-metadata/Reflect.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/assets/css/styles.css[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/zone.js/dist/zone.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/bootstrap/dist/css/bootstrap.min.css[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/systemjs.config.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/bootstrap/dist/js/bootstrap.min.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/systemjs/dist/system.src.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/assets/images/loader.gif[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/app/main.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js[0m
+[1] [90m17.05.24 20:33:20[0m [32m200[0m [35mGET[0m [90m/app/app.module.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/platform-browser/bundles/platform-browser.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/http/bundles/http.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/app.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/core/bundles/core.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/app.routing.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/index.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/forms/bundles/forms.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/panel-admin.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/panel-profesor.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/panel-alumno.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/ejercicio-add.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/cabecera-profesor.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/truncate-pipe.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/cabecera-admin.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/resolver-actividad.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/cabecera-alumno.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/guards/authProfesor.guard.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/components/login.component.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/guards/authAlumno.guard.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/guards/authAdmin.guard.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/compiler/bundles/compiler.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/Observable.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/Subject.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/src/ng2-drag-drop.module.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/services/authentication.service.js[0m
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/models/user.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/common/bundles/common.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/toPromise.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/router/bundles/router.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/fromPromise.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/services/ejercicio.service.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/services/actividad.service.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/underscore/underscore.js[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/index.html[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/jquery/dist/jquery.min.js[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [33m404[0m [35mGET[0m [90m/”node_modules/underscore/underscore.js”[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/core-js/client/shim.min.js[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/zone.js/dist/zone.js[0m
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/reflect-metadata/Reflect.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/systemjs/dist/system.src.js[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/bootstrap/dist/js/bootstrap.min.js[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/bootstrap/dist/css/bootstrap.min.css[0m
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/assets/css/styles.css[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/systemjs.config.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/main.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/assets/images/loader.gif[0m
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [32m200[0m [35mGET[0m [90m/app/app.module.js[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [36m304[0m [35mGET[0m [90m/node_modules/@angular/compiler/bundles/compiler.umd.js[0m
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [36m304[0m [35mGET[0m [90m/node_modules/@angular/core/bundles/core.umd.js[0m
+[1] [BS] Reloading Browsers...
+[1] [90m17.05.24 20:33:21[0m [36m304[0m [35mGET[0m [90m/node_modules/@angular/platform-browser/bundles/platform-browser.umd.js[0m
+[1] [90m17.05.24 20:33:21[0m [36m304[0m [35mGET[0m [90m/node_modules/@angular/forms/bundles/forms.umd.js[0m
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/node_modules/@angular/http/bundles/http.umd.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/app.component.js[0m
+[0] 20:33:21 - Compilation complete. Watching for file changes.
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/index.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/app.routing.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/panel-admin.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/panel-profesor.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/panel-alumno.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/ejercicio-add.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/cabecera-profesor.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/truncate-pipe.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/cabecera-alumno.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/cabecera-admin.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/resolver-actividad.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/guards/authProfesor.guard.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/components/login.component.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/guards/authAlumno.guard.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/guards/authAdmin.guard.js[0m
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/node_modules/rxjs/Subject.js[0m
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/node_modules/rxjs/Observable.js[0m
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/node_modules/@angular/common/bundles/common.umd.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/toPromise.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/fromPromise.js[0m
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/node_modules/@angular/router/bundles/router.umd.js[0m
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/src/ng2-drag-drop.module.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/services/authentication.service.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/models/user.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/underscore/underscore.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/services/ejercicio.service.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/services/actividad.service.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/models/actividad.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/services/solucion.service.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/services/profesor.service.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/models/ejercicio.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/models/ficha.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/models/solucion.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/Subscriber.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/Subscription.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/ObjectUnsubscribedError.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/SubjectSubscription.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/symbol/rxSubscriber.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/root.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/toSubscriber.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/symbol/observable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/PromiseObservable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/from.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/of.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/every.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/map.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/mergeAll.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/mergeMap.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/reduce.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/catch.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/concatAll.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/first.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/EmptyError.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/BehaviorSubject.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/last.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/src/directives/droppable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/src/directives/draggable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/add/operator/map.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/src/services/ng2-drag-drop.service.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/isFunction.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/Observer.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/isArray.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/isObject.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/tryCatch.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/errorObject.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/UnsubscriptionError.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/OuterSubscriber.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/FromObservable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/ArrayObservable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/src/shared/drop-event.model.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/subscribeToResult.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/ng2-drag-drop/src/shared/utils.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/isPromise.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/IteratorObservable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/ArrayLikeObservable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/symbol/iterator.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/operator/observeOn.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/ScalarObservable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/util/isScheduler.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/observable/EmptyObservable.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/InnerSubscriber.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/node_modules/rxjs/Notification.js[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/home.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/panel-admin.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/panel-profesor.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/ejercicio-add.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/panel-alumno.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/cabecera-profesor.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/resolver-actividad.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/cabecera-admin.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/cabecera-alumno.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/app/views/login.html[0m
+[1] [90m17.05.24 20:33:22[0m [32m200[0m [35mGET[0m [90m/assets/css/menu-profesor.css[0m
+[1] [90m17.05.24 20:33:22[0m [36m304[0m [35mGET[0m [90m/assets/css/styles.css[0m
+[1] [90m17.05.24 20:33:23[0m [32m200[0m [35mGET[0m [90m/node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot[0m
+/cygdrive/c/Program Files/nodejs/npm: line 34: 12368 Hangup                  "$NODE_EXE" "$NPM_CLI_JS" "$@"
+[1] 
+[1] npm
+[1]  ERR! Windows_NT 6.1.7601
+[1] npm ERR! argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\DGON\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "lite"
+[1] npm ERR! node
+[1]  v7.4.0
+[1] npm ERR! npm  v4.1.1
+[1] npm 
+[1] ERR! code ELIFECYCLE
+[1] npm ERR!
+[1]  angular2-final-victorroblesweb@1.0.0 lite: `lite-server`
+[1] npm ERR! Exit status 1073807364
+[1] npm ERR!
+[1]  
+[1] npm ERR! Failed at the angular2-final-victorroblesweb@1.0.0 lite script 'lite-server'.
+[1] npm ERR!
+[1]  Make sure you have the latest version of node.js and npm installed.
+[1] npm ERR! If you do, this is most likely a problem with the angular2-final-victorroblesweb package,
+[1] npm
+[1]  ERR! not with npm itself.
+[1] npm ERR!
+[1]  Tell the author that this fails on your system:
+[1] npm ERR!     lite-server
+[1] npm ERR!
+[1]  You can get information on how to open an issue for this project with:
+[1] npm ERR!
+[1]      npm bugs angular2-final-victorroblesweb
+[1] npm ERR! Or if that isn't available, you can get their info via:
+[1] npm ERR!
+[1]      npm owner ls angular2-final-victorroblesweb
+[1] npm ERR! There is likely additional logging output above.
+[1] 
+[1] npm
+[1]  
+[1] ERR!
+[1]  Please include the following file with any support request:
+[1] npm
+[1]  
+[1] ERR!
+[1]      C:\Users\DGON\Documents\Universidad\TFG\client-web\npm-debug.log
+[1] npm run lite exited with code 1
