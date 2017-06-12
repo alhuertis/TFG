@@ -888,6 +888,58 @@
 
 
 /*********MODALES**********/
+
+
+.modal-mensajes .modal-body{
+	 background: #219FC4; 
+	 color: white; 
+	 font-size: 20px;
+}
+
+.mod-crear-actividad .modal-header{
+	background: #3C9B86;
+}
+
+.mod-crear-actividad .modal-header h4{
+	margin: 0px;
+	color: white; 
+
+}
+
+.mod-crear-actividad .modal-body{
+	background:  #f4f4f4;
+}
+
+.mod-crear-actividad .modal-body input, .mod-crear-actividad .modal-body select{
+	margin-bottom: 15px;
+	color: #111;
+	font-size: 18px;
+}
+
+.mod-crear-actividad .modal-body select{
+	width: 50%;
+}
+
+.mod-crear-actividad .modal-body input[type= 'date']{
+	margin-left: 10px;
+	border-radius: 4px;
+}
+
+.mod-crear-actividad .modal-footer .btn:first-child{
+	background: #e87d89;
+	color: white;
+	border-color: #e26874;
+}
+
+.mod-crear-actividad .modal-footer .btn:last-child{
+	background: #4da591;
+	color: white;
+	border-color: #3f8978;
+}
+
+.mod-crear-actividad .modal-footer{background: #f4f4f4;}
+
+
 .modal-ver-actividad .modal-header{
 	background: rgba(23,157,168,0.9);
 	color: #015156;

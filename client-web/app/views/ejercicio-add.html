@@ -44,7 +44,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-6">
+						<!--<div class="col-md-6">
 							<label for="power">Tipo</label>
 							<select class="form-control" id="tipo"
 									required
@@ -55,7 +55,7 @@
 							<div [hidden]="tipo.valid || tipo.pristine" class="alert alert-danger">
 							Tipo requerido
 							</div>
-						</div>
+						</div>-->
 					</div>
 
 					<textarea style="margin-top: 25px" class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado"> </textarea>
@@ -68,7 +68,9 @@
 
 				
 				<div class="col-md-3">
-					<textarea (blur)="aplicaValoresLogicos()" [style.visibility]="(ejercicio.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> </textarea>
+					<!--<textarea (blur)="aplicaValoresLogicos()" [style.visibility]="(ejercicio.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> -->
+					<textarea (blur)="aplicaValoresLogicos()"  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> 
+					</textarea>
 
 					<div class="row" style="margin-top: 10px">
 						<div class="col-md-4">
@@ -102,8 +104,9 @@
 				<div class="col-md-3">
 					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
 
-					<textarea *ngIf="ejercicio.tipo <= 1 " style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
-					<textarea *ngIf="ejercicio.tipo > 1" style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>
+					<!--<textarea *ngIf="ejercicio.tipo <= 1 " style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
+					<textarea *ngIf="ejercicio.tipo > 1" style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>-->
+					<textarea style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>
 					
 					<button style="margin-top: 20px" type="submit" class="btn btn-success">Crear</button> <a style="margin-top: 20px" [routerLink]="['/']" class="btn btn-danger">Salir</a>
 				</div>

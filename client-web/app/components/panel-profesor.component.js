@@ -32,6 +32,7 @@ var PanelProfesorComponent = (function () {
         this.valoresLogico = [];
         this.tipoLogico = "";
         this.valorLogico = "";
+        this.primeraVisita = true;
         this.title = "Panel de profesores";
         //this.user="Antonio Sarasa";
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
@@ -79,8 +80,10 @@ var PanelProfesorComponent = (function () {
             else {
                 _this.loading = false;
                 _this.nEjercicios = _this.ejercicios.length;
-                _this.ejersAMostrar = _this.ejercicios;
-                _this.seleccionaDatos('ejercicios', 'ejercicios', 1);
+                if (_this.primeraVisita) {
+                    _this.ejersAMostrar = _this.ejercicios;
+                    _this.seleccionaDatos('ejercicios', 'ejercicios', 1);
+                }
             }
         }, function (error) {
             _this.errorMessage = error;
@@ -577,6 +580,7 @@ var PanelProfesorComponent = (function () {
         });*/
     }; //fin ngAfterViewInit
     PanelProfesorComponent.prototype.seleccionaDatos = function (datos, tipo, page) {
+        this.primeraVisita = false;
         this.datosSeleccionados = datos;
         this.tipoSeleccionado = tipo;
         this.mostrarListaActs = false;
@@ -797,9 +801,16 @@ var PanelProfesorComponent = (function () {
             this.nuevaActividad.profesor = this.user.nombre + " " + this.user.apellidos;
             this.nuevaActividad.fecha_creacion = new Date();
             this.nuevaActividad.ejercicios = ids;
+            this.nuevaActividad.visible = false;
+            this.nuevaActividad.propuesta = false;
+            this.modalActividad = true;
+            setTimeout(function () { return _this.visibleAnimate = true; });
         }
-        this.modalActividad = true;
-        setTimeout(function () { return _this.visibleAnimate = true; });
+        else {
+            this.message = "Debe seleccionar al menos un ejercicio";
+            this.modalMessage = true;
+            setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+        }
     };
     PanelProfesorComponent.prototype.cancelarActividad = function () {
         var _this = this;

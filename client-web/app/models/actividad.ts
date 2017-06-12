@@ -19,8 +19,8 @@ export class Actividad{
         this.fecha_creacion=null;
         this.nivel="";
         this.ejercicios=[];
-        this.visible=null;
-        this.propuesta=null;
+        this.visible=false;
+        this.propuesta=false;
         this.fecha_prop_fin=null;
         this.marcado=null;
     }

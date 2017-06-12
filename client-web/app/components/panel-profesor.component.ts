@@ -26,6 +26,7 @@ declare var $:any;
 
 export class  PanelProfesorComponent implements OnInit{
 
+	public primeraVisita: Boolean;
 	public title: string;
 	public user: User;
 	public id_profesor: string;
@@ -148,6 +149,7 @@ export class  PanelProfesorComponent implements OnInit{
 			private _solucionService: SolucionService
 
 	){
+		this.primeraVisita= true;
 		this.title= "Panel de profesores";
 		//this.user="Antonio Sarasa";
 		this.user= JSON.parse(localStorage.getItem('currentUser')).user; 
@@ -202,8 +204,10 @@ export class  PanelProfesorComponent implements OnInit{
 				else{
 					this.loading=false;
 					this.nEjercicios= this.ejercicios.length;
-					this.ejersAMostrar= this.ejercicios;
-					this.seleccionaDatos('ejercicios', 'ejercicios', 1);
+					if(this.primeraVisita){
+						this.ejersAMostrar= this.ejercicios;
+						this.seleccionaDatos('ejercicios', 'ejercicios', 1);
+					}
 					/*this.ejersAMostrar= this.ejercicios;
 					this.datosAMostrar="Todos los ejercicios";
 					this.mostrarLista=true;*/
@@ -933,6 +937,7 @@ export class  PanelProfesorComponent implements OnInit{
 	}//fin ngAfterViewInit
 
 	public seleccionaDatos(datos, tipo, page?){
+		this.primeraVisita=false;
 		this.datosSeleccionados=datos;
 		this.tipoSeleccionado=tipo;
 
@@ -1176,10 +1181,18 @@ export class  PanelProfesorComponent implements OnInit{
 			this.nuevaActividad.profesor= this.user.nombre + " " + this.user.apellidos;
 			this.nuevaActividad.fecha_creacion= new Date();
 			this.nuevaActividad.ejercicios=ids;
+			this.nuevaActividad.visible=false;
+			this.nuevaActividad.propuesta=false;
+			this.modalActividad = true;
+    		setTimeout(() => this.visibleAnimate = true);
+		}else{
+			this.message="Debe seleccionar al menos un ejercicio";
+			this.modalMessage=true;
+			setTimeout(() => this.visibleAnimate = true, 300);
+
 		}
 
-		this.modalActividad = true;
-    	setTimeout(() => this.visibleAnimate = true);
+		
 		
 	}
 

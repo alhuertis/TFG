@@ -9,8 +9,8 @@
 
                     <ul>
                       <li> Mi Coleccion <span class="badge badge-small"> {{nMiColeccion}}</span><i *ngIf="nMiColeccion" (click)="seleccionaDatos('mios', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
-                        <ul>
-                          <li><a href="#"> Nivel</a>
+                        <!--<ul>
+                          <li><a href="#"> Nivel</a>-->
                             <ul>
                               <li> Bajo <span class="badge badge-small">{{nMiColeccionNivelB}}</span><i *ngIf="nMiColeccionNivelB" (click)="seleccionaDatos('mios bajo', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                               <li> Medio <span class="badge badge-small">{{nMiColeccionNivelM}}</span><i *ngIf="nMiColeccionNivelM" (click)="seleccionaDatos('mios medio', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
@@ -24,27 +24,27 @@
                               <li> Tipo 3 <span class="badge badge-small">{{nMiColeccionTipo3}}</span><i *ngIf="nMiColeccionTipo3" (click)="seleccionaDatos('mios T3', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                               <li> Tipo 4 <span class="badge badge-small">{{nMiColeccionTipo4}}</span><i *ngIf="nMiColeccionTipo4" (click)="seleccionaDatos('mios T4', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
-                          </li> -->
+                          </li> 
                           </ul>
-                        </li> 
+                        </li> -->
                         <li> Otras Colecciones <span class="badge badge-small"> {{nEjercicios-nMiColeccion}}</span><i *ngIf="nEjercicios-nMiColeccion" (click)="seleccionaDatos('otros', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i>
-                        <ul>
-                          <li> Nivel
+                        <!--<ul>
+                          <li> Nivel-->
                             <ul>
                               <li> Bajo <span class="badge badge-small">{{nOtrasColeccionesNivelB}}</span><i *ngIf="nOtrasColeccionesNivelB" (click)="seleccionaDatos('otros bajo', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                               <li> Medio <span class="badge badge-small">{{nOtrasColeccionesNivelM}}</span><i *ngIf="nOtrasColeccionesNivelM" (click)="seleccionaDatos('otros medio', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                               <li> Avanzado <span class="badge badge-small">{{nOtrasColeccionesNivelA}}</span><i *ngIf="nOtrasColeccionesNivelA" (click)="seleccionaDatos('otros avanzado', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
-                          </li>
-                         <!-- <li> Tipo
+                         <!-- </li>
+                          <li> Tipo
                             <ul>
                               <li> Tipo 1 <span class="badge badge-small">{{nOtrasColeccionesTipo1}}</span><i *ngIf="nOtrasColeccionesTipo1" (click)="seleccionaDatos('otros T1', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                               <li> Tipo 2 <span class="badge badge-small">{{nOtrasColeccionesTipo2}}</span><i *ngIf="nOtrasColeccionesTipo2" (click)="seleccionaDatos('otros T2', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                               <li> Tipo 3 <span class="badge badge-small">{{nOtrasColeccionesTipo3}}</span><i *ngIf="nOtrasColeccionesTipo3" (click)="seleccionaDatos('otros T3', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                               <li> Tipo 4 <span class="badge badge-small">{{nOtrasColeccionesTipo4}}</span><i *ngIf="nOtrasColeccionesTipo4" (click)="seleccionaDatos('otros T4', 'ejercicios')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                             </ul>
-                          </li> -->
-                          </ul>
+                          </li> 
+                          </ul>-->
                         </li>
                     </ul>
                 </li>
@@ -251,14 +251,20 @@
 
                     <div class="chk-fechas">
                       
-                      <input #updateVisible [(ngModel)]="updateActividad.visible" #updateVisible="ngModel" type="checkbox" data-toggle="toggle">
-                      <label>Visible</label>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <input #updateVisible [(ngModel)]="updateActividad.visible" #updateVisible="ngModel" type="checkbox" data-toggle="toggle">
+                          <label>Visible</label>
+                        </div>
 
-                      <input #updatePropuesta [(ngModel)]="updateActividad.propuesta" #updatePropuesta="ngModel" type="checkbox" data-toggle="toggle">
-                      <label>Propuesta</label>
+                        <div class="col-md-6 animated aparecer" [ngStyle]="{'display': updateActividad.visible ? 'block' : 'none'}">
+                          <input #updatePropuesta [(ngModel)]="updateActividad.propuesta" #updatePropuesta="ngModel" type="checkbox" data-toggle="toggle">
+                          <label>Propuesta</label>
+                        </div>
+                      </div>
                     </div>
 
-                    <div class="fecha-fin" [ngStyle]="{'display': updateActividad.propuesta ? 'block' : 'none'}">
+                    <div class="fecha-fin animated aparecer" [ngStyle]="{'display': updateActividad.propuesta ? 'block' : 'none'}">
                       <label for="fecha-fin">Fecha de fin </label>
                       <input type="date" name="fin-fecha" [(ngModel)]="updateActividad.fecha_prop_fin" useValueAsDate>
                     </div>
@@ -335,14 +341,15 @@
   <!-- modal crear actividad -->
   <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalActividad ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-      <div class="modal-dialog">
+      <div class="modal-dialog mod-crear-actividad">
         <div class="modal-content">
           <div class="modal-header">
             <h4>Completar datos de la actividad</h4>
           </div>
           <div class="modal-body">
             <div class="form-nueva-actividad" *ngIf="nuevaActividad != null">
-              <input type="text" class="form-control"  placeholder="Titulo de actividad" name="titulo" #titulo="ngModel" [(ngModel)]="nuevaActividad.titulo">
+              <input type="text" class="form-control"  placeholder="Titulo de actividad..." name="titulo" #titulo="ngModel" [(ngModel)]="nuevaActividad.titulo">
+
               <label for="power">Nivel</label>
               <select class="form-control" name="nivel" #nivel="ngModel" 
                   required
@@ -352,21 +359,21 @@
                 <option value="Avanzado">Avanzado</option>
               </select>
 
-              <div>
-                <label>
-                  <input #visible [(ngModel)]="nuevaActividad.visible" type="checkbox" data-toggle="toggle">Visible
-                </label>
+              <div class="row">
+                <div class="col-md-2">
+                  <input #nuevaVisible [(ngModel)]="nuevaActividad.visible" #nuevaVisible="ngModel" type="checkbox" data-toggle="toggle">
+                  <label> Visible</label>
+                </div>
+
+                <div class="col-md-3 animated aparecer" [ngStyle]="{'display': nuevaActividad.visible ? 'block' : 'none'}">
+                  <input #propuesta [(ngModel)]="nuevaActividad.propuesta" #propuesta="ngModel" type="checkbox" data-toggle="toggle">
+                  <label> Propuesta</label>
+                </div>
               </div>
              
-
-              <div>
-                <label>
-                <input #propuesta [(ngModel)]="nuevaActividad.propuesta" type="checkbox" data-toggle="toggle">Propuesta
-              </label>
-              </div>
               
-              <div [ngStyle]="{'display': nuevaActividad.propuesta ? 'block' : 'none'}">
-                <label for="">Fecha de fin </label>
+              <div [ngStyle]="{'display': nuevaActividad.propuesta ? 'block' : 'none'}" class="animated aparecer">
+                <label for="fecha-fin">Fecha de fin </label>
                 <input type="date" name="fecha-fin" [(ngModel)]="nuevaActividad.fecha_prop_fin" useValueAsDate>
               </div>
               
@@ -376,7 +383,7 @@
           </div>
           <div class="modal-footer">
             <button (click)="cancelarActividad()" class="btn">Cancelar</button>
-            <button (click)="guardarActividad()" class="btn btn-success">Guardar</button>
+            <button (click)="guardarActividad()" class="btn">Guardar</button>
           </div>
         </div>
       </div>
@@ -509,9 +516,9 @@
 <!-- modal para mensajes -->
 <div (click)="cerrarModalMessage()" style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
       [ngStyle]="{'display': modalMessage ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-  <div class="modal-dialog modal-xs">
+  <div class="modal-dialog modal-xs modal-mensajes">
     <div class="modal-content">
-      <div class="modal-body" style="background: #f7e26f; color: #333; font-size: 16px">
+      <div class="modal-body">
         <p class="text-center">{{message}}</p>
       </div>
     </div>
