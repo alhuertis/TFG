@@ -96,25 +96,37 @@
           <div class="row">
             <div class="col-md-9">
               <div class="row">
-                <div class="col-md-5">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h4><span>Titulo: </span>{{actividad.titulo}}</h4>
+                  </div>
+                </div>
+                <div class="col-md-4 act-user">
                   <ul>
-                    <li><i class="glyphicon glyphicon-pencil"></i> título: {{actividad.titulo | truncate : 5}}</li>
-                    <li><i class="glyphicon glyphicon-user"></i> profesor: {{actividad.profesor}}</li>     
+                    <li><i class="glyphicon glyphicon-user"></i> {{actividad.profesor}}</li>     
                   </ul>
                 </div>
-            
-                <div class="col-md-5">
+
+                <div class="col-md-4 act-nivel">
                   <ul>
-                    <li><i class="glyphicon glyphicon-signal"></i> nivel: {{actividad.nivel}}</li>
-                    <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{actividad.fecha_creacion |  date : 'dd/MM/yyyy'}}</li>
-                    <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{actividad.fecha_prop_fin | date : 'dd/MM/yyyy'}}</li>
+                    <li><i class="glyphicon glyphicon-signal"></i> {{actividad.nivel}}</li>    
                   </ul>
-              </div>
+                </div>
+              
+                <div class="col-md-4">
+                  <ul>
+                    <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date: 'dd/MM/yyyy'}}</li>
+                    <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_prop_fin | date: 'dd/MM/yyyy'}}</li>
+                  </ul>
+                </div>
             </div>
           </div>
 
-          <div class="col-md-1 botones-lista">
-            <a class="btn btn-resolver btn-xs" [routerLink]="['/resolver-actividad/'+ actividad._id]">Resolver actividad</a>
+          <div class="col-md-3 botones-lista">
+            <div class="resolver">
+              <a class="btn btn-resolver btn-xs" [routerLink]="['/resolver-actividad/'+ actividad._id]"><i class="glyphicon glyphicon-pencil"> Resolver</i></a>
+            </div>
+            
           </div>
         </div>
       </div>

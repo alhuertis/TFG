@@ -102,19 +102,28 @@
                   </div>
                   <div class="col-sm-9">
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
+                        <h4><span>Titulo: </span>{{ejercicio.titulo}}</h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 ejer-user">
                         <ul>
-                          <li><i class="glyphicon glyphicon-pencil"></i> {{ejercicio.titulo | truncate:35}}</li>
-                          <li><i class="glyphicon glyphicon-user"></i> {{ejercicio.autor}}</li>     
+                          <li><i class="glyphicon glyphicon-user"></i> {{ejercicio.autor}}</li>    
+                        </ul>
+                      </div>
+
+                      <div class="col-md-4 ejer-nivel">
+                        <ul>
+                          <li><i class="glyphicon glyphicon-signal"></i> {{ejercicio.nivel}}</li>     
                         </ul>
                       </div>
                     
-                    <div class="col-md-6">
-                      <ul>
-                        <li><i class="glyphicon glyphicon-tags"></i> {{ejercicio.tipo}}</li>
-                        <li><i class="glyphicon glyphicon-signal"></i> {{ejercicio.nivel}}</li>
-                      </ul>
-                    </div>
+                      <div class="col-md-4">
+                        <ul>
+                          <li><i class="glyphicon glyphicon-calendar"></i> {{ejercicio.fechaCreacion | date: 'dd/MM/yy'}}</li>
+                        </ul>
+                      </div>
                   </div>
                   </div>
 
@@ -134,19 +143,30 @@
                 <div class="row">
                   <div class="col-sm-10">
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h4><span>Titulo: </span>{{actividad.titulo}}</h4>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 act-user">
                         <ul>
-                          <li><i class="glyphicon glyphicon-pencil"></i> {{actividad.titulo | truncate : 25}}</li>
                           <li><i class="glyphicon glyphicon-user"></i> {{actividad.profesor}}</li>     
                         </ul>
                       </div>
+
+                      <div class="col-md-4 act-nivel">
+                        <ul>
+                          <li><i class="glyphicon glyphicon-signal"></i> {{actividad.nivel}}</li>    
+                        </ul>
+                      </div>
                     
-                    <div class="col-md-6">
-                      <ul>
-                        <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date: 'dd/MM/yyyy'}}</li>
-                        <li><i class="glyphicon glyphicon-signal"></i> {{actividad.nivel}}</li>
-                      </ul>
-                    </div>
+                      <div class="col-md-4">
+                        <ul>
+                          <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date: 'dd/MM/yyyy'}}</li>
+                          <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_prop_fin | date: 'dd/MM/yyyy'}}</li>
+                        </ul>
+                      </div>
                   </div>
                   </div>
 
@@ -223,7 +243,7 @@
               <ul>
                 <li [dragOverClass]="'drop-ejer'" draggable="true" droppable="true" *ngFor="let ejer of actividad, let i=index" [dragData]="i" (onDrop)="dropEjercicio($event, ejer,i)" [ngClass]="{'aparecer': modificando, 'fadeInLeft': !modificando}" class="animated">
                   <i class="glyphicon glyphicon-pencil" (click)="showEjercicio(ejer)"></i> <span  (click)="showEjercicio(ejer)">{{ejer.titulo | truncate : 5}}</span>
-                  <i class="glyphicon glyphicon-tags" (click)="showEjercicio(ejer)"></i> <span (click)="showEjercicio(ejer)">{{ejer.tipo}}</span>
+                  <!--<i class="glyphicon glyphicon-tags" (click)="showEjercicio(ejer)"></i> <span (click)="showEjercicio(ejer)">{{ejer.tipo}}</span>-->
                   <i class="glyphicon glyphicon-signal" (click)="showEjercicio(ejer)"></i> <span (click)="showEjercicio(ejer)" id="last">{{ejer.nivel}}</span>
                   <i class="glyphicon glyphicon-remove" (click)="descartarEjer($event, ejer._id, i)"></i>
                 </li>
@@ -323,7 +343,7 @@
           <ul>
             <li><label><i class="glyphicon glyphicon-user"></i> Autor:</label> {{ejerAbrir.autor}}</li>
             <li><label><i class="glyphicon glyphicon-signal"></i> Nivel:</label> {{ejerAbrir.nivel}}</li>
-            <li><label><i class="glyphicon glyphicon-tag"></i> Tipo:</label> {{ejerAbrir.tipo}}</li>
+            <!--<li><label><i class="glyphicon glyphicon-tag"></i> Tipo:</label> {{ejerAbrir.tipo}}</li>-->
             <li><label><i class="glyphicon glyphicon-calendar"></i> Fecha de creación:</label> {{ejerAbrir.fechaCreacion | date: 'dd/MM/yyyy'}}</li>
             <li><label><i class="glyphicon glyphicon-calendar"></i> Ultima modificación:</label> {{ejerAbrir.fechaModificacion | date: 'dd/MM/yyyy'}} a las {{ejerAbrir.fechaModificacion | date: 'hh:mm:ss'}}</li>
             <li><label><i class="glyphicon glyphicon-pencil"></i> Enunciado:</label> {{ejerAbrir.enunciado}}</li>
@@ -435,7 +455,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <!--<div class="col-md-6">
                   <label for="power">Tipo</label>
                   <select class="form-control" id="tipo"
                       required
@@ -446,7 +466,7 @@
                   <div [hidden]="tipo.valid || tipo.pristine" class="alert alert-danger">
                   Tipo requerido
                   </div>
-                </div>
+                </div>-->
               </div>
 
               <label style="margin-top: 25px" for="enunciado">Enunciado</label>
@@ -455,7 +475,8 @@
 
             <div class="col-md-4">
               <label for="fraseATraducir">Frase a traducir</label>
-              <textarea (blur)="aplicaValoresLogicos()" [style.visibility]="(ejerUpdate.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejerUpdate.fraseATraducir"> </textarea>
+              <!--<textarea (blur)="aplicaValoresLogicos()" [style.visibility]="(ejerUpdate.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejerUpdate.fraseATraducir"> </textarea>-->
+              <textarea (blur)="aplicaValoresLogicos()"  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejerUpdate.fraseATraducir"> </textarea>
             
               <div class="row" style="margin-top: 10px">
                 <div class="col-md-4">
@@ -494,11 +515,12 @@
               <label style="margin-top: 10px" for="fPatron">Solución F.patrón</label>
               <textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejerUpdate.solucionFPatron"> </textarea>
             
-              <label style="margin-top: 20px" *ngIf="ejerUpdate.tipo <= 1 " for="">Solución posible en Español</label>
-              <label style="margin-top: 20px" *ngIf="ejerUpdate.tipo > 1 " for="">Solución posible en Latin</label>
-              <textarea *ngIf="ejerUpdate.tipo <= 1 " class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejerUpdate.solucionPEspanol"> </textarea>
-				    	<textarea *ngIf="ejerUpdate.tipo > 1" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejerUpdate.solucionPLatin"> </textarea>
-				
+              <!--<label style="margin-top: 20px" *ngIf="ejerUpdate.tipo <= 1 " for="">Solución posible en Español</label>
+              <label style="margin-top: 20px" *ngIf="ejerUpdate.tipo > 1 " for="">Solución posible en Latin</label>-->
+              <label style="margin-top: 20px" for="">Solución posible en Español</label>
+              <!--<textarea *ngIf="ejerUpdate.tipo <= 1 " class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejerUpdate.solucionPEspanol"> </textarea>
+				    	<textarea *ngIf="ejerUpdate.tipo > 1" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejerUpdate.solucionPLatin"> </textarea>-->
+              <textarea class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejerUpdate.solucionPEspanol"> </textarea>
             </div>
 
           </div>
