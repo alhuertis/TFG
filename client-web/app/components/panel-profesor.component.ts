@@ -140,6 +140,9 @@ export class  PanelProfesorComponent implements OnInit{
 	public valoresLogico: String[]=[];
 	public tipoLogico: string="";
 	public valorLogico: string="";
+
+	//Boleanos para vistas
+	public buscarSoluciones: boolean;
 	
 
 
@@ -187,6 +190,8 @@ export class  PanelProfesorComponent implements OnInit{
 		this.deleteAct= new Actividad();
 
 		this.message="";
+
+		this.buscarSoluciones=false;
 		
 	}
 
@@ -1576,5 +1581,13 @@ export class  PanelProfesorComponent implements OnInit{
 		);
 	}
 
+	verBusquedaSoluciones(){
+		this.buscarSoluciones=true;
+	}
+
+	saliendoDeBuscarSoluciones(){
+		this.buscarSoluciones=false;
+
+	}
 	
 }

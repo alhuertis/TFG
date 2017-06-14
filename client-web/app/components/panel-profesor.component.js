@@ -67,6 +67,7 @@ var PanelProfesorComponent = (function () {
         this.updateActividad = new actividad_1.Actividad();
         this.deleteAct = new actividad_1.Actividad();
         this.message = "";
+        this.buscarSoluciones = false;
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1112,6 +1113,12 @@ var PanelProfesorComponent = (function () {
                 alert('Error en la peticion de borrado en el servidor');
             }
         });
+    };
+    PanelProfesorComponent.prototype.verBusquedaSoluciones = function () {
+        this.buscarSoluciones = true;
+    };
+    PanelProfesorComponent.prototype.saliendoDeBuscarSoluciones = function () {
+        this.buscarSoluciones = false;
     };
     return PanelProfesorComponent;
 }());

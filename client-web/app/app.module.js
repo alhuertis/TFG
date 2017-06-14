@@ -17,6 +17,7 @@ var panel_profesor_component_1 = require("./components/panel-profesor.component"
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
 var cabecera_profesor_component_1 = require("./components/cabecera-profesor.component");
+var buscar_soluciones_component_1 = require("./components/buscar-soluciones.component");
 var truncate_pipe_component_1 = require("./components/truncate-pipe.component");
 var cabecera_alumno_component_1 = require("./components/cabecera-alumno.component");
 var cabecera_admin_component_1 = require("./components/cabecera-admin.component");
@@ -47,6 +48,7 @@ AppModule = __decorate([
             ejercicio_add_component_1.EjercicioAddComponent,
             panel_alumno_component_1.PanelAlumnoComponent,
             cabecera_profesor_component_1.CabeceraProfesorComponent,
+            buscar_soluciones_component_1.PanelBuscarSolucionesComponent,
             truncate_pipe_component_1.TruncatePipe,
             cabecera_alumno_component_1.CabeceraAlumnoComponent,
             cabecera_admin_component_1.CabeceraAdminComponent,

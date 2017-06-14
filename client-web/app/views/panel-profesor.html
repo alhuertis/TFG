@@ -1,7 +1,14 @@
 <cabecera-profesor></cabecera-profesor>
 
-<div class="panel-profesor container-fluid">
-    
+<div [ngStyle]="{'display': !buscarSoluciones ? 'block' : 'none'}" class="panel-profesor container-fluid">
+
+    <div class="row">
+       <div class="col-md-4 col-sm-4">
+          <a routerLink="/crear-ejercicio" class="btn btn-default">Crear ejercicio</a>
+          <button (click)="verBusquedaSoluciones()" class="btn btn-default">Corregir ejercicios</button>
+       </div>
+    </div>
+
     <div class="row">
         <div class="col-md-3 col-sm-3 menu-profesor-arbol">
             <ul id="tree1">
@@ -647,5 +654,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<panel-buscar-soluciones *ngIf="buscarSoluciones" (salir)="saliendoDeBuscarSoluciones()"></panel-buscar-soluciones>
 		
 

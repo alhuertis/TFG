@@ -146,6 +146,10 @@
 } 
 /*********HEADER PROFESOR / ALUMNO**********/
 
+.menu-opciones{
+	margin-right: 50px;
+}
+
 .navbar-brand, .navbar-header span {
 	color: #27292B !important;
 }
@@ -177,7 +181,7 @@
 	color:white !important;
 }
 
-.logout a{
+.logout a, .user-nav a{
 	color: white !important;
 	font-size: 14px;
 }
