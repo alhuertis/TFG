@@ -18,7 +18,9 @@
 
 
 function  getDiccionario(req, res){
-     	LexicalResource.findOne((err, lr) => {
+    var diccionario = new Array();
+    
+     	LexicalResource.find((err, lr) => {
  		if(err){
  			res.status(500).send({message: 'Error al devolver los datos'});
  		}else{
@@ -26,9 +28,12 @@ function  getDiccionario(req, res){
  		if(!lr){
  			res.status(404).send({message: 'No hay datos'});
  		}else{
-            var le= lr.Lexicon.LexicalEntry[0]; 
-               console.log(JSON.stringify(le.id)); 
- 				res.status(200).send({lr});
+            
+             for (var i= 0; i < lr.length; i++) {
+          
+                diccionario= crearPalabra(lr[i],diccionario);
+               }
+ 				res.status(200).send({diccionario});
  		}
 
  		}
@@ -37,6 +42,115 @@ function  getDiccionario(req, res){
  	});
 }
 
+ 
+function crearPalabra(lr,diccionario){
+
+        var id=lr.Lexicon.LexicalEntry[0].id;
+              var lema=lr.Lexicon.LexicalEntry[0].Lemma.feat[0].val;
+              var categoria=lr.Lexicon.LexicalEntry[0].feat[0].val;
+              
+     if(categoria=="Verbo"){
+        var sense= lr.Lexicon.LexicalEntry[0].Sense;
+        var significado=new Array();
+         for (var s = 0; s < sense.length; s++) {
+            
+       
+            var argumentos= new Array();
+                                  var sign=sense[s].Definition[0].feat[0].val;
+              var Caracterizacion= sense[s].PredicativeRepresentation[0].SemanticPredicate[0].SemanticArgument; 
+              
+              var numArgumentos= sense[s].PredicativeRepresentation[0].SemanticPredicate[0].label;
+                 var ejemplo= sense[s].SenseExample[0].feat[0].val;
+
+            if(sign!=""){
+
+                    for(var i=0; i<Caracterizacion.length;i++){
+                       var caracFeat= new Array();
+                      
+                    if(Caracterizacion[i].feat[0].val!=""){
+
+                        for(var j=0; j<Caracterizacion[i].fs.length;j++){
+                   
+                        caracFeat.push(
+                            Caracterizacion[i].fs[j].feat[0].val+" "+ Caracterizacion[i].fs[j].feat[1].val
+                        );
+                    
+                }
+                
+                argumentos.push({
+                            "numero": Caracterizacion[i].label,
+                            "tipo": Caracterizacion[i].feat[0].val,
+                            "caracArgumental":caracFeat
+                        }) ;
+
+                    }
+                   
+                    
+         
+                    
+                }
+
+                   significado.push({
+                "significado":sign,
+                "numArgumentos": numArgumentos,
+                "argumentos":argumentos,
+                "ejemplo":ejemplo
+            });
+            }
+            
+         
+         }
+           
+           
+           
+          }  else if(categoria=="Sustantivo"){
+
+                var significado=new Array();
+                 
+                var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense;  
+                
+                for(var i=0; i<Caracterizacion.length;i++){
+                   
+                        var fs=Caracterizacion[i].fs;
+                        var definicion=    Caracterizacion[i].Definition[0].feat[0].val;
+                        var carArg= new Array();
+
+                        for (var j = 0; j < fs.length; j++) {
+                        carArg.push(
+                             Caracterizacion[i].fs[0].feat[0].val+" "+ Caracterizacion[i].fs[0].feat[1].val
+                        );
+                            
+                        }
+                     
+                        significado.push( {"significado":definicion,
+                  "caracArgumental":carArg});
+                    
+                }
+              
+          } else{
+
+              
+                var significado=new Array();
+                 
+                var Caracterizacion= lr.Lexicon.LexicalEntry[0].Sense;  
+                
+                for(var i=0; i<Caracterizacion.length;i++){
+                     
+                        var definicion=    Caracterizacion[i].Definition[0].feat[0].val;
+        
+                        significado.push( {"significado":definicion});
+                    
+                }
+          }   
+        
+
+        diccionario.push({"id": id,
+                                "lema":lema,
+                                "categoria":categoria,
+                                "significado":significado});
+    return diccionario;
+
+}
 function  getPalabra(req, res){
     
     var carac= new Array();
@@ -610,13 +724,13 @@ if(save){
      //console.log(JSON.stringify(sense));
       
       var featLemma = new Array();
-     for(var i=0;i<campos[1].split(",").length;i++){
+    
          featLemma.push({
                  att: "writtenForm",
-                 val: campos[1].split(",")[i]
+                 val: campos[1]
              });
              
-     }
+     
 
      
      lr.Lexicon.LexicalEntry.push({
