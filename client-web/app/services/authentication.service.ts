@@ -83,6 +83,10 @@ export class AuthenticationService {
         return this.http.get(this.url+'auth/registros').map(res => res.json());
     }
 
+    getListaUsers(){
+        return this.http.get(this.url+'auth/listaUsers').map(res => res.json());
+    }
+
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
         // calculate total pages
         let totalPages = Math.ceil(totalItems / pageSize);

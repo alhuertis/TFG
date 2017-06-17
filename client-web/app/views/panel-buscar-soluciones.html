@@ -2,21 +2,93 @@
 
 <div class="panel-buscar-sol container-fluid">
     <div class="row">
-
         <div class="col-md-3">
+            
+            <div class="panel-buscar-soluciones">
+                <div class="buscar-por-actividad">
+                    <label for="power">Buscaqueda por actividades</label>
+                    <select class="form-control" id="porActividades"
+                            required
+                            [(ngModel)]="busquedaByActividad" name="porActividad"
+                            #porActividad="ngModel" >
+                    <option *ngFor="let act of actividades" [value]="act._id">{{act.titulo}}</option>
+                    </select>
 
-            Aqui el buscador
+                    <button class="btn" (click)="buscarPorActividad()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                    <div class="clearfix"></div>
+
+                </div>
+
+                <div class="buscar-por-alumno">
+                    <label for="power">Buscaqueda por alumnos</label>
+                    <select class="form-control" id="porAlumnos"
+                            required
+                            [(ngModel)]="busquedaByAlumnos" name="porActividad"
+                            #porActividad="ngModel" >
+                    <option *ngFor="let alu of alumnos" [value]="alu._id">{{alu.nombre}} {{alu.apellidos}} ({{alu.alias}})</option>
+                    </select>
+
+                    <button class="btn" (click)="buscarPorActividad()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-7">
+            <div class="col-md-12 sol-lista animated fadeInLeft" *ngFor="let solucion of pagedSoluciones; let i=index">
+                <div class="row">
+                    <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-5">
+                        <ul>
+                            <li><i class="glyphicon glyphicon-pencil"></i> título: {{solucion.actividad.titulo | truncate: 12}}</li>
+                            <li><i class="glyphicon glyphicon-user"></i> profesor: {{solucion.actividad.profesor}}</li>     
+                        </ul>
+                        </div>
+                    
+                        <div class="col-md-5">
+                        <ul>
+                            <li><i class="glyphicon glyphicon-signal"></i> nivel: {{solucion.actividad.nivel}}</li>
+                            <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{solucion.actividad.fecha_creacion |  date : 'dd/MM/yyyy'}}</li>
+                            <li *ngIf="solucion.actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{solucion.actividad.fecha_prop_fin | date : 'dd/MM/yyyy'}}</li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
 
-            Aqui los datos de busqueda
+                <div class="col-md-1 botones-lista">
+                    <a class="btn btn-default btn-ver-sol btn-xs">Abrir</a>
+                </div>
+                </div>
+            </div>
+
+            <!-- Paginador para soluciones-->
+            <div *ngIf="mostrarSoluciones" class="row">
+                <div class="col-sm-12">
+                    <!-- pager -->
+                    <ul *ngIf="pagerSolucion.pages && pagerSolucion.pages.length" class="pagination">
+                    <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
+                        <a (click)="setPageSoluciones(1)">Primera</a>
+                    </li>
+                    <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
+                        <a (click)="setPageSoluciones(pagerSolucion.currentPage - 1)">Anterior</a>
+                    </li>
+                    <li *ngFor="let page of pagerSolucion.pages" [ngClass]="{active:pagerSolucion.currentPage === page}">
+                        <a (click)="setPageSoluciones(page)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pagerSolucion.currentPage === pagerSolucion.totalPages}">
+                        <a (click)="setPageSoluciones(pagerSolucion.currentPage + 1)">Siguiente</a>
+                    </li>
+                    <li [ngClass]="{disabled:pagerSolucion.currentPage === pagerSolucion.totalPages}">
+                        <a (click)="setPageSoluciones(pagerSolucion.totalPages)">Ultima</a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- ########################### -->
         </div>
-
-
     </div>
-
-
 </div>
 
 

@@ -96,6 +96,14 @@ var SolucionService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.delete(this.url + 'solucionByActividad/' + id, { headers: headers }).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.getByIdActividad = function (id_actividad) {
+        var params = { _id: id_actividad };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'soluciones-byIdActividad', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
+    SolucionService.prototype.getUsersConSolucion = function () {
+        return this._http.get(this.url + 'soluciones-usersConSolucion').map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

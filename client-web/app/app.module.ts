@@ -28,7 +28,9 @@ import {AuthGuardAdmin} from './guards/authAdmin.guard';
   			FormsModule,
   			HttpModule,
         routing,
-        Ng2DragDropModule 
+        Ng2DragDropModule,
+       
+         
   ],
   //Aqui cargamos todos los componentes que vamos a usar en la aplicacion.(Es un array).
   declarations: [ 

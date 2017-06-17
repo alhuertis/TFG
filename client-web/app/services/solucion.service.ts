@@ -156,7 +156,19 @@ export class SolucionService{
 	}
 
     
+    getByIdActividad(id_actividad: any){
 
+        let params= {_id: id_actividad};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'soluciones-byIdActividad', params, {headers: headers}).map(res => res.json());
+
+    }
+
+
+    getUsersConSolucion(){
+		return this._http.get(this.url+'soluciones-usersConSolucion').map(res => res.json());
+	}
     
 
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {

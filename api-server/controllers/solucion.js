@@ -3,7 +3,8 @@
 'use strict'
 
 var Solucion= require('../models/solucion');
-var Actividad= require('../models/actividad')
+var Actividad= require('../models/actividad');
+var User= require('../models/user');
 
 
 function getSolucion(req, res){
@@ -87,6 +88,32 @@ function getSoluciones(req, res){
 				res.status(200).send({soluciones});
 			}	
 		}
+
+	}); //El primer parametro equivaldria al where, pero no pasamos nada. Despues una cuncion de callback
+
+
+}
+
+function getSolucionesByIdActividad(req, res){
+
+
+
+	Solucion.find({actividad: req.body._id}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
 
 	}); //El primer parametro equivaldria al where, pero no pasamos nada. Despues una cuncion de callback
 
@@ -349,6 +376,28 @@ function deleteSolucionByActividad(req, res){
 
 }
 
+function getUsersConSolucion(req, res){
+	Solucion.distinct('alumno').exec((err, soluciones)=>{
+		User.populate(soluciones, {path: "alumno"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					res.status(200).send({soluciones});
+				}	
+			}
+
+		});
+		
+	});
+
+}
+
 
 
 
@@ -370,6 +419,8 @@ module.exports= {
 	getSinTerminarByProfesor,
 	borrarEjercicio,
 	deleteSolucionByActividad,
+	getSolucionesByIdActividad,
+	getUsersConSolucion,
 
 
 }

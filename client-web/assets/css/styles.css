@@ -1069,8 +1069,25 @@
 	font-size: 16px;
 }
 
-
-
 /*********FIN ES**********/
+
+
+/*********  BUSCAR SOLUCIONES *************/
+
+.buscar-por-actividad{
+	padding: 8px;
+	background: #878787;
+	border-radius: 4px;
+	margin-bottom: 5px;
+
+}
+
+.buscar-por-actividad label{color: white; font-size: 16px;}
+
+.buscar-por-actividad button{ float: right; background: #01C7FF; margin-top: 7px; color: white;}
+
+
+
+/********* FIN BUSCAR SOLUCIONES *************/
 
 

@@ -120,10 +120,25 @@ function registro(req, res){
             else{
                 res.status(200).send({message:'Registro borrado correctamente', resultado: 'ok'});
             }
-        });     
-                  
-    
-      
+        }); 
+    }
+
+    function getListaUsers(req, res){
+        User.find({'role':'alumno'}).sort('-nombre').exec((err, usuarios)=>{
+            if(err){
+                res.status(500).send({message:'Error al devolver los registros'});
+            }
+            else{
+
+                if(!usuarios){
+                    res.status(404).send({message:'No hay usuarios'});
+                }
+                else{
+                    res.status(200).send({usuarios});
+                }	
+            }
+         });
+
     }
 
 
@@ -133,4 +148,5 @@ module.exports= {
     registro,
     getRegistros,
     borrarRegistro,
+    getListaUsers
 }

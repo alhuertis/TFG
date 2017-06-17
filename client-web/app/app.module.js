@@ -38,7 +38,7 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             app_routing_1.routing,
-            ng2_drag_drop_1.Ng2DragDropModule
+            ng2_drag_drop_1.Ng2DragDropModule,
         ],
         //Aqui cargamos todos los componentes que vamos a usar en la aplicacion.(Es un array).
         declarations: [

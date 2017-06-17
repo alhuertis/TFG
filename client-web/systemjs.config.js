@@ -46,6 +46,8 @@
       'ng2-drag-drop':  { 
         main: './index.js',  
         defaultExtension: 'js' },
+      
+        
     }
   });
 })(this);
