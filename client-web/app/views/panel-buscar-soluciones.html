@@ -5,33 +5,44 @@
         <div class="col-md-3">
             
             <div class="panel-buscar-soluciones">
-                <div class="buscar-por-actividad">
-                    <label for="power">Buscaqueda por actividades</label>
+                <div class="buscar-filtro">
+                    <label for="power">Actividades</label>
                     <select class="form-control" id="porActividades"
                             required
                             [(ngModel)]="busquedaByActividad" name="porActividad"
                             #porActividad="ngModel" >
+                    <option [value]=""></option>
                     <option *ngFor="let act of actividades" [value]="act._id">{{act.titulo}}</option>
                     </select>
 
-                    <button class="btn" (click)="buscarPorActividad()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                    <div class="clearfix"></div>
-
-                </div>
-
-                <div class="buscar-por-alumno">
-                    <label for="power">Buscaqueda por alumnos</label>
-                    <select class="form-control" id="porAlumnos"
-                            required
-                            [(ngModel)]="busquedaByAlumnos" name="porActividad"
-                            #porActividad="ngModel" >
-                    <option *ngFor="let alu of alumnos" [value]="alu._id">{{alu.nombre}} {{alu.apellidos}} ({{alu.alias}})</option>
+                    <label for="power">Alumnos</label>
+                    <select class="form-control" id="porAlumnos" required (change)="addAlumno($event.target.value)">
+                    <option [value]=""></option>
+                    <option *ngFor="let alu of alumnos, let i of index" [value]="alu._id">{{alu.nombre}} {{alu.apellidos}} ({{alu.alias}})</option>
                     </select>
 
-                    <button class="btn" (click)="buscarPorActividad()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                    <div class="tags">
+                            <label *ngFor="let alu of busquedaByAlumnos" class="tag animated aparecer fadeOut">{{alu.nombre}} {{alu.apellidos.substr(0,1)}}. <i (click)="deleteAlumno(alu._id)" class="glyphicon glyphicon-remove"></i> </label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="desde">Desde </label>
+                            <input type="date" name="fecha-desde" [(ngModel)]="fecha_desde" useValueAsDate>
+                        </div>
+
+                        <div class="col-md-6">
+                           <label for="desde">Hasta </label>
+                            <input type="date" name="fecha-hasta" [(ngModel)]="fecha_hasta" useValueAsDate> 
+                        </div>
+                    </div>
+
+                    <button class="btn" (click)="buscar()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
                     <div class="clearfix"></div>
 
                 </div>
+
+                
             </div>
         </div>
 

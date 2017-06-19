@@ -43,6 +43,7 @@ function saveSolucion(req, res){
 	solucion.nivel= params.nivel;
 	solucion.profesor= params.profesor;
 	solucion.ejercicios= params.ejercicios;
+	solucion.ultima_modificacion= new Date();
 	console.log(params.ejercicios);
 
 	solucion.save((err, solucionStored)=>{

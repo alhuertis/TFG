@@ -14,6 +14,7 @@ export class Solucion{
     public nivel: String;
     public terminado: Boolean;
     public profesor: String;
+    public ultima_modificacion: Date;
     
     
     constructor(){
@@ -28,5 +29,6 @@ export class Solucion{
         this.notaFinal=0;
         this.profesor="";
         this.ejercicios= new Array();
+        this.ultima_modificacion= null;
     }
 }

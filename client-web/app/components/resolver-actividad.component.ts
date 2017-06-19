@@ -617,7 +617,7 @@ export class  ResolverActividadComponent implements OnInit{
 
         }
         else {
-
+            this.solucion.ultima_modificacion= new Date();
             this._solucionService.updateSolucion(this.solucion).subscribe(
                 result =>{
                     console.log(result);

@@ -13,6 +13,7 @@ var SolucionSchema = Schema({
     nivel: String,
     terminado: Boolean,
     profesor: {type: Schema.ObjectId, ref: "User"},
+    ultima_modificacion: Date,
 
 });
 

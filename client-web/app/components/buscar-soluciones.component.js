@@ -13,6 +13,7 @@ var ejercicio_service_1 = require("../services/ejercicio.service");
 var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
 var authentication_service_1 = require("../services/authentication.service");
+var criteriaSolucion_1 = require("../models/criteriaSolucion");
 var PanelBuscarSolucionesComponent = (function () {
     function PanelBuscarSolucionesComponent(_ejercicioService, _actividadService, _solucionService, _authenticationService) {
         this._ejercicioService = _ejercicioService;
@@ -29,6 +30,9 @@ var PanelBuscarSolucionesComponent = (function () {
         this.actividades = new Array();
         this.mostrarSoluciones = false;
         this.alumnos = new Array();
+        this.busquedaByAlumnos = new Array();
+        this.fecha_desde = null;
+        this.fecha_hasta = null;
     }
     PanelBuscarSolucionesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -85,7 +89,34 @@ var PanelBuscarSolucionesComponent = (function () {
             }
         });
     };
-    PanelBuscarSolucionesComponent.prototype.buscarPorAlumnos = function () {
+    PanelBuscarSolucionesComponent.prototype.addAlumno = function (alu) {
+        for (var i = 0; i < this.alumnos.length; i++) {
+            if (this.alumnos[i]._id == alu) {
+                this.busquedaByAlumnos.push(this.alumnos[i]);
+            }
+        }
+    };
+    PanelBuscarSolucionesComponent.prototype.deleteAlumno = function (alu) {
+        for (var i = 0; i < this.busquedaByAlumnos.length; i++) {
+            if (this.busquedaByAlumnos[i]._id == alu) {
+                this.busquedaByAlumnos.splice(i, 1);
+            }
+        }
+    };
+    PanelBuscarSolucionesComponent.prototype.buscar = function () {
+        var criteria = new criteriaSolucion_1.CriteriaSolucion();
+        if (this.busquedaByActividad != null) {
+            criteria.id_actividad = this.busquedaByActividad;
+        }
+        if (this.busquedaByAlumnos != null) {
+            criteria.ids_alumnos = this.busquedaByAlumnos;
+        }
+        if (this.fecha_desde != null) {
+            criteria.desde = this.fecha_desde;
+        }
+        if (this.fecha_hasta != null) {
+            criteria.hasta = this.fecha_hasta;
+        }
     };
     PanelBuscarSolucionesComponent.prototype.setPageSoluciones = function (page) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

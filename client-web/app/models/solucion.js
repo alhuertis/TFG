@@ -13,6 +13,7 @@ var Solucion = (function () {
         this.notaFinal = 0;
         this.profesor = "";
         this.ejercicios = new Array();
+        this.ultima_modificacion = null;
     }
     return Solucion;
 }());

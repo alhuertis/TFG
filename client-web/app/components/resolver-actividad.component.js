@@ -493,6 +493,7 @@ var ResolverActividadComponent = (function () {
             });
         }
         else {
+            this.solucion.ultima_modificacion = new Date();
             this._solucionService.updateSolucion(this.solucion).subscribe(function (result) {
                 console.log(result);
                 _this.solucion._id = result;

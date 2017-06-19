@@ -1074,18 +1074,38 @@
 
 /*********  BUSCAR SOLUCIONES *************/
 
-.buscar-por-actividad{
-	padding: 8px;
+.buscar-filtro{
+	padding: 15px;
 	background: #878787;
 	border-radius: 4px;
 	margin-bottom: 5px;
 
 }
 
-.buscar-por-actividad label{color: white; font-size: 16px;}
+.buscar-filtro label{color: white; font-size: 14px; margin-top: 7px; padding-bottom: 0px; margin-bottom: 0px;}
 
-.buscar-por-actividad button{ float: right; background: #01C7FF; margin-top: 7px; color: white;}
+.buscar-filtro #porAlumnos{
+	width: 70%;
+}
 
+.buscar-filtro button{ float: right; background: #01C7FF; margin-top: 35px; color: white;}
+
+.tags .tag{
+	background: #01C7FF; 
+	font-size: 12px;
+	padding: 5px;
+	margin: 4px 3px 0px 0px;
+	border-radius: 4px;
+	color: white;
+}
+
+.tags .tag i{
+	cursor: pointer;
+	margin-left: 4px;
+	color: #db5c5c;
+}
+
+.buscar-filtro input[type=date]{border-radius: 5px;}
 
 
 /********* FIN BUSCAR SOLUCIONES *************/

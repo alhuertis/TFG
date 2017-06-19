@@ -8,6 +8,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import {User} from '../models/user';
 import {Actividad} from '../models/actividad';
 import {Solucion} from '../models/solucion';
+import {CriteriaSolucion} from '../models/criteriaSolucion';
 
 //Para usar undescore y jquery
 import * as _ from 'underscore';
@@ -34,7 +35,9 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
     public actividades: Actividad[];
     public alumnos: User[];
     public busquedaByActividad: any;
-    public busquedaByAlumnos: any;
+    public busquedaByAlumnos: any[];
+    public fecha_desde: Date;
+    public fecha_hasta: Date;
 
     // pager object (paginador)
     pager: any = {};
@@ -55,6 +58,9 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
         this.actividades= new Array<Actividad>();
         this.mostrarSoluciones= false;
         this.alumnos= new Array<User>();
+        this.busquedaByAlumnos= new Array();
+        this.fecha_desde= null;
+        this.fecha_hasta= null;
 
 
     }
@@ -138,8 +144,42 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
         );
     }
 
-    buscarPorAlumnos(){
+    addAlumno(alu : any){
+        for(let i=0; i < this.alumnos.length; i++){
+            if(this.alumnos[i]._id == alu){
+                this.busquedaByAlumnos.push(this.alumnos[i]);
+            }
+        }
+        
+    }
 
+    deleteAlumno(alu : any){
+        for(let i=0; i < this.busquedaByAlumnos.length; i++){
+            if(this.busquedaByAlumnos[i]._id == alu){
+                this.busquedaByAlumnos.splice(i,1);
+            }
+        }
+
+    }
+
+    buscar(){
+        var criteria= new CriteriaSolucion();
+
+        if(this.busquedaByActividad != null){
+            criteria.id_actividad= this.busquedaByActividad;
+        }
+
+        if(this.busquedaByAlumnos != null){
+            criteria.ids_alumnos= this.busquedaByAlumnos;
+        }
+
+        if(this.fecha_desde != null){
+            criteria.desde= this.fecha_desde;
+        }
+
+        if(this.fecha_hasta != null){
+            criteria.hasta= this.fecha_hasta;
+        }
 
     }
 
