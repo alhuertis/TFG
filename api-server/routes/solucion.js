@@ -26,6 +26,6 @@ api.post('/soluciones-sinTerminarByProfesor', SolucionController.getSinTerminarB
 api.put('/soluciones-ejercicio/:id', SolucionController.borrarEjercicio);
 api.delete('/solucionByActividad/:id', SolucionController.deleteSolucionByActividad);
 api.post('/soluciones-byIdActividad', SolucionController.getSolucionesByIdActividad);
-api.get('/soluciones-usersConSolucion', SolucionController.getUsersConSolucion);
+api.post('/soluciones-byCriteria', SolucionController.getSolucionesByCriteria);
 
 module.exports= api;

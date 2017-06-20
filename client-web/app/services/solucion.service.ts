@@ -165,10 +165,13 @@ export class SolucionService{
 
     }
 
+     getByCriteria(criteria: any){
+		let headers= new Headers({'Content-Type': 'application/json'});
 
-    getUsersConSolucion(){
-		return this._http.get(this.url+'soluciones-usersConSolucion').map(res => res.json());
-	}
+        return this._http.post(this.url+'soluciones-byCriteria', criteria, {headers: headers}).map(res => res.json());
+
+    }
+
     
 
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {

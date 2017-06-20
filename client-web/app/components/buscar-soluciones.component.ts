@@ -181,6 +181,36 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
             criteria.hasta= this.fecha_hasta;
         }
 
+        this._solucionService.getByCriteria(criteria).subscribe(
+
+            result=>{
+                this.soluciones= result.soluciones;
+
+				if(!this.soluciones){
+					alert('Error en el servidor');
+				}else{
+                    if(this.soluciones.length > 0){
+                        this.setPageSoluciones(1);
+                        this.mostrarSoluciones=true;
+                    }else{
+                        alert("No hay soluciones para esta actividad");
+                        this.pagedSoluciones=[];
+                        this.mostrarSoluciones=false;
+                    }
+                
+                }
+            },
+
+            error=>{
+                 this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+            }
+        );
+
     }
 
     setPageSoluciones(page: number) {

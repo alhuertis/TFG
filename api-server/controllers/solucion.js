@@ -377,9 +377,15 @@ function deleteSolucionByActividad(req, res){
 
 }
 
-function getUsersConSolucion(req, res){
-	Solucion.distinct('alumno').exec((err, soluciones)=>{
-		User.populate(soluciones, {path: "alumno"}, function(err,soluciones ){
+function getSolucionesByCriteria(req, res){
+
+	let criteria= req.body;
+
+	//Para ver los campos que vienen
+	console.log(criteria);
+
+	Solucion.find({}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
 			if(err){
 				res.status(500).send({message:'Error al devolver las soluciones'});
 			}
@@ -392,12 +398,13 @@ function getUsersConSolucion(req, res){
 					res.status(200).send({soluciones});
 				}	
 			}
-
 		});
-		
+
 	});
 
+
 }
+
 
 
 
@@ -421,7 +428,7 @@ module.exports= {
 	borrarEjercicio,
 	deleteSolucionByActividad,
 	getSolucionesByIdActividad,
-	getUsersConSolucion,
+	getSolucionesByCriteria,
 
 
 }

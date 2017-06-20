@@ -104,6 +104,7 @@ var PanelBuscarSolucionesComponent = (function () {
         }
     };
     PanelBuscarSolucionesComponent.prototype.buscar = function () {
+        var _this = this;
         var criteria = new criteriaSolucion_1.CriteriaSolucion();
         if (this.busquedaByActividad != null) {
             criteria.id_actividad = this.busquedaByActividad;
@@ -117,6 +118,29 @@ var PanelBuscarSolucionesComponent = (function () {
         if (this.fecha_hasta != null) {
             criteria.hasta = this.fecha_hasta;
         }
+        this._solucionService.getByCriteria(criteria).subscribe(function (result) {
+            _this.soluciones = result.soluciones;
+            if (!_this.soluciones) {
+                alert('Error en el servidor');
+            }
+            else {
+                if (_this.soluciones.length > 0) {
+                    _this.setPageSoluciones(1);
+                    _this.mostrarSoluciones = true;
+                }
+                else {
+                    alert("No hay soluciones para esta actividad");
+                    _this.pagedSoluciones = [];
+                    _this.mostrarSoluciones = false;
+                }
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        });
     };
     PanelBuscarSolucionesComponent.prototype.setPageSoluciones = function (page) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {
