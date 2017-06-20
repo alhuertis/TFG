@@ -42,4 +42,5 @@ app.use('/apiDiccionario', apiDiccionario);
 app.use('/apiSolucion', apiSolucion);
 app.use('/apiAuth', apiAuth);
 //Con esto permitimos que este modulo sea importado con require en otros modulos
+
 module.exports= app;

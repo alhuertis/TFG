@@ -6,7 +6,7 @@
 
 
 
- var workbook = XLSX.readFile("./excel/exportacion_excel23_12_2016.xls");
+ var workbook = XLSX.readFile("./excel/DiccionarioDidacticoLatin.xls");
 
 
  var worksheet = workbook.Sheets['Datos'];
@@ -28,10 +28,10 @@ function  getDiccionario(req, res){
  		if(!lr){
  			res.status(404).send({message: 'No hay datos'});
  		}else{
-            
+           
              for (var i= 0; i < lr.length; i++) {
-          
-                diccionario= crearPalabra(lr[i],diccionario);
+              
+                diccionario= crearPalabra(lr[i],diccionario); 
                }
  				res.status(200).send({diccionario});
  		}
@@ -39,13 +39,16 @@ function  getDiccionario(req, res){
  		}
 
  	
- 	});
+ 	});  
+     
 }
 
  
 function crearPalabra(lr,diccionario){
 
+        
         var id=lr.Lexicon.LexicalEntry[0].id;
+         
               var lema=lr.Lexicon.LexicalEntry[0].Lemma.feat[0].val;
               var categoria=lr.Lexicon.LexicalEntry[0].feat[0].val;
               
@@ -224,7 +227,7 @@ function  getPalabra(req, res){
  
     var save=true;
      for (var i = 2; i < LexicalEntry.length - 1; i++) {
-
+        
             lr = new LexicalResource();
      //Datos que se puede pasar por parametro
      lr.GlobalInformation.feat.push({
@@ -298,6 +301,9 @@ if(save){
           break;
           case "Conjunción":
            categoriaAdjAdvPronPrepConj(campos,"conjunction");
+          break;
+          case "Partícula":
+           categoriaAdjAdvPronPrepConj(campos,"particula");
           break;
          case "Verbo":
              categoriaVerbo2(campos, encabezado);
