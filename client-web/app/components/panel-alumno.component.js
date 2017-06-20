@@ -45,6 +45,8 @@ var PanelAlumnoComponent = (function () {
         this.datosAMostrar = new String();
         this.mostrarActividades = false;
         this.mostrarSoluciones = false;
+        this.verSolu = false;
+        this.solucion = null;
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -478,6 +480,14 @@ var PanelAlumnoComponent = (function () {
         // get current page of items
         this.pagedActividades = this.actividadesAMostrar.slice(this.pager.startIndex, this.pager.endIndex + 1);
         //alert(this.ejercicios.slice(1,5));
+    };
+    PanelAlumnoComponent.prototype.verSolucion = function (solucion) {
+        this.solucion = solucion;
+        this.verSolu = true;
+    };
+    PanelAlumnoComponent.prototype.saliendoDeVerSolucion = function () {
+        this.solucion = null;
+        this.verSolu = false;
     };
     PanelAlumnoComponent.prototype.setPageSoluciones = function (page) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

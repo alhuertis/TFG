@@ -11,7 +11,8 @@ import {PanelProfesorComponent} from './components/panel-profesor.component';
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component'; 
 import {CabeceraProfesorComponent} from './components/cabecera-profesor.component';
-import {PanelBuscarSolucionesComponent} from './components/buscar-soluciones.component';  
+import {PanelBuscarSolucionesComponent} from './components/buscar-soluciones.component';
+import {DatosSolucionComponent} from './components/datos-solucion.component';  
 import {TruncatePipe} from './components/truncate-pipe.component';
 import {CabeceraAlumnoComponent} from './components/cabecera-alumno.component';
 import {CabeceraAdminComponent} from './components/cabecera-admin.component';
@@ -45,7 +46,8 @@ import {AuthGuardAdmin} from './guards/authAdmin.guard';
         CabeceraAlumnoComponent,
         CabeceraAdminComponent,
         ResolverActividadComponent,
-        LoginComponent
+        LoginComponent,
+        DatosSolucionComponent
 
    ],
   providers: [appRoutingProviders,AuthGuardProfesor,AuthGuardAlumno, AuthGuardAdmin],

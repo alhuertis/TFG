@@ -62,7 +62,9 @@ export class  PanelAlumnoComponent implements OnInit{
 	public pagedSoluciones: Solucion[];
 	public mostrarActividades: Boolean;
 	public mostrarSoluciones: Boolean;
+	public verSolu: Boolean;
 
+	public solucion: Solucion;
 	
 
 	
@@ -97,6 +99,8 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.datosAMostrar= new String();
 		this.mostrarActividades=false;
 		this.mostrarSoluciones=false;
+		this.verSolu= false;
+		this.solucion= null;
 		
 	}
 
@@ -683,6 +687,16 @@ export class  PanelAlumnoComponent implements OnInit{
 		//alert(this.ejercicios.slice(1,5));
 		
     }
+
+	verSolucion(solucion: Solucion){
+		this.solucion= solucion;
+		this.verSolu=true;
+	}
+
+	saliendoDeVerSolucion(){
+		this.solucion= null;
+		this.verSolu=false;
+	}
 
 	setPageSoluciones(page: number) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {
