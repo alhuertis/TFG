@@ -23,18 +23,14 @@ var PanelProfesorComponent = (function () {
         //Obtencion de datos
         this._diccionarioService.getDiccionario().subscribe(function (result) {
             console.log(result);
-            /*this.ejercicios= result.ejercicios;
-
-            if(!this.ejercicios){
+            _this.ejercicios = result.ejercicios;
+            if (!_this.ejercicios) {
                 alert('Error en el servidor');
             }
-            else{
-                this.loading=false;
-                this.nEjercicios= this.ejercicios.length;
-                /*this.ejersAMostrar= this.ejercicios;
-                this.datosAMostrar="Todos los ejercicios";
-                this.mostrarLista=true;*/
-            //}
+            else {
+                _this.loading = false;
+                _this.nEjercicios = _this.ejercicios.length;
+            }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {

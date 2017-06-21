@@ -380,11 +380,63 @@ function deleteSolucionByActividad(req, res){
 function getSolucionesByCriteria(req, res){
 
 	let criteria= req.body;
-
+	var find="";
+	var fecha="";
 	//Para ver los campos que vienen
 	console.log(criteria);
 
-	Solucion.find({}).sort('-_id').exec((err, soluciones)=>{
+	if(criteria.id_actividad!=null){
+	find=find+"actividad: "+criteria.id_actividad;
+	
+    }
+
+		if(criteria.desde!=null && criteria.desde!="" ){
+			
+			fecha="ultima_modificacion: {$gte:"+criteria.desde+"}";
+		}
+
+		if(criteria.hasta!=null && criteria.hasta!="" ){
+			if(fecha!="") fecha="ultima_modificacion: {$gte:"+criteria.desde+", $lte:"+criteria.hasta+" }";
+			else fecha="ultima_modificacion: {$lte:"+criteria.hasta+"}";
+		}
+
+		if(fecha!=""){
+			if(find!="")find=find+", "+fecha; else find=fecha;
+		} 
+	
+
+console.log(find);
+
+if(criteria.ids_alumnos!=null){
+	var solu= new Array();
+	for (var index = 0; index < criteria.ids_alumnos.length; index++) {
+		var findAl="alumno: "+criteria.ids_alumnos[index]+find;
+		Solucion.find({findAl}).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
+
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
+				}
+				else{
+					for (var i = 0; i < soluciones.length; i++) {
+						solu.push(soluciones[i]);
+					}
+				}	
+			}
+		});
+
+	});
+
+		
+}
+
+res.status(200).send({solu});
+}else{
+	Solucion.find({find}).sort('-_id').exec((err, soluciones)=>{
 		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
 			if(err){
 				res.status(500).send({message:'Error al devolver las soluciones'});
@@ -401,7 +453,8 @@ function getSolucionesByCriteria(req, res){
 		});
 
 	});
-
+}
+	
 
 }
 
