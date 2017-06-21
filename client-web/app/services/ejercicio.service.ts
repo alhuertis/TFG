@@ -45,6 +45,14 @@ export class EjercicioService{
 		return this._http.get(this.url+'ejercicioTitulo/'+titulo).map(res => res.json());
 	}
 
+	getEjerciciosByIds(ids: any){
+		
+		let params= {ids: ids};
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+		return this._http.post(this.url+'ejercicios-byIds', params, {headers: headers}).map(res=> res.json());
+	}
+
 	addEjercicio(ejercicio: Ejercicio){
 		let json = JSON.stringify(ejercicio);
 		let params= json;

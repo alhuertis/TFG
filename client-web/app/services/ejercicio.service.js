@@ -36,6 +36,11 @@ var EjercicioService = (function () {
     EjercicioService.prototype.getEjerciciosTitulo = function (titulo) {
         return this._http.get(this.url + 'ejercicioTitulo/' + titulo).map(function (res) { return res.json(); });
     };
+    EjercicioService.prototype.getEjerciciosByIds = function (ids) {
+        var params = { ids: ids };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'ejercicios-byIds', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     EjercicioService.prototype.addEjercicio = function (ejercicio) {
         var json = JSON.stringify(ejercicio);
         var params = json;

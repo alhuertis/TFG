@@ -73,6 +73,31 @@ function getEjercicios(req, res){
 
 }
 
+
+function getEjerciciosByIds(req, res){
+
+	let ids= req.body.ids;
+	console.log(ids);
+
+	Ejercicio.find({"_id": {$in: ids}}).exec((err, ejercicios)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver los ejercicios'});
+		}
+		else{
+
+			if(!ejercicios){
+				res.status(404).send({message:'No hay ejercicios'});
+			}
+			else{
+				res.status(200).send({ejercicios});
+			}	
+		}
+
+	}); //El primer parametro equivaldria al where, pero no pasamos nada. Despues una cuncion de callback
+
+
+}
+
 function getEjerciciosFecha(req, res){
 
 console.log(req.body);
@@ -520,6 +545,7 @@ module.exports= {
 	getEjersOtrasColeccionesTipo2,
 	getEjersOtrasColeccionesTipo3,
 	getEjersOtrasColeccionesTipo4,
+	getEjerciciosByIds,
 
 
 }

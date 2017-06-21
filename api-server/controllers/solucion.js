@@ -32,7 +32,7 @@ function getSolucion(req, res){
 function saveSolucion(req, res){
 	var solucion = new Solucion();
 	var params = req.body;
-	solucion.actividad=params.id_actividad;
+	solucion.actividad=params.actividad;
 	solucion.notaFinal= params.notaFinal;
 	solucion.alumno=params.id_alumno;
 	solucion.ejercicios=params.id_ejercicios;

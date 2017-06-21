@@ -1,6 +1,6 @@
 <cabecera-alumno></cabecera-alumno>
 
-<div class="panel-alumno container-fluid">
+<div [ngStyle]="{'display': !verSolu ? 'block' : 'none'}" class="panel-alumno container-fluid">
 
   <div class="row">
     <div class="col-md-4 menu-alumno-arbol">
@@ -157,8 +157,9 @@
           </div>
 
           <div class="col-md-1 botones-lista">
-            <a *ngIf="solucion.terminado" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id]">Resolver de nuevo</a>
+            <a *ngIf="solucion.terminado" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id]"><i class="glyphicon glyphicon-pencil"> Resolver de nuevo</i></a>
             <a *ngIf="!solucion.terminado" class="btn btn-resolver-sol btn-xs" [routerLink]="['/resolver-actividad/' + solucion.actividad._id + '-' + solucion._id]">Continuar</a>
+            <a class="btn btn-resolver-sol btn-xs" (click)="verSolucion(solucion)"><i class="glyphicon glyphicon-eye-open"> Ver</i></a>
           </div>
         </div>
       </div>
@@ -220,3 +221,5 @@
 
   </div>
 </div>
+
+<datos-solucion *ngIf="verSolu" [solucion]="solucion" (salir)="saliendoDeVerSolucion()"></datos-solucion>

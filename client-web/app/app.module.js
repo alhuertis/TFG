@@ -18,6 +18,7 @@ var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
 var cabecera_profesor_component_1 = require("./components/cabecera-profesor.component");
 var buscar_soluciones_component_1 = require("./components/buscar-soluciones.component");
+var datos_solucion_component_1 = require("./components/datos-solucion.component");
 var truncate_pipe_component_1 = require("./components/truncate-pipe.component");
 var cabecera_alumno_component_1 = require("./components/cabecera-alumno.component");
 var cabecera_admin_component_1 = require("./components/cabecera-admin.component");
@@ -53,7 +54,8 @@ AppModule = __decorate([
             cabecera_alumno_component_1.CabeceraAlumnoComponent,
             cabecera_admin_component_1.CabeceraAdminComponent,
             resolver_actividad_component_1.ResolverActividadComponent,
-            login_component_1.LoginComponent
+            login_component_1.LoginComponent,
+            datos_solucion_component_1.DatosSolucionComponent
         ],
         providers: [app_routing_1.appRoutingProviders, authProfesor_guard_1.AuthGuardProfesor, authAlumno_guard_1.AuthGuardAlumno, authAdmin_guard_1.AuthGuardAdmin],
         bootstrap: [app_component_1.AppComponent]

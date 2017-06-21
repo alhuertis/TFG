@@ -34,6 +34,7 @@ function getActividad(req, res){
 function cargarActividad(req, res){
 
 	var actividadId= req.params.id;
+	console.log(actividadId);
 
 	Actividad.findById(actividadId, function(err, actividad){
 

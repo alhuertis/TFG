@@ -4,7 +4,7 @@ import {SolucionEjercicio} from '../models/solucion-ejercicio';
 export class Solucion{
 
     public _id: String;
-    public id_actividad: any={};
+    public actividad: any={};
     public id_alumno: String;
     public ejercicios:SolucionEjercicio[] /*String[]*/;
     public calificaciones: number[];
@@ -23,7 +23,7 @@ export class Solucion{
         this.calificaciones=new Array();
         this.respuestas=new Array();
         this.msgCalificaciones=new Array();
-        this.id_actividad=null;
+        this.actividad=null;
         this.id_alumno=null;
         this.nivel="";
         this.notaFinal=0;
