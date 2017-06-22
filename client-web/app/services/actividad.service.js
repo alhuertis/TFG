@@ -24,11 +24,9 @@ var ActividadService = (function () {
         return this._http.get(this.url + 'actividades').map(function (res) { return res.json(); });
     };
     ActividadService.prototype.getActividad = function (id) {
-        console.log('Llamando a ' + this.url + 'actividad/' + id);
         return this._http.get(this.url + 'actividad/' + id).map(function (res) { return res.json(); });
     };
     ActividadService.prototype.cargarActividad = function (id) {
-        console.log('Llamando a ' + this.url + 'cargarActividad/' + id);
         return this._http.get(this.url + 'cargarActividad/' + id).map(function (res) { return res.json(); });
     };
     ActividadService.prototype.borrarEjercicio = function (id) {

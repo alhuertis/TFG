@@ -30,7 +30,6 @@ var EjercicioService = (function () {
         return this._http.post(this.url + 'ejercicios', params, { headers: headers }).map(function (res) { return res.json(); });
     };
     EjercicioService.prototype.getEjercicio = function (id) {
-        console.log('Llamando a ' + this.url + 'ejercicio/' + id);
         return this._http.get(this.url + 'ejercicio/' + id).map(function (res) { return res.json(); });
     };
     EjercicioService.prototype.getEjerciciosTitulo = function (titulo) {

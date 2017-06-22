@@ -314,7 +314,6 @@ function getByIdProfesorDisp(req, res){
 function getByIdProfesorProp(req, res){
 
 	var id= req.params.id;
-	console.log(id);
 	Actividad.find({"id_profesor": id, "propuesta": "true", "visible":"true"}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades del profesor por id'});
@@ -725,8 +724,6 @@ function getActsOtrasColeccionesNivelB(req, res){
 function borrarEjercicio(req, res){
 	
 	var id = req.params;
-	console.log(id);
-
 
 	Actividad.update({},{ $pull:{"ejercicios": id.id}},{multi:true},(err, item)=>{
 		if(err){
@@ -735,7 +732,6 @@ function borrarEjercicio(req, res){
 		else if(!item){
 				res.status(404).send({message:'Ninguna actividad contiene ese ejercicio', respuesta:'ko'});	
 		}else{
-			console.log(item);
 			res.status(200).send({message:'Se han actualizado los ejercicios', respuesta:'ok'});
 		}
 			

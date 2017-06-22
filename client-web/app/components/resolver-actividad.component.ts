@@ -315,8 +315,6 @@ export class  ResolverActividadComponent implements OnInit{
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
             this.solucion.ejercicios[this.ejerSel].msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
             this.solucion.ejercicios[this.ejerSel].calificacion= 1;
-            this.solucion.ejercicios[this.ejerSel].notaProfesor= -1;
-            this.solucion.ejercicios[this.ejerSel].msgProfesor="";
         }else{
             let patron: String[];
             let res: String[];
@@ -346,6 +344,8 @@ export class  ResolverActividadComponent implements OnInit{
            }
         }
         this.solucion.ejercicios[this.ejerSel].respuesta= this.respuesta;
+        this.solucion.ejercicios[this.ejerSel].notaProfesor= -1;
+        this.solucion.ejercicios[this.ejerSel].msgProfesor="";
         this.resueltos++;
         this.progreso= (this.resueltos * 100) / this.actividad.length;
 

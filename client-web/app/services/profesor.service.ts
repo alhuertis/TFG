@@ -25,7 +25,6 @@ export class ProfesorService{
 	}
 
 	getProfesor(_id: string){
-		console.log('Llamando a ' + this.url+'profesor/'+_id);
 		return this._http.get(this.url+'profesor/'+_id).map(res => res.json());
 	}
 

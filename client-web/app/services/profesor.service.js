@@ -23,7 +23,6 @@ var ProfesorService = (function () {
         return this._http.get(this.url + 'profesores').map(function (res) { return res.json(); });
     };
     ProfesorService.prototype.getProfesor = function (_id) {
-        console.log('Llamando a ' + this.url + 'profesor/' + _id);
         return this._http.get(this.url + 'profesor/' + _id).map(function (res) { return res.json(); });
     };
     return ProfesorService;

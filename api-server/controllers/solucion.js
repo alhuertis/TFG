@@ -44,7 +44,6 @@ function saveSolucion(req, res){
 	solucion.profesor= params.profesor;
 	solucion.ejercicios= params.ejercicios;
 	solucion.ultima_modificacion= new Date();
-	console.log("Ejercicios: "  + params.ejercicios);
 
 	solucion.save((err, solucionStored)=>{
 		if(err){
@@ -349,7 +348,6 @@ function getSinTerminarByProfesor(req, res){
 function borrarEjercicio(req, res){
 	
 	var id = {_id:req.params.id };
-	console.log("ID: " + id);
 
 	Solucion.update({},{ $pull:{"ejercicios": id}},{multi:true},(err, item)=>{
 		if(err){
@@ -385,75 +383,76 @@ function getSolucionesByCriteria(req, res){
 	//Para ver los campos que vienen
 	console.log(criteria);
 
-	if(criteria.id_actividad!=null){
-	find=find+"actividad: "+criteria.id_actividad;
+	if(criteria.id_actividad !=null && criteria.id_actividad!= ""){
+		find=find+"actividad:"+criteria.id_actividad;
 	
     }
 
-		if(criteria.desde!=null && criteria.desde!="" ){
-			
-			fecha="ultima_modificacion: {$gte:"+criteria.desde+"}";
-		}
+	if(criteria.desde!=null && criteria.desde!="" ){
+		
+		fecha="ultima_modificacion: {$gte:"+criteria.desde+"}";
+	}
 
-		if(criteria.hasta!=null && criteria.hasta!="" ){
-			if(fecha!="") fecha="ultima_modificacion: {$gte:"+criteria.desde+", $lte:"+criteria.hasta+" }";
-			else fecha="ultima_modificacion: {$lte:"+criteria.hasta+"}";
-		}
+	if(criteria.hasta!=null && criteria.hasta!="" ){
+		if(fecha!="") fecha="ultima_modificacion: {$gte:"+criteria.desde+", $lte:"+criteria.hasta+" }";
+		else fecha="ultima_modificacion: {$lte:"+criteria.hasta+"}";
+	}
 
-		if(fecha!=""){
-			if(find!="")find=find+", "+fecha; else find=fecha;
-		} 
+	if(fecha!=""){
+		if(find!="")find=find+", "+fecha; else find=fecha;
+	} 
 	
 
-console.log(find);
+	console.log("find: " + find);
 
-if(criteria.ids_alumnos!=null){
-	var solu= new Array();
-	for (var index = 0; index < criteria.ids_alumnos.length; index++) {
-		var findAl="alumno: "+criteria.ids_alumnos[index]+find;
-		Solucion.find({findAl}).sort('-_id').exec((err, soluciones)=>{
-		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
-			if(err){
-				res.status(500).send({message:'Error al devolver las soluciones'});
-			}
-			else{
-
-				if(!soluciones){
-					res.status(404).send({message:'No hay soluciones'});
-				}
-				else{
-					for (var i = 0; i < soluciones.length; i++) {
-						solu.push(soluciones[i]);
+	if(criteria.ids_alumnos!=null && criteria.ids_alumnos.length){
+		var solu= new Array();
+		for (var index = 0; index < criteria.ids_alumnos.length; index++) {
+				var findAl="alumno: "+criteria.ids_alumnos[index]+find;
+				Solucion.find({findAl}).sort('-_id').exec((err, soluciones)=>{
+				Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+					if(err){
+						res.status(500).send({message:'Error al devolver las soluciones'});
 					}
-				}	
-			}
-		});
+					else{
 
-	});
+						if(!soluciones){
+							res.status(404).send({message:'No hay soluciones'});
+						}
+						else{
+							for (var i = 0; i < soluciones.length; i++) {
+								solu.push(soluciones[i]);
+							}
+						}	
+					}
+				});
+
+			});
 
 		
-}
+		}
 
-res.status(200).send({solu});
-}else{
-	Solucion.find({find}).sort('-_id').exec((err, soluciones)=>{
-		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
-			if(err){
-				res.status(500).send({message:'Error al devolver las soluciones'});
-			}
-			else{
-
-				if(!soluciones){
-					res.status(404).send({message:'No hay soluciones'});
+		res.status(200).send({solu});
+	}else{
+		console.log("Llego aqui: " + find);
+		Solucion.find({find}).sort('-_id').exec((err, soluciones)=>{
+			Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
+				if(err){
+					res.status(500).send({message:'Error al devolver las soluciones'});
 				}
 				else{
-					res.status(200).send({soluciones});
-				}	
-			}
-		});
 
-	});
-}
+					if(!soluciones){
+						res.status(404).send({message:'No hay soluciones'});
+					}
+					else{
+						res.status(200).send({soluciones});
+					}	
+				}
+			});
+
+		});
+	}
 	
 
 }

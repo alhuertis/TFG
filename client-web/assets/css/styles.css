@@ -1157,7 +1157,7 @@
 .datos-solucion .enunciado{
 	background: #444;
 	color: #ccc;
-	border-radius: 0px 24px 24px 0px;
+	/*border-radius: 0px 24px 24px 0px;*/
 	padding: 8px;
 	margin-bottom: 15px;
 }
@@ -1176,10 +1176,11 @@
 	list-style-type: none;
 	background: #63b1ed;
 	color: white;
-	border-radius: 24px 0px 0px 24px;
+	border-radius: 20px 0px 0px 20px;
 	width: 80%;
 	float: right;
 	padding: 8px;
+	padding-left: 18px;
 }
 
 .msgProfesor{

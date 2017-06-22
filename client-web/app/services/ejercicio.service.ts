@@ -36,7 +36,6 @@ export class EjercicioService{
 	}
 
 	getEjercicio(id: string){
-		console.log('Llamando a ' + this.url+'ejercicio/'+id);
 		return this._http.get(this.url+'ejercicio/'+id).map(res => res.json());
 	}
 

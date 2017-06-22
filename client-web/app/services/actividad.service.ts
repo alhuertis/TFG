@@ -25,12 +25,10 @@ export class ActividadService{
 	}
 
 	getActividad(id: string){
-		console.log('Llamando a ' + this.url+'actividad/'+id);
 		return this._http.get(this.url+'actividad/'+id).map(res => res.json());
 	}
 
     cargarActividad(id: string){
-		console.log('Llamando a ' + this.url+'cargarActividad/'+id);
 		return this._http.get(this.url+'cargarActividad/'+id).map(res => res.json());
 	}
 

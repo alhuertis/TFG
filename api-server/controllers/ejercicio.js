@@ -77,7 +77,6 @@ function getEjercicios(req, res){
 function getEjerciciosByIds(req, res){
 
 	let ids= req.body.ids;
-	console.log(ids);
 
 	Ejercicio.find({"_id": {$in: ids}}).exec((err, ejercicios)=>{
 		if(err){
@@ -99,8 +98,6 @@ function getEjerciciosByIds(req, res){
 }
 
 function getEjerciciosFecha(req, res){
-
-console.log(req.body);
 var fecha1= req.body.fecha1;
 var fecha2= req.body.fecha2;
 	Ejercicio.find({fechaCreacion:{$gte:fecha1, $lte:fecha2}}).sort('-_id').exec((err, ejercicios)=>{

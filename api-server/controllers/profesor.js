@@ -42,11 +42,9 @@ function saveProfesor(req, res){
 	profesor.save((err, profesorStored)=>{
 		if(err){
 			res.status(500).send({message:'Error al guardar la actividad'});
-			console.log("Error al guardar");
 		}
 		else{
 			res.status(200).send({respuesta: 'ok'});
-			console.log("Guardado");
 		}
 	});
 
@@ -61,11 +59,9 @@ function getProfesores(req, res){
 		else{
 
 			if(!profesores){
-				console.log('No hay profesores');
 				res.status(404).send({message:'No hay profesores'});
 			}
 			else{
-				console.log(profesores);
 				res.status(200).send({profesores});
 			}	
 		}
