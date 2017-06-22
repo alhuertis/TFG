@@ -34,7 +34,6 @@ function getActividad(req, res){
 function cargarActividad(req, res){
 
 	var actividadId= req.params.id;
-	console.log(actividadId);
 
 	Actividad.findById(actividadId, function(err, actividad){
 
@@ -66,16 +65,13 @@ function saveActividad(req, res){
 	actividad.visible= params.visible;
 	actividad.propuesta= params.propuesta;
 	actividad.fecha_prop_fin= params.fecha_prop_fin;
-	console.log(actividad);
 
 	actividad.save((err, actividadStored)=>{
 		if(err){
 			res.status(500).send({message:'Error al guardar la actividad'});
-			console.log("Error al guardar");
 		}
 		else{
 			res.status(200).send({respuesta: 'ok'});
-			console.log("Guardado");
 		}
 	});
 
@@ -295,7 +291,6 @@ function getPropuestasByCierre(req, res){
 function getByIdProfesorDisp(req, res){
 
 	var id= req.params.id;
-	console.log(id);
 	Actividad.find({"id_profesor": id, "visible": "true"}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades del profesor por id'});

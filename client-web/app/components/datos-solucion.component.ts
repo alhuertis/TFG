@@ -32,6 +32,7 @@ export class  DatosSolucionComponent implements OnInit{
     public user: User;
     public ejercicios: Ejercicio[];
     public actividad: Actividad;
+    public indice: number;
    
     // pager object (paginador)
     /*pager: any = {};
@@ -47,8 +48,8 @@ export class  DatosSolucionComponent implements OnInit{
 	){
         this.errorMessage="";
         this.user= JSON.parse(localStorage.getItem('currentUser')).user;
-        this.ejercicios= [];
-        this.actividad= null; 
+        this.actividad= new Actividad();
+        this.indice=0; 
         
 
 
@@ -56,37 +57,10 @@ export class  DatosSolucionComponent implements OnInit{
 
 
     ngOnInit(){
-        /*let ids: any[];
-        ids= new Array<any>();
-
-        for(let ejer of this.solucion.ejercicios){
-            ids.push(ejer._id);
-        }
-
-        this._ejercicioService.getEjerciciosByIds(ids).subscribe(
-
-            result=>{
-                this.ejercicios= result.ejercicios;
-                alert(this.ejercicios.length);
-            },
-
-            error=>{
-                 this.errorMessage= <any>error;
-
-				if(this.errorMessage != null){
-					console.log(this.errorMessage);
-					alert('Error en la peticion de mi coleccion');
-				}
-            }
-
-        );*/
-        let id: string;
-        id= this.solucion.actividad._id;
-        this._actividadService.cargarActividad(id).subscribe(
+        this._actividadService.cargarActividad(this.solucion.actividad._id).subscribe(
 
              result=>{
                 this.actividad= result.actividad;
-                alert(this.actividad.titulo);
             },
 
             error=>{
@@ -107,6 +81,10 @@ export class  DatosSolucionComponent implements OnInit{
 
     exit(){
         this.salir.emit();
+    }
+
+    cambiaIndice(i : number){
+        this.indice=i;
     }
 
 

@@ -12,6 +12,7 @@ var core_1 = require("@angular/core");
 var ejercicio_service_1 = require("../services/ejercicio.service");
 var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
+var actividad_1 = require("../models/actividad");
 var solucion_1 = require("../models/solucion");
 var DatosSolucionComponent = (function () {
     // pager object (paginador)
@@ -24,40 +25,13 @@ var DatosSolucionComponent = (function () {
         this.salir = new core_1.EventEmitter();
         this.errorMessage = "";
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
-        this.ejercicios = [];
-        this.actividad = null;
+        this.actividad = new actividad_1.Actividad();
+        this.indice = 0;
     }
     DatosSolucionComponent.prototype.ngOnInit = function () {
         var _this = this;
-        /*let ids: any[];
-        ids= new Array<any>();
-
-        for(let ejer of this.solucion.ejercicios){
-            ids.push(ejer._id);
-        }
-
-        this._ejercicioService.getEjerciciosByIds(ids).subscribe(
-
-            result=>{
-                this.ejercicios= result.ejercicios;
-                alert(this.ejercicios.length);
-            },
-
-            error=>{
-                 this.errorMessage= <any>error;
-
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert('Error en la peticion de mi coleccion');
-                }
-            }
-
-        );*/
-        var id;
-        id = this.solucion.actividad._id;
-        this._actividadService.cargarActividad(id).subscribe(function (result) {
+        this._actividadService.cargarActividad(this.solucion.actividad._id).subscribe(function (result) {
             _this.actividad = result.actividad;
-            alert(_this.actividad.titulo);
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
@@ -70,6 +44,9 @@ var DatosSolucionComponent = (function () {
     }*/
     DatosSolucionComponent.prototype.exit = function () {
         this.salir.emit();
+    };
+    DatosSolucionComponent.prototype.cambiaIndice = function (i) {
+        this.indice = i;
     };
     return DatosSolucionComponent;
 }());

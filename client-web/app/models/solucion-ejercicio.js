@@ -5,6 +5,8 @@ var SolucionEjercicio = (function () {
         this.calificacion = -1;
         this.respuesta = "";
         this.msgCalificacion = "";
+        this.msgProfesor = "";
+        this.notaProfesor = -1;
     }
     return SolucionEjercicio;
 }());

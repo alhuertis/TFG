@@ -1110,4 +1110,90 @@
 
 /********* FIN BUSCAR SOLUCIONES *************/
 
+/********** DATOS SOLUCION *******************/
+
+.datos-actividad{
+	background: #e0e4e5;
+	margin-left: 0px;
+	padding: 10px;
+	border-radius: 4px;
+}
+
+.datos-actividad h4{margin: 5px 0px 5px 40px; text-decoration: underline;}
+
+.datos-actividad ul, .enlaces-ejers ul{list-style-type: none;}
+
+.enlaces-ejers{
+	margin-left: 15px;
+	padding: 10px;
+	border-radius: 4px;
+}
+
+.enlaces-ejers ul{margin: 0px; padding-left: 7px; border-left: 2px solid #333;}
+
+.enlaces-ejers li{
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.enlaces-ejers span{
+	font-size: 26px;
+}
+
+.enlaces-ejers li:nth-child(odd) {
+    color: #08ad9f;
+}
+.enlaces-ejers li:nth-child(even) {
+    color: #7ae2db;
+}
+
+.enlaces-ejers li:hover{color: #27292B;}
+
+
+.datos-solucion{
+	border-radius: 5px;
+}
+
+.datos-solucion .enunciado{
+	background: #444;
+	color: #ccc;
+	border-radius: 0px 24px 24px 0px;
+	padding: 8px;
+	margin-bottom: 15px;
+}
+
+.datos-solucion .notas-calificacion li span{font-size: 18px}
+.datos-solucion .enunciado p, datos-solucion .notas-calificacion li {font-size: 16px; margin-bottom: 0px;}
+
+.datos-solucion .enunciado p label{color: #63b1ed; margin-bottom: 0px}
+.datos-solucion .notas-calificacion li label{ margin-bottom: 0px; color:#444}
+
+
+.datos-solucion .enunciado p:first-child{padding-left:15px; }
+.datos-solucion .enunciado p:last-child{padding-right:15px; }
+
+.datos-solucion .notas-calificacion{
+	list-style-type: none;
+	background: #63b1ed;
+	color: white;
+	border-radius: 24px 0px 0px 24px;
+	width: 80%;
+	float: right;
+	padding: 8px;
+}
+
+.msgProfesor{
+	background: #22f978;
+	color: white;
+	padding: 8px;
+	margin-bottom: 15px;
+	font-size: 22px;
+}
+
+
+
+
+/**********FIN DATOS SOLUCION *******************/
+
+
 

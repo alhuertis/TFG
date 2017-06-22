@@ -228,7 +228,6 @@ export class  ResolverActividadComponent implements OnInit{
 				this.errorMessage= <any>error;
 
 				if(this.errorMessage != null){
-					console.log(this.errorMessage);
 					alert(this.errorMessage);
 				}
 			}
@@ -316,6 +315,8 @@ export class  ResolverActividadComponent implements OnInit{
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
             this.solucion.ejercicios[this.ejerSel].msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
             this.solucion.ejercicios[this.ejerSel].calificacion= 1;
+            this.solucion.ejercicios[this.ejerSel].notaProfesor= -1;
+            this.solucion.ejercicios[this.ejerSel].msgProfesor="";
         }else{
             let patron: String[];
             let res: String[];
@@ -596,7 +597,6 @@ export class  ResolverActividadComponent implements OnInit{
 
             this._solucionService.saveSolucion(this.solucion).subscribe(
                 result =>{
-                    console.log(result);
                     this.solucion._id= result;
 
                     if(this.solucion._id == ""){
@@ -609,7 +609,6 @@ export class  ResolverActividadComponent implements OnInit{
                     this.errorMessage= <any>error;
 
                     if(this.errorMessage != null){
-                        console.log(this.errorMessage);
                         alert(this.errorMessage);
                     }
                 }
@@ -620,7 +619,6 @@ export class  ResolverActividadComponent implements OnInit{
             this.solucion.ultima_modificacion= new Date();
             this._solucionService.updateSolucion(this.solucion).subscribe(
                 result =>{
-                    console.log(result);
                     this.solucion._id= result;
 
                     if(this.solucion._id == ""){
@@ -633,7 +631,6 @@ export class  ResolverActividadComponent implements OnInit{
                     this.errorMessage= <any>error;
 
                     if(this.errorMessage != null){
-                        console.log(this.errorMessage);
                         alert(this.errorMessage);
                     }
                 }

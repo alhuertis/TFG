@@ -1,9 +1,66 @@
-<ol class="breadcrumb" style="width: 230px; background:#eee">
-    <li><a (click)="exit()">Alumno</a></li>
-    <li class="active">Datos solucion</li>
-</ol>
+<div class="row">
+    <div class="col-md-3">
+        <ol class="breadcrumb" style="width: 230px; background:#eee">
+            <li><a (click)="exit()">Alumno</a></li>
+            <li class="active">Datos solucion</li>
+        </ol>
 
 
-<ul>
-    <li *ngFor="let ejer of ejercicios">{{ejer.titulo}}</li>
-</ul>
+        <div class="datos-actividad">
+            <h4>Titulo: {{actividad.titulo}}</h4>
+            <ul>
+                <li><i class="glyphicon glyphicon-user"></i> <label for="profesor"> Profesor: </label> <span>{{actividad.profesor}}</span></li>
+                <li><i class="glyphicon glyphicon-signal"></i> <label for="nivel"> Nivel: </label> <span>{{actividad.nivel}}</span></li>
+                <li><i class="glyphicon glyphicon-calendar"></i> <label for="creacion"> Creación: </label> <span>{{actividad.fecha_creacion | date: 'dd/MM/yy'}}</span></li>
+                <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> <label for="hasta"> Hasta: </label> <span>{{actividad.fecha_prop_fin | date: 'dd/MM/yy'}}</span></li>
+                <li ><i class="glyphicon glyphicon-pencil"></i> <label for="calificacion-total"> Calificacion Total: </label> <span>{{solucion.notaFinal}} sobre {{solucion.ejercicios.length}}</span></li>
+            </ul>
+            
+        </div>
+
+        <div class="enlaces-ejers">
+            <ul>
+                <li *ngFor="let ejer of actividad.ejercicios; let i=index" (click)="cambiaIndice(i)"><span>{{i}}#</span> {{ejer.titulo}}</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div *ngIf="actividad.ejercicios.length > 0" class="col-md-8 animated aparecer">
+
+        <h2 class="text-center"><span>{{indice}}#</span> {{actividad.ejercicios[indice].titulo}}</h2>
+        <div class="datos-solucion">
+            <!--<ul class="enunciado">
+                <li><label>Enunciado:</label> {{actividad.ejercicios[indice].enunciado}}</li>
+                <li><label>Frase a traducir:</label> {{actividad.ejercicios[indice].fraseATraducir}}</li>
+                <li><label>Respuesta:</label> {{solucion.ejercicios[indice].respuesta}}</li>
+            </ul>-->
+            <div class="enunciado">
+                <p><label>Enunciado:</label> {{actividad.ejercicios[indice].enunciado}}</p>
+                <p class="text-center"><label>Frase a traducir:</label> {{actividad.ejercicios[indice].fraseATraducir}}</p>
+                <p class="text-right"><label>Respuesta:</label> {{solucion.ejercicios[indice].respuesta}}</p>
+            </div>
+
+            <ul class="notas-calificacion">
+                <li><label>Calificacion del ejercicio:</label> <span class="badge">{{solucion.ejercicios[indice].calificacion}}</span></li>
+                <li><label>Mensage de la aplicacion:</label> {{solucion.ejercicios[indice].msgCalificacion}}</li>
+            </ul>
+
+            <div class="clearfix"></div>
+
+            <div class="msgProfesor">
+                <label for="anotacion">Anotación del profesor</label>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut autem ipsa magni alias, aspernatur omnis commodi eius 
+                    sit libero rerum ab cumque quis cum voluptatem esse nulla reprehenderit iusto qui."</p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+

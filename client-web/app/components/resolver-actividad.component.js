@@ -151,7 +151,6 @@ var ResolverActividadComponent = (function () {
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
                 alert(_this.errorMessage);
             }
         });
@@ -226,6 +225,8 @@ var ResolverActividadComponent = (function () {
         if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
             this.solucion.ejercicios[this.ejerSel].msgCalificacion = "!!Enhorabuena¡¡ La respuesta es correcta";
             this.solucion.ejercicios[this.ejerSel].calificacion = 1;
+            this.solucion.ejercicios[this.ejerSel].notaProfesor = -1;
+            this.solucion.ejercicios[this.ejerSel].msgProfesor = "";
         }
         else {
             var patron = void 0;
@@ -476,7 +477,6 @@ var ResolverActividadComponent = (function () {
         this.solucion.profesor = this.infoActividad.id_profesor;
         if (this.solucion._id == "") {
             this._solucionService.saveSolucion(this.solucion).subscribe(function (result) {
-                console.log(result);
                 _this.solucion._id = result;
                 if (_this.solucion._id == "") {
                     alert('Error en el servidor guardando la solucion');
@@ -487,7 +487,6 @@ var ResolverActividadComponent = (function () {
             }, function (error) {
                 _this.errorMessage = error;
                 if (_this.errorMessage != null) {
-                    console.log(_this.errorMessage);
                     alert(_this.errorMessage);
                 }
             });
@@ -495,7 +494,6 @@ var ResolverActividadComponent = (function () {
         else {
             this.solucion.ultima_modificacion = new Date();
             this._solucionService.updateSolucion(this.solucion).subscribe(function (result) {
-                console.log(result);
                 _this.solucion._id = result;
                 if (_this.solucion._id == "") {
                     alert('Error en el servidor actualizando la solucion');
@@ -506,7 +504,6 @@ var ResolverActividadComponent = (function () {
             }, function (error) {
                 _this.errorMessage = error;
                 if (_this.errorMessage != null) {
-                    console.log(_this.errorMessage);
                     alert(_this.errorMessage);
                 }
             });
