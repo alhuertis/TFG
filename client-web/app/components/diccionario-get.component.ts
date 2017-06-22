@@ -41,7 +41,7 @@ export class  PanelProfesorComponent implements OnInit{
 		this._diccionarioService.getDiccionario().subscribe(
 			result =>{
 				console.log(result);
-				/*this.ejercicios= result.ejercicios;
+				this.ejercicios= result.ejercicios;
 
 				if(!this.ejercicios){
 					alert('Error en el servidor');
