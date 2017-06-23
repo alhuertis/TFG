@@ -10,6 +10,8 @@
     padding: 0px !important;
     margin: 0px !important;
 }
+
+ol li a{cursor: pointer;}
 /***********FIN HACKS**************/
 
 /***********ANIMACIONES***********/
@@ -1079,6 +1081,7 @@
 	background: #878787;
 	border-radius: 4px;
 	margin-bottom: 5px;
+	width: 100%;
 
 }
 
@@ -1106,6 +1109,13 @@
 }
 
 .buscar-filtro input[type=date]{border-radius: 5px;}
+
+.panel-buscar-sol .listado-soluciones{
+	margin-top: 55px;
+}
+
+
+
 
 
 /********* FIN BUSCAR SOLUCIONES *************/

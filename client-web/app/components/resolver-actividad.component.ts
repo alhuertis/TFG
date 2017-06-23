@@ -584,6 +584,7 @@ export class  ResolverActividadComponent implements OnInit{
     guardarSolucion(){
         this.solucion.actividad= this.id_actividad;
         this.solucion.id_alumno= this.user._id;
+        this.solucion.nombre_alumno= this.user.nombre + " " + this.user.apellidos;
 
         for (var i = 0; i < this.infoActividad.ejercicios.length; i++){
             this.solucion.ejercicios[i]._id= this.infoActividad.ejercicios[i];

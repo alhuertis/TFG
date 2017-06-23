@@ -9,6 +9,7 @@ var Solucion = (function () {
         this.msgCalificaciones = new Array();
         this.actividad = null;
         this.id_alumno = null;
+        this.nombre_alumno = "";
         this.nivel = "";
         this.notaFinal = 0;
         this.profesor = "";

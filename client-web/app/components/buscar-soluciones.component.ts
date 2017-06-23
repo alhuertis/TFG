@@ -44,6 +44,8 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
 	pagerSolucion: any = {};
     public pagedSoluciones: Solucion[];
     public mostrarSoluciones: Boolean;
+    public msgBusqueda: string;
+    public boolMsgBusqueda: Boolean;
 
 
 
@@ -61,6 +63,9 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
         this.busquedaByAlumnos= new Array();
         this.fecha_desde= null;
         this.fecha_hasta= null;
+        this.soluciones=[];
+        this.msgBusqueda="";
+        this.boolMsgBusqueda=false;
 
 
     }
@@ -82,7 +87,6 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
                 this.errorMessage= <any>error;
 
 				if(this.errorMessage != null){
-					console.log(this.errorMessage);
 					alert('Error en la peticion de mi coleccion');
 				}
             }
@@ -98,7 +102,6 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
                 this.errorMessage= <any>error;
 
 				if(this.errorMessage != null){
-					console.log(this.errorMessage);
 					alert('Error en la peticion de mi coleccion');
 				}
             }
@@ -113,36 +116,6 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
         this.salir.emit();
     }
 
-    buscarPorActividad(){
-        this._solucionService.getByIdActividad(this.busquedaByActividad).subscribe(
-            result=>{
-                this.soluciones= result.soluciones;
-
-				if(!this.soluciones){
-					alert('Error en el servidor');
-				}else{
-                    if(this.soluciones.length > 0){
-                        this.setPageSoluciones(1);
-                        this.mostrarSoluciones=true;
-                    }else{
-                        alert("No hay soluciones para esta actividad");
-                        this.pagedSoluciones=[];
-                        this.mostrarSoluciones=false;
-                    }
-                
-                }
-            },
-
-            error=>{
-                 this.errorMessage= <any>error;
-
-				if(this.errorMessage != null){
-					console.log(this.errorMessage);
-					alert('Error en la peticion de mi coleccion');
-				}
-            }
-        );
-    }
 
     addAlumno(alu : any){
         for(let i=0; i < this.alumnos.length; i++){
@@ -150,6 +123,10 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
                 this.busquedaByAlumnos.push(this.alumnos[i]);
             }
         }
+
+        this.busquedaByAlumnos = _.uniq(this.busquedaByAlumnos);
+        
+
         
     }
 
@@ -159,6 +136,8 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
                 this.busquedaByAlumnos.splice(i,1);
             }
         }
+
+        $("#porAlumnos").val($("#porAlumnos option:first").val());
 
     }
 
@@ -192,10 +171,13 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
                     if(this.soluciones.length > 0){
                         this.setPageSoluciones(1);
                         this.mostrarSoluciones=true;
+                        this.msgBusqueda="";
+                        this.boolMsgBusqueda=false;
                     }else{
-                        alert("No hay soluciones para esta actividad");
                         this.pagedSoluciones=[];
                         this.mostrarSoluciones=false;
+                        this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+                        this.boolMsgBusqueda=true;
                     }
                 
                 }

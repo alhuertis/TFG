@@ -6,6 +6,7 @@ export class Solucion{
     public _id: String;
     public actividad: any={};
     public id_alumno: String;
+    public nombre_alumno: String;
     public ejercicios:SolucionEjercicio[] /*String[]*/;
     public calificaciones: number[];
     public msgCalificaciones: String[];
@@ -25,6 +26,7 @@ export class Solucion{
         this.msgCalificaciones=new Array();
         this.actividad=null;
         this.id_alumno=null;
+        this.nombre_alumno="";
         this.nivel="";
         this.notaFinal=0;
         this.profesor="";

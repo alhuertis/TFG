@@ -1,8 +1,10 @@
-<a class="btn btn-default" (click)="exit()">Salir</a>
-
 <div class="panel-buscar-sol container-fluid">
     <div class="row">
         <div class="col-md-3">
+            <ol class="breadcrumb" style="background:#eee">
+                <li><i class="glyphicon glyphicon-home"></i> <a (click)="exit()">Panel principal</a></li>
+                <li class="active">Ver soluciones </li>
+            </ol>
             
             <div class="panel-buscar-soluciones">
                 <div class="buscar-filtro">
@@ -26,12 +28,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-12">
                             <label for="desde">Desde </label>
                             <input type="date" name="fecha-desde" [(ngModel)]="fecha_desde" useValueAsDate>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-12">
                            <label for="desde">Hasta </label>
                             <input type="date" name="fecha-hasta" [(ngModel)]="fecha_hasta" useValueAsDate> 
                         </div>
@@ -46,13 +48,14 @@
             </div>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-7 listado-soluciones">
             <div class="col-md-12 sol-lista animated fadeInLeft" *ngFor="let solucion of pagedSoluciones; let i=index">
                 <div class="row">
                     <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-5">
                         <ul>
+                            <li><i class="glyphicon glyphicon-education"></i> alumno: {{solucion.nombre_alumno}}</li>
                             <li><i class="glyphicon glyphicon-pencil"></i> título: {{solucion.actividad.titulo | truncate: 12}}</li>
                             <li><i class="glyphicon glyphicon-user"></i> profesor: {{solucion.actividad.profesor}}</li>     
                         </ul>
@@ -69,7 +72,7 @@
                 </div>
 
                 <div class="col-md-1 botones-lista">
-                    <a class="btn btn-default btn-ver-sol btn-xs">Abrir</a>
+                    <a class="btn btn-resolver-sol btn-xs" (click)="verSolucion(solucion)"><i class="glyphicon glyphicon-eye-open"> Ver</i></a>
                 </div>
                 </div>
             </div>
@@ -97,6 +100,9 @@
                     </ul>
                 </div>
             </div>
+
+            <div *ngIf="boolMsgBusqueda && !mostrarSoluciones" class="alert alert-warning animated fadeInLeft" role="alert">{{msgBusqueda}}</div>
+
             <!-- ########################### -->
         </div>
     </div>

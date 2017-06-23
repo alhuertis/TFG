@@ -35,6 +35,7 @@ function saveSolucion(req, res){
 	solucion.actividad=params.actividad;
 	solucion.notaFinal= params.notaFinal;
 	solucion.alumno=params.id_alumno;
+	solucion.nombre_alumno= params.nombre_alumno;
 	solucion.ejercicios=params.id_ejercicios;
 	solucion.calificaciones=params.calificaciones;
 	solucion.msgCalificaciones=params.msgCalificaciones;
@@ -97,7 +98,7 @@ function getSoluciones(req, res){
 function getSolucionesByIdActividad(req, res){
 
 
-
+	console.log(req.body);
 	Solucion.find({actividad: req.body._id}).sort('-_id').exec((err, soluciones)=>{
 		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
 			if(err){
@@ -375,85 +376,52 @@ function deleteSolucionByActividad(req, res){
 
 }
 
+
 function getSolucionesByCriteria(req, res){
 
 	let criteria= req.body;
-	var find="";
-	var fecha="";
-	//Para ver los campos que vienen
 	console.log(criteria);
 
-	if(criteria.id_actividad !=null && criteria.id_actividad!= ""){
-		find=find+"actividad:"+criteria.id_actividad;
-	
-    }
+	var find= {};
+	if(criteria.id_actividad != null && criteria.id_actividad != "")
+		find.actividad=criteria.id_actividad;
 
-	if(criteria.desde!=null && criteria.desde!="" ){
-		
-		fecha="ultima_modificacion: {$gte:"+criteria.desde+"}";
+	if(criteria.desde != null && criteria.desde != ""){
+		if(criteria.hasta != null && criteria.hasta != ""){
+			find.ultima_modificacion= {$gte: criteria.desde,$lte:criteria.hasta };
+		}else{
+			find.ultima_modificacion= {$gte: criteria.desde};
+		}
+	}else if(criteria.hasta != null && criteria.hasta != ""){
+		find.ultima_modificacion= {$lte: criteria.hasta};
 	}
-
-	if(criteria.hasta!=null && criteria.hasta!="" ){
-		if(fecha!="") fecha="ultima_modificacion: {$gte:"+criteria.desde+", $lte:"+criteria.hasta+" }";
-		else fecha="ultima_modificacion: {$lte:"+criteria.hasta+"}";
-	}
-
-	if(fecha!=""){
-		if(find!="")find=find+", "+fecha; else find=fecha;
-	} 
-	
-
-	console.log("find: " + find);
 
 	if(criteria.ids_alumnos!=null && criteria.ids_alumnos.length){
-		var solu= new Array();
-		for (var index = 0; index < criteria.ids_alumnos.length; index++) {
-				var findAl="alumno: "+criteria.ids_alumnos[index]+find;
-				Solucion.find({findAl}).sort('-_id').exec((err, soluciones)=>{
-				Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
-					if(err){
-						res.status(500).send({message:'Error al devolver las soluciones'});
-					}
-					else{
+		find.alumno={$in: criteria.ids_alumnos};
+	}
 
-						if(!soluciones){
-							res.status(404).send({message:'No hay soluciones'});
-						}
-						else{
-							for (var i = 0; i < soluciones.length; i++) {
-								solu.push(soluciones[i]);
-							}
-						}	
-					}
-				});
+	console.log("nueva busqueda: " + JSON.stringify(find));
 
-			});
+	
+	Solucion.find(find).sort('-_id').exec((err, soluciones)=>{
+		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones){
+			if(err){
+				res.status(500).send({message:'Error al devolver las soluciones'});
+			}
+			else{
 
-		
-		}
-
-		res.status(200).send({solu});
-	}else{
-		console.log("Llego aqui: " + find);
-		Solucion.find({find}).sort('-_id').exec((err, soluciones)=>{
-			Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
-				if(err){
-					res.status(500).send({message:'Error al devolver las soluciones'});
+				if(!soluciones){
+					res.status(404).send({message:'No hay soluciones'});
 				}
 				else{
-
-					if(!soluciones){
-						res.status(404).send({message:'No hay soluciones'});
-					}
-					else{
-						res.status(200).send({soluciones});
-					}	
-				}
-			});
+					res.status(200).send({soluciones});
+				}	
+			}
 
 		});
-	}
-	
+
+	});
+
 
 }
 

@@ -14,6 +14,8 @@ var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
 var authentication_service_1 = require("../services/authentication.service");
 var criteriaSolucion_1 = require("../models/criteriaSolucion");
+//Para usar undescore y jquery
+var _ = require("underscore");
 var PanelBuscarSolucionesComponent = (function () {
     function PanelBuscarSolucionesComponent(_ejercicioService, _actividadService, _solucionService, _authenticationService) {
         this._ejercicioService = _ejercicioService;
@@ -33,6 +35,9 @@ var PanelBuscarSolucionesComponent = (function () {
         this.busquedaByAlumnos = new Array();
         this.fecha_desde = null;
         this.fecha_hasta = null;
+        this.soluciones = [];
+        this.msgBusqueda = "";
+        this.boolMsgBusqueda = false;
     }
     PanelBuscarSolucionesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,7 +49,6 @@ var PanelBuscarSolucionesComponent = (function () {
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
                 alert('Error en la peticion de mi coleccion');
             }
         });
@@ -53,7 +57,6 @@ var PanelBuscarSolucionesComponent = (function () {
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
                 alert('Error en la peticion de mi coleccion');
             }
         });
@@ -63,38 +66,13 @@ var PanelBuscarSolucionesComponent = (function () {
     PanelBuscarSolucionesComponent.prototype.exit = function () {
         this.salir.emit();
     };
-    PanelBuscarSolucionesComponent.prototype.buscarPorActividad = function () {
-        var _this = this;
-        this._solucionService.getByIdActividad(this.busquedaByActividad).subscribe(function (result) {
-            _this.soluciones = result.soluciones;
-            if (!_this.soluciones) {
-                alert('Error en el servidor');
-            }
-            else {
-                if (_this.soluciones.length > 0) {
-                    _this.setPageSoluciones(1);
-                    _this.mostrarSoluciones = true;
-                }
-                else {
-                    alert("No hay soluciones para esta actividad");
-                    _this.pagedSoluciones = [];
-                    _this.mostrarSoluciones = false;
-                }
-            }
-        }, function (error) {
-            _this.errorMessage = error;
-            if (_this.errorMessage != null) {
-                console.log(_this.errorMessage);
-                alert('Error en la peticion de mi coleccion');
-            }
-        });
-    };
     PanelBuscarSolucionesComponent.prototype.addAlumno = function (alu) {
         for (var i = 0; i < this.alumnos.length; i++) {
             if (this.alumnos[i]._id == alu) {
                 this.busquedaByAlumnos.push(this.alumnos[i]);
             }
         }
+        this.busquedaByAlumnos = _.uniq(this.busquedaByAlumnos);
     };
     PanelBuscarSolucionesComponent.prototype.deleteAlumno = function (alu) {
         for (var i = 0; i < this.busquedaByAlumnos.length; i++) {
@@ -102,6 +80,7 @@ var PanelBuscarSolucionesComponent = (function () {
                 this.busquedaByAlumnos.splice(i, 1);
             }
         }
+        $("#porAlumnos").val($("#porAlumnos option:first").val());
     };
     PanelBuscarSolucionesComponent.prototype.buscar = function () {
         var _this = this;
@@ -127,11 +106,14 @@ var PanelBuscarSolucionesComponent = (function () {
                 if (_this.soluciones.length > 0) {
                     _this.setPageSoluciones(1);
                     _this.mostrarSoluciones = true;
+                    _this.msgBusqueda = "";
+                    _this.boolMsgBusqueda = false;
                 }
                 else {
-                    alert("No hay soluciones para esta actividad");
                     _this.pagedSoluciones = [];
                     _this.mostrarSoluciones = false;
+                    _this.msgBusqueda = "No hay soluciones para este criterio de busqueda";
+                    _this.boolMsgBusqueda = true;
                 }
             }
         }, function (error) {
