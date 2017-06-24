@@ -13,6 +13,7 @@ var ejercicio_service_1 = require("../services/ejercicio.service");
 var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
 var authentication_service_1 = require("../services/authentication.service");
+var solucion_1 = require("../models/solucion");
 var criteriaSolucion_1 = require("../models/criteriaSolucion");
 //Para usar undescore y jquery
 var _ = require("underscore");
@@ -38,6 +39,8 @@ var PanelBuscarSolucionesComponent = (function () {
         this.soluciones = [];
         this.msgBusqueda = "";
         this.boolMsgBusqueda = false;
+        this.verSolu = false;
+        this.solucion = new solucion_1.Solucion();
     }
     PanelBuscarSolucionesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -82,6 +85,14 @@ var PanelBuscarSolucionesComponent = (function () {
         }
         $("#porAlumnos").val($("#porAlumnos option:first").val());
     };
+    PanelBuscarSolucionesComponent.prototype.limpiarFiltro = function () {
+        this.busquedaByActividad = null;
+        this.busquedaByAlumnos = [];
+        $("#porActividades").val($("#porActividades option:first").val());
+        $("#porAlumnos").val($("#porAlumnos option:first").val());
+        this.fecha_desde = null;
+        this.fecha_hasta = null;
+    };
     PanelBuscarSolucionesComponent.prototype.buscar = function () {
         var _this = this;
         var criteria = new criteriaSolucion_1.CriteriaSolucion();
@@ -123,6 +134,14 @@ var PanelBuscarSolucionesComponent = (function () {
                 alert('Error en la peticion de mi coleccion');
             }
         });
+    };
+    PanelBuscarSolucionesComponent.prototype.verSolucion = function (solucion) {
+        this.solucion = solucion;
+        this.verSolu = true;
+    };
+    PanelBuscarSolucionesComponent.prototype.saliendoDeVerSolucion = function () {
+        this.solucion = new solucion_1.Solucion();
+        this.verSolu = false;
     };
     PanelBuscarSolucionesComponent.prototype.setPageSoluciones = function (page) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

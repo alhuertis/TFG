@@ -20,7 +20,7 @@
 
         <div class="enlaces-ejers">
             <ul>
-                <li *ngFor="let ejer of actividad.ejercicios; let i=index" (click)="cambiaIndice(i)"><span>{{i}}#</span> {{ejer.titulo}}</li>
+                <li *ngFor="let ejer of actividad.ejercicios; let i=index" (click)="cambiaIndice(i)"><span>{{i}}#</span> {{ejer.titulo}}  <i *ngIf="i == indice" class="glyphicon glyphicon-hand-left"></i></li>
             </ul>
         </div>
 
@@ -48,11 +48,21 @@
 
             <div class="clearfix"></div>
 
-            <div class="msgProfesor">
+            <div *ngIf="user.role == 'alumno' && solucion.ejercicios[indice].msgProfesor != ''" class="msgProfesor">
                 <label for="anotacion">Anotación del profesor</label>
                 <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut autem ipsa magni alias, aspernatur omnis commodi eius 
                     sit libero rerum ab cumque quis cum voluptatem esse nulla reprehenderit iusto qui."</p>
+            </div>
 
+            <div *ngIf="user.role == 'alumno' && solucion.ejercicios[indice].msgProfesor == ''" class="msgProfesor">
+                <p>Su profesor aún no ha escrito ningún comentario sobre su respuesta a este ejercicio</p>
+            </div>
+
+            <div *ngIf="user.role == 'profesor'" class="msgProfesor valorar-profesor">
+                <p (click)="editarValoracion()" *ngIf="solucion.ejercicios[indice].msgProfesor == '' && !editarVal">Haz click para escribir una valoracion</p>
+                
+                <input (focusout)="(this.editarVal=false)" class="input-valorar" *ngIf="editarVal" type="text" name="val" #val="ngModel" [(ngModel)]="valoracion">
+                <button *ngIf="editarVal" class="btn btn-default">Valorar</button>
             </div>
 
         </div>

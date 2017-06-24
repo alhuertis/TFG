@@ -27,6 +27,8 @@ var DatosSolucionComponent = (function () {
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
         this.actividad = new actividad_1.Actividad();
         this.indice = 0;
+        this.editarVal = false;
+        this.valoracion = "";
     }
     DatosSolucionComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -47,6 +49,9 @@ var DatosSolucionComponent = (function () {
     };
     DatosSolucionComponent.prototype.cambiaIndice = function (i) {
         this.indice = i;
+    };
+    DatosSolucionComponent.prototype.editarValoracion = function () {
+        this.editarVal = true;
     };
     return DatosSolucionComponent;
 }());

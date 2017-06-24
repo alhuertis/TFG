@@ -1091,7 +1091,11 @@ ol li a{cursor: pointer;}
 	width: 70%;
 }
 
-.buscar-filtro button{ float: right; background: #01C7FF; margin-top: 35px; color: white;}
+.buscar-filtro .btn-limpiar{float: right; margin-top: 35px; margin-right: 15px;}
+
+.buscar-filtro .btn-buscar{ float: right; background: #01C7FF; margin-top: 35px; color: white;}
+
+
 
 .tags .tag{
 	background: #01C7FF; 
@@ -1159,6 +1163,9 @@ ol li a{cursor: pointer;}
 
 .enlaces-ejers li:hover{color: #27292B;}
 
+.enlaces-ejers i{ padding-left: 4px; font-size: 26px; }
+
+.enlaces-ejers .glyphicon-hand-left{top:7px; }
 
 .datos-solucion{
 	border-radius: 5px;
@@ -1199,7 +1206,19 @@ ol li a{cursor: pointer;}
 	padding: 8px;
 	margin-bottom: 15px;
 	font-size: 22px;
+	text-align: center;
 }
+
+.msgProfesor .input-valorar{
+	background: #22f978;
+	color: white;
+	border: none;
+	border-bottom: 1px solid #544f4f;
+}
+
+.msgProfesor .input-valorar:focus, .msgProfesor .input-valorar:active, .msgProfesor .input-valorar:link{
+	border: none !important;
+} 
 
 
 

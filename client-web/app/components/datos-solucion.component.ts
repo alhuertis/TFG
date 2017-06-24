@@ -33,6 +33,8 @@ export class  DatosSolucionComponent implements OnInit{
     public ejercicios: Ejercicio[];
     public actividad: Actividad;
     public indice: number;
+    public editarVal: boolean;
+    public valoracion: String;
    
     // pager object (paginador)
     /*pager: any = {};
@@ -49,7 +51,9 @@ export class  DatosSolucionComponent implements OnInit{
         this.errorMessage="";
         this.user= JSON.parse(localStorage.getItem('currentUser')).user;
         this.actividad= new Actividad();
-        this.indice=0; 
+        this.indice=0;
+        this.editarVal=false;
+        this.valoracion=""; 
         
 
 
@@ -85,6 +89,10 @@ export class  DatosSolucionComponent implements OnInit{
 
     cambiaIndice(i : number){
         this.indice=i;
+    }
+
+    editarValoracion(){
+        this.editarVal=true;
     }
 
 

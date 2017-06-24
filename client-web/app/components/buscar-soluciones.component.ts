@@ -46,6 +46,8 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
     public mostrarSoluciones: Boolean;
     public msgBusqueda: string;
     public boolMsgBusqueda: Boolean;
+    public verSolu: Boolean;
+    public solucion: Solucion;
 
 
 
@@ -66,6 +68,8 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
         this.soluciones=[];
         this.msgBusqueda="";
         this.boolMsgBusqueda=false;
+        this.verSolu=false;
+        this.solucion= new Solucion();
 
 
     }
@@ -141,6 +145,15 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
 
     }
 
+    limpiarFiltro(){
+        this.busquedaByActividad=null;
+        this.busquedaByAlumnos=[];
+        $("#porActividades").val($("#porActividades option:first").val());
+        $("#porAlumnos").val($("#porAlumnos option:first").val());
+        this.fecha_desde= null;
+        this.fecha_hasta= null;
+    }
+
     buscar(){
         var criteria= new CriteriaSolucion();
 
@@ -193,6 +206,16 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
             }
         );
 
+    }
+
+    verSolucion(solucion : Solucion){
+        this.solucion= solucion;
+        this.verSolu= true;
+    }
+
+    saliendoDeVerSolucion(){
+        this.solucion= new Solucion();
+        this.verSolu= false;
     }
 
     setPageSoluciones(page: number) {

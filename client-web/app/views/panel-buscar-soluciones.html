@@ -1,6 +1,6 @@
-<div class="panel-buscar-sol container-fluid">
+<div [ngStyle]="{'display': !verSolu ? 'block' : 'none'}" class="panel-buscar-sol container-fluid">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <ol class="breadcrumb" style="background:#eee">
                 <li><i class="glyphicon glyphicon-home"></i> <a (click)="exit()">Panel principal</a></li>
                 <li class="active">Ver soluciones </li>
@@ -39,7 +39,8 @@
                         </div>
                     </div>
 
-                    <button class="btn" (click)="buscar()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                    <button class="btn btn-buscar" (click)="buscar()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+                    <button class="btn btn-limpiar" (click)="limpiarFiltro()">Limpiar filtro</button>
                     <div class="clearfix"></div>
 
                 </div>
@@ -107,5 +108,7 @@
         </div>
     </div>
 </div>
+
+<datos-solucion *ngIf="verSolu" [solucion]="solucion" (salir)="saliendoDeVerSolucion()"></datos-solucion>
 
 
