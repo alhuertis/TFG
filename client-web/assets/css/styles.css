@@ -1200,25 +1200,89 @@ ol li a{cursor: pointer;}
 	padding-left: 18px;
 }
 
+.datos-solucion .notas-calificacion li:first-child{ margin-bottom: 7px;}
+
+.notas-calificacion input{
+	background: #3f7793;
+	width: 60px;
+	border: none;
+	outline: none;
+	color: white;
+	padding: 5px;
+	border-radius: 8px;
+}
+
+.notas-calificacion i{
+	margin-left: 12px;
+	cursor: pointer;
+	color: #3f7793;
+}
+
+.notas-calificacion #guardar-nota{
+	color: #2c8c53;
+}
+
+.notas-calificacion #cancelar-nota{
+	color: #a83e39;
+}
+
 .msgProfesor{
 	background: #22f978;
-	color: white;
 	padding: 8px;
 	margin-bottom: 15px;
+}
+
+.msgProfesor p{
+	color: white;
 	font-size: 22px;
 	text-align: center;
 }
 
 .msgProfesor .input-valorar{
-	background: #22f978;
+	background: #099641;
 	color: white;
 	border: none;
-	border-bottom: 1px solid #544f4f;
+	border-radius: 8px;
+	padding: 5px 10px 5px 10px;
+	font-size: 14px;
+	width: 100%;
 }
 
 .msgProfesor .input-valorar:focus, .msgProfesor .input-valorar:active, .msgProfesor .input-valorar:link{
 	border: none !important;
+	/*outline: 1px solid 	#046629;*/
+	outline: 0px;
 } 
+
+.msgProfesor button{
+	float: right;
+	margin-top: 8px;
+	margin-left: 8px;
+}
+
+.msgProfesor button:hover{
+	background: #ccc9c9;
+}
+
+.msgProfesor .btn-valorar{
+	color: #04722e;
+}
+
+.msgProfesor .btn-cancel-val{
+	color: #d30c0c
+}
+
+.msgProfesor .editar{
+	padding-bottom: 3px;
+	
+}
+
+.msgProfesor .editar i{
+	text-align: right;
+	font-size: 14px;
+	color: #50b277;
+	cursor: pointer;
+}
 
 
 

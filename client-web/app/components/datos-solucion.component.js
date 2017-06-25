@@ -29,6 +29,9 @@ var DatosSolucionComponent = (function () {
         this.indice = 0;
         this.editarVal = false;
         this.valoracion = "";
+        this.msgRespuesta = "";
+        this.editarNota = false;
+        this.nota = null;
     }
     DatosSolucionComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -49,9 +52,57 @@ var DatosSolucionComponent = (function () {
     };
     DatosSolucionComponent.prototype.cambiaIndice = function (i) {
         this.indice = i;
+        this.cancelValoracion();
+        this.editarNota = false;
+        this.editarVal = false;
+    };
+    DatosSolucionComponent.prototype.escribirValoracion = function () {
+        this.editarVal = true;
+    };
+    DatosSolucionComponent.prototype.cancelValoracion = function () {
+        this.editarVal = false;
+        this.valoracion = "";
     };
     DatosSolucionComponent.prototype.editarValoracion = function () {
+        this.valoracion = this.solucion.ejercicios[this.indice].msgProfesor;
         this.editarVal = true;
+    };
+    DatosSolucionComponent.prototype.editaNota = function () {
+        this.nota = this.solucion.ejercicios[this.indice].calificacion;
+        this.editarNota = true;
+    };
+    DatosSolucionComponent.prototype.guardarValoracion = function () {
+        var _this = this;
+        this.solucion.ejercicios[this.indice].msgProfesor = this.valoracion;
+        this._solucionService.updateSolucion(this.solucion).subscribe(function (result) {
+            _this.editarVal = false;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                alert(_this.errorMessage);
+            }
+        });
+    };
+    DatosSolucionComponent.prototype.guardarNota = function () {
+        var _this = this;
+        this.solucion.ejercicios[this.indice].calificacion = this.nota;
+        this.solucion.notaFinal = 0;
+        for (var i = 0; i < this.solucion.ejercicios.length; i++) {
+            this.solucion.notaFinal += this.solucion.ejercicios[i].calificacion;
+        }
+        this._solucionService.updateSolucion(this.solucion).subscribe(function (result) {
+            _this.editarNota = false;
+            _this.nota = null;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                alert(_this.errorMessage);
+            }
+        });
+    };
+    DatosSolucionComponent.prototype.cancelarNota = function () {
+        this.editarNota = false;
+        this.nota = null;
     };
     return DatosSolucionComponent;
 }());

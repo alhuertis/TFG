@@ -28,6 +28,7 @@ export class  DatosSolucionComponent implements OnInit{
     @Output() salir= new EventEmitter();
 
     public errorMessage: string;
+    public msgRespuesta: string;
 
     public user: User;
     public ejercicios: Ejercicio[];
@@ -35,6 +36,10 @@ export class  DatosSolucionComponent implements OnInit{
     public indice: number;
     public editarVal: boolean;
     public valoracion: String;
+
+    public editarNota: boolean;
+    public nota: number;
+    
    
     // pager object (paginador)
     /*pager: any = {};
@@ -53,7 +58,10 @@ export class  DatosSolucionComponent implements OnInit{
         this.actividad= new Actividad();
         this.indice=0;
         this.editarVal=false;
-        this.valoracion=""; 
+        this.valoracion="";
+        this.msgRespuesta="";
+        this.editarNota=false;
+        this.nota=null;
         
 
 
@@ -89,11 +97,80 @@ export class  DatosSolucionComponent implements OnInit{
 
     cambiaIndice(i : number){
         this.indice=i;
+        this.cancelValoracion();
+        this.editarNota=false;
+        this.editarVal= false;
+    }
+
+    escribirValoracion(){
+        this.editarVal=true;
+    }
+
+    cancelValoracion(){
+        this.editarVal=false;
+        this.valoracion="";
     }
 
     editarValoracion(){
+        this.valoracion= this.solucion.ejercicios[this.indice].msgProfesor;
         this.editarVal=true;
     }
+
+    editaNota(){
+        this.nota=this.solucion.ejercicios[this.indice].calificacion;
+        this.editarNota=true;
+    }
+
+
+    guardarValoracion(){
+
+        this.solucion.ejercicios[this.indice].msgProfesor=this.valoracion;
+
+        this._solucionService.updateSolucion(this.solucion).subscribe(
+
+           result =>{
+                this.editarVal=false;
+            },
+            error => {
+                this.errorMessage= <any>error;
+
+                if(this.errorMessage != null){
+                    alert(this.errorMessage);
+                }
+            }
+        );
+    }
+
+    guardarNota(){
+         this.solucion.ejercicios[this.indice].calificacion=this.nota;
+
+         this.solucion.notaFinal=0;
+         for(var i=0; i < this.solucion.ejercicios.length; i++){
+            this.solucion.notaFinal+= this.solucion.ejercicios[i].calificacion;
+         }
+
+         this._solucionService.updateSolucion(this.solucion).subscribe(
+
+           result =>{
+                this.editarNota=false;
+                this.nota=null;
+            },
+            error => {
+                this.errorMessage= <any>error;
+
+                if(this.errorMessage != null){
+                    alert(this.errorMessage);
+                }
+            }
+        );
+
+    }
+
+    cancelarNota(){
+        this.editarNota=false;
+        this.nota=null;
+    }
+
 
 
     /*setPageSoluciones(page: number) {

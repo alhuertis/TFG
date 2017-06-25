@@ -42,7 +42,14 @@
             </div>
 
             <ul class="notas-calificacion">
-                <li><label>Calificacion del ejercicio:</label> <span class="badge">{{solucion.ejercicios[indice].calificacion}}</span></li>
+                <li><label>Calificacion del ejercicio:</label> <span *ngIf="!editarNota" class="animated aparecer badge">{{solucion.ejercicios[indice].calificacion}}</span>
+                    <input class="input-valorar animated aparecer" *ngIf="editarNota && user.role=='profesor'" type="number" name="valNota" #valNota="ngModel" [(ngModel)]="nota" min="0" max="1"/> 
+                    <i class="animated aparecer" (click)="editaNota()" *ngIf="!editarNota && user.role=='profesor'" class="glyphicon glyphicon-pencil">editar</i> 
+                    <i class="animated aparecer" (click)="guardarNota()" id="guardar-nota" *ngIf="editarNota && user.role=='profesor'" class="glyphicon glyphicon-ok">guardar</i>
+                    <i class="animated aparecer" (click)="cancelarNota()" id="cancelar-nota" *ngIf="editarNota && user.role=='profesor'" class="glyphicon glyphicon-remove">cancelar</i>
+                
+                </li>
+                
                 <li><label>Mensage de la aplicacion:</label> {{solucion.ejercicios[indice].msgCalificacion}}</li>
             </ul>
 
@@ -50,8 +57,7 @@
 
             <div *ngIf="user.role == 'alumno' && solucion.ejercicios[indice].msgProfesor != ''" class="msgProfesor">
                 <label for="anotacion">Anotación del profesor</label>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut autem ipsa magni alias, aspernatur omnis commodi eius 
-                    sit libero rerum ab cumque quis cum voluptatem esse nulla reprehenderit iusto qui."</p>
+                <p>{{solucion.ejercicios[indice].msgProfesor}}</p>
             </div>
 
             <div *ngIf="user.role == 'alumno' && solucion.ejercicios[indice].msgProfesor == ''" class="msgProfesor">
@@ -59,11 +65,20 @@
             </div>
 
             <div *ngIf="user.role == 'profesor'" class="msgProfesor valorar-profesor">
-                <p (click)="editarValoracion()" *ngIf="solucion.ejercicios[indice].msgProfesor == '' && !editarVal">Haz click para escribir una valoracion</p>
+                <div *ngIf="solucion.ejercicios[indice].msgProfesor != ''" class="editar" (click)="editarValoracion()">
+                    <i class="glyphicon glyphicon-pencil">editar</i>
+                </div>
+                <p class="animated aparecer" (click)="escribirValoracion()" *ngIf="solucion.ejercicios[indice].msgProfesor == '' && !editarVal">Haz click para escribir una valoracion</p>
+                <p class="animated aparecer" *ngIf="solucion.ejercicios[indice].msgProfesor != '' && !editarVal">{{solucion.ejercicios[indice].msgProfesor}}</p>
                 
-                <input (focusout)="(this.editarVal=false)" class="input-valorar" *ngIf="editarVal" type="text" name="val" #val="ngModel" [(ngModel)]="valoracion">
-                <button *ngIf="editarVal" class="btn btn-default">Valorar</button>
+                <textarea autofocus class="input-valorar" *ngIf="editarVal" type="text" name="val" #val="ngModel" [(ngModel)]="valoracion">
+                </textarea>
+
+                <button *ngIf="editarVal" class="btn btn-valorar" (click)="guardarValoracion()">Guardar</button>
+                <button *ngIf="editarVal" class="btn btn-cancel-val" (click)="cancelValoracion()">Cancelar</button> 
+                <div class="clearfix"></div>
             </div>
+            
 
         </div>
 
