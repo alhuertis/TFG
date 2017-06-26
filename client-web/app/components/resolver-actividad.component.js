@@ -13,15 +13,17 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
+var diccionario_service_1 = require("../services/diccionario.service");
 var ejercicio_1 = require("../models/ejercicio");
 var ficha_1 = require("../models/ficha");
 var solucion_1 = require("../models/solucion");
 var solucion_ejercicio_1 = require("../models/solucion-ejercicio");
 var _ = require("underscore");
 var ResolverActividadComponent = (function () {
-    function ResolverActividadComponent(_actividadService, _solucionService, route, _router) {
+    function ResolverActividadComponent(_actividadService, _solucionService, _diccionarioService, route, _router) {
         this._actividadService = _actividadService;
         this._solucionService = _solucionService;
+        this._diccionarioService = _diccionarioService;
         this.route = route;
         this._router = _router;
         var parametros = this.route.snapshot.params['id_actividad'];
@@ -33,6 +35,8 @@ var ResolverActividadComponent = (function () {
             this.id_solucion = "";
         this.actividad = [];
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
+        this.diccionario = [];
+        this.caracterizacionesFichas = { "amarilla": "-animado +definido", "azul": "-animado -definido", "marron": "+animado -humano", "roja": "+animado +humano", "verde": "lugar" };
         /*this.actividad=
         [
             {
@@ -133,6 +137,14 @@ var ResolverActividadComponent = (function () {
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this._diccionarioService.getDiccionario().subscribe(function (result) {
+            _this.diccionario = result.diccionario;
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                alert(_this.errorMessage);
+            }
+        });
         this._actividadService.cargarActividad(this.id_actividad).subscribe(function (result) {
             _this.actividad = result.actividad.ejercicios;
             _this.infoActividad = result.actividad;
@@ -428,7 +440,13 @@ var ResolverActividadComponent = (function () {
         var data = event.dragData;
         var sonFichas = data == '-animado +definido' || data == '-animado -definido' || data == '+animado -humano' || data == '+animado +humano' || data == 'lugar';
         if (!sonFichas) {
-            alert(data);
+            var vari = _.findWhere(this.diccionario, { "lema": data.toLowerCase() });
+            if (vari != undefined) {
+                alert(vari.significado[0].caracArgumental[0]);
+            }
+            else {
+                alert("No se encuentra en el diccionario");
+            }
         }
         else {
             if (posicion == 'izquierda') {
@@ -548,11 +566,12 @@ ResolverActividadComponent = __decorate([
     core_1.Component({
         selector: 'resolver-actividad',
         templateUrl: 'app/views/resolver-actividad.html',
-        providers: [actividad_service_1.ActividadService, solucion_service_1.SolucionService],
+        providers: [actividad_service_1.ActividadService, solucion_service_1.SolucionService, diccionario_service_1.DiccionarioService],
         styleUrls: ['../../assets/css/styles.css'],
     }),
     __metadata("design:paramtypes", [actividad_service_1.ActividadService,
         solucion_service_1.SolucionService,
+        diccionario_service_1.DiccionarioService,
         router_1.ActivatedRoute,
         router_1.Router])
 ], ResolverActividadComponent);

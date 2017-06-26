@@ -5,6 +5,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {ActividadService} from '../services/actividad.service';
 import {SolucionService} from '../services/solucion.service';
+import {DiccionarioService} from '../services/diccionario.service';
 import {Actividad} from '../models/actividad';
 import {Ejercicio} from '../models/ejercicio';
 import {Ficha} from '../models/ficha';
@@ -19,7 +20,7 @@ import * as _ from 'underscore';
 
 	selector: 'resolver-actividad',
 	templateUrl: 'app/views/resolver-actividad.html',
-	providers: [ActividadService, SolucionService], //Necesitamos esto para poder usar los metodos
+	providers: [ActividadService, SolucionService, DiccionarioService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/styles.css'],
 }) 
 
@@ -74,13 +75,18 @@ export class  ResolverActividadComponent implements OnInit{
     modalAyuda: Boolean;
     msgSalir: String;
 
+    //Diccionario 
+    diccionario: {}[];
+    caracterizacionesFichas: {};
+
  
 	
 	
 
 	constructor(
 			private _actividadService: ActividadService,
-            private _solucionService: SolucionService, 
+            private _solucionService: SolucionService,
+            private _diccionarioService: DiccionarioService, 
             private route:  ActivatedRoute,
             private _router: Router
 
@@ -97,6 +103,8 @@ export class  ResolverActividadComponent implements OnInit{
 
         this.actividad=[];
         this.user= JSON.parse(localStorage.getItem('currentUser')).user;
+        this.diccionario=[];
+        this.caracterizacionesFichas= {"amarilla":"-animado +definido", "azul":"-animado -definido", "marron":"+animado -humano", "roja":"+animado +humano", "verde":"lugar"};
         /*this.actividad=
         [
             {   
@@ -206,6 +214,23 @@ export class  ResolverActividadComponent implements OnInit{
 
 
 	ngOnInit(){
+
+        this._diccionarioService.getDiccionario().subscribe(
+
+            result =>{
+                this.diccionario= result.diccionario;
+                
+                
+            },
+
+            error=>{
+                this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					alert(this.errorMessage);
+				}
+            }
+        );
 
         this._actividadService.cargarActividad(this.id_actividad).subscribe(
 			result =>{
@@ -537,7 +562,14 @@ export class  ResolverActividadComponent implements OnInit{
         var data= event.dragData;
         var sonFichas:Boolean= data == '-animado +definido' || data == '-animado -definido' || data == '+animado -humano' || data == '+animado +humano' || data == 'lugar';
         if(!sonFichas){ //Si lo que se arrastran son las palabras
-            alert(data);
+            var vari= _.findWhere(this.diccionario, {"lema": data.toLowerCase()});
+            if(vari != undefined){
+                alert(vari.significado[0].caracArgumental[0]);
+            }
+            else{
+                alert("No se encuentra en el diccionario");
+            }
+            
 
         }
         else{ //Si hacemos drop con las fichas
