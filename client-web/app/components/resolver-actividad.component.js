@@ -37,6 +37,11 @@ var ResolverActividadComponent = (function () {
         this.user = JSON.parse(localStorage.getItem('currentUser')).user;
         this.diccionario = [];
         this.caracterizacionesFichas = { "amarilla": "-animado +definido", "azul": "-animado -definido", "marron": "+animado -humano", "roja": "+animado +humano", "verde": "lugar" };
+        this.color = "";
+        this.izquierda = { "puesta": "false", "color": "", "caracterizacion": "", "emparejada": "" };
+        this.derecha = { "puesta": "false", "color": "", "caracterizacion": "", "emparejada": "" };
+        this.superior = { "puesta": "false", "color": "", "caracterizacion": "", "emparejada": "" };
+        this.palabrasAcertadas = [];
         /*this.actividad=
         [
             {
@@ -409,22 +414,22 @@ var ResolverActividadComponent = (function () {
             alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
         else {
             if (palabra == this.verbo) {
-                alert("Has acertado, es el verbo");
+                //alert("Has acertado, es el verbo");
                 this.faseVerbo = true;
                 if (this.argumentos == 1 && event.dragData == "monovalente") {
                     this.monovalente.activa = true;
                 }
                 else if (this.argumentos == 2 && event.dragData == "bivalente") {
                     this.bivalente.activa = true;
-                    $(event.nativeEvent.target).addClass("marcada");
                 }
                 else if (this.argumentos == 3 && event.dragData == "trivalente") {
-                    this.bivalente.activa = true;
+                    this.trivalente.activa = true;
                 }
                 else {
                     alert("Pero no es la ficha adecuada");
                     this.faseVerbo = false;
                 }
+                $(event.nativeEvent.target).addClass("marcada flash");
             }
             else {
                 alert("No es el verbo");
@@ -432,9 +437,10 @@ var ResolverActividadComponent = (function () {
             }
         }
     };
-    ResolverActividadComponent.prototype.dragPentagono = function (event) {
+    ResolverActividadComponent.prototype.dragPentagono = function (event, color) {
         //alert($(event.nativeEvent.target).attr("src"));
         this.srcDraggedPentagono = $(event.target).attr("src");
+        this.color = color;
     };
     ResolverActividadComponent.prototype.dropPentagono = function (event, posicion) {
         var data = event.dragData;
@@ -443,12 +449,40 @@ var ResolverActividadComponent = (function () {
             var vari = _.findWhere(this.diccionario, { "lema": data.toLowerCase() });
             if (vari != undefined) {
                 alert(vari.significado[0].caracArgumental[0]);
+                alert(data);
+                if (posicion == 'izquierda' && this.izquierda.caracterizacion == vari.significado[0].caracArgumental[0]) {
+                    $("." + data).css("background", this.izquierda.color);
+                }
+                else if (posicion == 'superior' && this.superior.caracterizacion == vari.significado[0].caracArgumental[0]) {
+                    $("." + data).css("background", this.superior.color);
+                }
+                else if (posicion == 'derecha' && this.derecha.caracterizacion == vari.significado[0].caracArgumental[0]) {
+                    $("." + data).css("background", this.derecha.color);
+                }
+                else {
+                    alert("No se pueden emparejar");
+                }
             }
             else {
                 alert("No se encuentra en el diccionario");
             }
         }
         else {
+            if (posicion == 'izquierda') {
+                this.izquierda.color = this.color;
+                this.izquierda.puesta = true;
+                this.izquierda.caracterizacion = data;
+            }
+            else if (posicion == 'superior') {
+                this.superior.color = this.color;
+                this.superior.puesta = true;
+                this.superior.caracterizacion = data;
+            }
+            else if (posicion == 'derecha') {
+                this.derecha.color = this.color;
+                this.derecha.puesta = true;
+                this.derecha.caracterizacion = data;
+            }
             if (posicion == 'izquierda') {
                 if (data == '+animado +humano') {
                     $(event.nativeEvent.target).children().css("display", "block");

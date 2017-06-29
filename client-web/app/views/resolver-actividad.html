@@ -71,23 +71,23 @@
                     </div>
 
                     <div data-toggle="tooltip" data-placement="left" title="-animado +definido">
-                        <img draggable="true" [dragData]="'-animado +definido'" [dragOverClass]="'drag-ficha'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_amarillo.png" alt="amarilla" class="img-responsive">
+                        <img draggable="true" [dragData]="'-animado +definido'" [dragOverClass]="'drag-ficha'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event, '#CAC834')" src="../../assets/images/pentagono_amarillo.png" alt="amarillo" class="img-responsive">
                     </div>
 
                     <div data-toggle="tooltip" data-placement="left" title="-animado -definido">
-                        <img draggable="true" [dragData]="'-animado -definido'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_azul.png" alt="azul" class="img-responsive">
+                        <img draggable="true" [dragData]="'-animado -definido'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event, '#52BCCF')" src="../../assets/images/pentagono_azul.png" alt="azul" class="img-responsive">
                     </div>
 
                     <div data-toggle="tooltip" data-placement="left" title="+animado -humano">
-                        <img draggable="true" [dragData]="'+animado -humano'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_naranja.png" alt="naranja" class="img-responsive">
+                        <img draggable="true" [dragData]="'+animado -humano'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event, '#89622F')" src="../../assets/images/pentagono_naranja.png" alt="naranja" class="img-responsive">
                     </div>
                     
                     <div data-toggle="tooltip" data-placement="left" title="+animado +humano">
-                        <img draggable="true" [dragData]="'+animado +humano'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_rojo.png" alt="roja" class="img-responsive">
+                        <img draggable="true" [dragData]="'+animado +humano'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event, '#D33D3D')" src="../../assets/images/pentagono_rojo.png" alt="rojo" class="img-responsive">
                     </div>
 
                     <div data-toggle="tooltip" data-placement="left" title="lugar">
-                        <img draggable="true" [dragData]="'lugar'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event)" src="../../assets/images/pentagono_verde.png" alt="verde" class="img-responsive">                       
+                        <img draggable="true" [dragData]="'lugar'" (click)="sacarFichas($event)" (onDragStart)="dragPentagono($event, '#52CF61')" src="../../assets/images/pentagono_verde.png" alt="verde" class="img-responsive">                       
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="frase-traducir animated fadeInLeft">
-                        <p><span droppable="true" class="label label-default" [dragOverClass]="'drop-ficha-palabra'" *ngFor="let palabra of fraseSplit" (onDrop)="dropVerbo($event, palabra)" (click)="clickPalabra($event,palabra)" draggable="true" [dragData]="palabra">{{palabra}}</span></p>
+                        <p><span droppable="true" class="label label-default" [dragOverClass]="'drop-ficha-palabra'" *ngFor="let palabra of fraseSplit; let i= index" [ngClass]="fraseSplit[i]" (onDrop)="dropVerbo($event, palabra)" (click)="clickPalabra($event,palabra)" draggable="true" [dragData]="palabra">{{palabra}}</span></p>
                     </div>
 
                     <div class="solucion">
@@ -110,9 +110,9 @@
 
                     <div class="puzle">
                         <div id="central">
-                            <img *ngIf="monovalente.activa" id="monovalente" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': monovalente.top}">
-                            <img *ngIf="bivalente.activa" id="bivalente" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': bivalente.top}">    
-                            <img *ngIf="trivalente.activa" id="trivalente" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive" [ngStyle]="{'top': trivalente.top}">
+                            <img *ngIf="monovalente.activa" id="monovalente" src="../../assets/images/triangulo_monovalente.png" alt="monovalente" class="img-responsive flash" [ngStyle]="{'top': monovalente.top}">
+                            <img *ngIf="bivalente.activa" id="bivalente" src="../../assets/images/triangulo_bivalente.png" alt="monovalente" class="img-responsive flash" [ngStyle]="{'top': bivalente.top}">    
+                            <img *ngIf="trivalente.activa" id="trivalente" src="../../assets/images/triangulo_trivalente.png" alt="monovalente" class="img-responsive flash" [ngStyle]="{'top': trivalente.top}">
 
                             <div id="izq" (click)="quitaPentagono($event)" *ngIf="argumentos >= 2 && faseVerbo" droppable="true" [dragOverClass]="'drop-ficha-pentagono'" (onDrop)="dropPentagono($event, 'izquierda')">
                                 <img class="img-responsive izquierda">

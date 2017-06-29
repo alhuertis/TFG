@@ -19,6 +19,37 @@ ol li a{cursor: pointer;}
 
 
 /*********FIN ANIMACIONES***********/
+
+.flash{
+	-webkit-animation-name: flash;
+	animation-name: flash;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+@-webkit-keyframes flash{
+	0%, 50%, 100% {
+		opacity: 1;
+	}
+
+	25%, 75% {
+		opacity: 0;
+	}
+}
+  
+@keyframes flash {
+  	0%, 50%, 100% {
+  		opacity: 1;
+  	}
+
+	25%, 75% {
+  		opacity: 0;
+  	}
+}
+
+
 .animated {
 	-webkit-animation-duration: 0.5s;
 	animation-duration: 0.5s;
@@ -145,7 +176,8 @@ ol li a{cursor: pointer;}
 .aparecer {
 	-webkit-animation-name: aparecer;
 	animation-name: aparecer;
-} 
+}
+
 /*********HEADER PROFESOR / ALUMNO**********/
 
 .menu-opciones{
@@ -683,17 +715,21 @@ ol li a{cursor: pointer;}
 .frase-traducir p span{
 	margin: 2px;
 	font-size: 16px;
-	background: #39a890;
+	background:none;
 	cursor: pointer;
+	border: 1px solid #544f4f;
+	color: #544f4f;
 	
 }
 
 .frase-traducir p span:hover{
-	background:#544f4f;
+	background:#979595;
+	color: white;
 }
 
 .marcada{
-	background:#f43333 !important;
+	background:#979595 !important;
+	border: none !important;
 }
 
 .acertada{
@@ -851,7 +887,8 @@ ol li a{cursor: pointer;}
 }
 
 .drop-ficha-palabra{
-	background:#f43333 !important;
+	background:#979595 !important;
+	border: none !important;
 }
 
 .resolver{

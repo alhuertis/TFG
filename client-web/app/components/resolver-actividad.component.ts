@@ -79,6 +79,12 @@ export class  ResolverActividadComponent implements OnInit{
     diccionario: {}[];
     caracterizacionesFichas: {};
 
+    //Control de pentagonos y palabras usadas
+    color: String;
+    izquierda: {puesta, color, caracterizacion, emparejada};
+    superior: {puesta, color, caracterizacion, emparejada};
+    derecha: {puesta, color, caracterizacion, emparejada};
+    palabrasAcertadas: Boolean[];
  
 	
 	
@@ -105,6 +111,11 @@ export class  ResolverActividadComponent implements OnInit{
         this.user= JSON.parse(localStorage.getItem('currentUser')).user;
         this.diccionario=[];
         this.caracterizacionesFichas= {"amarilla":"-animado +definido", "azul":"-animado -definido", "marron":"+animado -humano", "roja":"+animado +humano", "verde":"lugar"};
+        this.color="";
+        this.izquierda= {"puesta":"false", "color":"", "caracterizacion":"", "emparejada":""};
+        this.derecha={"puesta":"false", "color":"", "caracterizacion":"", "emparejada":""};
+        this.superior={"puesta":"false", "color":"", "caracterizacion":"", "emparejada":""};
+        this.palabrasAcertadas=[];
         /*this.actividad=
         [
             {   
@@ -526,7 +537,7 @@ export class  ResolverActividadComponent implements OnInit{
         else{
 
             if(palabra == this.verbo){
-                alert("Has acertado, es el verbo");
+                //alert("Has acertado, es el verbo");
                 this.faseVerbo=true;
 
                 if(this.argumentos==1 && event.dragData == "monovalente"){
@@ -534,14 +545,16 @@ export class  ResolverActividadComponent implements OnInit{
                 }
                 else if(this.argumentos==2 && event.dragData == "bivalente"){
                     this.bivalente.activa=true;
-                    $(event.nativeEvent.target).addClass("marcada");
+                    
                 }else if(this.argumentos==3 && event.dragData == "trivalente"){
-                    this.bivalente.activa=true;
+                    this.trivalente.activa=true;
                 }
                 else{
                     alert("Pero no es la ficha adecuada");
                     this.faseVerbo=false;
                 }
+
+                $(event.nativeEvent.target).addClass("marcada flash");
             }
             else{
                 alert("No es el verbo");
@@ -550,11 +563,13 @@ export class  ResolverActividadComponent implements OnInit{
         }
     }
 
-    dragPentagono(event: any){
+
+    dragPentagono(event: any, color: String){
 
         //alert($(event.nativeEvent.target).attr("src"));
         
         this.srcDraggedPentagono=$(event.target).attr("src");
+        this.color=color;
         
     }
 
@@ -564,7 +579,23 @@ export class  ResolverActividadComponent implements OnInit{
         if(!sonFichas){ //Si lo que se arrastran son las palabras
             var vari= _.findWhere(this.diccionario, {"lema": data.toLowerCase()});
             if(vari != undefined){
+                
                 alert(vari.significado[0].caracArgumental[0]);
+                alert(data);
+
+                
+                if(posicion == 'izquierda' && this.izquierda.caracterizacion == vari.significado[0].caracArgumental[0] ){
+                    $("."+data).css("background", this.izquierda.color);
+
+                }else if(posicion == 'superior' && this.superior.caracterizacion == vari.significado[0].caracArgumental[0] ){
+                    $("."+data).css("background", this.superior.color);
+
+                }else if(posicion == 'derecha' && this.derecha.caracterizacion == vari.significado[0].caracArgumental[0]){
+                    $("."+data).css("background", this.derecha.color);
+                }else{
+                    alert("No se pueden emparejar");
+                }
+                
             }
             else{
                 alert("No se encuentra en el diccionario");
@@ -573,6 +604,20 @@ export class  ResolverActividadComponent implements OnInit{
 
         }
         else{ //Si hacemos drop con las fichas
+            if(posicion == 'izquierda'){
+                this.izquierda.color= this.color;
+                this.izquierda.puesta= true;
+                this.izquierda.caracterizacion= data;
+            }else if(posicion == 'superior'){
+                this.superior.color=this.color;
+                this.superior.puesta= true;
+                this.superior.caracterizacion= data;
+            }else if(posicion == 'derecha'){
+                this.derecha.color=this.color;
+                this.derecha.puesta= true;
+                this.derecha.caracterizacion= data;
+            }
+
             if(posicion == 'izquierda'){
                 if(data == '+animado +humano'){
                     $(event.nativeEvent.target).children().css("display", "block");
