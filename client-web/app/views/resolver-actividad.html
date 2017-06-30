@@ -103,8 +103,8 @@
                     </div>
 
                     <div class="solucion">
-                        <input type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
-                        <button class="btn btn-default" [disabled]="respuesta.length == 0 || terminado" (click)="calificar()">Enviar</button>
+                        <input *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
+                        <button *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" class="btn btn-default" [disabled]="respuesta.length == 0 || terminado" (click)="calificar()">Enviar</button>
                         <button class="btn btn-success animated aparecer" *ngIf="terminado" (click)="abrirModalSalir()">Terminar</button>
                     </div>
 
@@ -128,6 +128,8 @@
                         </div>
                         
                     </div>
+
+                    
       
                 </div>
             </div>    

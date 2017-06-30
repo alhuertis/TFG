@@ -273,18 +273,22 @@ export class  ResolverActividadComponent implements OnInit{
             this._solucionService.getSolucion(this.id_solucion).subscribe(
 
                 result=>{
-                    this.solucion= result.solucion;
-                    if(!this.solucion)
-                        alert("No se han podidos cargar los datos de solucion anteriores");
-                    else{
-                        for(var i= 0; i< this.solucion.ejercicios.length; i++){
-                            if(this.solucion.ejercicios[i].calificacion >= 0){
-                                this.calificaciones[i]= this.solucion.ejercicios[i].calificacion;
-                                this.resueltos++;
+                    this.sleep(800).then(()=>{
+                        this.solucion= result.solucion;
+                        if(!this.solucion)
+                            alert("No se han podidos cargar los datos de solucion anteriores");
+                        else{
+                            for(var i= 0; i< this.solucion.ejercicios.length; i++){
+                                if(this.solucion.ejercicios[i].calificacion >= 0){
+                                    this.calificaciones[i]= this.solucion.ejercicios[i].calificacion;
+                                    this.resueltos++;
+                                }
                             }
+                            this.progreso= (this.resueltos * 100) / this.actividad.length;
                         }
-                        this.progreso= (this.resueltos * 100) / this.actividad.length;
-                    }
+                    });
+                    
+                    
                 },
 
                 error=>{
@@ -313,6 +317,7 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     siguienteEjer(){
+        this.restaurarColoresPalabras();
         this.ejerSel++;
         this.siguiente= this.ejerSel < this.actividad.length - 1;
         this.anterior=this.ejerSel > 0;
@@ -338,6 +343,7 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     anteriorEjer(){
+        this.restaurarColoresPalabras();
         this.ejerSel--;
         this.anterior= this.ejerSel > 0;
         this.siguiente= this.ejerSel < this.actividad.length-1;
@@ -542,22 +548,29 @@ export class  ResolverActividadComponent implements OnInit{
 
                 if(this.argumentos==1 && event.dragData == "monovalente"){
                     this.monovalente.activa=true;
+                    $(event.nativeEvent.target).addClass("marcada flash");
                 }
                 else if(this.argumentos==2 && event.dragData == "bivalente"){
                     this.bivalente.activa=true;
+                    $(event.nativeEvent.target).addClass("marcada flash");
                     
                 }else if(this.argumentos==3 && event.dragData == "trivalente"){
                     this.trivalente.activa=true;
+                    $(event.nativeEvent.target).addClass("marcada flash");
                 }
                 else{
-                    alert("Pero no es la ficha adecuada");
+                    //alert("Pero no es la ficha adecuada");
                     this.faseVerbo=false;
                 }
 
-                $(event.nativeEvent.target).addClass("marcada flash");
+                
             }
             else{
-                alert("No es el verbo");
+                //alert("No es el verbo");
+                $(event.nativeEvent.target).addClass("shake");
+                this.sleep(1000).then(()=>{
+                    $(".frase-traducir").children().removeClass("shake");
+                });
                 this.faseVerbo=false;
             }
         }
@@ -580,20 +593,31 @@ export class  ResolverActividadComponent implements OnInit{
             var vari= _.findWhere(this.diccionario, {"lema": data.toLowerCase()});
             if(vari != undefined){
                 
-                alert(vari.significado[0].caracArgumental[0]);
-                alert(data);
+                //alert(vari.significado[0].caracArgumental[0]);
+                //alert(data);
 
                 
                 if(posicion == 'izquierda' && this.izquierda.caracterizacion == vari.significado[0].caracArgumental[0] ){
                     $("."+data).css("background", this.izquierda.color);
+                    $("."+data).addClass("flash");
+                    $(".izquierda").addClass("flash");
 
                 }else if(posicion == 'superior' && this.superior.caracterizacion == vari.significado[0].caracArgumental[0] ){
                     $("."+data).css("background", this.superior.color);
+                    $("."+data).addClass("flash");
+                    $(".superior").addClass("flash");
 
                 }else if(posicion == 'derecha' && this.derecha.caracterizacion == vari.significado[0].caracArgumental[0]){
                     $("."+data).css("background", this.derecha.color);
+                    $("."+data).addClass("flash");
+                    $(".derecha").addClass("flash");
+
                 }else{
-                    alert("No se pueden emparejar");
+                    //alert("No se pueden emparejar");
+                    $("."+data).addClass("shake");
+                    this.sleep(1000).then(()=>{
+                        $("."+data).removeClass("shake");
+                    });
                 }
                 
             }
@@ -624,12 +648,32 @@ export class  ResolverActividadComponent implements OnInit{
                     $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
                 }
                 else{
-                    alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+
+                    //alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
+                    $(event.nativeEvent.target).children().addClass("fadeOut2");
+
+                    this.sleep(1000).then(()=>{
+                        $(event.nativeEvent.target).children().css("display", "none");
+                        $(event.nativeEvent.target).children().removeAttr("src");
+                        $(event.nativeEvent.target).children().removeClass("fadeOut2")
+                    });
+                    
                 }
 
             }else{
                 if(data == '+animado +humano'){
-                    alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                    //alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
+                    $(event.nativeEvent.target).children().addClass("fadeOut2");
+
+                    this.sleep(700).then(()=>{
+                        $(event.nativeEvent.target).children().css("display", "none");
+                        $(event.nativeEvent.target).children().removeAttr("src");
+                        $(event.nativeEvent.target).children().removeClass("fadeOut2")
+                    });
                 }else{
                     $(event.nativeEvent.target).children().css("display", "block");
                     $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
@@ -680,7 +724,7 @@ export class  ResolverActividadComponent implements OnInit{
                     if(this.solucion._id == ""){
                         alert('Error en el servidor guardando la solucion');
                     }else{
-                        alert("Se ha guardado la actividad con id: " + this.solucion._id);
+                        //alert("Se ha guardado la actividad con id: " + this.solucion._id);
                     }
                 },
                 error => {
@@ -702,7 +746,7 @@ export class  ResolverActividadComponent implements OnInit{
                     if(this.solucion._id == ""){
                         alert('Error en el servidor actualizando la solucion');
                     }else{
-                        alert("Se ha actualizado la actividad con id: " + this.solucion._id);
+                        //alert("Se ha actualizado la actividad con id: " + this.solucion._id);
                     }
                 },
                 error => {
@@ -749,5 +793,15 @@ export class  ResolverActividadComponent implements OnInit{
     abrirModalAyuda(){
         this.modalAyuda=true;
         setTimeout(() => this.visibleAnimate = true);
+    }
+
+    restaurarColoresPalabras(){
+
+        for(var p of this.fraseSplit){
+            $("."+p).css("background", "none");
+            $("."+p).removeClass("flash");
+        }
+
+       
     }
 }

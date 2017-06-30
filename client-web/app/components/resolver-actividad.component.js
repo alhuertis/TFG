@@ -173,18 +173,20 @@ var ResolverActividadComponent = (function () {
         });
         if (this.id_solucion != "") {
             this._solucionService.getSolucion(this.id_solucion).subscribe(function (result) {
-                _this.solucion = result.solucion;
-                if (!_this.solucion)
-                    alert("No se han podidos cargar los datos de solucion anteriores");
-                else {
-                    for (var i = 0; i < _this.solucion.ejercicios.length; i++) {
-                        if (_this.solucion.ejercicios[i].calificacion >= 0) {
-                            _this.calificaciones[i] = _this.solucion.ejercicios[i].calificacion;
-                            _this.resueltos++;
+                _this.sleep(800).then(function () {
+                    _this.solucion = result.solucion;
+                    if (!_this.solucion)
+                        alert("No se han podidos cargar los datos de solucion anteriores");
+                    else {
+                        for (var i = 0; i < _this.solucion.ejercicios.length; i++) {
+                            if (_this.solucion.ejercicios[i].calificacion >= 0) {
+                                _this.calificaciones[i] = _this.solucion.ejercicios[i].calificacion;
+                                _this.resueltos++;
+                            }
                         }
+                        _this.progreso = (_this.resueltos * 100) / _this.actividad.length;
                     }
-                    _this.progreso = (_this.resueltos * 100) / _this.actividad.length;
-                }
+                });
             }, function (error) {
                 _this.errorMessage = error;
                 if (_this.errorMessage != null) {
@@ -207,6 +209,7 @@ var ResolverActividadComponent = (function () {
         return verbo;
     };
     ResolverActividadComponent.prototype.siguienteEjer = function () {
+        this.restaurarColoresPalabras();
         this.ejerSel++;
         this.siguiente = this.ejerSel < this.actividad.length - 1;
         this.anterior = this.ejerSel > 0;
@@ -230,6 +233,7 @@ var ResolverActividadComponent = (function () {
         this.guardarSolucion();
     };
     ResolverActividadComponent.prototype.anteriorEjer = function () {
+        this.restaurarColoresPalabras();
         this.ejerSel--;
         this.anterior = this.ejerSel > 0;
         this.siguiente = this.ejerSel < this.actividad.length - 1;
@@ -418,21 +422,27 @@ var ResolverActividadComponent = (function () {
                 this.faseVerbo = true;
                 if (this.argumentos == 1 && event.dragData == "monovalente") {
                     this.monovalente.activa = true;
+                    $(event.nativeEvent.target).addClass("marcada flash");
                 }
                 else if (this.argumentos == 2 && event.dragData == "bivalente") {
                     this.bivalente.activa = true;
+                    $(event.nativeEvent.target).addClass("marcada flash");
                 }
                 else if (this.argumentos == 3 && event.dragData == "trivalente") {
                     this.trivalente.activa = true;
+                    $(event.nativeEvent.target).addClass("marcada flash");
                 }
                 else {
-                    alert("Pero no es la ficha adecuada");
+                    //alert("Pero no es la ficha adecuada");
                     this.faseVerbo = false;
                 }
-                $(event.nativeEvent.target).addClass("marcada flash");
             }
             else {
-                alert("No es el verbo");
+                //alert("No es el verbo");
+                $(event.nativeEvent.target).addClass("shake");
+                this.sleep(1000).then(function () {
+                    $(".frase-traducir").children().removeClass("shake");
+                });
                 this.faseVerbo = false;
             }
         }
@@ -448,19 +458,29 @@ var ResolverActividadComponent = (function () {
         if (!sonFichas) {
             var vari = _.findWhere(this.diccionario, { "lema": data.toLowerCase() });
             if (vari != undefined) {
-                alert(vari.significado[0].caracArgumental[0]);
-                alert(data);
+                //alert(vari.significado[0].caracArgumental[0]);
+                //alert(data);
                 if (posicion == 'izquierda' && this.izquierda.caracterizacion == vari.significado[0].caracArgumental[0]) {
                     $("." + data).css("background", this.izquierda.color);
+                    $("." + data).addClass("flash");
+                    $(".izquierda").addClass("flash");
                 }
                 else if (posicion == 'superior' && this.superior.caracterizacion == vari.significado[0].caracArgumental[0]) {
                     $("." + data).css("background", this.superior.color);
+                    $("." + data).addClass("flash");
+                    $(".superior").addClass("flash");
                 }
                 else if (posicion == 'derecha' && this.derecha.caracterizacion == vari.significado[0].caracArgumental[0]) {
                     $("." + data).css("background", this.derecha.color);
+                    $("." + data).addClass("flash");
+                    $(".derecha").addClass("flash");
                 }
                 else {
-                    alert("No se pueden emparejar");
+                    //alert("No se pueden emparejar");
+                    $("." + data).addClass("shake");
+                    this.sleep(1000).then(function () {
+                        $("." + data).removeClass("shake");
+                    });
                 }
             }
             else {
@@ -489,12 +509,28 @@ var ResolverActividadComponent = (function () {
                     $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
                 }
                 else {
-                    alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                    //alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
+                    $(event.nativeEvent.target).children().addClass("fadeOut2");
+                    this.sleep(1000).then(function () {
+                        $(event.nativeEvent.target).children().css("display", "none");
+                        $(event.nativeEvent.target).children().removeAttr("src");
+                        $(event.nativeEvent.target).children().removeClass("fadeOut2");
+                    });
                 }
             }
             else {
                 if (data == '+animado +humano') {
-                    alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                    //alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                    $(event.nativeEvent.target).children().css("display", "block");
+                    $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
+                    $(event.nativeEvent.target).children().addClass("fadeOut2");
+                    this.sleep(700).then(function () {
+                        $(event.nativeEvent.target).children().css("display", "none");
+                        $(event.nativeEvent.target).children().removeAttr("src");
+                        $(event.nativeEvent.target).children().removeClass("fadeOut2");
+                    });
                 }
                 else {
                     $(event.nativeEvent.target).children().css("display", "block");
@@ -535,7 +571,6 @@ var ResolverActividadComponent = (function () {
                     alert('Error en el servidor guardando la solucion');
                 }
                 else {
-                    alert("Se ha guardado la actividad con id: " + _this.solucion._id);
                 }
             }, function (error) {
                 _this.errorMessage = error;
@@ -552,7 +587,6 @@ var ResolverActividadComponent = (function () {
                     alert('Error en el servidor actualizando la solucion');
                 }
                 else {
-                    alert("Se ha actualizado la actividad con id: " + _this.solucion._id);
                 }
             }, function (error) {
                 _this.errorMessage = error;
@@ -593,6 +627,13 @@ var ResolverActividadComponent = (function () {
         var _this = this;
         this.modalAyuda = true;
         setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    ResolverActividadComponent.prototype.restaurarColoresPalabras = function () {
+        for (var _i = 0, _a = this.fraseSplit; _i < _a.length; _i++) {
+            var p = _a[_i];
+            $("." + p).css("background", "none");
+            $("." + p).removeClass("flash");
+        }
     };
     return ResolverActividadComponent;
 }());
