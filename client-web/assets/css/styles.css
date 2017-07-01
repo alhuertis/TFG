@@ -1093,6 +1093,11 @@ ol li a{cursor: pointer;}
 .botones-resolver ul li:last-child:hover{
 	background: #c61919;
 }
+
+.modal-diccionario .modal-body{
+	min-height: 300px;
+}
+
 /*********FIN PANEL ALUMNO**********/
 
 /*********PANEL ADMIN**********/
@@ -1460,9 +1465,6 @@ ol li a{cursor: pointer;}
 	color: #50b277;
 	cursor: pointer;
 }
-
-
-
 
 /**********FIN DATOS SOLUCION *******************/
 

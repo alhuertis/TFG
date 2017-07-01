@@ -85,6 +85,9 @@ export class  ResolverActividadComponent implements OnInit{
     superior: {puesta, color, caracterizacion, emparejada};
     derecha: {puesta, color, caracterizacion, emparejada};
     palabrasAcertadas: Boolean[];
+    busquedaPalabra: String;
+    resultadoBusqueda: any;
+    buscandoPalabra: Boolean;
  
 	
 	
@@ -116,85 +119,10 @@ export class  ResolverActividadComponent implements OnInit{
         this.derecha={"puesta":"false", "color":"", "caracterizacion":"", "emparejada":""};
         this.superior={"puesta":"false", "color":"", "caracterizacion":"", "emparejada":""};
         this.palabrasAcertadas=[];
-        /*this.actividad=
-        [
-            {   
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 1",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Traducir la siguiente frase al español",
-                "fraseATraducir": "Dei sacrificium accipiunt",
-                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                "solucionFPatron": "dioses + reciben + sacrificio",
-                "solucionPEspanol": "Los dioses reciben el sacrificio",
-                "solucionPLatin": "",
-                "marcado": false 
-            },
-            {   
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 2",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Traducir toda la frase",
-                "fraseATraducir": "Magister sapientiam amat",
-                "solucionFLogico": "Nominativo(magister), Acusativo(sapientiam),Verbo(amat)",
-                "solucionFPatron": "maestro + ama + sabiduria",
-                "solucionPEspanol": "El maestro ama la sabiduría",
-                "solucionPLatin": "",
-                "marcado": false 
-            },
-            {   
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 3",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Aprende latin con este ejercicio",
-                "fraseATraducir": "Dei sacrificium accipiunt",
-                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                "solucionFPatron": "dioses + reciben + sacrificio",
-                "solucionPEspanol": "Los dioses reciben el sacrificio",
-                "solucionPLatin": "",
-                "marcado": false 
-            },
-            {   
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 4",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Traduce lo que puedas",
-                "fraseATraducir": "Dei sacrificium accipiunt",
-                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                "solucionFPatron": "dioses + reciben + sacrificio",
-                "solucionPEspanol": "Los dioses reciben el sacrificio",
-                "solucionPLatin": "",
-                "marcado": false 
-            }
-        ];*/
+        this.busquedaPalabra="";
 
         this.ejercicio= new Ejercicio("","","","",null,"","",null,null,"","","","","","",false);
-        this.ejerSel=0;
-        
+        this.ejerSel=0;   
        
         this.calificaciones=[];
         this.solucion=new Solucion();
@@ -218,6 +146,8 @@ export class  ResolverActividadComponent implements OnInit{
         this.resueltos=0;
 
         this.terminado=false;
+        this.buscandoPalabra=false;
+        this.resultadoBusqueda={};
         
 
 	
@@ -683,6 +613,20 @@ export class  ResolverActividadComponent implements OnInit{
         }
     }
 
+    buscarPalabra(){
+        //Sustantivo, verbo, adverbio, conjuncion, Pronombre,Adjetivo
+
+        this.buscandoPalabra=true;
+        this.sleep(200).then(()=>{
+            this.resultadoBusqueda= _.findWhere(this.diccionario, {"lema": this.busquedaPalabra.toLowerCase()});
+            this.buscandoPalabra=false;
+        });
+        
+        
+       
+
+    }
+
     quitaPentagono(event: any){
         $(event.target).children().removeAttr("src");
         $(event.target).children().css("display", "none");
@@ -800,6 +744,7 @@ export class  ResolverActividadComponent implements OnInit{
         for(var p of this.fraseSplit){
             $("."+p).css("background", "none");
             $("."+p).removeClass("flash");
+            $("."+p).removeClass("shake");
         }
 
        

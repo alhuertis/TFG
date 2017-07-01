@@ -185,12 +185,46 @@
    <!-- modal diccionario -->
   <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalDiccionario ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-diccionario">
       <div class="modal-content">
         <div class="modal-header">
             <h4><i class="glyphicon glyphicon-book"></i> Bienvenido al diccionario Latin</h4>
         </div>  
         <div class="modal-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <input class="form-control" type="text" placeholder="Buscar palabra" [(ngModel)]="busquedaPalabra">
+                </div>
+                <div class="col-md-3">
+                    <button (click)="buscarPalabra()" class="btn"><i class="glyphicon glyphicon-search"> Buscar</i></button>
+                    <img *ngIf="buscandoPalabra" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="animated aparecer" *ngIf="resultadoBusqueda == undefined">
+                        <p>No se encontraron resultados...</p>
+                    </div>
+                    <div class="animated aparecer" *ngIf="(resultadoBusqueda | json) != '{}' && resultadoBusqueda != undefined">
+                        <ul>
+                            <li><label for="categoria">Lema: </label><span> {{resultadoBusqueda.lema}}</span></li>
+                            <li><label for="categoria">Categoria: </label><span> {{resultadoBusqueda.categoria}}</span></li>
+                        </ul>
+                        
+                        <div *ngFor="let sig of resultadoBusqueda.significado " class="significados">
+                            <ul>
+                                <li><label for="categoria">Lema: </label><span> {{sig.significado}}</span></li>
+                                <li><label for="categoria">Categoria: </label><span> {{sig.caracArgumental}}</span></li>
+                            </ul>
+
+                        </div>
+                        
+                    </div>
+                        
+                </div>    
+            </div>    
+            
           
         </div>
         <div class="modal-footer">

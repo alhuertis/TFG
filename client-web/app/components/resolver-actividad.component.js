@@ -42,81 +42,7 @@ var ResolverActividadComponent = (function () {
         this.derecha = { "puesta": "false", "color": "", "caracterizacion": "", "emparejada": "" };
         this.superior = { "puesta": "false", "color": "", "caracterizacion": "", "emparejada": "" };
         this.palabrasAcertadas = [];
-        /*this.actividad=
-        [
-            {
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 1",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Traducir la siguiente frase al español",
-                "fraseATraducir": "Dei sacrificium accipiunt",
-                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                "solucionFPatron": "dioses + reciben + sacrificio",
-                "solucionPEspanol": "Los dioses reciben el sacrificio",
-                "solucionPLatin": "",
-                "marcado": false
-            },
-            {
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 2",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Traducir toda la frase",
-                "fraseATraducir": "Magister sapientiam amat",
-                "solucionFLogico": "Nominativo(magister), Acusativo(sapientiam),Verbo(amat)",
-                "solucionFPatron": "maestro + ama + sabiduria",
-                "solucionPEspanol": "El maestro ama la sabiduría",
-                "solucionPLatin": "",
-                "marcado": false
-            },
-            {
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 3",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Aprende latin con este ejercicio",
-                "fraseATraducir": "Dei sacrificium accipiunt",
-                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                "solucionFPatron": "dioses + reciben + sacrificio",
-                "solucionPEspanol": "Los dioses reciben el sacrificio",
-                "solucionPLatin": "",
-                "marcado": false
-            },
-            {
-                "_id": "",
-                "id_profesor": "000001",
-                "titulo": "Titulo 4",
-                "nivel": "Medio",
-                "tipo": 1,
-                "autor": "Antonio Sarasa",
-                "institucion_profesor": "Universidad complutense",
-                "fechaCreacion": new Date(),
-                "fechaModificacion": new Date(),
-                "enunciado": "Traduce lo que puedas",
-                "fraseATraducir": "Dei sacrificium accipiunt",
-                "solucionFLogico": "Nominativo(Dei), Acusativo(sacrificium), Verbo(accipiunt)",
-                "solucionFPatron": "dioses + reciben + sacrificio",
-                "solucionPEspanol": "Los dioses reciben el sacrificio",
-                "solucionPLatin": "",
-                "marcado": false
-            }
-        ];*/
+        this.busquedaPalabra = "";
         this.ejercicio = new ejercicio_1.Ejercicio("", "", "", "", null, "", "", null, null, "", "", "", "", "", "", false);
         this.ejerSel = 0;
         this.calificaciones = [];
@@ -139,6 +65,8 @@ var ResolverActividadComponent = (function () {
         this.srcDraggedPentagono = "adios";
         this.resueltos = 0;
         this.terminado = false;
+        this.buscandoPalabra = false;
+        this.resultadoBusqueda = {};
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -539,6 +467,15 @@ var ResolverActividadComponent = (function () {
             }
         }
     };
+    ResolverActividadComponent.prototype.buscarPalabra = function () {
+        //Sustantivo, verbo, adverbio, conjuncion, Pronombre,Adjetivo
+        var _this = this;
+        this.buscandoPalabra = true;
+        this.sleep(200).then(function () {
+            _this.resultadoBusqueda = _.findWhere(_this.diccionario, { "lema": _this.busquedaPalabra.toLowerCase() });
+            _this.buscandoPalabra = false;
+        });
+    };
     ResolverActividadComponent.prototype.quitaPentagono = function (event) {
         $(event.target).children().removeAttr("src");
         $(event.target).children().css("display", "none");
@@ -633,6 +570,7 @@ var ResolverActividadComponent = (function () {
             var p = _a[_i];
             $("." + p).css("background", "none");
             $("." + p).removeClass("flash");
+            $("." + p).removeClass("shake");
         }
     };
     return ResolverActividadComponent;
