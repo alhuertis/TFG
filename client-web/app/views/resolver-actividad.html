@@ -191,7 +191,10 @@
             <h4><i class="glyphicon glyphicon-book"></i> Bienvenido al diccionario Latin</h4>
         </div>  
         <div class="modal-body">
-            <div class="row">
+            <div class="dicc-lematizada">
+                <p><label>Frase lematizada:</label> <span *ngFor="let palabra of fraseSplit; let i= index" (click)="addBuscar(palabra)">{{palabra}}</span></p>
+            </div>
+            <div class="row" style="border-bottom: 1px solid lightgrey; padding-bottom: 10px;">
                 <div class="col-md-5">
                     <input class="form-control" type="text" placeholder="Buscar palabra" [(ngModel)]="busquedaPalabra">
                 </div>
@@ -207,18 +210,62 @@
                         <p>No se encontraron resultados...</p>
                     </div>
                     <div class="animated aparecer" *ngIf="(resultadoBusqueda | json) != '{}' && resultadoBusqueda != undefined">
-                        <ul>
-                            <li><label for="categoria">Lema: </label><span> {{resultadoBusqueda.lema}}</span></li>
-                            <li><label for="categoria">Categoria: </label><span> {{resultadoBusqueda.categoria}}</span></li>
+                        <ul class="lema">
+                            <li><label for="categoria">Lema </label><span> {{resultadoBusqueda.lema}}</span></li>
+                            <li><label for="categoria">Categoria </label><span> {{resultadoBusqueda.categoria}}</span></li>
                         </ul>
                         
-                        <div *ngFor="let sig of resultadoBusqueda.significado " class="significados">
-                            <ul>
-                                <li><label for="categoria">Lema: </label><span> {{sig.significado}}</span></li>
-                                <li><label for="categoria">Categoria: </label><span> {{sig.caracArgumental}}</span></li>
-                            </ul>
+                        <div *ngIf="resultadoBusqueda.categoria == 'Sustantivo'"> <!-- Sustantivos -->
+                            <div *ngFor="let sig of resultadoBusqueda.significado; let i=index " class="significados">
+                                <ul>
+                                    <li><label for="categoria">Significado {{i + 1}} </label><span> {{sig.significado}}</span></li>
+                                    <li><label for="caracterizacion">Caracterizacion argumental </label><span> {{sig.caracArgumental}}</span></li>
+                                </ul>
 
+                            </div>
                         </div>
+
+                        <div *ngIf="resultadoBusqueda.categoria == 'Verbo'"> <!-- Verbos -->
+                            <div *ngFor="let sig of resultadoBusqueda.significado; let i=index " class="significados">
+                                <ul>
+                                    <li><label for="significado">Significado {{i + 1}} </label><span> {{sig.significado}}</span></li>
+                                    <li *ngIf="sig.ejemplo != ''"><label for="significado">Ejemplo </label><span> {{sig.ejemplo}}</span></li>
+                                    <li><label for="argumentos">Argumentos </label><span> {{sig.numArgumentos}}</span></li>
+                                </ul>
+
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Numero</th>
+                                                    <th>Tipo</th>
+                                                    <th>Caracterizacion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let arg of sig.argumentos; let i= index">
+                                                    <td>{{i + 1}}</td>
+                                                    <td>{{arg.numero}}</td>
+                                                    <td>{{arg.tipo}}</td>
+                                                    <td>{{arg.caracArgumental}}</td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div *ngIf="resultadoBusqueda.categoria == 'Adjetivo' || resultadoBusqueda.categoria == 'Adverbio' || resultadoBusqueda.categoria == 'Pronombre'  "> <!-- Verbos -->
+                            <ul>
+                                <li *ngFor="let s of resultadoBusqueda.significado; let i=index"><label for="significado">Significado {{i+1}} </label><span> {{s.significado}}</span></li>
+                            </ul>
+                        </div>
+                        
                         
                     </div>
                         

@@ -1094,9 +1094,40 @@ ol li a{cursor: pointer;}
 	background: #c61919;
 }
 
+.modal-diccionario{ width: 70%;}
+
+.modal-diccionario .modal-header{ background: #39A890}
+
+.modal-diccionario .modal-header h4 { padding: 0px;margin: 0px;}
+
 .modal-diccionario .modal-body{
 	min-height: 300px;
 }
+
+.modal-diccionario .modal-body .dicc-lematizada span{
+	margin-right: 3px;
+	cursor: pointer;
+	text-decoration: underline;
+	color: #5696af;
+}
+
+.modal-diccionario ul{ list-style-type: none; padding-left: 0px;}
+
+.modal-diccionario ul label{ 
+	background: #a3a1a1; 
+	padding: 4px;
+	border: none; 
+	border-radius: 5px;
+	outline: none;
+}
+
+.modal-diccionario .lema li{
+	display: inline-block;
+	margin-right: 15px;
+	margin-top: 20px;
+}
+
+
 
 /*********FIN PANEL ALUMNO**********/
 

@@ -617,14 +617,25 @@ export class  ResolverActividadComponent implements OnInit{
         //Sustantivo, verbo, adverbio, conjuncion, Pronombre,Adjetivo
 
         this.buscandoPalabra=true;
-        this.sleep(200).then(()=>{
-            this.resultadoBusqueda= _.findWhere(this.diccionario, {"lema": this.busquedaPalabra.toLowerCase()});
-            this.buscandoPalabra=false;
-        });
-        
-        
-       
+        this.sleep(100).then(()=>{
 
+            var encontrado:Boolean = false;
+            var i:number = 0;
+            while(!encontrado && i < this.diccionario.length){
+                var o : any = this.diccionario[i];
+                if(o.lema == this.busquedaPalabra.toLowerCase() || o.lema.indexOf(this.busquedaPalabra.toLowerCase()+",") != -1){
+                    this.resultadoBusqueda= o;
+                    encontrado=true;
+                }
+                i++;
+            } 
+            this.buscandoPalabra=false;
+        }); 
+    }
+
+    addBuscar(palabra : String){
+        this.busquedaPalabra=palabra;
+        this.buscarPalabra();
     }
 
     quitaPentagono(event: any){

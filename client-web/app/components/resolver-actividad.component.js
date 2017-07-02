@@ -471,10 +471,23 @@ var ResolverActividadComponent = (function () {
         //Sustantivo, verbo, adverbio, conjuncion, Pronombre,Adjetivo
         var _this = this;
         this.buscandoPalabra = true;
-        this.sleep(200).then(function () {
-            _this.resultadoBusqueda = _.findWhere(_this.diccionario, { "lema": _this.busquedaPalabra.toLowerCase() });
+        this.sleep(100).then(function () {
+            var encontrado = false;
+            var i = 0;
+            while (!encontrado && i < _this.diccionario.length) {
+                var o = _this.diccionario[i];
+                if (o.lema == _this.busquedaPalabra.toLowerCase() || o.lema.indexOf(_this.busquedaPalabra.toLowerCase() + ",") != -1) {
+                    _this.resultadoBusqueda = o;
+                    encontrado = true;
+                }
+                i++;
+            }
             _this.buscandoPalabra = false;
         });
+    };
+    ResolverActividadComponent.prototype.addBuscar = function (palabra) {
+        this.busquedaPalabra = palabra;
+        this.buscarPalabra();
     };
     ResolverActividadComponent.prototype.quitaPentagono = function (event) {
         $(event.target).children().removeAttr("src");
