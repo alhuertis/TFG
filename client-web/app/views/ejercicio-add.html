@@ -102,11 +102,13 @@
 				</div>
 				
 				<div class="col-md-3">
+					<textarea style="margin-bottom: 20px;" class="form-control" placeholder="Frase lematizada..." name="fLematizada" #fLematizada="ngModel" [(ngModel)]="ejercicio.fraseLematizada"> </textarea>
+					
 					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
 
 					<!--<textarea *ngIf="ejercicio.tipo <= 1 " style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
 					<textarea *ngIf="ejercicio.tipo > 1" style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>-->
-					<textarea style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>
+					<textarea style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
 					
 					<button style="margin-top: 20px" type="submit" class="btn btn-success">Crear</button> <a style="margin-top: 20px" [routerLink]="['/']" class="btn btn-danger">Salir</a>
 				</div>

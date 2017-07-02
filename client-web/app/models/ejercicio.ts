@@ -13,6 +13,7 @@ export class Ejercicio{
 		public fechaModificacion: Date,
 		public enunciado: string,
 		public fraseATraducir: string,
+		public fraseLematizada: string,
 		public solucionFLogico: string,
 		public solucionFPatron: string,
 		public solucionPEspanol: string,

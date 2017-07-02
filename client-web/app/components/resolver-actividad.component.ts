@@ -37,6 +37,7 @@ export class  ResolverActividadComponent implements OnInit{
     anterior: Boolean;
     siguiente: Boolean;
     fraseSplit: String[];
+    fraseLematizadaSplit: String[];
     respuesta: String;
     calificaciones: number[];
     msgCalificacion: String;
@@ -88,6 +89,7 @@ export class  ResolverActividadComponent implements OnInit{
     busquedaPalabra: String;
     resultadoBusqueda: any;
     buscandoPalabra: Boolean;
+    msgFichas: String;
  
 	
 	
@@ -121,7 +123,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.palabrasAcertadas=[];
         this.busquedaPalabra="";
 
-        this.ejercicio= new Ejercicio("","","","",null,"","",null,null,"","","","","","",false);
+        this.ejercicio= new Ejercicio("","","","",null,"","",null,null,"","","","","","","",false);
         this.ejerSel=0;   
        
         this.calificaciones=[];
@@ -148,6 +150,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.terminado=false;
         this.buscandoPalabra=false;
         this.resultadoBusqueda={};
+        this.msgFichas="";
         
 
 	
@@ -181,6 +184,7 @@ export class  ResolverActividadComponent implements OnInit{
 					alert('Error en el servidor');
 				}else{
                     this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
+                    this.fraseLematizadaSplit= this.actividad[this.ejerSel].fraseLematizada.split(" ");
                     this.verbo= this.extraerVerbo();
                     this.anterior=this.ejerSel >0 ;
                     this.siguiente=this.ejerSel < this.actividad.length -1;
@@ -214,7 +218,10 @@ export class  ResolverActividadComponent implements OnInit{
                                     this.resueltos++;
                                 }
                             }
+                            
                             this.progreso= (this.resueltos * 100) / this.actividad.length;
+                            if(this.progreso == 100)
+                                this.terminado=true;
                         }
                     });
                     
@@ -252,6 +259,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.siguiente= this.ejerSel < this.actividad.length - 1;
         this.anterior=this.ejerSel > 0;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        this.fraseLematizadaSplit= this.actividad[this.ejerSel].fraseLematizada.split(" ");
         this.respuesta="";
         this.verboMarcado=false;
         this.verbo= this.extraerVerbo();
@@ -278,6 +286,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.anterior= this.ejerSel > 0;
         this.siguiente= this.ejerSel < this.actividad.length-1;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        this.fraseLematizadaSplit= this.actividad[this.ejerSel].fraseLematizada.split(" ");
         this.respuesta="";
         this.verbo= this.extraerVerbo();
         this.guardarSolucion();
@@ -466,10 +475,23 @@ export class  ResolverActividadComponent implements OnInit{
         }
     }
 
+    mostrarMsgFichas(msg : String){
+        this.msgFichas=msg;
+         this.sleep(4000).then(()=>{
+            $(".respuesta-fichas").removeClass("fadeInRigth");
+            $(".respuesta-fichas").addClass("fadeOutRight");
+            this.sleep(1000).then(()=>{
+                this.msgFichas="";
+            });
+            
+        });
+    }
+
     dropVerbo(event: any, palabra: String){
         //alert(palabra + " " + event.dragData);
         if(this.faseVerbo)
-            alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
+            //alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
+            this.mostrarMsgFichas("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
         else{
 
             if(palabra == this.verbo){
@@ -490,6 +512,7 @@ export class  ResolverActividadComponent implements OnInit{
                 }
                 else{
                     //alert("Pero no es la ficha adecuada");
+                    this.mostrarMsgFichas("Has acertado, es el verbo, pero no estas usando la ficha correcta.")
                     this.faseVerbo=false;
                 }
 
@@ -497,6 +520,7 @@ export class  ResolverActividadComponent implements OnInit{
             }
             else{
                 //alert("No es el verbo");
+                this.mostrarMsgFichas("Este no es el verbo en la frase, prueba con otra...")
                 $(event.nativeEvent.target).addClass("shake");
                 this.sleep(1000).then(()=>{
                     $(".frase-traducir").children().removeClass("shake");
@@ -520,13 +544,20 @@ export class  ResolverActividadComponent implements OnInit{
         var data= event.dragData;
         var sonFichas:Boolean= data == '-animado +definido' || data == '-animado -definido' || data == '+animado -humano' || data == '+animado +humano' || data == 'lugar';
         if(!sonFichas){ //Si lo que se arrastran son las palabras
-            var vari= _.findWhere(this.diccionario, {"lema": data.toLowerCase()});
-            if(vari != undefined){
-                
-                //alert(vari.significado[0].caracArgumental[0]);
-                //alert(data);
+            
+            let i=0;
+            let dataLema: String=data;
+            for(var p of this.fraseSplit){
+                if(dataLema == p){
+                    dataLema=this.fraseLematizadaSplit[i];
+                    break;
+                }
+                i++;
+            }
 
-                
+            var vari= _.findWhere(this.diccionario, {"lema": dataLema.toLowerCase()});
+            if(vari != undefined){
+
                 if(posicion == 'izquierda' && this.izquierda.caracterizacion == vari.significado[0].caracArgumental[0] ){
                     $("."+data).css("background", this.izquierda.color);
                     $("."+data).addClass("flash");
@@ -552,7 +583,8 @@ export class  ResolverActividadComponent implements OnInit{
                 
             }
             else{
-                alert("No se encuentra en el diccionario");
+                //alert("No se encuentra en el diccionario");
+                this.mostrarMsgFichas("No ha sido posible validar la palabra en el diccionario");
             }
             
 
@@ -580,6 +612,7 @@ export class  ResolverActividadComponent implements OnInit{
                 else{
 
                     //alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                    this.mostrarMsgFichas("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
                     $(event.nativeEvent.target).children().css("display", "block");
                     $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
                     $(event.nativeEvent.target).children().addClass("fadeOut2");
@@ -595,6 +628,7 @@ export class  ResolverActividadComponent implements OnInit{
             }else{
                 if(data == '+animado +humano'){
                     //alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                    this.mostrarMsgFichas("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
                     $(event.nativeEvent.target).children().css("display", "block");
                     $(event.nativeEvent.target).children().attr("src",this.srcDraggedPentagono);
                     $(event.nativeEvent.target).children().addClass("fadeOut2");
@@ -628,6 +662,9 @@ export class  ResolverActividadComponent implements OnInit{
                     encontrado=true;
                 }
                 i++;
+            }
+            if(!encontrado || this.busquedaPalabra==''){
+                this.resultadoBusqueda={};
             } 
             this.buscandoPalabra=false;
         }); 
@@ -677,7 +714,8 @@ export class  ResolverActividadComponent implements OnInit{
                     this.solucion._id= result;
 
                     if(this.solucion._id == ""){
-                        alert('Error en el servidor guardando la solucion');
+                        //alert('Error en el servidor guardando la solucion');
+                        this.mostrarMsgFichas('Error en el servidor guardando la solucion');
                     }else{
                         //alert("Se ha guardado la actividad con id: " + this.solucion._id);
                     }

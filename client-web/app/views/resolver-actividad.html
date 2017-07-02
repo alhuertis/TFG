@@ -49,7 +49,8 @@
             <ul>
                 <li (click)="abrirModalDiccionario()"><i class="glyphicon glyphicon-search"></i> Abrir diccionario</li>
                 <li (click)="abrirModalAyuda()"><i class="glyphicon glyphicon-question-sign"></i> Mostrar ayuda</li>
-                <li (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar y salir</li>
+                <li *ngIf="!terminado" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar y salir</li>
+                <li *ngIf="terminado" id="terminar" class="animated aparecer" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Terminar</li>
             </ul>
         </div>
     </div>
@@ -105,7 +106,7 @@
                     <div class="solucion">
                         <input *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
                         <button *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" class="btn btn-default" [disabled]="respuesta.length == 0 || terminado" (click)="calificar()">Enviar</button>
-                        <button class="btn btn-success animated aparecer" *ngIf="terminado" (click)="abrirModalSalir()">Terminar</button>
+                        <!--<button class="btn btn-success animated aparecer" id="terminar" *ngIf="terminado" (click)="abrirModalSalir()">Terminar</button>-->
                     </div>
 
                     <div class="puzle">
@@ -128,9 +129,7 @@
                         </div>
                         
                     </div>
-
-                    
-      
+                          
                 </div>
             </div>    
         </div> 
@@ -141,6 +140,9 @@
             <p *ngIf="solucion.ejercicios[ejerSel].calificacion >= 0">Nota: {{solucion.ejercicios[ejerSel].calificacion}}</p>
             <p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''">Respuesta: {{solucion.ejercicios[ejerSel].respuesta}}</p>
             <p *ngIf="solucion.ejercicios[ejerSel].msgCalificacion != ''">{{solucion.ejercicios[ejerSel].msgCalificacion}}</p>
+        </div>
+        <div *ngIf="msgFichas != '' " class="respuesta-fichas animated fadeInRigth">
+            <p>{{msgFichas}}</p>
         </div>
         
     </div>
@@ -192,7 +194,7 @@
         </div>  
         <div class="modal-body">
             <div class="dicc-lematizada">
-                <p><label>Frase lematizada:</label> <span *ngFor="let palabra of fraseSplit; let i= index" (click)="addBuscar(palabra)">{{palabra}}</span></p>
+                <p><label>Frase lematizada:</label> <span *ngFor="let palabra of fraseLematizadaSplit; let i= index" (click)="addBuscar(palabra)">{{palabra}}</span></p>
             </div>
             <div class="row" style="border-bottom: 1px solid lightgrey; padding-bottom: 10px;">
                 <div class="col-md-5">
@@ -206,8 +208,8 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <div class="animated aparecer" *ngIf="resultadoBusqueda == undefined">
-                        <p>No se encontraron resultados...</p>
+                    <div class="animated aparecer" *ngIf="(resultadoBusqueda | json) == '{}' || resultadoBusqueda == undefined">
+                        
                     </div>
                     <div class="animated aparecer" *ngIf="(resultadoBusqueda | json) != '{}' && resultadoBusqueda != undefined">
                         <ul class="lema">

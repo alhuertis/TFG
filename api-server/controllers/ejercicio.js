@@ -133,6 +133,7 @@ function saveEjercicio(req, res){
 	ejercicio.fechaModificacion= new Date();
 	ejercicio.enunciado= params.enunciado;
 	ejercicio.fraseATraducir= params.fraseATraducir;
+	ejercicio.fraseLematizada= params.fraseLematizada;
 	ejercicio.solucionFLogico= params.solucionFLogico;
 	ejercicio.solucionFPatron= params.solucionFPatron;
 	ejercicio.solucionPEspanol= params.solucionPEspanol;

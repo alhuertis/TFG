@@ -32,7 +32,7 @@ var EjercicioAddComponent = (function () {
     }
     EjercicioAddComponent.prototype.ngOnInit = function () {
         //Lo ponemos asi para rellenarlo con el chuwidatabindin
-        this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", 1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa, new Date(), new Date(), "", "", "", "", "", "", false);
+        this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", 1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa, new Date(), new Date(), "", "", "", "", "", "", "", false);
     };
     EjercicioAddComponent.prototype.aplicaValoresLogicos = function () {
         var frase = this.ejercicio.fraseATraducir;

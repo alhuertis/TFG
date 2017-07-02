@@ -355,6 +355,7 @@
             <li><label><i class="glyphicon glyphicon-calendar"></i> Ultima modificación:</label> {{ejerAbrir.fechaModificacion | date: 'dd/MM/yyyy'}} a las {{ejerAbrir.fechaModificacion | date: 'HH:mm:ss'}}</li>
             <li><label><i class="glyphicon glyphicon-pencil"></i> Enunciado:</label> {{ejerAbrir.enunciado}}</li>
             <li><label><i class="glyphicon glyphicon-th-list"></i> Frase a traducir:</label> {{ejerAbrir.fraseATraducir}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Frase lematizada:</label> {{ejerAbrir.fraseLematizada}}</li>
             <li><label><i class="glyphicon glyphicon-th-list"></i> Solución en formato lógico:</label> {{ejerAbrir.solucionFLogico}}</li>
             <li><label><i class="glyphicon glyphicon-th-list"></i> Solución en formato patrón:</label> {{ejerAbrir.solucionFPatron}}</li>
             <li *ngIf="ejerAbrir.solucionPEspanol"><label><i class="glyphicon glyphicon-th-list"></i> Solución en Español:</label> {{ejerAbrir.solucionPEspanol}}</li>
@@ -511,12 +512,15 @@
                 </div>
               </div>
 
+              <label style="margin-top: 25px" for="fLogico">Solucion en F.lógico</label>
+              <textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejerUpdate.solucionFLogico"> </textarea>
+
             </div>
 
             <div class="col-md-4">
 
-              <label for="fLogico">Solucion en F.lógico</label>
-              <textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejerUpdate.solucionFLogico"> </textarea>
+              <label for="lematizada">Frase lematizada</label>
+              <textarea class="form-control" placeholder="Frase lematizada..." name="fLematizada" #fLematizada="ngModel" [(ngModel)]="ejerUpdate.fraseLematizada"> </textarea>
             
 
               <label style="margin-top: 10px" for="fPatron">Solución F.patrón</label>
@@ -524,7 +528,7 @@
             
               <!--<label style="margin-top: 20px" *ngIf="ejerUpdate.tipo <= 1 " for="">Solución posible en Español</label>
               <label style="margin-top: 20px" *ngIf="ejerUpdate.tipo > 1 " for="">Solución posible en Latin</label>-->
-              <label style="margin-top: 20px" for="">Solución posible en Español</label>
+              <label style="margin-top: 10px" for="">Solución posible en Español</label>
               <!--<textarea *ngIf="ejerUpdate.tipo <= 1 " class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejerUpdate.solucionPEspanol"> </textarea>
 				    	<textarea *ngIf="ejerUpdate.tipo > 1" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejerUpdate.solucionPLatin"> </textarea>-->
               <textarea class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejerUpdate.solucionPEspanol"> </textarea>

@@ -20,6 +20,36 @@ ol li a{cursor: pointer;}
 
 /*********FIN ANIMACIONES***********/
 
+.fadeOutRight {
+  -webkit-animation-name: fadeOutRight;
+  animation-name: fadeOutRight;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes fadeOutRight {
+  0% {
+  opacity: 1;
+  }
+  100% {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  }
+  }
+  @keyframes fadeOutRight {
+  0% {
+  opacity: 1;
+  }
+  100% {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  }
+  }
+
+
 .shake {
   -webkit-animation-name: shake;
   animation-name: shake;
@@ -916,18 +946,38 @@ ol li a{cursor: pointer;}
 	outline: 0;
 }
 
+#terminar{
+	background: #77a399;
+}
+
 .calificacion{
-	background: #63b1ed;
+	background: #98cbf2;
     /*width: 480px;*/
     /*margin: 18px 15px 15px 15px;*/
     padding: 5px 5px 2px 10px;
     border-radius: 10px 0px 0px 10px;
     color: white;
 	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 12px;
 }
 
 .calificacion p{
 	line-height: 16px;
+}
+
+.respuesta-fichas{
+	background: #98cbf2;
+    padding: 5px 5px 2px 10px;
+    border-radius: 10px 0px 0px 10px;
+    color: white;
+	font-size: 12px;
+}
+
+.respuesta-fichas i{
+	cursor: pointer;
+	font-size: 10px;
+	color: #e27878;
 }
 
 .progress{

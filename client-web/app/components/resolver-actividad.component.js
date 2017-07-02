@@ -43,7 +43,7 @@ var ResolverActividadComponent = (function () {
         this.superior = { "puesta": "false", "color": "", "caracterizacion": "", "emparejada": "" };
         this.palabrasAcertadas = [];
         this.busquedaPalabra = "";
-        this.ejercicio = new ejercicio_1.Ejercicio("", "", "", "", null, "", "", null, null, "", "", "", "", "", "", false);
+        this.ejercicio = new ejercicio_1.Ejercicio("", "", "", "", null, "", "", null, null, "", "", "", "", "", "", "", false);
         this.ejerSel = 0;
         this.calificaciones = [];
         this.solucion = new solucion_1.Solucion();
@@ -67,6 +67,7 @@ var ResolverActividadComponent = (function () {
         this.terminado = false;
         this.buscandoPalabra = false;
         this.resultadoBusqueda = {};
+        this.msgFichas = "";
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -86,6 +87,7 @@ var ResolverActividadComponent = (function () {
             }
             else {
                 _this.fraseSplit = _this.actividad[_this.ejerSel].fraseATraducir.split(" ");
+                _this.fraseLematizadaSplit = _this.actividad[_this.ejerSel].fraseLematizada.split(" ");
                 _this.verbo = _this.extraerVerbo();
                 _this.anterior = _this.ejerSel > 0;
                 _this.siguiente = _this.ejerSel < _this.actividad.length - 1;
@@ -113,6 +115,8 @@ var ResolverActividadComponent = (function () {
                             }
                         }
                         _this.progreso = (_this.resueltos * 100) / _this.actividad.length;
+                        if (_this.progreso == 100)
+                            _this.terminado = true;
                     }
                 });
             }, function (error) {
@@ -142,6 +146,7 @@ var ResolverActividadComponent = (function () {
         this.siguiente = this.ejerSel < this.actividad.length - 1;
         this.anterior = this.ejerSel > 0;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        this.fraseLematizadaSplit = this.actividad[this.ejerSel].fraseLematizada.split(" ");
         this.respuesta = "";
         this.verboMarcado = false;
         this.verbo = this.extraerVerbo();
@@ -166,6 +171,7 @@ var ResolverActividadComponent = (function () {
         this.anterior = this.ejerSel > 0;
         this.siguiente = this.ejerSel < this.actividad.length - 1;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
+        this.fraseLematizadaSplit = this.actividad[this.ejerSel].fraseLematizada.split(" ");
         this.respuesta = "";
         this.verbo = this.extraerVerbo();
         this.guardarSolucion();
@@ -340,10 +346,22 @@ var ResolverActividadComponent = (function () {
             }
         }
     };
+    ResolverActividadComponent.prototype.mostrarMsgFichas = function (msg) {
+        var _this = this;
+        this.msgFichas = msg;
+        this.sleep(4000).then(function () {
+            $(".respuesta-fichas").removeClass("fadeInRigth");
+            $(".respuesta-fichas").addClass("fadeOutRight");
+            _this.sleep(1000).then(function () {
+                _this.msgFichas = "";
+            });
+        });
+    };
     ResolverActividadComponent.prototype.dropVerbo = function (event, palabra) {
         //alert(palabra + " " + event.dragData);
         if (this.faseVerbo)
-            alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
+            //alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
+            this.mostrarMsgFichas("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
         else {
             if (palabra == this.verbo) {
                 //alert("Has acertado, es el verbo");
@@ -362,11 +380,13 @@ var ResolverActividadComponent = (function () {
                 }
                 else {
                     //alert("Pero no es la ficha adecuada");
+                    this.mostrarMsgFichas("Has acertado, es el verbo, pero no estas usando la ficha correcta.");
                     this.faseVerbo = false;
                 }
             }
             else {
                 //alert("No es el verbo");
+                this.mostrarMsgFichas("Este no es el verbo en la frase, prueba con otra...");
                 $(event.nativeEvent.target).addClass("shake");
                 this.sleep(1000).then(function () {
                     $(".frase-traducir").children().removeClass("shake");
@@ -384,10 +404,18 @@ var ResolverActividadComponent = (function () {
         var data = event.dragData;
         var sonFichas = data == '-animado +definido' || data == '-animado -definido' || data == '+animado -humano' || data == '+animado +humano' || data == 'lugar';
         if (!sonFichas) {
-            var vari = _.findWhere(this.diccionario, { "lema": data.toLowerCase() });
+            var i = 0;
+            var dataLema = data;
+            for (var _i = 0, _a = this.fraseSplit; _i < _a.length; _i++) {
+                var p = _a[_i];
+                if (dataLema == p) {
+                    dataLema = this.fraseLematizadaSplit[i];
+                    break;
+                }
+                i++;
+            }
+            var vari = _.findWhere(this.diccionario, { "lema": dataLema.toLowerCase() });
             if (vari != undefined) {
-                //alert(vari.significado[0].caracArgumental[0]);
-                //alert(data);
                 if (posicion == 'izquierda' && this.izquierda.caracterizacion == vari.significado[0].caracArgumental[0]) {
                     $("." + data).css("background", this.izquierda.color);
                     $("." + data).addClass("flash");
@@ -412,7 +440,8 @@ var ResolverActividadComponent = (function () {
                 }
             }
             else {
-                alert("No se encuentra en el diccionario");
+                //alert("No se encuentra en el diccionario");
+                this.mostrarMsgFichas("No ha sido posible validar la palabra en el diccionario");
             }
         }
         else {
@@ -438,6 +467,7 @@ var ResolverActividadComponent = (function () {
                 }
                 else {
                     //alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                    this.mostrarMsgFichas("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
                     $(event.nativeEvent.target).children().css("display", "block");
                     $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
                     $(event.nativeEvent.target).children().addClass("fadeOut2");
@@ -451,6 +481,7 @@ var ResolverActividadComponent = (function () {
             else {
                 if (data == '+animado +humano') {
                     //alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                    this.mostrarMsgFichas("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
                     $(event.nativeEvent.target).children().css("display", "block");
                     $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
                     $(event.nativeEvent.target).children().addClass("fadeOut2");
@@ -481,6 +512,9 @@ var ResolverActividadComponent = (function () {
                     encontrado = true;
                 }
                 i++;
+            }
+            if (!encontrado || _this.busquedaPalabra == '') {
+                _this.resultadoBusqueda = {};
             }
             _this.buscandoPalabra = false;
         });
@@ -518,7 +552,8 @@ var ResolverActividadComponent = (function () {
             this._solucionService.saveSolucion(this.solucion).subscribe(function (result) {
                 _this.solucion._id = result;
                 if (_this.solucion._id == "") {
-                    alert('Error en el servidor guardando la solucion');
+                    //alert('Error en el servidor guardando la solucion');
+                    _this.mostrarMsgFichas('Error en el servidor guardando la solucion');
                 }
                 else {
                 }

@@ -14,6 +14,7 @@ var EjercicioSchema= Schema({
 	fechaModificacion: Date,
 	enunciado: String,
 	fraseATraducir: String,
+	fraseLematizada: String,
 	solucionFLogico: String,
 	solucionFPatron: String,
 	solucionPEspanol: String,
