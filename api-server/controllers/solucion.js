@@ -400,6 +400,8 @@ function getSolucionesByCriteria(req, res){
 		find.alumno={$in: criteria.ids_alumnos};
 	}
 
+	find.terminado="true";
+
 	console.log("nueva busqueda: " + JSON.stringify(find));
 
 	

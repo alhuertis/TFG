@@ -14,7 +14,7 @@ var core_1 = require("@angular/core");
 var CabeceraAlumnoComponent = (function () {
     function CabeceraAlumnoComponent() {
         this.titulo = "Panel de alumno";
-        this.user = "Alberto Daimiel";
+        this.user = JSON.parse(localStorage.getItem('currentUser')).user;
     }
     return CabeceraAlumnoComponent;
 }());

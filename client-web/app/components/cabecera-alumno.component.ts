@@ -15,7 +15,7 @@ export class CabeceraAlumnoComponent{
 
 	constructor(){
         this.titulo= "Panel de alumno";
-        this.user= "Alberto Daimiel";
+        this.user= JSON.parse(localStorage.getItem('currentUser')).user;
 
 	}
 

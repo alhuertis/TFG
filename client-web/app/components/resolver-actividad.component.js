@@ -220,101 +220,95 @@ var ResolverActividadComponent = (function () {
         }
     };
     ResolverActividadComponent.prototype.clickMonovalente = function (event) {
-        if (this.argumentos > 1) {
+        /*if(this.argumentos > 1){
             alert("Esta pieza no representa el numero de argumentos del verbo");
-        }
-        else {
-            if (this.verboMarcado) {
-                this.faseVerbo = true;
-                this.monovalente.activa = true;
-            }
-            else {
-                if (this.monovalente.activa)
-                    this.monovalente.activa = false;
+        }else{
+            if(this.verboMarcado){
+                this.faseVerbo=true;
+                this.monovalente.activa=true;
+            }else{
+                if(this.monovalente.activa)
+                    this.monovalente.activa=false;
                 else
-                    this.monovalente.activa = true;
+                    this.monovalente.activa=true;
             }
-        }
+        }*/
     };
     ResolverActividadComponent.prototype.clickBivalente = function (event) {
-        if (this.argumentos != 2) {
+        /*if(this.argumentos != 2){
             alert("Esta pieza no representa el numero de argumentos del verbo");
-        }
-        else {
-            if (this.verboMarcado) {
-                this.faseVerbo = true;
-                this.bivalente.activa = true;
+        }else{
+             if(this.verboMarcado){
+                this.faseVerbo=true;
+                this.bivalente.activa=true;
                 $('span.marcada').removeClass("marcada").addClass("acertada");
-            }
-            else {
-                if (this.bivalente.activa)
-                    this.bivalente.activa = false;
+            }else{
+                if(this.bivalente.activa)
+                    this.bivalente.activa=false;
                 else
-                    this.bivalente.activa = true;
+                    this.bivalente.activa=true;
             }
-        }
+        }*/
     };
     ResolverActividadComponent.prototype.clickTrivalente = function (event) {
-        if (this.argumentos != 3) {
-            alert("Esta pieza no representa el numero de argumentos del verbo");
-        }
-        else {
-            if (this.verboMarcado) {
-                this.faseVerbo = true;
-                this.trivalente.activa = true;
-            }
-            else {
-                if (this.trivalente.activa)
-                    this.trivalente.activa = false;
-                else
-                    this.trivalente.activa = true;
-            }
-        }
+        /*if(this.argumentos != 3){
+           alert("Esta pieza no representa el numero de argumentos del verbo");
+       }else{
+            if(this.verboMarcado){
+               this.faseVerbo=true;
+               this.trivalente.activa=true;
+           }else{
+               if(this.trivalente.activa)
+                   this.trivalente.activa=false;
+               else
+                   this.trivalente.activa=true;
+           }
+       }*/
     };
     ResolverActividadComponent.prototype.clickAmarilla = function (event) {
-        if (this.amarilla.activa)
-            this.amarilla.activa = false;
-        else {
-            this.amarilla.activa = true;
-            this.amarilla.top = "0px";
-            this.amarilla.left = "0px";
-        }
+        /*if(this.amarilla.activa)
+            this.amarilla.activa=false;
+        else{
+            this.amarilla.activa=true;
+            this.amarilla.top="0px";
+            this.amarilla.left="0px";
+        }*/
     };
     ResolverActividadComponent.prototype.clickAzul = function (event) {
-        if (this.azul.activa)
-            this.azul.activa = false;
-        else {
-            this.azul.activa = true;
-            this.azul.top = "20px";
-            this.azul.left = "30px";
-        }
+        /*if(this.azul.activa)
+            this.azul.activa=false;
+        else{
+            this.azul.activa=true;
+            this.azul.top="20px";
+            this.azul.left="30px";
+        }*/
     };
     ResolverActividadComponent.prototype.clickNaranja = function (event) {
-        if (this.naranja.activa)
-            this.naranja.activa = false;
-        else {
-            this.naranja.activa = true;
-            this.naranja.top = "20px";
-            this.naranja.left = "30px";
-        }
+        /*if(this.naranja.activa)
+            this.naranja.activa=false;
+        else{
+            this.naranja.activa=true;
+            this.naranja.top="20px";
+            this.naranja.left="30px";
+        }*/
     };
     ResolverActividadComponent.prototype.clickRoja = function (event) {
-        if (this.roja.activa)
-            this.roja.activa = false;
-        else {
-            this.roja.activa = true;
-            this.roja.top = "20px";
-            this.roja.left = "30px";
-        }
+        /*if(this.roja.activa)
+            this.roja.activa=false;
+        else{
+            this.roja.activa=true;
+            this.roja.top="20px";
+            this.roja.left="30px";
+        }*/
     };
     ResolverActividadComponent.prototype.clickVerde = function (event) {
-        if (this.verde.activa)
-            this.verde.activa = false;
-        else {
-            this.verde.activa = true;
-            this.verde.top = "20px";
-            this.verde.left = "30px";
-        }
+        /*if(this.verde.activa)
+            this.verde.activa=false;
+        else{
+            this.verde.activa=true;
+            this.verde.top="20px";
+            this.verde.left="30px";
+        }*/
     };
     ResolverActividadComponent.prototype.sacarFichas = function (event) {
         if ($(event.target).next().css("display") == "none") {
@@ -330,21 +324,22 @@ var ResolverActividadComponent = (function () {
         }
     };
     ResolverActividadComponent.prototype.clickPalabra = function (event, palabra) {
-        if (this.verboMarcado && !this.faseVerbo) {
-            this.verboMarcado = false;
-            $(event.target).removeClass("marcada");
-        }
-        else if (!this.faseVerbo) {
-            if (palabra == this.verbo) {
-                this.verboMarcado = true;
-                alert("Es el verbo!");
-                $(event.target).addClass("marcada");
-            }
-            else {
-                alert("No es el verbo");
-                $(event.target).removeClass("marcada");
-            }
-        }
+        /* if(this.verboMarcado && !this.faseVerbo){
+             this.verboMarcado=false;
+             $(event.target).removeClass("marcada");
+         }else if(!this.faseVerbo){
+             if(palabra == this.verbo){
+                 this.verboMarcado=true;
+                 //alert("Es el verbo!");
+                 this.mostrarMsgFichas("Es el verbo!");
+                 $(event.target).addClass("marcada");
+             }
+             else{
+                 //alert("No es el verbo");
+                 this.mostrarMsgFichas("No es el verbo...");
+                 $(event.target).removeClass("marcada");
+             }
+         }*/
     };
     ResolverActividadComponent.prototype.mostrarMsgFichas = function (msg) {
         var _this = this;

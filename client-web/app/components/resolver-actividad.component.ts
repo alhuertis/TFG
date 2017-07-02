@@ -343,7 +343,7 @@ export class  ResolverActividadComponent implements OnInit{
 
     clickMonovalente(event){
 
-        if(this.argumentos > 1){
+        /*if(this.argumentos > 1){
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }else{
             if(this.verboMarcado){
@@ -355,12 +355,12 @@ export class  ResolverActividadComponent implements OnInit{
                 else
                     this.monovalente.activa=true;
             }    
-        }
+        }*/
     }
 
     clickBivalente(event){
 
-        if(this.argumentos != 2){
+        /*if(this.argumentos != 2){
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }else{
              if(this.verboMarcado){
@@ -373,12 +373,12 @@ export class  ResolverActividadComponent implements OnInit{
                 else
                     this.bivalente.activa=true;
             }
-        }
+        }*/
     }
 
     clickTrivalente(event){
 
-         if(this.argumentos != 3){
+         /*if(this.argumentos != 3){
             alert("Esta pieza no representa el numero de argumentos del verbo");
         }else{
              if(this.verboMarcado){
@@ -390,57 +390,57 @@ export class  ResolverActividadComponent implements OnInit{
                 else
                     this.trivalente.activa=true;
             }
-        }
+        }*/
     }
 
     clickAmarilla(event){
-        if(this.amarilla.activa)
+        /*if(this.amarilla.activa)
             this.amarilla.activa=false;
         else{
             this.amarilla.activa=true;
             this.amarilla.top="0px";
             this.amarilla.left="0px";
-        }
+        }*/
     }
 
     clickAzul(event){
-        if(this.azul.activa)
+        /*if(this.azul.activa)
             this.azul.activa=false;
         else{
             this.azul.activa=true;
             this.azul.top="20px";
             this.azul.left="30px";
-        }
+        }*/
     }
 
     clickNaranja(event){
-        if(this.naranja.activa)
+        /*if(this.naranja.activa)
             this.naranja.activa=false;
         else{
             this.naranja.activa=true;
             this.naranja.top="20px";
             this.naranja.left="30px";
-        }
+        }*/
     }
 
     clickRoja(event){
-        if(this.roja.activa)
+        /*if(this.roja.activa)
             this.roja.activa=false;
         else{
             this.roja.activa=true;
             this.roja.top="20px";
             this.roja.left="30px";
-        }
+        }*/
     }
 
     clickVerde(event){
-        if(this.verde.activa)
+        /*if(this.verde.activa)
             this.verde.activa=false;
         else{
             this.verde.activa=true;
             this.verde.top="20px";
             this.verde.left="30px";
-        }
+        }*/
     }
 
     sacarFichas(event){
@@ -459,20 +459,22 @@ export class  ResolverActividadComponent implements OnInit{
 
     clickPalabra(event, palabra: String){
 
-        if(this.verboMarcado && !this.faseVerbo){
+       /* if(this.verboMarcado && !this.faseVerbo){
             this.verboMarcado=false;
             $(event.target).removeClass("marcada");
         }else if(!this.faseVerbo){
             if(palabra == this.verbo){
                 this.verboMarcado=true;
-                alert("Es el verbo!");
+                //alert("Es el verbo!");
+                this.mostrarMsgFichas("Es el verbo!");
                 $(event.target).addClass("marcada");
             }
             else{
-                alert("No es el verbo");
+                //alert("No es el verbo");
+                this.mostrarMsgFichas("No es el verbo...");
                 $(event.target).removeClass("marcada");
             }
-        }
+        }*/
     }
 
     mostrarMsgFichas(msg : String){

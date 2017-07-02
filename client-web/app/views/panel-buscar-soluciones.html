@@ -52,28 +52,32 @@
         <div class="col-md-7 listado-soluciones">
             <div class="col-md-12 sol-lista animated fadeInLeft" *ngFor="let solucion of pagedSoluciones; let i=index">
                 <div class="row">
-                    <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-5">
-                        <ul>
-                            <li><i class="glyphicon glyphicon-education"></i> alumno: {{solucion.nombre_alumno}}</li>
-                            <li><i class="glyphicon glyphicon-pencil"></i> título: {{solucion.actividad.titulo | truncate: 12}}</li>
-                            <li><i class="glyphicon glyphicon-user"></i> profesor: {{solucion.actividad.profesor}}</li>     
-                        </ul>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <h4><span>Titulo: </span>{{solucion.actividad.titulo}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li><i class="glyphicon glyphicon-education"></i> alumno: {{solucion.nombre_alumno}}</li>
+                                    <li><i class="glyphicon glyphicon-user"></i> profesor: {{solucion.actividad.profesor}}</li>     
+                                </ul>
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <ul>
+                                    <li><i class="glyphicon glyphicon-signal"></i> nivel: {{solucion.actividad.nivel}}</li>
+                                    <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{solucion.actividad.fecha_creacion |  date : 'dd/MM/yyyy'}}</li>
+                                    <li *ngIf="solucion.actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{solucion.actividad.fecha_prop_fin | date : 'dd/MM/yyyy'}}</li>
+                                </ul>
+                            </div>
                         </div>
-                    
-                        <div class="col-md-5">
-                        <ul>
-                            <li><i class="glyphicon glyphicon-signal"></i> nivel: {{solucion.actividad.nivel}}</li>
-                            <li><i class="glyphicon glyphicon-calendar"></i> apertura: {{solucion.actividad.fecha_creacion |  date : 'dd/MM/yyyy'}}</li>
-                            <li *ngIf="solucion.actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> cierre: {{solucion.actividad.fecha_prop_fin | date : 'dd/MM/yyyy'}}</li>
-                        </ul>
                     </div>
-                    </div>
-                </div>
 
-                <div class="col-md-1 botones-lista">
-                    <a class="btn btn-resolver-sol btn-xs" (click)="verSolucion(solucion)"><i class="glyphicon glyphicon-eye-open"> Ver</i></a>
+                <div class="col-md-2 botones-lista">
+                    <a class="btn btn-ver-sol btn-xs" (click)="verSolucion(solucion)">mostrar <i class="glyphicon glyphicon-eye-open"></i></a>
                 </div>
                 </div>
             </div>
