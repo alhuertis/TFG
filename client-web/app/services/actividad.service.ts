@@ -163,6 +163,12 @@ export class ActividadService{
 		return this._http.get(this.url+'actividad-otrasColeccionesNivelB/'+id_profesor).map(res => res.json());
 	}
 
+	getByCriteria(criteria: any){
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'actividades-byCriteria', criteria, {headers: headers}).map(res => res.json());
+    }
+
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 10) {
         // calculate total pages
         let totalPages = Math.ceil(totalItems / pageSize);

@@ -104,6 +104,10 @@ var EjercicioService = (function () {
     EjercicioService.prototype.getEjersOtrasColeccionesTipo4 = function (id_profesor) {
         return this._http.get(this.url + 'ejercicios/otrasColeccionesTipo4/' + id_profesor).map(function (res) { return res.json(); });
     };
+    EjercicioService.prototype.getByCriteria = function (criteria) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'ejercicios-byCriteria', criteria, { headers: headers }).map(function (res) { return res.json(); });
+    };
     EjercicioService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 10; }

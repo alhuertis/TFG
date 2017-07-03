@@ -43,5 +43,6 @@ api.get('/actividad-otrasColeccionesNivelB/:id_profesor', ActividadController.ge
 api.put('/actividad/:id', ActividadController.updateActividad); 
 api.put('/actividad-ejercicio/:id', ActividadController.borrarEjercicio);
 api.delete('/actividad/:id', ActividadController.deleteActividad);  
+api.post('/actividades-byCriteria', ActividadController.getActividadesByCriteria);
 
 module.exports= api; 

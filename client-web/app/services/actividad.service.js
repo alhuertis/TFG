@@ -125,6 +125,10 @@ var ActividadService = (function () {
     ActividadService.prototype.getActsOtrasColeccionesNivelB = function (id_profesor) {
         return this._http.get(this.url + 'actividad-otrasColeccionesNivelB/' + id_profesor).map(function (res) { return res.json(); });
     };
+    ActividadService.prototype.getByCriteria = function (criteria) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'actividades-byCriteria', criteria, { headers: headers }).map(function (res) { return res.json(); });
+    };
     ActividadService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 10; }

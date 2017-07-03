@@ -740,6 +740,56 @@ function borrarEjercicio(req, res){
 
 }
 
+function getActividadesByCriteria(req, res){/*
+
+	let criteria= req.body;
+	console.log(criteria);
+
+	var find= {};
+	if(criteria.titulo != null && criteria.titulo != "")
+		find.titulo={$regex:criteria.titulo+'$'};
+
+	if(criteria.nivel != null && criteria.nivel != "")
+		find.nivel=criteria.nivel;	
+
+	if(criteria.desde != null && criteria.desde != ""){
+		if(criteria.hasta != null && criteria.hasta != ""){
+			find.fecha_creacion= {$gte: criteria.desde,$lte:criteria.hasta };
+		}else{
+			find.fecha_creacion= {$gte: criteria.desde};
+		}
+	}else if(criteria.hasta != null && criteria.hasta != ""){
+		find.fecha_creacion= {$lte: criteria.hasta};
+	}
+
+	if(criteria.autor != null && criteria.autor != "")
+		find.autor={$regex:criteria.autor+'$'};
+
+	if(criteria.fraseATraducir != null && criteria.fraseATraducir != "")
+		find.fraseATraducir={$regex:criteria.fraseATraducir+'$'};
+
+	console.log("nueva busqueda: " + JSON.stringify(find));
+
+	
+	Ejercicio.find(find).sort('-_id').exec((err, ejercicios)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver los ejercicios'});
+		}
+		else{
+
+			if(!ejercicios){
+				res.status(404).send({message:'No hay ejercicios para su busqueda'});
+			}
+			else{
+				res.status(200).send({ejercicios});
+			}	
+		}
+
+	});
+
+*/}
+
+
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {
 	getActividad,
@@ -773,5 +823,6 @@ module.exports= {
 	getActsOtrasColeccionesNivelM,
 	updateActividad,
 	borrarEjercicio,
-	deleteActividad
+	deleteActividad,
+	getActividadesByCriteria
 }
