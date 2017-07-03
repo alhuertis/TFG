@@ -155,6 +155,10 @@ var PanelAlumnoComponent = (function () {
             if (!_this.disponibles) {
                 alert('Error en el servidor');
             }
+            else {
+                _this.actividadesAMostrar = _this.actividades;
+                _this.seleccionaDatosActividades('disponibles', false, '');
+            }
         }, function (error) {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
@@ -351,7 +355,7 @@ var PanelAlumnoComponent = (function () {
             switch (datos) {
                 case 'disponibles':
                     this.actividadesAMostrar = this.disponibles;
-                    this.datosAMostrar = "Total disponibles";
+                    this.datosAMostrar = "Actividades disponibles";
                     break;
                 case 'disponibles nb':
                     this.actividadesAMostrar = this.disponiblesNBajo;

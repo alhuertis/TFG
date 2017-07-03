@@ -283,6 +283,9 @@ export class  PanelAlumnoComponent implements OnInit{
 
 				if(!this.disponibles){
 					alert('Error en el servidor');
+				}else{
+					this.actividadesAMostrar= this.actividades;
+					this.seleccionaDatosActividades('disponibles', false, '');
 				}
 			},
 			error => {
@@ -529,7 +532,7 @@ export class  PanelAlumnoComponent implements OnInit{
 			switch(datos){
 				case 'disponibles':
 					this.actividadesAMostrar=this.disponibles;
-					this.datosAMostrar= "Total disponibles";
+					this.datosAMostrar= "Actividades disponibles";
 					break;
 				case 'disponibles nb':
 					this.actividadesAMostrar=this.disponiblesNBajo;

@@ -48,7 +48,7 @@
         <div class="botones-resolver">
             <ul>
                 <li (click)="abrirModalDiccionario()"><i class="glyphicon glyphicon-search"></i> Abrir diccionario</li>
-                <li (click)="abrirModalAyuda()"><i class="glyphicon glyphicon-question-sign"></i> Mostrar ayuda</li>
+                <li (click)="abrirModalAyuda()"><i class="glyphicon glyphicon-question-sign"></i> Mostrar solucion</li>
                 <li *ngIf="!terminado" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar y salir</li>
                 <li *ngIf="terminado" id="terminar" class="animated aparecer" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Terminar</li>
             </ul>
@@ -284,15 +284,15 @@
   </div>
 
 
-  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+  <div (click)="cancelarModalAyuda()" style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalAyuda ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog">
       <div class="modal-content">  
         <div class="modal-body">
-          Ayuda...
-        </div>
-        <div class="modal-footer">
-            <button (click)="cancelarModalAyuda()" class="btn">Cerrar</button>
+            <div *ngIf="actividad.length > 0">   
+                <h4>{{actividad[ejerSel].solucionPEspanol}}</h4>
+            </div>
+         
         </div>
       </div>
     </div>

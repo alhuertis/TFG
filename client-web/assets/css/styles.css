@@ -397,6 +397,10 @@ ol li a{cursor: pointer;}
 
 
 /*******PANEL PROFESOR ********/
+.acciones-profesor{
+	margin-left: 15px;
+}
+
 .menu-profesor-arbol, .menu-alumno-arbol {
 	padding-top: 30px !important;
 }
@@ -950,7 +954,7 @@ ol li a{cursor: pointer;}
 }
 
 #terminar{
-	background: #77a399;
+	background: #408940;
 }
 
 .calificacion{
@@ -961,6 +965,7 @@ ol li a{cursor: pointer;}
     border-radius: 10px 0px 0px 10px;
     color: white;
 	font-weight: bold;
+	margin-top: 25px;
 	margin-bottom: 5px;
 	font-size: 14px;
 }
@@ -1092,7 +1097,7 @@ ol li a{cursor: pointer;}
 
 
 .btn-resolver{
-	background: #333;
+	background: #4c4d4f;
 	color: white;
 	padding: 8px;
 	margin-left: 30px;
@@ -1104,15 +1109,21 @@ ol li a{cursor: pointer;}
 }
 
 .btn-resolver-sol{
-	background: #27292B;
+	background: #4c4d4f;
 	color: white;
+	padding: 3px;
+	margin-left: 30px;
+	float: right;
+	margin-bottom: 2px;
 }
 
 .btn-ver-sol{
-	color: #4b4f4e;
+	color: #4c4d4f;
 	float: right;
 	margin-top: -5px;
-	font-size: 14px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: roboto;
 }
 
 .btn-ver-sol:hover{color: white;}
@@ -1141,7 +1152,7 @@ ol li a{cursor: pointer;}
 }
 
 .botones-resolver ul li{
-	background: #e0a03a;
+	background: #6b4e00;
 	padding: 5px 5px 5px 48px;
 	margin-bottom: 2px;
 	border-radius: 0px 6px 6px 0px;
@@ -1151,11 +1162,11 @@ ol li a{cursor: pointer;}
 }
 
 .botones-resolver ul li:hover{
-	background: #db9429;
+	background: #935e0d;
 }
 
 .botones-resolver ul li:last-child{
-	background: #e53232;
+	background: #c43333;
 }
 
 .botones-resolver ul li:last-child:hover{
@@ -1411,24 +1422,29 @@ ol li a{cursor: pointer;}
 	background: #e0e4e5;
 	margin-left: 0px;
 	padding: 10px;
-	border-radius: 4px;
+	border-radius: 8px;
 }
 
-.datos-actividad h4{margin: 5px 0px 5px 40px; text-decoration: underline;}
+.datos-actividad h4{margin: 5px 0px 5px 10px; text-decoration: underline;}
 
-.datos-actividad ul, .enlaces-ejers ul{list-style-type: none;}
+.datos-actividad ul{
+	padding-left: 10px;
+}
+
+.datos-actividad ul, .enlaces-ejers ul{list-style-type: none; padding-top: 0px;}
 
 .enlaces-ejers{
 	margin-left: 15px;
-	padding: 10px;
+	padding: 0px 10px 10px 10px;
 	border-radius: 4px;
 }
 
 .enlaces-ejers ul{margin: 0px; padding-left: 7px; border-left: 2px solid #333;}
 
 .enlaces-ejers li{
-	font-size: 16px;
+	font-size: 14px;
 	cursor: pointer;
+	padding-top: 10px;
 }
 
 .enlaces-ejers span{
@@ -1444,9 +1460,9 @@ ol li a{cursor: pointer;}
 
 .enlaces-ejers li:hover{color: #27292B;}
 
-.enlaces-ejers i{ padding-left: 4px; font-size: 26px; }
+.enlaces-ejers i{ padding-left: 4px; font-size: 20px; }
 
-.enlaces-ejers .glyphicon-hand-left{top:7px; }
+.enlaces-ejers .glyphicon-hand-left{top:4px; }
 
 .datos-solucion{
 	border-radius: 5px;
@@ -1454,7 +1470,7 @@ ol li a{cursor: pointer;}
 
 .datos-solucion .enunciado{
 	background: #444;
-	color: #ccc;
+	color: #eff2f4;
 	/*border-radius: 0px 24px 24px 0px;*/
 	padding: 8px;
 	margin-bottom: 15px;
@@ -1463,7 +1479,7 @@ ol li a{cursor: pointer;}
 .datos-solucion .notas-calificacion li span{font-size: 18px}
 .datos-solucion .enunciado p, datos-solucion .notas-calificacion li {font-size: 16px; margin-bottom: 0px;}
 
-.datos-solucion .enunciado p label{color: #63b1ed; margin-bottom: 0px}
+.datos-solucion .enunciado p label{color: #7bc1f7; margin-bottom: 0px}
 .datos-solucion .notas-calificacion li label{ margin-bottom: 0px; color:#444}
 
 
@@ -1472,7 +1488,7 @@ ol li a{cursor: pointer;}
 
 .datos-solucion .notas-calificacion{
 	list-style-type: none;
-	background: #63b1ed;
+	background: #74b5e8;
 	color: white;
 	border-radius: 20px 0px 0px 20px;
 	width: 80%;
@@ -1496,21 +1512,29 @@ ol li a{cursor: pointer;}
 .notas-calificacion i{
 	margin-left: 12px;
 	cursor: pointer;
-	color: #3f7793;
+	color: #0d3b5e;
 }
 
 .notas-calificacion #guardar-nota{
-	color: #2c8c53;
+	color: #17773e;
 }
 
 .notas-calificacion #cancelar-nota{
-	color: #a83e39;
+	color: #8e0808;
 }
 
 .msgProfesor{
 	background: #22f978;
 	padding: 8px;
 	margin-bottom: 15px;
+	padding-top:0px;
+	padding-left: 0px; 
+}
+
+.msgProfesor label{
+	background: #17c65d;
+	padding: 5px;
+	margin-top: 7px;
 }
 
 .msgProfesor p{
@@ -1520,7 +1544,7 @@ ol li a{cursor: pointer;}
 }
 
 .msgProfesor .input-valorar{
-	background: #099641;
+	background: #17c65d;
 	color: white;
 	border: none;
 	border-radius: 8px;
@@ -1540,6 +1564,7 @@ ol li a{cursor: pointer;}
 	margin-top: 8px;
 	margin-left: 8px;
 }
+
 
 .msgProfesor button:hover{
 	background: #ccc9c9;
@@ -1561,8 +1586,10 @@ ol li a{cursor: pointer;}
 .msgProfesor .editar i{
 	text-align: right;
 	font-size: 14px;
-	color: #50b277;
+	color: #08a547;
 	cursor: pointer;
+	margin-top: 7px;
+	margin-left: 10px;
 }
 
 /**********FIN DATOS SOLUCION *******************/
