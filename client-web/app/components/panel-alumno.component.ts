@@ -10,6 +10,7 @@ import {Profesor} from '../models/profesor';
 import {User} from '../models/user';
 import {Solucion} from '../models/solucion';
 import {TruncatePipe} from './truncate-pipe.component';
+import {CriteriaActividades} from '../models/criteriaActividades';
 
 import * as _ from 'underscore';
 declare var $:any;
@@ -65,6 +66,9 @@ export class  PanelAlumnoComponent implements OnInit{
 	public verSolu: Boolean;
 
 	public solucion: Solucion;
+	public visibleAnimate: Boolean;
+	public modalBuscarActs: Boolean;
+	public criteriaActividades: CriteriaActividades;
 	
 
 	
@@ -101,6 +105,9 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.mostrarSoluciones=false;
 		this.verSolu= false;
 		this.solucion= null;
+		this.visibleAnimate=false;
+		this.modalBuscarActs=false;
+		this.criteriaActividades= new CriteriaActividades();
 		
 	}
 
@@ -699,6 +706,60 @@ export class  PanelAlumnoComponent implements OnInit{
 	saliendoDeVerSolucion(){
 		this.solucion= null;
 		this.verSolu=false;
+	}
+
+
+	abrirBuscarActs(){
+		this.modalBuscarActs = true;
+		setTimeout(() => this.visibleAnimate = true);
+	}
+
+	cerrarBuscarActividades(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalBuscarActs = false, 300);
+	}
+
+
+	buscarActividades(){
+        
+        this._actividadService.getByCriteria(this.criteriaActividades).subscribe(
+
+            result=>{
+
+                this.actividadesAMostrar= result.actividades;
+				this.mostrarSoluciones=false;
+				this.mostrarActividades=true;
+				
+				if(this.actividadesAMostrar.length > 0){
+					this.datosAMostrar="Resultado de la busqueda";
+					this.setPage(1);
+					this.modalBuscarActs=false;
+				}else{
+					this.datosAMostrar="No se han encontrado resultados...";
+					this.actividadesAMostrar=[];
+					this.pagedActividades=[];
+					this.setPage(-1);
+					//this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+					this.modalBuscarActs=false;
+				}
+                
+                
+            },
+
+            error=>{
+                 this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+            }
+        );
+    }
+
+
+	limpiarFiltroActs(){
+		this.criteriaActividades= new CriteriaActividades();
 	}
 
 	setPageSoluciones(page: number) {

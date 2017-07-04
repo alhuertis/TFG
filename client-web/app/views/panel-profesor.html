@@ -11,11 +11,11 @@
               Acciones <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a routerLink="/crear-ejercicio">Crear ejercicio</a></li>
-              <li><a (click)="verBusquedaSoluciones()">Ver soluciones</a></li>
+              <li><a routerLink="/crear-ejercicio"><i class="glyphicon glyphicon-plus"></i> Crear ejercicio</a></li>
+              <li><a (click)="verBusquedaSoluciones()"><i class="glyphicon glyphicon-eye-open"></i> Ver soluciones</a></li>
               <li role="separator" class="divider"></li>
-              <li><a (click)="abrirBuscarEjers()">Buscador ejercicios</a></li>
-              <li><a (click)="abrirBuscarActs()">Buscador actividades</a></li>
+              <li><a (click)="abrirBuscarEjers()"><i class="glyphicon glyphicon-search"></i> Buscador ejercicios</a></li>
+              <li><a (click)="abrirBuscarActs()"><i class="glyphicon glyphicon-search"></i> Buscador actividades</a></li>
             </ul>
           </div>
        </div>
@@ -108,7 +108,7 @@
         <div class="col-md-5 col-sm-5 panel-ejercicios">
           <div class="row">
             <div class="col-sm-12">
-              <h3 class="text-center" *ngIf="mostrarListaEjers || mostrarListaActs ">{{datosAMostrar}}</h3>
+              <h3 class="text-center animated aparecer" *ngIf="mostrarListaEjers || mostrarListaActs ">{{datosAMostrar}}</h3>
             </div>
           </div>
           
@@ -183,7 +183,7 @@
                       <div class="col-md-4">
                         <ul>
                           <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date: 'dd/MM/yyyy'}}</li>
-                          <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_prop_fin | date: 'dd/MM/yyyy'}}</li>
+                          <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-ban-circle"></i> {{actividad.fecha_prop_fin | date: 'dd/MM/yyyy'}}</li>
                         </ul>
                       </div>
                   </div>
@@ -710,7 +710,7 @@
 			</div>
       <div class="row">
         <div class="col-md-2">
-          <button class="btn btn-default" (click)="limpiarFiltroEjers()">Limpiar filtro</button>
+          <button class="btn btn-default limpiar-filtro-ejers" (click)="limpiarFiltroEjers()">Limpiar filtro</button>
         </div>
       </div>
   
@@ -742,7 +742,7 @@
               <label for="nivel">nivel</label>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
               <select class="form-control" [(ngModel)]="criteriaActividades.nivel" name="nivel"
                 #nivel="ngModel" required>
                 <option value="Bajo">Bajo</option>
@@ -765,17 +765,34 @@
 
             <div class="col-md-4 col-sm-12">
               <label for="desde">Desde </label>
-              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaEjercicios.desde" useValueAsDate>
+              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaActividades.desde" useValueAsDate>
             </div>
 
             <div class="col-md-4 col-sm-12">
                 <label for="desde">Hasta </label>
-                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaEjercicios.hasta" useValueAsDate> 
+                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaActividades.hasta" useValueAsDate> 
             </div>
 		  	</div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <label for="visible">Propuesta</label>
+              <select class="form-control" [(ngModel)]="criteriaActividades.propuesta" name="propuesta"
+                #propuesta="ngModel" required>
+                <option value="true">Si</option>
+                <option value="false">No</option>
+              </select>
+          </div>
+
+          <div class="col-md-4 col-sm-4 animated aparecer" *ngIf="criteriaActividades.propuesta">
+              <label for="desde">Fecha propuesta</label>
+              <input type="date" name="fecha_propuesta" class="form-control" [(ngModel)]="criteriaActividades.fecha_propuesta" useValueAsDate>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-md-2">
-            <button class="btn btn-default" (click)="limpiarFiltroActs()">Limpiar filtro</button>
+            <button class="btn btn-default limpiar-filtro-acts" (click)="limpiarFiltroActs()">Limpiar filtro</button>
           </div>
         </div>
   

@@ -3,6 +3,22 @@
 <div [ngStyle]="{'display': !verSolu ? 'block' : 'none'}" class="panel-alumno container-fluid">
 
   <div class="row">
+       <div class="col-md-4 col-sm-4">
+          <!--<a routerLink="/crear-ejercicio" class="btn btn-default">Crear ejercicio</a>
+          <button (click)="verBusquedaSoluciones()" class="btn btn-default">Ver soluciones</button>-->
+          <div class="btn-group acciones-profesor">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Acciones <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a (click)="abrirBuscarActs()"><i class="glyphicon glyphicon-search"></i> Buscador actividades</a></li>
+              <li><a (click)="abrirBuscarEjers()"><i class="glyphicon glyphicon-search"></i> Buscador soluciones</a></li>
+            </ul>
+          </div>
+       </div>
+    </div>
+
+  <div class="row">
     <div class="col-md-4 menu-alumno-arbol">
 
       <ul id="tree1">
@@ -116,7 +132,7 @@
                 <div class="col-md-4">
                   <ul>
                     <li><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_creacion | date: 'dd/MM/yyyy'}}</li>
-                    <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-calendar"></i> {{actividad.fecha_prop_fin | date: 'dd/MM/yyyy'}}</li>
+                    <li *ngIf="actividad.propuesta"><i class="glyphicon glyphicon-ban-circle"></i> {{actividad.fecha_prop_fin | date: 'dd/MM/yyyy'}}</li>
                   </ul>
                 </div>
             </div>
@@ -168,7 +184,7 @@
 
     <!-- Paginador para actividades-->
     <div class="row">
-      <div class="col-sm-12" *ngIf="mostrarActividades">
+      <div class="col-sm-12" *ngIf="mostrarActividades && pagedActividades > 0">
         <!-- pager -->
         <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
           <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -193,7 +209,7 @@
 
     <!-- Paginador para soluciones-->
     <div class="row">
-      <div class="col-sm-12" *ngIf="mostrarSoluciones">
+      <div class="col-sm-12" *ngIf="mostrarSoluciones && pagedSoluciones > 0">
         <!-- pager -->
         <ul *ngIf="pagerSolucion.pages && pagerSolucion.pages.length" class="pagination">
           <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
@@ -221,5 +237,87 @@
 
   </div>
 </div>
+
+<!-- modal buscar actividades -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalBuscarActs ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog modal-buscar-acts">
+      <div class="modal-content">
+        <div class="modal-header" style="background: #6AB5A4;">
+          <h4><i class="glyphicon glyphicon-search"></i> Buscar actividades</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" placeholder="titulo" class="form-control" name="titulo" [(ngModel)]="criteriaActividades.titulo" #titulo="ngModel" required />
+            </div>
+
+            <div class="col-md-1">
+              <label for="nivel">nivel</label>
+            </div>
+
+            <div class="col-md-4">
+              <select class="form-control" [(ngModel)]="criteriaActividades.nivel" name="nivel"
+                #nivel="ngModel" required>
+                <option value="Bajo">Bajo</option>
+                <option value="Medio">Medio</option>
+                <option value="Avanzado">Avanzado</option>
+              </select>
+            </div>
+          </div>
+			
+          <div class="row">
+
+            <div class="col-md-3">
+              <label for="visible">visible</label>
+              <select class="form-control" [(ngModel)]="criteriaActividades.visible" name="visible"
+                #visible="ngModel" required>
+                <option value="true">Si</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <label for="desde">Desde </label>
+              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaActividades.desde" useValueAsDate>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <label for="desde">Hasta </label>
+                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaActividades.hasta" useValueAsDate> 
+            </div>
+		  	</div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <label for="visible">Propuesta</label>
+              <select class="form-control" [(ngModel)]="criteriaActividades.propuesta" name="propuesta"
+                #propuesta="ngModel" required>
+                <option value="true">Si</option>
+                <option value="false">No</option>
+              </select>
+          </div>
+
+          <div class="col-md-4 col-sm-4 animated aparecer" *ngIf="criteriaActividades.propuesta">
+              <label for="desde">Fecha propuesta</label>
+              <input type="date" name="fecha_propuesta" class="form-control" [(ngModel)]="criteriaActividades.fecha_propuesta" useValueAsDate>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <button class="btn btn-default limpiar-filtro-acts" (click)="limpiarFiltroActs()">Limpiar filtro</button>
+          </div>
+        </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button class="btn" (click)="cerrarBuscarActividades()">Cerrar</button>
+          <button class="btn" (click)="buscarActividades()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <datos-solucion *ngIf="verSolu" [solucion]="solucion" (salir)="saliendoDeVerSolucion()"></datos-solucion>

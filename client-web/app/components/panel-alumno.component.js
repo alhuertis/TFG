@@ -13,6 +13,7 @@ var core_1 = require("@angular/core");
 var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
 var profesor_service_1 = require("../services/profesor.service");
+var criteriaActividades_1 = require("../models/criteriaActividades");
 //los decoradores no tienen punto y coma
 var PanelAlumnoComponent = (function () {
     function PanelAlumnoComponent(_actividadService, _profesorService, _solucionService) {
@@ -47,6 +48,9 @@ var PanelAlumnoComponent = (function () {
         this.mostrarSoluciones = false;
         this.verSolu = false;
         this.solucion = null;
+        this.visibleAnimate = false;
+        this.modalBuscarActs = false;
+        this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -492,6 +496,46 @@ var PanelAlumnoComponent = (function () {
     PanelAlumnoComponent.prototype.saliendoDeVerSolucion = function () {
         this.solucion = null;
         this.verSolu = false;
+    };
+    PanelAlumnoComponent.prototype.abrirBuscarActs = function () {
+        var _this = this;
+        this.modalBuscarActs = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelAlumnoComponent.prototype.cerrarBuscarActividades = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalBuscarActs = false; }, 300);
+    };
+    PanelAlumnoComponent.prototype.buscarActividades = function () {
+        var _this = this;
+        this._actividadService.getByCriteria(this.criteriaActividades).subscribe(function (result) {
+            _this.actividadesAMostrar = result.actividades;
+            _this.mostrarSoluciones = false;
+            _this.mostrarActividades = true;
+            if (_this.actividadesAMostrar.length > 0) {
+                _this.datosAMostrar = "Resultado de la busqueda";
+                _this.setPage(1);
+                _this.modalBuscarActs = false;
+            }
+            else {
+                _this.datosAMostrar = "No se han encontrado resultados...";
+                _this.actividadesAMostrar = [];
+                _this.pagedActividades = [];
+                _this.setPage(-1);
+                //this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+                _this.modalBuscarActs = false;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        });
+    };
+    PanelAlumnoComponent.prototype.limpiarFiltroActs = function () {
+        this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
     };
     PanelAlumnoComponent.prototype.setPageSoluciones = function (page) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

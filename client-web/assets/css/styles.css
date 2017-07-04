@@ -349,6 +349,10 @@ ol li a{cursor: pointer;}
 
 /*********HEADER PROFESOR / ALUMNO**********/
 
+body{
+	background: #f9f7f7;
+}
+
 .menu-opciones{
 	margin-right: 50px;
 }
@@ -399,6 +403,10 @@ ol li a{cursor: pointer;}
 /*******PANEL PROFESOR ********/
 .acciones-profesor{
 	margin-left: 15px;
+}
+
+.acciones-profesor a{
+	cursor: pointer;
 }
 
 .menu-profesor-arbol, .menu-alumno-arbol {
@@ -743,25 +751,34 @@ ol li a{cursor: pointer;}
 	margin: 5px;
 }
 
-.modal-buscar-ejers .modal-body{background: #efefef;}
+.modal-buscar-ejers .modal-body, .modal-buscar-acts .modal-body {background: #efefef;}
 
-.modal-buscar-ejers label{color: #6d6c6c}
+.modal-buscar-ejers label, .modal-buscar-acts label{color: #6d6c6c}
 
-.modal-buscar-ejers input, .modal-buscar-ejers input[type= 'date']{
+.modal-buscar-ejers input, .modal-buscar-ejers input[type= 'date'], .modal-buscar-acts input, .modal-buscar-acts input[type= 'date'] {
 	margin-bottom: 15px;
 }
 
-.modal-buscar-ejers .modal-footer button:last-child{
+.modal-buscar-ejers .modal-footer button:last-child, .modal-buscar-acts .modal-footer button:last-child {
 	background: #6ab5a4;
 }
 
-.modal-buscar-ejers .modal-footer button:last-child:hover{
+.modal-buscar-ejers .modal-footer button:last-child:hover, .modal-buscar-acts .modal-footer button:last-child:hover{
 	background: #79c6b4;
 }
 
-.modal-buscar-ejers .modal-footer button:first-child:hover{
+.modal-buscar-ejers .modal-footer button:first-child:hover, .modal-buscar-acts .modal-footer button:first-child:hover {
 	background: #edeaea;
 }
+
+ .modal-buscar-acts .limpiar-filtro-acts{
+	 margin-top: 15px;
+	 
+ }
+
+ .modal-buscar-acts .limpiar-filtro-acts, .modal-buscar-ejers .limpiar-filtro-ejers{
+	background: #c1fca4;
+ }
 /*******FIN PANEL PROFESOR ********/
 
 /********PANEL ALUMNO***************/
@@ -945,10 +962,12 @@ ol li a{cursor: pointer;}
 	width: 260px;
 	height: 30px;
 	padding: 7px;
-	color: #555;
+	/*color: #555;*/
+	color: #63b1ed;
 	font-size: 18px;
 	border: none;
 	border-bottom: 1px solid #63b1ed;
+	background: #f9f7f7;
 
 }
 
