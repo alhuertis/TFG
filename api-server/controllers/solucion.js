@@ -400,7 +400,40 @@ function getSolucionesByCriteria(req, res){
 		find.alumno={$in: criteria.ids_alumnos};
 	}
 
-	find.terminado="true";
+	if(criteria.actividad != null && criteria.actividad != "")
+		find.actividad=new RegExp(criteria.actividad, "i");
+
+
+	if(criteria.modificacion_desde != null && criteria.modificacion_desde != ""){
+		if(criteria.modificacion_hasta != null && criteria.modificacion_hasta != ""){
+			find.ultima_modificacion= {$gte: criteria.modificacion_desde,$lte:criteria.modificacion_hasta };
+		}else{
+			find.ultima_modificacion= {$gte: criteria.modificacion_desde};
+		}
+	}else if(criteria.modificacion_hasta != null && criteria.modificacion_hasta != ""){
+		find.ultima_modificacion= {$lte: criteria.modificacion_hasta};
+	}
+
+	if(criteria.nota_desde != null){
+		if(criteria.nota_hasta != null){
+			find.notaFinal= {$gte: criteria.nota_desde,$lte:criteria.nota_hasta };
+		}else{
+			find.notaFinal= {$gte: criteria.nota_desde};
+		}
+	}else if(criteria.nota_hasta != null){
+		find.notaFinal= {$lte: criteria.nota_hasta};
+	}
+
+	if(criteria.nivel != null && criteria.nivel != "")
+		find.nivel=criteria.nivel;
+
+	if(criteria.terminado != null)
+		find.terminado=criteria.terminado;
+
+	if(criteria.alumno != null && criteria.alumno != "")
+		find.nombre_alumno=criteria.alumno;
+
+
 
 	console.log("nueva busqueda: " + JSON.stringify(find));
 

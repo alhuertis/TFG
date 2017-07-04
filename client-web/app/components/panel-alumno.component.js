@@ -14,6 +14,7 @@ var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
 var profesor_service_1 = require("../services/profesor.service");
 var criteriaActividades_1 = require("../models/criteriaActividades");
+var criteriaSolucion_1 = require("../models/criteriaSolucion");
 //los decoradores no tienen punto y coma
 var PanelAlumnoComponent = (function () {
     function PanelAlumnoComponent(_actividadService, _profesorService, _solucionService) {
@@ -51,6 +52,8 @@ var PanelAlumnoComponent = (function () {
         this.visibleAnimate = false;
         this.modalBuscarActs = false;
         this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
+        this.modalBuscarSol = false;
+        this.CriteriaSolucion = new criteriaSolucion_1.CriteriaSolucion();
     }
     PanelAlumnoComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -536,6 +539,46 @@ var PanelAlumnoComponent = (function () {
     };
     PanelAlumnoComponent.prototype.limpiarFiltroActs = function () {
         this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
+    };
+    PanelAlumnoComponent.prototype.abrirBuscarSol = function () {
+        var _this = this;
+        this.modalBuscarSol = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelAlumnoComponent.prototype.cerrarBuscarSoluciones = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalBuscarSol = false; }, 300);
+    };
+    PanelAlumnoComponent.prototype.buscarSoluciones = function () {
+        var _this = this;
+        this._solucionService.getByCriteria(this.CriteriaSolucion).subscribe(function (result) {
+            _this.solucionesAMostrar = result.soluciones;
+            _this.mostrarActividades = false;
+            _this.mostrarSoluciones = true;
+            if (_this.solucionesAMostrar.length > 0) {
+                _this.datosAMostrar = "Resultado de la busqueda";
+                _this.setPageSoluciones(1);
+                _this.modalBuscarSol = false;
+            }
+            else {
+                _this.datosAMostrar = "No se han encontrado resultados...";
+                _this.solucionesAMostrar = [];
+                _this.pagedSoluciones = [];
+                _this.setPageSoluciones(-1);
+                //this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+                _this.modalBuscarSol = false;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        });
+    };
+    PanelAlumnoComponent.prototype.limpiarFiltroSol = function () {
+        this.CriteriaSolucion = new criteriaSolucion_1.CriteriaSolucion();
     };
     PanelAlumnoComponent.prototype.setPageSoluciones = function (page) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

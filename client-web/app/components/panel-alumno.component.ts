@@ -11,6 +11,7 @@ import {User} from '../models/user';
 import {Solucion} from '../models/solucion';
 import {TruncatePipe} from './truncate-pipe.component';
 import {CriteriaActividades} from '../models/criteriaActividades';
+import {CriteriaSolucion} from '../models/criteriaSolucion';
 
 import * as _ from 'underscore';
 declare var $:any;
@@ -69,6 +70,8 @@ export class  PanelAlumnoComponent implements OnInit{
 	public visibleAnimate: Boolean;
 	public modalBuscarActs: Boolean;
 	public criteriaActividades: CriteriaActividades;
+	public modalBuscarSol: Boolean;
+	public CriteriaSolucion: CriteriaSolucion;
 	
 
 	
@@ -108,6 +111,8 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.visibleAnimate=false;
 		this.modalBuscarActs=false;
 		this.criteriaActividades= new CriteriaActividades();
+		this.modalBuscarSol= false;
+		this.CriteriaSolucion= new CriteriaSolucion();
 		
 	}
 
@@ -761,6 +766,63 @@ export class  PanelAlumnoComponent implements OnInit{
 	limpiarFiltroActs(){
 		this.criteriaActividades= new CriteriaActividades();
 	}
+
+
+	abrirBuscarSol(){
+		this.modalBuscarSol = true;
+		setTimeout(() => this.visibleAnimate = true);
+	}
+
+	cerrarBuscarSoluciones(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalBuscarSol = false, 300);
+	}
+
+
+	buscarSoluciones(){
+        
+        this._solucionService.getByCriteria(this.CriteriaSolucion).subscribe(
+
+            result=>{
+
+                this.solucionesAMostrar= result.soluciones;
+				this.mostrarActividades=false;
+				this.mostrarSoluciones=true;
+				
+				if(this.solucionesAMostrar.length > 0){
+					this.datosAMostrar="Resultado de la busqueda";
+					this.setPageSoluciones(1);
+					this.modalBuscarSol=false;
+				}else{
+					this.datosAMostrar="No se han encontrado resultados...";
+					this.solucionesAMostrar=[];
+					this.pagedSoluciones=[];
+					this.setPageSoluciones(-1);
+					//this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+					this.modalBuscarSol=false;
+				}
+                
+                
+            },
+
+            error=>{
+                 this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+            }
+        );
+    }
+
+
+	limpiarFiltroSol(){
+		this.CriteriaSolucion= new CriteriaSolucion();
+	}
+
+	
+
 
 	setPageSoluciones(page: number) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

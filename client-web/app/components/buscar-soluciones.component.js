@@ -108,6 +108,7 @@ var PanelBuscarSolucionesComponent = (function () {
         if (this.fecha_hasta != null) {
             criteria.hasta = this.fecha_hasta;
         }
+        criteria.terminado = true;
         this._solucionService.getByCriteria(criteria).subscribe(function (result) {
             _this.soluciones = result.soluciones;
             if (!_this.soluciones) {

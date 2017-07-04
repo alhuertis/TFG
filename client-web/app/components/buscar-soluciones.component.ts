@@ -173,6 +173,8 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
             criteria.hasta= this.fecha_hasta;
         }
 
+        criteria.terminado=true;
+
         this._solucionService.getByCriteria(criteria).subscribe(
 
             result=>{

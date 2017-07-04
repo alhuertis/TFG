@@ -6,6 +6,14 @@ var CriteriaSolucion = (function () {
         this.ids_alumnos = null;
         this.desde = null;
         this.hasta = null;
+        this.actividad = null;
+        this.modificacion_desde = null;
+        this.modificacion_hasta = null;
+        this.nota_desde = null;
+        this.nota_hasta = null;
+        this.nivel = null;
+        this.terminado = null;
+        this.alumno = null;
     }
     return CriteriaSolucion;
 }());
