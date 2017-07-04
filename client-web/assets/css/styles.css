@@ -742,6 +742,26 @@ ol li a{cursor: pointer;}
 	float: right;
 	margin: 5px;
 }
+
+.modal-buscar-ejers .modal-body{background: #efefef;}
+
+.modal-buscar-ejers label{color: #6d6c6c}
+
+.modal-buscar-ejers input, .modal-buscar-ejers input[type= 'date']{
+	margin-bottom: 15px;
+}
+
+.modal-buscar-ejers .modal-footer button:last-child{
+	background: #6ab5a4;
+}
+
+.modal-buscar-ejers .modal-footer button:last-child:hover{
+	background: #79c6b4;
+}
+
+.modal-buscar-ejers .modal-footer button:first-child:hover{
+	background: #edeaea;
+}
 /*******FIN PANEL PROFESOR ********/
 
 /********PANEL ALUMNO***************/

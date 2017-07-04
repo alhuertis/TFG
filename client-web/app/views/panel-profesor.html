@@ -14,8 +14,8 @@
               <li><a routerLink="/crear-ejercicio">Crear ejercicio</a></li>
               <li><a (click)="verBusquedaSoluciones()">Ver soluciones</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Buscador ejercicios</a></li>
-              <li><a href="#">Buscador actividades</a></li>
+              <li><a (click)="abrirBuscarEjers()">Buscador ejercicios</a></li>
+              <li><a (click)="abrirBuscarActs()">Buscador actividades</a></li>
             </ul>
           </div>
        </div>
@@ -200,7 +200,7 @@
             
           </div>
 
-          <div class="row" *ngIf="mostrarListaEjers">
+          <div class="row" *ngIf="mostrarListaEjers && pagedItemsEjers > 0">
             <div class="col-sm-12">
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
@@ -223,7 +223,7 @@
             </div>
           </div>
 
-          <div class="row" *ngIf="mostrarListaActs">
+          <div class="row" *ngIf="mostrarListaActs && pagedItemsActs > 0">
             <div class="col-sm-12">
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
@@ -671,6 +671,122 @@
     </div>
   </div>
 </div>
+
+<!-- modal buscar ejercicios -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalBuscarEjer ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog modal-buscar-ejers">
+      <div class="modal-content">
+        <div class="modal-header" style="background: #6AB5A4;">
+          <h4><i class="glyphicon glyphicon-search"></i> Buscar ejercicios</h4>
+        </div>
+        <div class="modal-body">
+			<div class="row">
+				<div class="col-md-6">
+					<input type="text" placeholder="titulo" class="form-control" name="titulo" [(ngModel)]="criteriaEjercicios.titulo" #titulo="ngModel" required />
+				</div>
+				
+				<div class="col-md-6">
+					<input type="text" placeholder="Autor" class="form-control" name="autor" [(ngModel)]="criteriaEjercicios.autor" #autor="ngModel" required />
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<input type="text" placeholder="Frase a traducir" class="form-control" name="fraseATraducir" [(ngModel)]="criteriaEjercicios.fraseATraducir" #fraseATraducir="ngModel" required />
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6 col-sm-12">
+					<label for="desde">Desde </label>
+					<input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaEjercicios.desde" useValueAsDate>
+				</div>
+
+				<div class="col-md-6 col-sm-12">
+				    <label for="desde">Hasta </label>
+					  <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaEjercicios.hasta" useValueAsDate> 
+				</div>
+			</div>
+      <div class="row">
+        <div class="col-md-2">
+          <button class="btn btn-default" (click)="limpiarFiltroEjers()">Limpiar filtro</button>
+        </div>
+      </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button class="btn" (click)="cerrarBuscarEjercicios()">Cerrar</button>
+          <button class="btn" (click)="buscarEjercicios()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- modal buscar actividades -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalBuscarActs ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog modal-buscar-acts">
+      <div class="modal-content">
+        <div class="modal-header" style="background: #6AB5A4;">
+          <h4><i class="glyphicon glyphicon-search"></i> Buscar actividades</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" placeholder="titulo" class="form-control" name="titulo" [(ngModel)]="criteriaActividades.titulo" #titulo="ngModel" required />
+            </div>
+
+            <div class="col-md-1">
+              <label for="nivel">nivel</label>
+            </div>
+
+            <div class="col-md-3">
+              <select class="form-control" [(ngModel)]="criteriaActividades.nivel" name="nivel"
+                #nivel="ngModel" required>
+                <option value="Bajo">Bajo</option>
+                <option value="Medio">Medio</option>
+                <option value="Avanzado">Avanzado</option>
+              </select>
+            </div>
+          </div>
+			
+          <div class="row">
+
+            <div class="col-md-3">
+              <label for="visible">visible</label>
+              <select class="form-control" [(ngModel)]="criteriaActividades.visible" name="visible"
+                #visible="ngModel" required>
+                <option value="true">Si</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <label for="desde">Desde </label>
+              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaEjercicios.desde" useValueAsDate>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <label for="desde">Hasta </label>
+                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaEjercicios.hasta" useValueAsDate> 
+            </div>
+		  	</div>
+        <div class="row">
+          <div class="col-md-2">
+            <button class="btn btn-default" (click)="limpiarFiltroActs()">Limpiar filtro</button>
+          </div>
+        </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button class="btn" (click)="cerrarBuscarActividades()">Cerrar</button>
+          <button class="btn" (click)="buscarActividades()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <panel-buscar-soluciones *ngIf="buscarSoluciones" (salir)="saliendoDeBuscarSoluciones()"></panel-buscar-soluciones>
 		

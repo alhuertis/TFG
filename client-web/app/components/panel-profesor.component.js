@@ -14,6 +14,8 @@ var ejercicio_service_1 = require("../services/ejercicio.service");
 var actividad_service_1 = require("../services/actividad.service");
 var solucion_service_1 = require("../services/solucion.service");
 var actividad_1 = require("../models/actividad");
+var criteriaEjercicios_1 = require("../models/criteriaEjercicios");
+var criteriaActividades_1 = require("../models/criteriaActividades");
 //Para usar undescore y jquery
 var _ = require("underscore");
 //los decoradores no tienen punto y coma
@@ -68,6 +70,9 @@ var PanelProfesorComponent = (function () {
         this.deleteAct = new actividad_1.Actividad();
         this.message = "";
         this.buscarSoluciones = false;
+        this.criteriaEjercicios = new criteriaEjercicios_1.CriteriaEjercicios();
+        this.modalBuscarEjer = false;
+        this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1119,6 +1124,86 @@ var PanelProfesorComponent = (function () {
     };
     PanelProfesorComponent.prototype.saliendoDeBuscarSoluciones = function () {
         this.buscarSoluciones = false;
+    };
+    PanelProfesorComponent.prototype.abrirBuscarEjers = function () {
+        var _this = this;
+        this.modalBuscarEjer = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelProfesorComponent.prototype.cerrarBuscarEjercicios = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalBuscarEjer = false; }, 300);
+    };
+    PanelProfesorComponent.prototype.buscarEjercicios = function () {
+        var _this = this;
+        this._ejercicioService.getByCriteria(this.criteriaEjercicios).subscribe(function (result) {
+            _this.ejersAMostrar = result.ejercicios;
+            _this.mostrarListaActs = false;
+            _this.mostrarListaEjers = true;
+            if (_this.ejersAMostrar.length > 0) {
+                _this.datosAMostrar = "Resultado de la busqueda";
+                _this.setPageEjers(1);
+                _this.modalBuscarEjer = false;
+            }
+            else {
+                _this.datosAMostrar = "No se han encontrado resultados...";
+                _this.ejersAMostrar = [];
+                _this.pagedItemsEjers = [];
+                _this.setPageEjers(-1);
+                //this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+                _this.modalBuscarEjer = false;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        });
+    };
+    PanelProfesorComponent.prototype.limpiarFiltroEjers = function () {
+        this.criteriaEjercicios = new criteriaEjercicios_1.CriteriaEjercicios();
+    };
+    PanelProfesorComponent.prototype.abrirBuscarActs = function () {
+        var _this = this;
+        this.modalBuscarActs = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelProfesorComponent.prototype.cerrarBuscarActividades = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalBuscarActs = false; }, 300);
+    };
+    PanelProfesorComponent.prototype.buscarActividades = function () {
+        var _this = this;
+        this._actividadService.getByCriteria(this.criteriaActividades).subscribe(function (result) {
+            _this.actsAMostrar = result.actividades;
+            _this.mostrarListaEjers = false;
+            _this.mostrarListaActs = true;
+            if (_this.actsAMostrar.length > 0) {
+                _this.datosAMostrar = "Resultado de la busqueda";
+                _this.setPageActs(1);
+                _this.modalBuscarActs = false;
+            }
+            else {
+                _this.datosAMostrar = "No se han encontrado resultados...";
+                _this.actsAMostrar = [];
+                _this.pagedItemsActs = [];
+                _this.setPageActs(-1);
+                //this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+                _this.modalBuscarActs = false;
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion de mi coleccion');
+            }
+        });
+    };
+    PanelProfesorComponent.prototype.limpiarFiltroActs = function () {
+        this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
     };
     return PanelProfesorComponent;
 }());

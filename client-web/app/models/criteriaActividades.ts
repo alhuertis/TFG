@@ -4,7 +4,6 @@ export class CriteriaActividades{
     
     public titulo: String;
     public nivel: String;
-    public profesor: String;
     public propuesta: Boolean;
     public visible: Boolean;
     public desde: Date;
@@ -20,7 +19,6 @@ export class CriteriaActividades{
         this.desde=null;
         this.hasta=null;
         this.propuesta=null;
-        this.profesor=null;
         this.visible=null;
         this.fecha_propuesta=null;
       

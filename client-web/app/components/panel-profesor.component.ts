@@ -8,6 +8,8 @@ import {SolucionService} from '../services/solucion.service';
 import {Ejercicio} from '../models/ejercicio';
 import {Actividad} from '../models/actividad';
 import {User} from '../models/user';
+import {CriteriaEjercicios} from '../models/criteriaEjercicios';
+import {CriteriaActividades} from '../models/criteriaActividades';
 
 import {TruncatePipe} from './truncate-pipe.component';
 
@@ -133,6 +135,8 @@ export class  PanelProfesorComponent implements OnInit{
 	public ejerAbrir: Ejercicio;
 	public actAbrir: Actividad;
 	public ejerBorrar: Ejercicio;
+	public modalBuscarEjer: Boolean;
+	public modalBuscarActs: Boolean;
 
 	//Modificar ejer panel
 	public niveles= ['Bajo', 'Medio', 'Avanzado'];
@@ -143,6 +147,9 @@ export class  PanelProfesorComponent implements OnInit{
 
 	//Boleanos para vistas
 	public buscarSoluciones: boolean;
+
+	public criteriaEjercicios: CriteriaEjercicios;
+	public criteriaActividades: CriteriaActividades;
 	
 
 
@@ -192,6 +199,9 @@ export class  PanelProfesorComponent implements OnInit{
 		this.message="";
 
 		this.buscarSoluciones=false;
+		this.criteriaEjercicios= new CriteriaEjercicios();
+		this.modalBuscarEjer=false;
+		this.criteriaActividades= new CriteriaActividades();
 		
 	}
 
@@ -1588,6 +1598,110 @@ export class  PanelProfesorComponent implements OnInit{
 	saliendoDeBuscarSoluciones(){
 		this.buscarSoluciones=false;
 
+	}
+
+	abrirBuscarEjers(){
+		this.modalBuscarEjer = true;
+		setTimeout(() => this.visibleAnimate = true);
+	}
+
+	cerrarBuscarEjercicios(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalBuscarEjer = false, 300);
+	}
+
+	buscarEjercicios(){
+        
+        this._ejercicioService.getByCriteria(this.criteriaEjercicios).subscribe(
+
+            result=>{
+
+                this.ejersAMostrar= result.ejercicios;
+				this.mostrarListaActs=false;
+				this.mostrarListaEjers=true;
+				if(this.ejersAMostrar.length > 0){
+					this.datosAMostrar="Resultado de la busqueda";
+					this.setPageEjers(1);
+					this.modalBuscarEjer=false;
+				}else{
+					this.datosAMostrar="No se han encontrado resultados...";
+					this.ejersAMostrar=[];
+					this.pagedItemsEjers=[];
+					this.setPageEjers(-1);
+					//this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+					this.modalBuscarEjer=false;
+				}
+                
+                
+            },
+
+            error=>{
+                 this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+            }
+        );
+    }
+
+	limpiarFiltroEjers(){
+		this.criteriaEjercicios= new CriteriaEjercicios();
+	}
+
+
+	abrirBuscarActs(){
+		this.modalBuscarActs = true;
+		setTimeout(() => this.visibleAnimate = true);
+	}
+
+	cerrarBuscarActividades(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalBuscarActs = false, 300);
+	}
+
+
+	buscarActividades(){
+        
+        this._actividadService.getByCriteria(this.criteriaActividades).subscribe(
+
+            result=>{
+
+                this.actsAMostrar= result.actividades;
+				this.mostrarListaEjers=false;
+				this.mostrarListaActs=true;
+				
+				if(this.actsAMostrar.length > 0){
+					this.datosAMostrar="Resultado de la busqueda";
+					this.setPageActs(1);
+					this.modalBuscarActs=false;
+				}else{
+					this.datosAMostrar="No se han encontrado resultados...";
+					this.actsAMostrar=[];
+					this.pagedItemsActs=[];
+					this.setPageActs(-1);
+					//this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+					this.modalBuscarActs=false;
+				}
+                
+                
+            },
+
+            error=>{
+                 this.errorMessage= <any>error;
+
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticion de mi coleccion');
+				}
+            }
+        );
+    }
+
+
+	limpiarFiltroActs(){
+		this.criteriaActividades= new CriteriaActividades();
 	}
 	
 }

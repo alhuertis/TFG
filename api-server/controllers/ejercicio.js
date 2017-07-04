@@ -525,26 +525,26 @@ function getEjerciciosByCriteria(req, res){
 
 	var find= {};
 	if(criteria.titulo != null && criteria.titulo != "")
-		find.titulo={$regex:criteria.titulo+'$'};
+		find.titulo=new RegExp(criteria.titulo, "i");
 
 	if(criteria.nivel != null && criteria.nivel != "")
 		find.nivel=criteria.nivel;	
 
 	if(criteria.desde != null && criteria.desde != ""){
 		if(criteria.hasta != null && criteria.hasta != ""){
-			find.fecha_creacion= {$gte: criteria.desde,$lte:criteria.hasta };
+			find.fechaCreacion= {$gte: criteria.desde,$lte:criteria.hasta };
 		}else{
-			find.fecha_creacion= {$gte: criteria.desde};
+			find.fechaCreacion= {$gte: criteria.desde};
 		}
 	}else if(criteria.hasta != null && criteria.hasta != ""){
-		find.fecha_creacion= {$lte: criteria.hasta};
+		find.fechaCreacion= {$lte: criteria.hasta};
 	}
 
 	if(criteria.autor != null && criteria.autor != "")
-		find.autor={$regex:criteria.autor+'$'};
+		find.autor=new RegExp(criteria.autor, "i");
 
 	if(criteria.fraseATraducir != null && criteria.fraseATraducir != "")
-		find.fraseATraducir={$regex:criteria.fraseATraducir+'$'};
+		find.fraseATraducir=new RegExp(criteria.fraseATraducir, "i");
 
 	console.log("nueva busqueda: " + JSON.stringify(find));
 

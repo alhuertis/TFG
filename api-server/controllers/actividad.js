@@ -740,17 +740,27 @@ function borrarEjercicio(req, res){
 
 }
 
-function getActividadesByCriteria(req, res){/*
+function getActividadesByCriteria(req, res){
 
 	let criteria= req.body;
 	console.log(criteria);
 
 	var find= {};
 	if(criteria.titulo != null && criteria.titulo != "")
-		find.titulo={$regex:criteria.titulo+'$'};
+		find.titulo=new RegExp(criteria.titulo, "i");
 
 	if(criteria.nivel != null && criteria.nivel != "")
-		find.nivel=criteria.nivel;	
+		find.nivel=criteria.nivel;
+
+	if(criteria.visible != null && criteria.visible != "")
+		find.visible=criteria.visible;
+
+	if(criteria.propuesta != null && criteria.propuesta != "")
+		find.propuesta=criteria.propuesta;
+
+	if(criteria.fecha_propuesta != null && criteria.fecha_propuesta != ""){	
+		find.fecha_prop_fin= {$lte: criteria.fecha_propuesta};
+	}
 
 	if(criteria.desde != null && criteria.desde != ""){
 		if(criteria.hasta != null && criteria.hasta != ""){
@@ -762,32 +772,30 @@ function getActividadesByCriteria(req, res){/*
 		find.fecha_creacion= {$lte: criteria.hasta};
 	}
 
-	if(criteria.autor != null && criteria.autor != "")
-		find.autor={$regex:criteria.autor+'$'};
 
-	if(criteria.fraseATraducir != null && criteria.fraseATraducir != "")
-		find.fraseATraducir={$regex:criteria.fraseATraducir+'$'};
 
-	console.log("nueva busqueda: " + JSON.stringify(find));
+	console.log("nueva busqueda de actividades: " + JSON.stringify(find));
 
 	
-	Ejercicio.find(find).sort('-_id').exec((err, ejercicios)=>{
+	Actividad.find(find).sort('-_id').exec((err, actividades)=>{
 		if(err){
-			res.status(500).send({message:'Error al devolver los ejercicios'});
+			res.status(500).send({message:'Error al devolver las actividades'});
 		}
 		else{
 
-			if(!ejercicios){
-				res.status(404).send({message:'No hay ejercicios para su busqueda'});
+			if(!actividades){
+				res.status(404).send({message:'No hay actividades'});
 			}
 			else{
-				res.status(200).send({ejercicios});
+				Ejercicio.populate(actividades, {path:"ejercicios"}, function(err,actividades){
+					res.status(200).send({actividades});
+				});
 			}	
 		}
 
 	});
 
-*/}
+}
 
 
 //Exportamos las funciones que tengamos, para poder usar en routes

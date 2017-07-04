@@ -6,7 +6,6 @@ var CriteriaActividades = (function () {
         this.desde = null;
         this.hasta = null;
         this.propuesta = null;
-        this.profesor = null;
         this.visible = null;
         this.fecha_propuesta = null;
     }
