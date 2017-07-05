@@ -400,8 +400,8 @@ function getSolucionesByCriteria(req, res){
 		find.alumno={$in: criteria.ids_alumnos};
 	}
 
-	if(criteria.actividad != null && criteria.actividad != "")
-		find.actividad=new RegExp(criteria.actividad, "i");
+	if(criteria.actividades != null && criteria.actividades.length)
+		find.actividad={$in: criteria.actividades};
 
 
 	if(criteria.modificacion_desde != null && criteria.modificacion_desde != ""){

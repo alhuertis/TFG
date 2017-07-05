@@ -1205,6 +1205,18 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.limpiarFiltroActs = function () {
         this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
     };
+    PanelProfesorComponent.prototype.ordenaEjerTitulo = function () {
+        this.pagedItemsEjers = _.sortBy(this.pagedItemsEjers, "titulo");
+    };
+    PanelProfesorComponent.prototype.ordenaEjerFecha = function () {
+        this.pagedItemsEjers = _.sortBy(this.pagedItemsEjers, "fechaCreacion");
+    };
+    PanelProfesorComponent.prototype.ordenaEjerNivel = function () {
+        this.pagedItemsEjers = _.sortBy(this.pagedItemsEjers, "nivel");
+    };
+    PanelProfesorComponent.prototype.ordenaEjerReverse = function () {
+        this.pagedItemsEjers.reverse();
+    };
     return PanelProfesorComponent;
 }());
 PanelProfesorComponent = __decorate([

@@ -9,7 +9,7 @@ export class CriteriaSolucion{
     public desde: Date;
     public hasta: Date;
 
-    public actividad: String;
+    public actividades: String[];
     public modificacion_desde: Date;
     public modificacion_hasta: Date;
     public nota_desde: Number;

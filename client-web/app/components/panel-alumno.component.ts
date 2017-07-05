@@ -71,7 +71,7 @@ export class  PanelAlumnoComponent implements OnInit{
 	public modalBuscarActs: Boolean;
 	public criteriaActividades: CriteriaActividades;
 	public modalBuscarSol: Boolean;
-	public CriteriaSolucion: CriteriaSolucion;
+	public criteriaSolucion: CriteriaSolucion;
 	
 
 	
@@ -112,7 +112,7 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.modalBuscarActs=false;
 		this.criteriaActividades= new CriteriaActividades();
 		this.modalBuscarSol= false;
-		this.CriteriaSolucion= new CriteriaSolucion();
+		this.criteriaSolucion= new CriteriaSolucion();
 		
 	}
 
@@ -780,45 +780,63 @@ export class  PanelAlumnoComponent implements OnInit{
 
 
 	buscarSoluciones(){
-        
-        this._solucionService.getByCriteria(this.CriteriaSolucion).subscribe(
 
-            result=>{
+		let actividades: Actividad[];
+		actividades= [];
 
-                this.solucionesAMostrar= result.soluciones;
-				this.mostrarActividades=false;
-				this.mostrarSoluciones=true;
+		this._actividadService.getByCriteria(this.criteriaActividades).subscribe(
+
+			result=>{
+				actividades= result.actividades;
+
+				if(actividades.length > 0){
+					this.criteriaSolucion.actividades=[];
+					for(var act of actividades){
+						this.criteriaSolucion.actividades.push(act._id);
+					}
+				}
 				
-				if(this.solucionesAMostrar.length > 0){
-					this.datosAMostrar="Resultado de la busqueda";
-					this.setPageSoluciones(1);
-					this.modalBuscarSol=false;
-				}else{
-					this.datosAMostrar="No se han encontrado resultados...";
-					this.solucionesAMostrar=[];
-					this.pagedSoluciones=[];
-					this.setPageSoluciones(-1);
-					//this.msgBusqueda="No hay soluciones para este criterio de busqueda";
-					this.modalBuscarSol=false;
-				}
-                
-                
-            },
+				this._solucionService.getByCriteria(this.criteriaSolucion).subscribe(
 
-            error=>{
-                 this.errorMessage= <any>error;
+				result=>{
 
-				if(this.errorMessage != null){
-					console.log(this.errorMessage);
-					alert('Error en la peticion de mi coleccion');
-				}
-            }
-        );
+					this.solucionesAMostrar= result.soluciones;
+					this.mostrarActividades=false;
+					this.mostrarSoluciones=true;
+					
+					if(this.solucionesAMostrar.length > 0){
+						this.datosAMostrar="Resultado de la busqueda";
+						this.setPageSoluciones(1);
+						this.modalBuscarSol=false;
+					}else{
+						this.datosAMostrar="No se han encontrado resultados...";
+						this.solucionesAMostrar=[];
+						this.pagedSoluciones=[];
+						this.setPageSoluciones(-1);
+						//this.msgBusqueda="No hay soluciones para este criterio de busqueda";
+						this.modalBuscarSol=false;
+					}
+					
+					
+				},
+
+				error=>{
+					this.errorMessage= <any>error;
+
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert('Error en la peticion de mi coleccion');
+					}
+				});
+			}
+		);
+        
+        
     }
 
 
 	limpiarFiltroSol(){
-		this.CriteriaSolucion= new CriteriaSolucion();
+		this.criteriaSolucion= new CriteriaSolucion();
 	}
 
 	

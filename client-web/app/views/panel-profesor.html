@@ -3,7 +3,7 @@
 <div [ngStyle]="{'display': !buscarSoluciones ? 'block' : 'none'}" class="panel-profesor container-fluid">
 
     <div class="row">
-       <div class="col-md-4 col-sm-4">
+       <div class="col-md-3 col-sm-2">
           <!--<a routerLink="/crear-ejercicio" class="btn btn-default">Crear ejercicio</a>
           <button (click)="verBusquedaSoluciones()" class="btn btn-default">Ver soluciones</button>-->
           <div class="btn-group acciones-profesor">
@@ -19,6 +19,22 @@
             </ul>
           </div>
        </div>
+
+       
+        <div class="col-md-6">
+          <div class="ordenar-ejercicios" *ngIf="pagedItemsEjers != 'undefined'">
+            <label for="ordenar">Ordenar por: </label>
+            <ul>
+              <li (click)="ordenaEjerTitulo()"> Titulo</li>
+              <li (click)="ordenaEjerFecha()">- Fecha</li>
+              <li (click)="ordenaEjerNivel()">- Nivel</li>
+              <li (click)="ordenaEjerReverse()"> <i class="glyphicon glyphicon-sort"></i></li>
+            </ul>
+          </div>
+          
+        </div>
+          
+
     </div>
 
     <div class="row">
@@ -106,6 +122,7 @@
         </div>
  
         <div class="col-md-5 col-sm-5 panel-ejercicios">
+
           <div class="row">
             <div class="col-sm-12">
               <h3 class="text-center animated aparecer" *ngIf="mostrarListaEjers || mostrarListaActs ">{{datosAMostrar}}</h3>
@@ -200,7 +217,7 @@
             
           </div>
 
-          <div class="row" *ngIf="mostrarListaEjers && pagedItemsEjers > 0">
+          <div class="row" *ngIf="mostrarListaEjers && pagedItemsEjers != 'undefined'">
             <div class="col-sm-12">
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
@@ -223,7 +240,7 @@
             </div>
           </div>
 
-          <div class="row" *ngIf="mostrarListaActs && pagedItemsActs > 0">
+          <div class="row" *ngIf="mostrarListaActs">
             <div class="col-sm-12">
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
@@ -250,6 +267,7 @@
         
 
         <div class="col-md-4 col-sm-4 panel-actividad animated aparecer" *ngIf="mostrarListaEjers || mostrarListaActs">
+
           <div class="row">
             <div class="col-md-12">
               <h4 *ngIf="!modificando" class="text-center">Seleccion para actividad</h4>

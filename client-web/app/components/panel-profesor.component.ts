@@ -1703,5 +1703,23 @@ export class  PanelProfesorComponent implements OnInit{
 	limpiarFiltroActs(){
 		this.criteriaActividades= new CriteriaActividades();
 	}
+
+	ordenaEjerTitulo(){
+
+		this.pagedItemsEjers= _.sortBy(this.pagedItemsEjers,"titulo");
+	}
+
+	ordenaEjerFecha(){
+		this.pagedItemsEjers= _.sortBy(this.pagedItemsEjers,"fechaCreacion");
+	}
+
+	ordenaEjerNivel(){
+		this.pagedItemsEjers= _.sortBy(this.pagedItemsEjers,"nivel");
+	}
+
+	ordenaEjerReverse(){
+		this.pagedItemsEjers.reverse();
+
+	}
 	
 }

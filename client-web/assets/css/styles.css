@@ -779,6 +779,35 @@ body{
  .modal-buscar-acts .limpiar-filtro-acts, .modal-buscar-ejers .limpiar-filtro-ejers{
 	background: #c1fca4;
  }
+
+.ordenar-ejercicios{
+	border: 1px solid #AAAAAA;
+	display: inline-block;
+	padding-top: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+	border-radius: 5px;
+	background: white;
+	margin-top: 2px;
+}
+
+.ordenar-ejercicios ul{
+	padding-left: 0px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+ .ordenar-ejercicios ul, .ordenar-ejercicios ul li{
+	 display: inline-block;
+ }
+
+ .ordenar-ejercicios ul li{
+	 cursor: pointer;
+ }
+
+ .ordenar-ejercicios ul li i{
+	 padding-left: 4px;
+ }
 /*******FIN PANEL PROFESOR ********/
 
 /********PANEL ALUMNO***************/

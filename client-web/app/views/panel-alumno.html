@@ -320,7 +320,7 @@
   </div>
 
 
-  <!-- modal buscar actividades -->
+  <!-- modal buscar soluciones -->
   <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalBuscarSol ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog modal-buscar-acts">
@@ -331,15 +331,15 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-6">
-              <input type="text" placeholder="titulo" class="form-control" name="titulo" [(ngModel)]="criteriaActividades.titulo" #titulo="ngModel" required />
+              <input type="text" placeholder="Nombre actividad" class="form-control" name="actividad" [(ngModel)]="criteriaActividades.titulo" #actividad="ngModel" required />
             </div>
 
             <div class="col-md-1">
               <label for="nivel">nivel</label>
             </div>
 
-            <div class="col-md-4">
-              <select class="form-control" [(ngModel)]="criteriaActividades.nivel" name="nivel"
+            <div class="col-md-5">
+              <select class="form-control" [(ngModel)]="criteriaSolucion.nivel" name="nivel"
                 #nivel="ngModel" required>
                 <option value="Bajo">Bajo</option>
                 <option value="Medio">Medio</option>
@@ -350,40 +350,49 @@
 			
           <div class="row">
 
-            <div class="col-md-3">
-              <label for="visible">visible</label>
-              <select class="form-control" [(ngModel)]="criteriaActividades.visible" name="visible"
-                #visible="ngModel" required>
-                <option value="true">Si</option>
-                <option value="false">No</option>
-              </select>
-            </div>
 
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-3 col-sm-12">
               <label for="desde">Desde </label>
-              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaActividades.desde" useValueAsDate>
+              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaSolucion.desde" useValueAsDate>
             </div>
 
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-3 col-sm-12">
                 <label for="desde">Hasta </label>
-                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaActividades.hasta" useValueAsDate> 
+                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaSolucion.hasta" useValueAsDate> 
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+              <label for="desde">Modificado desde </label>
+              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaSolucion.modificacion_desde" useValueAsDate>
+            </div>
+
+            <div class="col-md-3 col-sm-12">
+                <label for="desde">Modificado hasta </label>
+                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaSolucion.modificacion_hasta" useValueAsDate> 
             </div>
 		  	</div>
 
         <div class="row">
           <div class="col-md-3">
-            <label for="visible">Propuesta</label>
-              <select class="form-control" [(ngModel)]="criteriaActividades.propuesta" name="propuesta"
+            <label for="visible">Terminado</label>
+              <select class="form-control" [(ngModel)]="criteriaSolucion.terminado" name="terminado"
                 #propuesta="ngModel" required>
                 <option value="true">Si</option>
                 <option value="false">No</option>
               </select>
           </div>
 
-          <div class="col-md-4 col-sm-4 animated aparecer" *ngIf="criteriaActividades.propuesta">
-              <label for="desde">Fecha propuesta</label>
-              <input type="date" name="fecha_propuesta" class="form-control" [(ngModel)]="criteriaActividades.fecha_propuesta" useValueAsDate>
+          <div class="col-md-3 col-sm-12">
+              <label for="nota_desde">Nota desde </label>
+              <input type="number" name="nota_desde" class="form-control" [(ngModel)]="criteriaSolucion.nota_desde" useValueAsDate>
           </div>
+
+          <div class="col-md-3 col-sm-12">
+              <label for="nota_desde">Nota hasta </label>
+              <input type="number" name="nota-hasta" class="form-control" [(ngModel)]="criteriaSolucion.nota_hasta" useValueAsDate> 
+          </div>
+
+          
         </div>
 
         <div class="row">
