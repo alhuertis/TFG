@@ -431,7 +431,7 @@ function getSolucionesByCriteria(req, res){
 		find.terminado=criteria.terminado;
 
 	if(criteria.alumno != null && criteria.alumno != "")
-		find.nombre_alumno=criteria.alumno;
+		find.alumno=criteria.alumno;
 
 
 

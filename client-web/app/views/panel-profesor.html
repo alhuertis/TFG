@@ -22,13 +22,23 @@
 
        
         <div class="col-md-6">
-          <div class="ordenar-ejercicios" *ngIf="pagedItemsEjers != 'undefined'">
+          <div class="ordenar-ejercicios" *ngIf="pagedItemsEjers != 'undefined' && mostrarListaEjers">
             <label for="ordenar">Ordenar por: </label>
             <ul>
               <li (click)="ordenaEjerTitulo()"> Titulo</li>
               <li (click)="ordenaEjerFecha()">- Fecha</li>
               <li (click)="ordenaEjerNivel()">- Nivel</li>
               <li (click)="ordenaEjerReverse()"> <i class="glyphicon glyphicon-sort"></i></li>
+            </ul>
+          </div>
+
+          <div class="ordenar-ejercicios" *ngIf="pagedItemsActs != 'undefined' && mostrarListaActs">
+            <label for="ordenar">Ordenar por: </label>
+            <ul>
+              <li (click)="ordenaActsTitulo()"> Titulo</li>
+              <li (click)="ordenaActsFecha()">- Fecha</li>
+              <li (click)="ordenaActsNivel()">- Nivel</li>
+              <li (click)="ordenaActsReverse()"> <i class="glyphicon glyphicon-sort"></i></li>
             </ul>
           </div>
           
@@ -218,7 +228,7 @@
           </div>
 
           <div class="row" *ngIf="mostrarListaEjers && pagedItemsEjers != 'undefined'">
-            <div class="col-sm-12">
+            <div class="col-sm-12 paginador">
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -241,7 +251,7 @@
           </div>
 
           <div class="row" *ngIf="mostrarListaActs">
-            <div class="col-sm-12">
+            <div class="col-sm-12 paginador">
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}">

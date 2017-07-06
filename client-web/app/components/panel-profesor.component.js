@@ -1217,6 +1217,18 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.ordenaEjerReverse = function () {
         this.pagedItemsEjers.reverse();
     };
+    PanelProfesorComponent.prototype.ordenaActsTitulo = function () {
+        this.pagedItemsActs = _.sortBy(this.pagedItemsActs, "titulo");
+    };
+    PanelProfesorComponent.prototype.ordenaActsFecha = function () {
+        this.pagedItemsActs = _.sortBy(this.pagedItemsActs, "fechaCreacion");
+    };
+    PanelProfesorComponent.prototype.ordenaActsNivel = function () {
+        this.pagedItemsActs = _.sortBy(this.pagedItemsActs, "nivel");
+    };
+    PanelProfesorComponent.prototype.ordenaActsReverse = function () {
+        this.pagedItemsActs.reverse();
+    };
     return PanelProfesorComponent;
 }());
 PanelProfesorComponent = __decorate([

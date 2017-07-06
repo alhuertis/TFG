@@ -796,6 +796,7 @@ export class  PanelAlumnoComponent implements OnInit{
 					}
 				}
 				
+				this.criteriaSolucion.alumno= this.user._id;
 				this._solucionService.getByCriteria(this.criteriaSolucion).subscribe(
 
 				result=>{

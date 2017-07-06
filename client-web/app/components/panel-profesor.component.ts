@@ -1721,5 +1721,24 @@ export class  PanelProfesorComponent implements OnInit{
 		this.pagedItemsEjers.reverse();
 
 	}
+
+
+	ordenaActsTitulo(){
+
+		this.pagedItemsActs= _.sortBy(this.pagedItemsActs,"titulo");
+	}
+
+	ordenaActsFecha(){
+		this.pagedItemsActs= _.sortBy(this.pagedItemsActs,"fechaCreacion");
+	}
+
+	ordenaActsNivel(){
+		this.pagedItemsActs= _.sortBy(this.pagedItemsActs,"nivel");
+	}
+
+	ordenaActsReverse(){
+		this.pagedItemsActs.reverse();
+
+	}
 	
 }

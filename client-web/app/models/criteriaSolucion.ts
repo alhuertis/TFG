@@ -26,7 +26,7 @@ export class CriteriaSolucion{
         this.ids_alumnos=null;
         this.desde=null;
         this.hasta=null;
-        this.actividad= null;
+        this.actividades= null;
         this.modificacion_desde= null;
         this.modificacion_hasta= null;
         this.nota_desde= null;

@@ -1663,4 +1663,6 @@ body{
 /**********FIN DATOS SOLUCION *******************/
 
 
-
+.paginador ul{
+	float: right;
+}

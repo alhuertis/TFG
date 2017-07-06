@@ -563,6 +563,7 @@ var PanelAlumnoComponent = (function () {
                     _this.criteriaSolucion.actividades.push(act._id);
                 }
             }
+            _this.criteriaSolucion.alumno = _this.user._id;
             _this._solucionService.getByCriteria(_this.criteriaSolucion).subscribe(function (result) {
                 _this.solucionesAMostrar = result.soluciones;
                 _this.mostrarActividades = false;
