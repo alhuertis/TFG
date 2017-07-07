@@ -254,42 +254,63 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     siguienteEjer(){
-        this.restaurarColoresPalabras();
-        this.ejerSel++;
-        this.siguiente= this.ejerSel < this.actividad.length - 1;
-        this.anterior=this.ejerSel > 0;
-        this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
-        this.fraseLematizadaSplit= this.actividad[this.ejerSel].fraseLematizada.split(" ");
-        this.respuesta="";
-        this.verboMarcado=false;
-        this.verbo= this.extraerVerbo();
-        this.faseVerbo=false;
-        this.monovalente.activa=false;
-        this.bivalente.activa=false;
-        this.trivalente.activa=false;
-        this.amarilla.activa=false;
-        this.azul.activa=false;
-        this.naranja.activa=false;
-        this.roja.activa=false;
-        this.verde.activa=false;
-        $('span.acertada').removeClass("acertada");
-        $('span.marcada').removeClass("marcada");
-        $('.izquierda, .superior, .derecha').removeAttr("src");
-        $('.izquierda, .superior, .derecha').css("display", "none");
+        if(this.siguiente){
+            this.restaurarColoresPalabras();
+            this.ejerSel++;
+            this.siguiente= this.ejerSel < this.actividad.length - 1;
+            this.anterior=this.ejerSel > 0;
+            this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
+            this.fraseLematizadaSplit= this.actividad[this.ejerSel].fraseLematizada.split(" ");
+            this.respuesta="";
+            this.verboMarcado=false;
+            this.verbo= this.extraerVerbo();
+            this.faseVerbo=false;
+            this.monovalente.activa=false;
+            this.bivalente.activa=false;
+            this.trivalente.activa=false;
+            this.amarilla.activa=false;
+            this.azul.activa=false;
+            this.naranja.activa=false;
+            this.roja.activa=false;
+            this.verde.activa=false;
+            $('span.acertada').removeClass("acertada");
+            $('span.marcada').removeClass("marcada");
+            $('.izquierda, .superior, .derecha').removeAttr("src");
+            $('.izquierda, .superior, .derecha').css("display", "none");
 
-        this.guardarSolucion();
+            if(this.resueltos > 0)
+                this.guardarSolucion();
+        }
     }
 
     anteriorEjer(){
+        if(this.anterior){
+            this.restaurarColoresPalabras();
+            this.ejerSel--;
+            this.anterior= this.ejerSel > 0;
+            this.siguiente= this.ejerSel < this.actividad.length-1;
+            this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
+            this.fraseLematizadaSplit= this.actividad[this.ejerSel].fraseLematizada.split(" ");
+            this.respuesta="";
+            this.verbo= this.extraerVerbo();
+
+            if(this.resueltos > 0)
+                this.guardarSolucion();
+        }
+    }
+
+    seleccionarEjer(n : number){
         this.restaurarColoresPalabras();
-        this.ejerSel--;
+        this.ejerSel= n;
         this.anterior= this.ejerSel > 0;
         this.siguiente= this.ejerSel < this.actividad.length-1;
         this.fraseSplit= this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.fraseLematizadaSplit= this.actividad[this.ejerSel].fraseLematizada.split(" ");
         this.respuesta="";
         this.verbo= this.extraerVerbo();
-        this.guardarSolucion();
+
+        if(this.resueltos > 0)
+                this.guardarSolucion();
     }
 
     calificar(){
@@ -337,6 +358,8 @@ export class  ResolverActividadComponent implements OnInit{
             this.solucion.notaFinal=this.calificacionFinal;
             this.terminado=true;
         }
+
+        this.guardarSolucion();
         
     }
 

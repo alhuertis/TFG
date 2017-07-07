@@ -141,40 +141,58 @@ var ResolverActividadComponent = (function () {
         return verbo;
     };
     ResolverActividadComponent.prototype.siguienteEjer = function () {
-        this.restaurarColoresPalabras();
-        this.ejerSel++;
-        this.siguiente = this.ejerSel < this.actividad.length - 1;
-        this.anterior = this.ejerSel > 0;
-        this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
-        this.fraseLematizadaSplit = this.actividad[this.ejerSel].fraseLematizada.split(" ");
-        this.respuesta = "";
-        this.verboMarcado = false;
-        this.verbo = this.extraerVerbo();
-        this.faseVerbo = false;
-        this.monovalente.activa = false;
-        this.bivalente.activa = false;
-        this.trivalente.activa = false;
-        this.amarilla.activa = false;
-        this.azul.activa = false;
-        this.naranja.activa = false;
-        this.roja.activa = false;
-        this.verde.activa = false;
-        $('span.acertada').removeClass("acertada");
-        $('span.marcada').removeClass("marcada");
-        $('.izquierda, .superior, .derecha').removeAttr("src");
-        $('.izquierda, .superior, .derecha').css("display", "none");
-        this.guardarSolucion();
+        if (this.siguiente) {
+            this.restaurarColoresPalabras();
+            this.ejerSel++;
+            this.siguiente = this.ejerSel < this.actividad.length - 1;
+            this.anterior = this.ejerSel > 0;
+            this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
+            this.fraseLematizadaSplit = this.actividad[this.ejerSel].fraseLematizada.split(" ");
+            this.respuesta = "";
+            this.verboMarcado = false;
+            this.verbo = this.extraerVerbo();
+            this.faseVerbo = false;
+            this.monovalente.activa = false;
+            this.bivalente.activa = false;
+            this.trivalente.activa = false;
+            this.amarilla.activa = false;
+            this.azul.activa = false;
+            this.naranja.activa = false;
+            this.roja.activa = false;
+            this.verde.activa = false;
+            $('span.acertada').removeClass("acertada");
+            $('span.marcada').removeClass("marcada");
+            $('.izquierda, .superior, .derecha').removeAttr("src");
+            $('.izquierda, .superior, .derecha').css("display", "none");
+            if (this.resueltos > 0)
+                this.guardarSolucion();
+        }
     };
     ResolverActividadComponent.prototype.anteriorEjer = function () {
+        if (this.anterior) {
+            this.restaurarColoresPalabras();
+            this.ejerSel--;
+            this.anterior = this.ejerSel > 0;
+            this.siguiente = this.ejerSel < this.actividad.length - 1;
+            this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
+            this.fraseLematizadaSplit = this.actividad[this.ejerSel].fraseLematizada.split(" ");
+            this.respuesta = "";
+            this.verbo = this.extraerVerbo();
+            if (this.resueltos > 0)
+                this.guardarSolucion();
+        }
+    };
+    ResolverActividadComponent.prototype.seleccionarEjer = function (n) {
         this.restaurarColoresPalabras();
-        this.ejerSel--;
+        this.ejerSel = n;
         this.anterior = this.ejerSel > 0;
         this.siguiente = this.ejerSel < this.actividad.length - 1;
         this.fraseSplit = this.actividad[this.ejerSel].fraseATraducir.split(" ");
         this.fraseLematizadaSplit = this.actividad[this.ejerSel].fraseLematizada.split(" ");
         this.respuesta = "";
         this.verbo = this.extraerVerbo();
-        this.guardarSolucion();
+        if (this.resueltos > 0)
+            this.guardarSolucion();
     };
     ResolverActividadComponent.prototype.calificar = function () {
         if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
@@ -218,6 +236,7 @@ var ResolverActividadComponent = (function () {
             this.solucion.notaFinal = this.calificacionFinal;
             this.terminado = true;
         }
+        this.guardarSolucion();
     };
     ResolverActividadComponent.prototype.clickMonovalente = function (event) {
         /*if(this.argumentos > 1){

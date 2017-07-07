@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-md-12">
                 <ol class="breadcrumb" style="width: 230px; background:#eee">
-                    <li><a routerLink="/alumno">Alumno</a></li>
-                    <li class="active">Resolver actividad</li>
+                    <li><a routerLink="/alumno"><i class="glyphicon glyphicon-home"></i> Panel principal</a></li>
+                    <li class="active">Resolver</li>
                 </ol>
             </div>
         </div>
@@ -45,8 +45,20 @@
 
 <div class="row">
     <div class="col-md-3">
+
+        <div class="btn-group btn-lista-ejers">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Lista de ejercicios ({{actividad.length}}) <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" *ngIf="actividad.length > 0">
+                <li *ngFor="let ej of actividad; let i=index" [ngClass]="{'ejer-sel': i == ejerSel}" (click)="seleccionarEjer(i)"><a>{{i + 1}}# {{ej.titulo}} <i *ngIf="i == ejerSel" class="glyphicon glyphicon-hand-left"></i></a></li>
+            </ul>
+        </div>
+
         <div class="botones-resolver">
             <ul>
+                <li id="siguiente-ejer" [ngClass]="{'ejer-disabled': siguiente == false}" (click)="siguienteEjer()">Siguiente <i class="glyphicon glyphicon-chevron-right"></i></li>
+                <li id="anterior-ejer" [ngClass]="{'ejer-disabled': anterior == false}" (click)="anteriorEjer()"><i class="glyphicon glyphicon-chevron-left"></i> Anterior</li>
                 <li (click)="abrirModalDiccionario()"><i class="glyphicon glyphicon-search"></i> Abrir diccionario</li>
                 <li (click)="abrirModalAyuda()"><i class="glyphicon glyphicon-question-sign"></i> Mostrar solucion</li>
                 <li *ngIf="!terminado" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar y salir</li>
@@ -148,23 +160,6 @@
     </div>
 
 </div>
-
-    
-
-<div class="row">
-    <div class="col-md-4 col-md-offset-6">
-        <div class="row pager-actividad">
-            <div>
-                <a *ngIf="anterior" (click)="anteriorEjer()"><i class="glyphicon glyphicon-circle-arrow-left" id="iAnterior"></i> anterior</a>
-            </div>
-            
-            <div>
-                <a *ngIf="siguiente" (click)="siguienteEjer()">siguiente <i class="glyphicon glyphicon-circle-arrow-right" id="iSiguiente"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 
   <!-- modal salir tras terminar -->

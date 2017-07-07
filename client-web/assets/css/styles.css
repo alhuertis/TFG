@@ -854,44 +854,6 @@ body{
 	margin-left: 8px;
 }
 
-
-.pager-actividad div{
-	font-size: 14px;
-	display: inline-block;
-	min-width: 100px;
-	margin: 2px;
-	padding: 8px;
-
-}
-
-.pager-actividad div:nth-child(2){
-	color: #6ab5a4;
-	font-size: 16px;
-
-}
-
-.pager-actividad div a{
-	cursor: pointer;
-	color: #27292B;
-	font-weight: bold;
-}
-
-.pager-actividad div a:hover{
-	text-decoration: none;
-}
-
-.pager-actividad div a i{font-size: 30px;}
-
-.pager-actividad div a i#iSiguiente{
-	top: 7px;
-	left: 5px;
-}
-
-.pager-actividad div a i#iAnterior{
-	top: 7px;
-	right: 5px;
-}
-
 .resolver{
 	padding: 15px;
 	border-radius: 5px;
@@ -1202,14 +1164,35 @@ body{
 	padding-top: 4px;
 }
 
+.btn-lista-ejers{
+	margin-top: 40px;
+}
+
+.btn-lista-ejers button{
+	margin-left: -3px;
+	background: #6b4e00;
+	color: white;
+}
+
+.btn-lista-ejers ul{
+	background: #dee5e0;
+}
+
+.btn-lista-ejers ul li{
+	cursor: pointer;
+}
+
+.btn-lista-ejers .ejer-sel a{
+	font-weight: bold;
+}
+
 
 .botones-resolver{
 	/*border: 1px solid #ccc;*/
 	/*background: #99CC99;*/
 	margin-left: -4px;
-	margin-top: 45px;
 	border-radius: 0px 6px 6px 0px;
-	padding: 10px 5px 10px 0px;
+	padding: 5px 5px 10px 0px;
 	 
 }
 
@@ -1241,6 +1224,15 @@ body{
 	background: #c61919;
 }
 
+.ejer-disabled{
+	cursor: not-allowed !important;
+	background: #999897 !important;
+}
+
+.ejer-disabled:hover{
+	background: none;
+}
+
 .modal-diccionario{ width: 70%;}
 
 .modal-diccionario .modal-header{ background: #6ab5a4}
@@ -1252,7 +1244,7 @@ body{
 }
 
 .modal-diccionario .modal-body .dicc-lematizada span{
-	margin-right: 3px;
+	margin-right: 5px;
 	cursor: pointer;
 	text-decoration: underline;
 	color: #5696af;
@@ -1619,6 +1611,9 @@ body{
 	padding: 5px 10px 5px 10px;
 	font-size: 14px;
 	width: 100%;
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .msgProfesor .input-valorar:focus, .msgProfesor .input-valorar:active, .msgProfesor .input-valorar:link{

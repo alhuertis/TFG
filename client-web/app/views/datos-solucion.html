@@ -42,7 +42,7 @@
             </div>
 
             <ul class="notas-calificacion">
-                <li><label>Calificacion del ejercicio:</label> <span *ngIf="!editarNota" class="animated aparecer badge">{{solucion.ejercicios[indice].calificacion}}</span>
+                <li><label>Calificacion del ejercicio:</label> <span *ngIf="!editarNota && solucion.ejercicios[indice].calificacion >= 0 " class="animated aparecer badge">{{solucion.ejercicios[indice].calificacion}}</span>
                     <input class="input-valorar animated aparecer" *ngIf="editarNota && user.role=='profesor'" type="number" name="valNota" #valNota="ngModel" [(ngModel)]="nota" min="0" max="1"/> 
                     <i class="animated aparecer" (click)="editaNota()" *ngIf="!editarNota && user.role=='profesor'" class="glyphicon glyphicon-pencil">editar</i> 
                     <i class="animated aparecer" (click)="guardarNota()" id="guardar-nota" *ngIf="editarNota && user.role=='profesor'" class="glyphicon glyphicon-ok">guardar</i>
