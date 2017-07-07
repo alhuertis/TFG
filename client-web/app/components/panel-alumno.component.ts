@@ -841,7 +841,42 @@ export class  PanelAlumnoComponent implements OnInit{
 	}
 
 	
+	ordenaSolTitulo(){
 
+		this.pagedSoluciones= _.sortBy(this.pagedSoluciones,"titulo");
+	}
+
+	ordenaSolFecha(){
+		this.pagedSoluciones= _.sortBy(this.pagedSoluciones,"fechaCreacion");
+	}
+
+	ordenaSolNivel(){
+		this.pagedSoluciones= _.sortBy(this.pagedSoluciones,"nivel");
+	}
+
+	ordenaSolReverse(){
+		this.pagedSoluciones.reverse();
+
+	}
+
+
+	ordenaActsTitulo(){
+
+		this.pagedActividades= _.sortBy(this.pagedActividades,"titulo");
+	}
+
+	ordenaActsFecha(){
+		this.pagedActividades= _.sortBy(this.pagedActividades,"fechaCreacion");
+	}
+
+	ordenaActsNivel(){
+		this.pagedActividades= _.sortBy(this.pagedActividades,"nivel");
+	}
+
+	ordenaActsReverse(){
+		this.pagedActividades.reverse();
+
+	}
 
 	setPageSoluciones(page: number) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

@@ -28,7 +28,7 @@
 
 			<div class="row">
 				<div class="col-md-3 col-md-offset-1">
-					<input type="text" class="form-control"  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejercicio.titulo">
+					<input type="text" class="form-control" required  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejercicio.titulo">
 					
 					<div class="row" style="margin-top: 10px">
 						<div class="col-md-6" >
@@ -39,9 +39,6 @@
 									#nivel="ngModel" >
 							<option *ngFor="let niv of niveles" [value]="niv">{{niv}}</option>
 							</select>
-							<div [hidden]="nivel.valid || nivel.pristine" class="alert alert-danger">
-							Nivel requerida
-							</div>
 						</div>
 
 						<!--<div class="col-md-6">
@@ -58,7 +55,7 @@
 						</div>-->
 					</div>
 
-					<textarea style="margin-top: 25px" class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado"> </textarea>
+					<textarea style="margin-top: 25px" class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado" required> </textarea>
 					
 				</div>
 			
@@ -69,7 +66,7 @@
 				
 				<div class="col-md-3">
 					<!--<textarea (blur)="aplicaValoresLogicos()" [style.visibility]="(ejercicio.tipo > 1) ? 'hidden' : 'visible' "  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> -->
-					<textarea (blur)="aplicaValoresLogicos()"  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir"> 
+					<textarea (blur)="aplicaValoresLogicos()"  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir" required> 
 					</textarea>
 
 					<div class="row" style="margin-top: 10px">
@@ -98,17 +95,17 @@
 						</div>
 					</div>
 
-					<textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico"> </textarea>
+					<textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico" required> </textarea>
 				</div>
 				
 				<div class="col-md-3">
-					<textarea style="margin-bottom: 20px;" class="form-control" placeholder="Frase lematizada..." name="fLematizada" #fLematizada="ngModel" [(ngModel)]="ejercicio.fraseLematizada"> </textarea>
+					<textarea style="margin-bottom: 20px;" class="form-control" placeholder="Frase lematizada..." name="fLematizada" #fLematizada="ngModel" [(ngModel)]="ejercicio.fraseLematizada" required> </textarea>
 					
-					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron"> </textarea>
+					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron" required> </textarea>
 
 					<!--<textarea *ngIf="ejercicio.tipo <= 1 " style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
 					<textarea *ngIf="ejercicio.tipo > 1" style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>-->
-					<textarea style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
+					<textarea style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol" required> </textarea>
 					
 					<button style="margin-top: 20px" type="submit" class="btn btn-success">Crear</button> <a style="margin-top: 20px" [routerLink]="['/']" class="btn btn-danger">Salir</a>
 				</div>
@@ -118,3 +115,36 @@
 		</form>
 	</div>
 </div>
+
+
+<!-- modal mostrar ejercicio -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalEjercicio ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog mostrar-ejercicio modal-lg">
+      <div class="modal-content">
+        <div *ngIf="ejercicio != null" class="modal-header">
+          <h3><label>Titulo:</label> {{ejercicio.titulo}}</h3>
+        </div>
+        <div *ngIf="ejercicio != null" class="modal-body">
+			<h2 class="text-center" style="color: green; margin-top: 0px;">¡Ejercicio creado!</h2>
+          <ul>
+            <li><label><i class="glyphicon glyphicon-user"></i> Autor:</label> {{ejercicio.autor}}</li>
+            <li><label><i class="glyphicon glyphicon-signal"></i> Nivel:</label> {{ejercicio.nivel}}</li>
+            <!--<li><label><i class="glyphicon glyphicon-tag"></i> Tipo:</label> {{ejercicio.tipo}}</li>-->
+            <li><label><i class="glyphicon glyphicon-calendar"></i> Fecha de creación:</label> {{ejercicio.fechaCreacion | date: 'dd/MM/yyyy'}}</li>
+            <li><label><i class="glyphicon glyphicon-calendar"></i> Ultima modificación:</label> {{ejercicio.fechaModificacion | date: 'dd/MM/yyyy'}} a las {{ejercicio.fechaModificacion | date: 'HH:mm:ss'}}</li>
+            <li><label><i class="glyphicon glyphicon-pencil"></i> Enunciado:</label> {{ejercicio.enunciado}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Frase a traducir:</label> {{ejercicio.fraseATraducir}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Frase lematizada:</label> {{ejercicio.fraseLematizada}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Solución en formato lógico:</label> {{ejercicio.solucionFLogico}}</li>
+            <li><label><i class="glyphicon glyphicon-th-list"></i> Solución en formato patrón:</label> {{ejercicio.solucionFPatron}}</li>
+            <li *ngIf="ejercicio.solucionPEspanol"><label><i class="glyphicon glyphicon-th-list"></i> Solución en Español:</label> {{ejercicio.solucionPEspanol}}</li>
+            <li *ngIf="ejercicio.solucionPLatin"><label><i class="glyphicon glyphicon-th-list"></i> Solución en Latín:</label> {{ejercicio.solucionPLatin}}</li>
+          </ul>
+        </div>
+		<div class="modal-footer">
+			<button class="btn btn-default" (click)="cerrarModalEjercicio()">cerrar</button>
+		</div>
+      </div>
+    </div>
+  </div>

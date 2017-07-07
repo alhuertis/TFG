@@ -583,8 +583,8 @@ body{
 }
 
 .active a{
-	background: #6ab5a4 !important;
-	border: 1px solid #6ab5a4 !important;
+	background: #2EA7B0 !important;
+	border: 1px solid #3399a0 !important;
 }
 
 .modActividad{
@@ -777,10 +777,10 @@ body{
  }
 
  .modal-buscar-acts .limpiar-filtro-acts, .modal-buscar-ejers .limpiar-filtro-ejers{
-	background: #c1fca4;
+	background: #a9e8ca;
  }
 
-.ordenar-ejercicios{
+.ordenar-filtros{
 	border: 1px solid #AAAAAA;
 	display: inline-block;
 	padding-top: 2px;
@@ -791,21 +791,21 @@ body{
 	margin-top: 2px;
 }
 
-.ordenar-ejercicios ul{
+.ordenar-filtros ul{
 	padding-left: 0px;
 	padding-bottom: 0px;
 	margin-bottom: 0px;
 }
 
- .ordenar-ejercicios ul, .ordenar-ejercicios ul li{
+ .ordenar-filtros ul, .ordenar-filtros ul li{
 	 display: inline-block;
  }
 
- .ordenar-ejercicios ul li{
+ .ordenar-filtros ul li{
 	 cursor: pointer;
  }
 
- .ordenar-ejercicios ul li i{
+ .ordenar-filtros ul li i{
 	 padding-left: 4px;
  }
 /*******FIN PANEL PROFESOR ********/

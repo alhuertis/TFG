@@ -84,7 +84,7 @@
 
             <!-- Paginador para soluciones-->
             <div *ngIf="mostrarSoluciones" class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 paginador">
                     <!-- pager -->
                     <ul *ngIf="pagerSolucion.pages && pagerSolucion.pages.length" class="pagination">
                     <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">

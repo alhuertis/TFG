@@ -29,6 +29,8 @@ var EjercicioAddComponent = (function () {
         this.tipoLogico = "";
         this.valorLogico = "";
         this.valoresLogico = [];
+        this.modalEjercicio = false;
+        this.visibleAnimate = false;
     }
     EjercicioAddComponent.prototype.ngOnInit = function () {
         //Lo ponemos asi para rellenarlo con el chuwidatabindin
@@ -62,7 +64,9 @@ var EjercicioAddComponent = (function () {
             }
             else {
                 _this.ejercicio = response.ejercicio;
-                _this._router.navigate(['/']);
+                //this._router.navigate(['/']);
+                _this.modalEjercicio = true;
+                setTimeout(function () { return _this.visibleAnimate = true; });
             }
         }, function (error) {
             _this.errorMessage = error;
@@ -72,6 +76,12 @@ var EjercicioAddComponent = (function () {
             }
         });
     }; // fin onSubmit
+    EjercicioAddComponent.prototype.cerrarModalEjercicio = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalEjercicio = false; }, 300);
+        this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", 1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa, new Date(), new Date(), "", "", "", "", "", "", "", false);
+    };
     return EjercicioAddComponent;
 }());
 EjercicioAddComponent = __decorate([

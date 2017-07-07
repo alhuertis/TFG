@@ -15,6 +15,7 @@ var solucion_service_1 = require("../services/solucion.service");
 var profesor_service_1 = require("../services/profesor.service");
 var criteriaActividades_1 = require("../models/criteriaActividades");
 var criteriaSolucion_1 = require("../models/criteriaSolucion");
+var _ = require("underscore");
 //los decoradores no tienen punto y coma
 var PanelAlumnoComponent = (function () {
     function PanelAlumnoComponent(_actividadService, _profesorService, _solucionService) {
@@ -592,6 +593,30 @@ var PanelAlumnoComponent = (function () {
     };
     PanelAlumnoComponent.prototype.limpiarFiltroSol = function () {
         this.criteriaSolucion = new criteriaSolucion_1.CriteriaSolucion();
+    };
+    PanelAlumnoComponent.prototype.ordenaSolTitulo = function () {
+        this.pagedSoluciones = _.sortBy(this.pagedSoluciones, "titulo");
+    };
+    PanelAlumnoComponent.prototype.ordenaSolFecha = function () {
+        this.pagedSoluciones = _.sortBy(this.pagedSoluciones, "fechaCreacion");
+    };
+    PanelAlumnoComponent.prototype.ordenaSolNivel = function () {
+        this.pagedSoluciones = _.sortBy(this.pagedSoluciones, "nivel");
+    };
+    PanelAlumnoComponent.prototype.ordenaSolReverse = function () {
+        this.pagedSoluciones.reverse();
+    };
+    PanelAlumnoComponent.prototype.ordenaActsTitulo = function () {
+        this.pagedActividades = _.sortBy(this.pagedActividades, "titulo");
+    };
+    PanelAlumnoComponent.prototype.ordenaActsFecha = function () {
+        this.pagedActividades = _.sortBy(this.pagedActividades, "fechaCreacion");
+    };
+    PanelAlumnoComponent.prototype.ordenaActsNivel = function () {
+        this.pagedActividades = _.sortBy(this.pagedActividades, "nivel");
+    };
+    PanelAlumnoComponent.prototype.ordenaActsReverse = function () {
+        this.pagedActividades.reverse();
     };
     PanelAlumnoComponent.prototype.setPageSoluciones = function (page) {
         if (page < 1 || page > this.pagerSolucion.totalPages) {

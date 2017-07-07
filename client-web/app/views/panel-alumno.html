@@ -16,7 +16,31 @@
             </ul>
           </div>
        </div>
-    </div>
+
+      <div class="col-md-6">
+          <div class="ordenar-filtros" *ngIf="pagedActividades != 'undefined' && mostrarActividades">
+            <label for="ordenar">Ordenar por: </label>
+            <ul>
+              <li (click)="ordenaActsTitulo()"> Titulo</li>
+              <li (click)="ordenaActsFecha()">- Fecha</li>
+              <li (click)="ordenaActsNivel()">- Nivel</li>
+              <li (click)="ordenaActsReverse()"> <i class="glyphicon glyphicon-sort"></i></li>
+            </ul>
+          </div>
+
+          <div class="ordenar-filtros" *ngIf="pagedSoluciones != 'undefined' && mostrarSoluciones">
+            <label for="ordenar">Ordenar por: </label>
+            <ul>
+              <li (click)="ordenaSolTitulo()"> Titulo</li>
+              <li (click)="ordenaSolFecha()">- Fecha</li>
+              <li (click)="ordenaSolNivel()">- Nivel</li>
+              <li (click)="ordenaSolReverse()"> <i class="glyphicon glyphicon-sort"></i></li>
+            </ul>
+          </div>
+          
+        </div>
+
+  </div>
 
   <div class="row">
     <div class="col-md-4 menu-alumno-arbol">
@@ -184,7 +208,7 @@
 
     <!-- Paginador para actividades-->
     <div class="row">
-      <div class="col-sm-12" *ngIf="mostrarActividades && pagedActividades > 0">
+      <div class="col-sm-12 paginador" *ngIf="mostrarActividades && pagedActividades != 'undefined'">
         <!-- pager -->
         <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
           <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -209,7 +233,7 @@
 
     <!-- Paginador para soluciones-->
     <div class="row">
-      <div class="col-sm-12" *ngIf="mostrarSoluciones && pagedSoluciones > 0">
+      <div class="col-sm-12 paginador" *ngIf="mostrarSoluciones && pagedSoluciones != 'undefined'">
         <!-- pager -->
         <ul *ngIf="pagerSolucion.pages && pagerSolucion.pages.length" class="pagination">
           <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
@@ -306,7 +330,7 @@
 
         <div class="row">
           <div class="col-md-2">
-            <button class="btn btn-default limpiar-filtro-acts" (click)="limpiarFiltroActs()">Limpiar filtro</button>
+            <button class="btn btn-default limpiar-filtro-acts" (click)="limpiarFiltroActs()"><i class="glyphicon glyphicon-filter"></i> Limpiar filtro</button>
           </div>
         </div>
   
@@ -397,7 +421,7 @@
 
         <div class="row">
           <div class="col-md-2">
-            <button class="btn btn-default limpiar-filtro-acts" (click)="limpiarFiltroSol()">Limpiar filtro</button>
+            <button class="btn btn-default limpiar-filtro-acts" (click)="limpiarFiltroSol()"><i class="glyphicon glyphicon-filter"></i> Limpiar filtro</button>
           </div>
         </div>
   

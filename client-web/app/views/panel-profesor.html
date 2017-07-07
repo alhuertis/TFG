@@ -22,7 +22,7 @@
 
        
         <div class="col-md-6">
-          <div class="ordenar-ejercicios" *ngIf="pagedItemsEjers != 'undefined' && mostrarListaEjers">
+          <div class="ordenar-filtros" *ngIf="pagedItemsEjers != 'undefined' && mostrarListaEjers">
             <label for="ordenar">Ordenar por: </label>
             <ul>
               <li (click)="ordenaEjerTitulo()"> Titulo</li>
@@ -32,7 +32,7 @@
             </ul>
           </div>
 
-          <div class="ordenar-ejercicios" *ngIf="pagedItemsActs != 'undefined' && mostrarListaActs">
+          <div class="ordenar-filtros" *ngIf="pagedItemsActs != 'undefined' && mostrarListaActs">
             <label for="ordenar">Ordenar por: </label>
             <ul>
               <li (click)="ordenaActsTitulo()"> Titulo</li>
@@ -442,7 +442,7 @@
               
               <div [ngStyle]="{'display': nuevaActividad.propuesta ? 'block' : 'none'}" class="animated aparecer">
                 <label for="fecha-fin">Fecha de fin </label>
-                <input type="date" name="fecha-fin" [(ngModel)]="nuevaActividad.fecha_prop_fin" useValueAsDate>
+                <input style="width: 200px; margin-left: 0px;" type="date" name="fecha-fin" class="form-control" [(ngModel)]="nuevaActividad.fecha_prop_fin" useValueAsDate>
               </div>
               
 

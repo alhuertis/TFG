@@ -46,6 +46,9 @@ export class EjercicioAddComponent implements OnInit{
 	public tipoLogico: string;
 	public valorLogico: string;
 
+	public modalEjercicio: Boolean;
+	public visibleAnimate: Boolean;
+
 	constructor(
 		private _ejercicioService: EjercicioService,
 		private _route: ActivatedRoute,
@@ -60,6 +63,8 @@ export class EjercicioAddComponent implements OnInit{
 		this.tipoLogico="";
 		this.valorLogico="";
 		this.valoresLogico=[];
+		this.modalEjercicio= false;
+		this.visibleAnimate=false;
 		
 	}
 
@@ -106,7 +111,9 @@ export class EjercicioAddComponent implements OnInit{
 				else{
 
 					this.ejercicio= response.ejercicio;
-					this._router.navigate(['/']);
+					//this._router.navigate(['/']);
+					this.modalEjercicio = true;
+					setTimeout(() => this.visibleAnimate = true);
 				}
 
 			},
@@ -123,7 +130,11 @@ export class EjercicioAddComponent implements OnInit{
 	}// fin onSubmit
 
 
-
+	cerrarModalEjercicio(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalEjercicio = false, 300);
+		this.ejercicio= new Ejercicio("",this.id_profesor,"","",1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa,new Date(),new Date(),"","","","","","","", false);
+	}
 	
 
 }
