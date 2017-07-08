@@ -1,3 +1,8 @@
+/******FONTS***********/
+@import url('https://fonts.googleapis.com/css?family=Kurale');
+
+/*******FIN FONTS******/
+
 /***********HACKS*********/
 .clearfix{
 	float: none;
@@ -411,6 +416,10 @@ body{
 
 .menu-profesor-arbol, .menu-alumno-arbol {
 	padding-top: 30px !important;
+}
+
+h1, h2, h3, h4{
+	font-family: 'Kurale', serif;
 }
 
 .panel-ejercicios h2, .panel-actividades h2{

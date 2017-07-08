@@ -47,7 +47,7 @@ var LoginComponent = (function () {
             }
             else {
                 // login failed
-                _this.error = 'Username or password is incorrect';
+                _this.error = 'Alias o contraseña incorrectas';
                 _this.loading = false;
             }
         });

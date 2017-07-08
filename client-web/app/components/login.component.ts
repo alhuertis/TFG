@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/alumno']);
                 } else {
                     // login failed
-                    this.error = 'Username or password is incorrect';
+                    this.error = 'Alias o contraseña incorrectas';
                     this.loading = false;
                 }
             });

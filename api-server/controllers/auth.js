@@ -5,6 +5,7 @@ var Registro= require('../models/registro');
 var Alumno= require('../models/alumno');
 var Profesor= require('../models/profesor');
 var service = require('./tokenService');
+	
 
 function guardarUsuario(req, res){
     
@@ -39,20 +40,26 @@ function guardarUsuario(req, res){
 }
 
 function login(req, res){
-     User.findOne({alias: req.body.alias, password: req.body.password}, function(err, user) {
+     User.findOne({alias: req.body.alias}, function(err, user) {
         // Comprobar si hay errores
         // Si el usuario existe o no
         // Y si la contraseña es correcta
 
         if(err){
 			res.status(500).send({message:'Error al devolver el usuario'});
-		}
-		else{
-			if(!user){
-				res.status(200).send({token:''});	
-			}else{
-                return res.status(200).send({token: service.createToken(user), user: user});
-            }
+		}else if(!user){
+            res.status(200).send({token:''});
+        }
+		else{   
+            user.comparePassword(req.body.password, function(err, isMatch) {
+                if (err) throw err;
+                console.log('Password123:', isMatch); // -&gt; Password123: true
+                if(!isMatch){
+                    res.status(200).send({token:''});
+                }else{
+                    return res.status(200).send({token: service.createToken(user), user: user});
+                }
+            });
         }     
     });
 }
