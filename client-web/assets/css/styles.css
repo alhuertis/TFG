@@ -1,6 +1,11 @@
 /******FONTS***********/
 @import url('https://fonts.googleapis.com/css?family=Kurale');
 
+
+h1, h2, h3, h4, .navbar-brand{
+	font-family: 'Kurale', serif;
+}
+
 /*******FIN FONTS******/
 
 /***********HACKS*********/
@@ -402,6 +407,18 @@ body{
 	color: #ccc !important;
 }
 
+
+.logo-cabecera{
+	position: absolute;
+	margin: 0 auto;
+	display: inline-block;
+	left: 40%;
+}
+
+.logo-cabecera img{
+	width: 60px;
+}
+
 /********FIN HEADER PROFESOR************/
 
 
@@ -418,9 +435,6 @@ body{
 	padding-top: 30px !important;
 }
 
-h1, h2, h3, h4{
-	font-family: 'Kurale', serif;
-}
 
 .panel-ejercicios h2, .panel-actividades h2{
 	margin: 0px !important;
