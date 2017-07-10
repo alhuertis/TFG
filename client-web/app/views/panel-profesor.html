@@ -177,6 +177,7 @@
                       <i class="glyphicon glyphicon-info-sign" id="info-ejer" (click)="showEjercicio(ejercicio)"></i>
                       <i *ngIf="user._id == ejercicio.id_profesor" class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="abrirModEjercicio(ejercicio)"></i>
                       <i *ngIf="user._id == ejercicio.id_profesor" class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="abrirBorrarEjercicio(ejercicio)"></i>
+
                   </div>
                 </div>
               </div>

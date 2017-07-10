@@ -13,6 +13,9 @@ import {CriteriaActividades} from '../models/criteriaActividades';
 
 import {TruncatePipe} from './truncate-pipe.component';
 
+
+
+
 //Para usar undescore y jquery
 import * as _ from 'underscore';
 declare var $:any;
@@ -1740,5 +1743,4 @@ export class  PanelProfesorComponent implements OnInit{
 		this.pagedItemsActs.reverse();
 
 	}
-	
 }
