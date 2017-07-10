@@ -42,7 +42,7 @@
     left:0
 }
 .tree ul li:last-child:before {
-    background:#fff;
+    background:#F9F7F7;
     height:auto;
     top:1em;
     bottom:0
@@ -75,7 +75,8 @@
 .ojo{
 	top: 2px;
 	left: 5px;
-	color: rgba(119,119,119,1);
+	/*color: rgba(119,119,119,1);*/
+    color: #2e826e;
 	cursor: pointer;
 	font-size: 0.9em;
 }
@@ -86,7 +87,8 @@
 
 .badge-small{
 	font-size: 0.6em;
-	background: rgba(39, 41, 49, 0.8);
+	/*background: rgba(39, 41, 49, 0.8);*/
+    background: #2e826e;;
 	margin-top: -3px;
 }
 

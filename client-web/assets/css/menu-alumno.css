@@ -42,7 +42,7 @@
     left:0
 }
 .tree ul li:last-child:before {
-    background:#fff;
+    background:#F9F7F7;
     height:auto;
     top:1em;
     bottom:0
@@ -75,7 +75,8 @@
 .ojo{
 	top: 2px;
 	left: 5px;
-	color: rgba(119,119,119,1);
+	/*color: rgba(119,119,119,1);*/
+    color: #24d0d6 !important;
 	cursor: pointer;
 	font-size: 0.9em;
 }
