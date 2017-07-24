@@ -93,7 +93,7 @@ export class EjercicioAddComponent implements OnInit{
 	addSeparator(event: KeyboardEvent){
 		let key = event.key;
 		if(event.keyCode == 32) {
-            this.ejercicio.solucionFPatron+=" +";
+            this.ejercicio.solucionFPatron+="+ ";
         }
 
 	}

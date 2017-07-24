@@ -101,7 +101,7 @@
 				<div class="col-md-3">
 					<textarea style="margin-bottom: 20px;" class="form-control" placeholder="Frase lematizada..." name="fLematizada" #fLematizada="ngModel" [(ngModel)]="ejercicio.fraseLematizada" required> </textarea>
 					
-					<textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron" required> </textarea>
+					<textarea (keyup)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron" required> </textarea>
 
 					<!--<textarea *ngIf="ejercicio.tipo <= 1 " style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
 					<textarea *ngIf="ejercicio.tipo > 1" style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>-->

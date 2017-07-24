@@ -20,7 +20,7 @@
                     <label for="power">Alumnos</label>
                     <select class="form-control" id="porAlumnos" required (change)="addAlumno($event.target.value)">
                     <option [value]=""></option>
-                    <option *ngFor="let alu of alumnos, let i of index" [value]="alu._id">{{alu.nombre}} {{alu.apellidos}} ({{alu.alias}})</option>
+                    <option *ngFor="let alu of alumnos, let i of index" [value]="alu._id">{{alu.nombre}} {{alu.apellidos}} ({{alu.usuario}})</option>
                     </select>
 
                     <div class="tags">

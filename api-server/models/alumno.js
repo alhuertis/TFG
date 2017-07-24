@@ -6,13 +6,13 @@ var Schema = mongoose.Schema;
 
 var AlumnoSchema = Schema({
 
-    alias: String,
+    usuario: String,
     password: String,
 	nombre: String,
 	apellidos: String,
-	dni: String,
+	//dni: String,
     email: String,
-    fecha_nacimiento: Date,
+    //fecha_nacimiento: Date,
     institucion_educativa: String,
     role: String,
 });

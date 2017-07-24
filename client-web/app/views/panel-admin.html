@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-md-4" (click)="verUsuario(usuario)">
-              <p class="ver-info">{{usuario.nombre}} {{usuario.apellidos}} "{{usuario.alias}}"</p>
+              <p class="ver-info">{{usuario.nombre}} {{usuario.apellidos}} "{{usuario.usuario}}"</p>
             </div>
 
             <div class="col-md-3" (click)="verUsuario(usuario)">
@@ -88,7 +88,7 @@
           <div class="row">
             <div class="col-md-10 col-md-offset-2">
               <ul class="user-info">
-                <li><i class="glyphicon glyphicon-sunglasses"></i> Alias: {{userInfo.alias}}</li>
+                <li><i class="glyphicon glyphicon-sunglasses"></i> Usuario: {{userInfo.usuario}}</li>
                 <li><i class="glyphicon glyphicon-user"></i> Nombre: {{userInfo.nombre}}</li>
                 <li><i class="glyphicon glyphicon-user"></i> Apellidos: {{userInfo.apellidos}}</li>
                 <li><i class="glyphicon glyphicon-envelope"></i> Email: {{userInfo.email}}</li>

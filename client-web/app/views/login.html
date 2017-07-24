@@ -11,9 +11,9 @@
 
         <div style="padding-top:30px" class="panel-body" > 
             <form id="loginform" class="form-horizontal" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-                <div style="margin-bottom: 25px" class="input-group" [ngClass]="{ 'has-error': f.submitted && !alias.valid }">
+                <div style="margin-bottom: 25px" class="input-group" [ngClass]="{ 'has-error': f.submitted && !usuario.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" placeholder="alias" class="form-control" name="alias" [(ngModel)]="modelLogin.alias" #alias="ngModel" required />
+                    <input type="text" placeholder="usuario" class="form-control" name="usuario" [(ngModel)]="modelLogin.usuario" #usuario="ngModel" required />
                     
                 </div>
                 
@@ -59,10 +59,10 @@
                     <span></span>
                 </div>
                     
-                <!--<div *ngIf="f2.submitted && !alias.valid">Alias is required</div>-->
-                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !alias.valid }">
+                <!--<div *ngIf="f2.submitted && !usuario.valid">Usuario is required</div>-->
+                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !usuario.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-sunglasses"></i></span>
-                    <input type="text" class="form-control" name="alias" [(ngModel)]="modelRegistro.alias" #alias="ngModel"  placeholder="Alias" required />
+                    <input type="text" class="form-control" name="usuario" [(ngModel)]="modelRegistro.usuario" #usuario="ngModel"  placeholder="Usuario" required />
                 </div>
                 
                 <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !password.valid }">
@@ -83,17 +83,6 @@
                 <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !email.valid }">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                     <input type="text" class="form-control" name="email" [(ngModel)]="modelRegistro.email" #email="ngModel"  placeholder="Email" required />
-                </div>
-
-                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !dni.valid }">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                    <input type="text" class="form-control" name="dni" [(ngModel)]="modelRegistro.dni" #dni="ngModel"  placeholder="Dni" required />
-                </div>
-
-
-                <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !fecha.valid }">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    <input type="date" class="form-control" name="fecha" [(ngModel)]="modelRegistro.fecha_nacimiento" #fecha="ngModel"  required />
                 </div>
 
                 <div class="input-group" style="margin-bottom: 15px" [ngClass]="{ 'has-error': f2.submitted && !institucion.valid }">

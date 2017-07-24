@@ -1432,7 +1432,7 @@ export class  PanelProfesorComponent implements OnInit{
 	addSeparator(event: KeyboardEvent){
 		let key = event.key;
 		if(event.keyCode == 32) {
-            this.ejerUpdate.solucionFPatron+=" +";
+            this.ejerUpdate.solucionFPatron+="+ ";
         }
 
 	}

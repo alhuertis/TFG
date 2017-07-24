@@ -10,6 +10,6 @@ var user1= {
     "password" : "$2a$10$N82E.pana4T44xScY9J/COKcmo7yftR.1s/EbCRorBlqZqCurmMyi",
     "apellidos" : "",
     "nombre" : "Administrador",
-    "alias" : "admin",
+    "usuario" : "admin",
     "__v" : 0
 }

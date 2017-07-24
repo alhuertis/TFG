@@ -52,7 +52,7 @@ var EjercicioAddComponent = (function () {
     EjercicioAddComponent.prototype.addSeparator = function (event) {
         var key = event.key;
         if (event.keyCode == 32) {
-            this.ejercicio.solucionFPatron += " +";
+            this.ejercicio.solucionFPatron += "+ ";
         }
     };
     EjercicioAddComponent.prototype.onSubmit = function () {

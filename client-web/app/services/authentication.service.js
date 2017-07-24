@@ -20,9 +20,9 @@ var AuthenticationService = (function () {
         this.token = currentUser && currentUser.token;
         this.url = 'http://' + window.location.hostname + ':3678/apiAuth/';
     }
-    AuthenticationService.prototype.login = function (alias, password) {
+    AuthenticationService.prototype.login = function (usuario, password) {
         var _this = this;
-        var json = JSON.stringify({ alias: alias, password: password });
+        var json = JSON.stringify({ usuario: usuario, password: password });
         var params = json;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.http.post(this.url + 'auth/login', params, { headers: headers })

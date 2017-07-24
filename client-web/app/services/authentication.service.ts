@@ -17,9 +17,9 @@ export class AuthenticationService {
         this.url= 'http://'+window.location.hostname+':3678/apiAuth/';
     }
  
-    login(alias: string, password: string): Observable<boolean> {
+    login(usuario: string, password: string): Observable<boolean> {
 
-        let json = JSON.stringify({ alias: alias, password: password });
+        let json = JSON.stringify({ usuario: usuario, password: password });
 		let params= json;
 
 		let headers= new Headers({'Content-Type': 'application/json'});

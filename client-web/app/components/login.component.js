@@ -32,7 +32,7 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function () {
         var _this = this;
         this.loading = true;
-        this.authenticationService.login(this.modelLogin.alias, this.modelLogin.password)
+        this.authenticationService.login(this.modelLogin.usuario, this.modelLogin.password)
             .subscribe(function (result) {
             if (result === true) {
                 // login successful
@@ -47,7 +47,7 @@ var LoginComponent = (function () {
             }
             else {
                 // login failed
-                _this.error = 'Alias o contraseña incorrectas';
+                _this.error = 'Usuario o contraseña incorrectas';
                 _this.loading = false;
             }
         });

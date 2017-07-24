@@ -565,7 +565,7 @@
             
 
               <label style="margin-top: 10px" for="fPatron">Solución F.patrón</label>
-              <textarea (keypress)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejerUpdate.solucionFPatron"> </textarea>
+              <textarea (keyup)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejerUpdate.solucionFPatron"> </textarea>
             
               <!--<label style="margin-top: 20px" *ngIf="ejerUpdate.tipo <= 1 " for="">Solución posible en Español</label>
               <label style="margin-top: 20px" *ngIf="ejerUpdate.tipo > 1 " for="">Solución posible en Latin</label>-->

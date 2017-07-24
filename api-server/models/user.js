@@ -7,13 +7,12 @@ var SALT_WORK_FACTOR = 10;
 
 var UserSchema = Schema({
 
-    alias: String,
+    usuario: String,
 	nombre: String,
 	apellidos: String,
     password: String,
-	dni: String,
     email: String,
-    fecha_nacimiento: Date,
+    /*fecha_nacimiento: Date,*/
     institucion_educativa: String,
     role: String,
 

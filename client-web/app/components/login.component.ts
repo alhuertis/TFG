@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
  
     login() {
         this.loading = true;
-        this.authenticationService.login(this.modelLogin.alias, this.modelLogin.password)
+        this.authenticationService.login(this.modelLogin.usuario, this.modelLogin.password)
             .subscribe(result => {
                 if (result === true) {
                     // login successful
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/alumno']);
                 } else {
                     // login failed
-                    this.error = 'Alias o contraseña incorrectas';
+                    this.error = 'Usuario o contraseña incorrectas';
                     this.loading = false;
                 }
             });

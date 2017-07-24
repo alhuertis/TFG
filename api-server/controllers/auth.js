@@ -11,17 +11,17 @@ function guardarUsuario(req, res){
     
         var user = new User();
         var params = req.body;
-        user.alias= params.alias;
+        user.usuario= params.usuario;
         user.nombre = params.nombre;
         user.apellidos = params.apellidos;
         user.password= params.password;
-        user.dni = params.dni;
+        /*user.dni = params.dni;*/
         user.email = params.email;
-        user.fecha_nacimiento = params.fecha_nacimiento;
+        /*user.fecha_nacimiento = params.fecha_nacimiento;*/
         user.institucion_educativa= params.institucion_educativa;
         user.role= params.role;
         
-        User.findOne({alias: req.body.alias, password: req.body.password}, function(err, userDB) {
+        User.findOne({usuario: req.body.usuario, password: req.body.password}, function(err, userDB) {
             
             if(!userDB){
                 user.save((err, userStored)=>{
@@ -40,7 +40,7 @@ function guardarUsuario(req, res){
 }
 
 function login(req, res){
-     User.findOne({alias: req.body.alias}, function(err, user) {
+     User.findOne({usuario: req.body.usuario}, function(err, user) {
         // Comprobar si hay errores
         // Si el usuario existe o no
         // Y si la contraseña es correcta
@@ -68,17 +68,17 @@ function registro(req, res){
     
         var registro = new Registro();
         var params = req.body;
-        registro.alias= params.alias;
+        registro.usuario= params.usuario;
         registro.nombre = params.nombre;
         registro.apellidos = params.apellidos;
         registro.password= params.password;
-        registro.dni = params.dni;
+        /*registro.dni = params.dni;*/
         registro.email = params.email;
-        registro.fecha_nacimiento = params.fecha_nacimiento;
+        /*registro.fecha_nacimiento = params.fecha_nacimiento;*/
         registro.institucion_educativa= params.institucion_educativa;
         registro.role= params.role;
         
-        Registro.findOne({alias: req.body.alias, password: req.body.password}, function(err, userDB) {
+        Registro.findOne({usuario: req.body.usuario, password: req.body.password}, function(err, userDB) {
             
             if(!userDB){
                 registro.save((err, userStored)=>{

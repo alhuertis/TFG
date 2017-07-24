@@ -994,7 +994,7 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.addSeparator = function (event) {
         var key = event.key;
         if (event.keyCode == 32) {
-            this.ejerUpdate.solucionFPatron += " +";
+            this.ejerUpdate.solucionFPatron += "+ ";
         }
     };
     PanelProfesorComponent.prototype.cargarModificacion = function (actividad) {
