@@ -13,6 +13,8 @@ var http_1 = require("@angular/http");
 var app_routing_1 = require("./app.routing");
 var ng2_drag_drop_1 = require("ng2-drag-drop");
 var panel_admin_component_1 = require("./components/panel-admin.component");
+var panel_registros_component_1 = require("./components/panel-registros.component");
+var panel_gestion_usuarios_component_1 = require("./components/panel-gestion-usuarios.component");
 var panel_profesor_component_1 = require("./components/panel-profesor.component");
 var panel_alumno_component_1 = require("./components/panel-alumno.component");
 var ejercicio_add_component_1 = require("./components/ejercicio-add.component");
@@ -45,6 +47,8 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             panel_admin_component_1.PanelAdminComponent,
+            panel_registros_component_1.PanelRegistrosComponent,
+            panel_gestion_usuarios_component_1.PanelGestionUsuariosComponent,
             panel_profesor_component_1.PanelProfesorComponent,
             ejercicio_add_component_1.EjercicioAddComponent,
             panel_alumno_component_1.PanelAlumnoComponent,

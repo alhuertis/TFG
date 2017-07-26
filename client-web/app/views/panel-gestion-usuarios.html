@@ -1,0 +1,146 @@
+ <div class="row">
+    <div class="col-md-12">
+
+        <ol class="breadcrumb" style="width: 230px; background:#eee">
+            <li><a (click)="exit()"><i class="glyphicon glyphicon-home"></i> Panel Administración</a></li>
+            <li class="active">Gestion usuarios</li>
+        </ol>
+    </div>
+        
+</div>
+
+<div class="panel-registros container-fluid">
+
+   
+
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3 animated aparecer" *ngIf="users.length > 0">
+        <h3 class="text-center">Hay <span>{{users.length}}</span> usuarios registrados</h3>
+        
+        <div *ngFor="let usuario of pagedItems" class="usu-registro">
+
+          <div class="row">
+
+            <div class="col-md-2" (click)="verUsuario(usuario)">
+              <img src="../../assets/images/users.png" alt="">
+            </div>
+
+            <div class="col-md-4" (click)="verUsuario(usuario)">
+              <p class="ver-info">{{usuario.nombre}} {{usuario.apellidos}} "{{usuario.usuario}}"</p>
+            </div>
+
+            <div class="col-md-3" (click)="verUsuario(usuario)">
+              <p class="ver-info">{{usuario.role}}</p>
+            </div>
+
+            <div class="col-md-3">
+                <div class="btn-group ">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Opciones <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a >Modificar datos</a></li>
+                        <li><a (click)="abrirModalPass()">Cambiar contraseña</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Eliminar</a></li>
+                    </ul>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  <div class="row" *ngIf="users.length > 0">
+    <div class="col-md-6 col-md-offset-3 paginador">
+      <!-- pager -->
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(1)">Primero</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(pager.currentPage - 1)">Anterior</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+          <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.currentPage + 1)">Siguiente</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.totalPages)">Ultimo</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- modal mensajes -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalRegistro ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body" >
+            <p *ngIf="msg != '' ">{{msg}}</p>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModal()" class="btn">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal info -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalUsuario ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+              <ul class="user-info">
+                <li><i class="glyphicon glyphicon-sunglasses"></i> Usuario: {{userInfo.usuario}}</li>
+                <li><i class="glyphicon glyphicon-user"></i> Nombre: {{userInfo.nombre}}</li>
+                <li><i class="glyphicon glyphicon-user"></i> Apellidos: {{userInfo.apellidos}}</li>
+                <li><i class="glyphicon glyphicon-envelope"></i> Email: {{userInfo.email}}</li>
+                <li><i class="glyphicon glyphicon-education"></i> Institucion educativa: {{userInfo.institucion_educativa}}</li>
+                <li><i class="glyphicon glyphicon-tag"></i> Role: {{userInfo.role}}</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModalInfo()" class="btn">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal cambiar contraseña -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalPass ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-2">
+              <input type="password" name="password" [(ngModel)]="nuevaPass" #password="ngModel" placeholder="Nueva contraseña" >
+            </div>
+            <div class="col-md-10 col-md-offset-2">
+              <input type="password" name="repeatPassword" [(ngModel)]="repeatNuevaPass" #repeatPassword="ngModel" placeholder="Repite contraseña" >
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button *ngIf="nuevaPass != '' && repeatNuevaPass != '' " (click)="cambiarPass()" class="btn btn-success animated aparecer">Modificar</button>
+            <button (click)="cerrarModalPass()" class="btn">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>

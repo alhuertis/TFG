@@ -148,6 +148,24 @@ function registro(req, res){
 
     }
 
+    function getAllUsers(req, res){
+        User.find({}).sort('-nombre').exec((err, usuarios)=>{
+            if(err){
+                res.status(500).send({message:'Error al devolver los registros'});
+            }
+            else{
+
+                if(!usuarios){
+                    res.status(404).send({message:'No hay usuarios'});
+                }
+                else{
+                    res.status(200).send({usuarios});
+                }	
+            }
+         });
+
+    }
+
 
 module.exports= {
 	guardarUsuario,
@@ -155,5 +173,6 @@ module.exports= {
     registro,
     getRegistros,
     borrarRegistro,
-    getListaUsers
+    getListaUsers,
+    getAllUsers,
 }

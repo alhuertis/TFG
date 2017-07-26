@@ -73,6 +73,9 @@ var AuthenticationService = (function () {
     AuthenticationService.prototype.getListaUsers = function () {
         return this.http.get(this.url + 'auth/listaUsers').map(function (res) { return res.json(); });
     };
+    AuthenticationService.prototype.getAllUsers = function () {
+        return this.http.get(this.url + 'auth/allUsers').map(function (res) { return res.json(); });
+    };
     AuthenticationService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

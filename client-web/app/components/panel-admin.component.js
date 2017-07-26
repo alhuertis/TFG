@@ -10,122 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var authentication_service_1 = require("../services/authentication.service");
-var user_1 = require("../models/user");
 //los decoradores no tienen punto y coma
 var PanelAdminComponent = (function () {
     function PanelAdminComponent(_authenticationService) {
         this._authenticationService = _authenticationService;
         // pager object
         this.pager = {};
-        this.users = [];
+        this.registros = [];
+        this.usuarios = [];
         this.msg = "";
-        this.modalRegistro = false;
-        this.modalUsuario = false;
         this.visibleAnimate = false;
-        this.userInfo = new user_1.User();
+        this.verRegistros = false;
+        this.verUsuarios = false;
     }
     PanelAdminComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._authenticationService.getRegistros().subscribe(function (result) {
-            _this.users = result.registros;
-            _this.setPage(1);
+            _this.registros = result.registros;
+            //this.setPage(1);
+        });
+        this._authenticationService.getAllUsers().subscribe(function (result) {
+            _this.usuarios = result.usuarios;
+            //this.setPage(1);
         });
     };
-    PanelAdminComponent.prototype.aprobarRegistro = function (usuario) {
-        var _this = this;
-        this._authenticationService.borrarRegistro(usuario).subscribe(function (result) {
-            if (result.resultado == 'ko') {
-                _this.msg = result.message;
-                setTimeout(function () { return _this.visibleAnimate = true; });
-                _this.modalRegistro = true;
-            }
-            else if (result.resultado == 'ok') {
-                _this._authenticationService.guardarUsuario(usuario).subscribe(function (result) {
-                    _this.msg = result.message;
-                    setTimeout(function () { return _this.visibleAnimate = true; });
-                    _this.modalRegistro = true;
-                    for (var i = 0; i < _this.users.length; i++) {
-                        if (_this.users[i]._id == usuario._id) {
-                            _this.users.splice(i, 1);
-                            continue;
-                        }
-                    }
-                    for (var i = 0; i < _this.pagedItems.length; i++) {
-                        if (_this.pagedItems[i]._id == usuario._id) {
-                            _this.pagedItems.splice(i, 1);
-                            continue;
-                        }
-                    }
-                    if (_this.pagedItems.length > 0)
-                        _this.setPage(_this.pager.currentPage);
-                    else
-                        _this.setPage(_this.pager.currentPage - 1);
-                }, function (error) {
-                    _this.msg = result.message;
-                    setTimeout(function () { return _this.visibleAnimate = true; });
-                    _this.modalRegistro = true;
-                });
-            }
-        }, function (error) {
-            _this.msg = error.message;
-            setTimeout(function () { return _this.visibleAnimate = true; });
-            _this.modalRegistro = true;
-        });
+    PanelAdminComponent.prototype.entrarRegistros = function () {
+        this.verRegistros = true;
     };
-    PanelAdminComponent.prototype.desaprobarRegistro = function (usuario) {
-        var _this = this;
-        this._authenticationService.borrarRegistro(usuario).subscribe(function (result) {
-            _this.msg = result.message;
-            setTimeout(function () { return _this.visibleAnimate = true; });
-            _this.modalRegistro = true;
-            for (var i = 0; i < _this.users.length; i++) {
-                if (_this.users[i]._id == usuario._id) {
-                    _this.users.splice(i, 1);
-                    continue;
-                }
-            }
-            for (var i = 0; i < _this.pagedItems.length; i++) {
-                if (_this.pagedItems[i]._id == usuario._id) {
-                    _this.pagedItems.splice(i, 1);
-                    continue;
-                }
-            }
-            if (_this.pagedItems.length > 0)
-                _this.setPage(_this.pager.currentPage);
-            else
-                _this.setPage(_this.pager.currentPage - 1);
-        }, function (error) {
-            _this.msg = error.message;
-            setTimeout(function () { return _this.visibleAnimate = true; });
-            _this.modalRegistro = true;
-        });
+    PanelAdminComponent.prototype.salirRegistros = function () {
+        this.verRegistros = false;
     };
-    PanelAdminComponent.prototype.cerrarModal = function () {
-        var _this = this;
-        this.visibleAnimate = false;
-        setTimeout(function () { return _this.modalRegistro = false; }, 300);
-        this.msg = "";
+    PanelAdminComponent.prototype.entrarUsuarios = function () {
+        this.verUsuarios = true;
     };
-    PanelAdminComponent.prototype.cerrarModalInfo = function () {
-        var _this = this;
-        this.visibleAnimate = false;
-        setTimeout(function () { return _this.modalUsuario = false; }, 300);
-        this.msg = "";
-    };
-    PanelAdminComponent.prototype.verUsuario = function (usuario) {
-        var _this = this;
-        this.userInfo = usuario;
-        setTimeout(function () { return _this.visibleAnimate = true; });
-        this.modalUsuario = true;
-    };
-    PanelAdminComponent.prototype.setPage = function (page) {
-        if (page < 1 || page > this.pager.totalPages) {
-            return;
-        }
-        // get pager object from service
-        this.pager = this._authenticationService.getPager(this.users.length, page);
-        // get current page of items
-        this.pagedItems = this.users.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    PanelAdminComponent.prototype.salirUsuarios = function () {
+        this.verUsuarios = false;
     };
     return PanelAdminComponent;
 }());

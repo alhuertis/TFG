@@ -6,7 +6,9 @@ import {HttpModule, JsonpModule} from '@angular/http';
 import {routing, appRoutingProviders} from './app.routing';
 import {Ng2DragDropModule} from "ng2-drag-drop";
 
-import {PanelAdminComponent} from './components/panel-admin.component'; 
+import {PanelAdminComponent} from './components/panel-admin.component';
+import {PanelRegistrosComponent} from './components/panel-registros.component';
+import {PanelGestionUsuariosComponent} from './components/panel-gestion-usuarios.component'; 
 import {PanelProfesorComponent} from './components/panel-profesor.component'; 
 import {PanelAlumnoComponent} from './components/panel-alumno.component';
 import {EjercicioAddComponent} from './components/ejercicio-add.component'; 
@@ -37,6 +39,8 @@ import {AuthGuardAdmin} from './guards/authAdmin.guard';
   declarations: [ 
   			AppComponent,
         PanelAdminComponent,
+        PanelRegistrosComponent,
+        PanelGestionUsuariosComponent,
         PanelProfesorComponent,
         EjercicioAddComponent,
         PanelAlumnoComponent,
