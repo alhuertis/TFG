@@ -17,7 +17,7 @@
       <div class="col-md-6 col-md-offset-3 animated aparecer" *ngIf="users.length > 0">
         <h3 class="text-center">Hay <span>{{users.length}}</span> usuarios registrados</h3>
         
-        <div *ngFor="let usuario of pagedItems" class="usu-registro">
+        <div *ngFor="let usuario of pagedItems; let i = index" class="usu-registro">
 
           <div class="row">
 
@@ -39,10 +39,10 @@
                         Opciones <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a >Modificar datos</a></li>
+                        <li><a (click)="abrirModalModificar(usuario)">Modificar datos</a></li>
                         <li><a (click)="abrirModalPass(usuario)">Cambiar contraseña</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Eliminar</a></li>
+                        <li><a (click)="abrirModalEliminar(usuario, i)">Eliminar</a></li>
                     </ul>
                 </div>
             </div>
@@ -128,11 +128,11 @@
         <div class="modal-content">
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-10 col-md-offset-2">
-              <input type="password" name="password" [(ngModel)]="nuevaPass" #password="ngModel" placeholder="Nueva contraseña" >
+            <div class="col-md-7 col-md-offset-2">
+              <input class="form-control" type="password" name="password" [(ngModel)]="nuevaPass" #password="ngModel" placeholder="Nueva contraseña" >
             </div>
-            <div class="col-md-10 col-md-offset-2">
-              <input type="password" name="repeatPassword" [(ngModel)]="repeatNuevaPass" #repeatPassword="ngModel" placeholder="Repite contraseña" >
+            <div class="col-md-7 col-md-offset-2">
+              <input class="form-control" type="password" name="repeatPassword" [(ngModel)]="repeatNuevaPass" #repeatPassword="ngModel" placeholder="Repite contraseña" >
             </div>
 
           </div>
@@ -155,4 +155,57 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- modal modificar datos personales -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalModificar ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-body" *ngIf="userUpdate != null">
+          <div class="row">
+            
+              <div class="col-md-3 form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" [(ngModel)]="userUpdate.nombre" #nombre="ngModel" placeholder="Nombre" >
+              </div>
+              <div class="col-md-3 form-group">
+                  <label for="nombre">Apellidos</label>
+                  <input type="text" name="apellidos" [(ngModel)]="userUpdate.apellidos" #apellidos="ngModel" placeholder="Apellidos" >
+              </div>
+              <div class="col-md-3 form-group">
+                  <label for="mail">Correo electrónico</label>
+                  <input type="text" name="mail" [(ngModel)]="userUpdate.email" #mail="ngModel" placeholder="Email" >
+              </div>
+              <div class="col-md-3 form-group">
+                <label for="institucion">Inst. educativa</label>
+                <input type="text" name="institucion" [(ngModel)]="userUpdate.institucion_educativa" #institucion="ngModel" placeholder="Inst. educativa" >
+              </div>
+          
+          </div>
+
+          </div>
+        <div class="modal-footer">
+            <button (click)="modificarUsuario()" class="btn btn-success">Modificar</button>
+            <button (click)="cerrarModalModificar()" class="btn">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal eliminar usuario -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalEliminar ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body" >
+            <p *ngIf="msg != '' ">{{msg}}</p>
+        </div>
+        <div class="modal-footer">
+          <button (click)="eliminarUsuario()" class="btn btn-warning">Eliminar</button>
+          <button (click)="cerrarModalEliminar()" class="btn">Cerrar</button>
+        </div>
+        </div>
+    </div>
 </div>

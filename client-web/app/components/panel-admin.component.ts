@@ -72,6 +72,7 @@ export class  PanelAdminComponent implements OnInit{
 
 	salirRegistros(){
 		this.verRegistros=false;
+		this.actualizaDatos();
 	}
 
 	entrarUsuarios(){
@@ -80,8 +81,24 @@ export class  PanelAdminComponent implements OnInit{
 
 	salirUsuarios(){
 		this.verUsuarios=false;
+		this.actualizaDatos();
 	}
 
+	actualizaDatos(){
+		this._authenticationService.getRegistros().subscribe(
+			result =>{
+				this.registros= result.registros;
+				//this.setPage(1);
+			}
+		);
+
+		this._authenticationService.getAllUsers().subscribe(
+			result =>{
+				this.usuarios= result.usuarios;
+				//this.setPage(1);
+			}
+		);
+	}
 	/*setPage(page: number) {
         if (page < 1 || page > this.pager.totalPages) {
             return;

@@ -132,6 +132,22 @@ function registro(req, res){
         }); 
     }
 
+    function borrarUsuario(req, res){
+        var params = req.body;
+
+        User.findByIdAndRemove(params._id, function (err, registro) {
+            if(err){
+                res.status(500).send({message:'Error al borrar el usuario.', respuesta:'ko'});
+            }
+
+            if(!registro)
+                res.status(400).send({message:'No existe un usuario con ese id', respuesta: 'ko'});
+            else{
+                res.status(200).send({message:'Usuario borrado correctamente', respuesta: 'ok'});
+            }
+        }); 
+    }
+
     function getListaUsers(req, res){
         User.find({'role':'alumno'}).sort('-nombre').exec((err, usuarios)=>{
             if(err){
@@ -168,14 +184,13 @@ function registro(req, res){
 
     }
 
-    function updateUser(req, res) {
-        var userId = req.params.id;
+    function updateUserPass(req, res) {
         var update = req.body;
         
         bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
             bcrypt.hash(req.body.password, salt, function(err, hash){
                 update.password = hash;
-                User.findByIdAndUpdate(userId, update, (err, usuariodUpdated) => {
+                User.findByIdAndUpdate(update._id, update, (err, usuariodUpdated) => {
 
                     if (err)
                         res.status(500).send({message: "Error al actualizar el usuario"});
@@ -184,10 +199,20 @@ function registro(req, res){
                 });
             });
         });
+    }
 
+    function updateUsuario(req, res) {
+        var update = req.body;
+        console.log(update.apellidos);
         
 
-        
+        User.findByIdAndUpdate(update._id, update, (err, usuariodUpdated) => {
+
+            if (err)
+                res.status(500).send({message: "Error al actualizar el usuario"});
+            else 
+                res.status(200).send({respuesta:'ok', usuariodUpdated});
+        });
     }
 
 
@@ -199,5 +224,7 @@ module.exports= {
     borrarRegistro,
     getListaUsers,
     getAllUsers,
-    updateUser,
+    updateUserPass,
+    updateUsuario,
+    borrarUsuario,
 }

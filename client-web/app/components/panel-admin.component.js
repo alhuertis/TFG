@@ -39,12 +39,25 @@ var PanelAdminComponent = (function () {
     };
     PanelAdminComponent.prototype.salirRegistros = function () {
         this.verRegistros = false;
+        this.actualizaDatos();
     };
     PanelAdminComponent.prototype.entrarUsuarios = function () {
         this.verUsuarios = true;
     };
     PanelAdminComponent.prototype.salirUsuarios = function () {
         this.verUsuarios = false;
+        this.actualizaDatos();
+    };
+    PanelAdminComponent.prototype.actualizaDatos = function () {
+        var _this = this;
+        this._authenticationService.getRegistros().subscribe(function (result) {
+            _this.registros = result.registros;
+            //this.setPage(1);
+        });
+        this._authenticationService.getAllUsers().subscribe(function (result) {
+            _this.usuarios = result.usuarios;
+            //this.setPage(1);
+        });
     };
     return PanelAdminComponent;
 }());

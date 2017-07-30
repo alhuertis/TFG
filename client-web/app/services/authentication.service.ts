@@ -79,6 +79,15 @@ export class AuthenticationService {
         return this.http.post(this.url+'auth/borrarRegistro', params, {headers: headers}).map(res => res.json());
     }
 
+    borrarUsuario(model: any){
+        let json = JSON.stringify(model);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this.http.post(this.url+'auth/borrarUsuario', params, {headers: headers}).map(res => res.json());
+    }
+
     getRegistros(){
         return this.http.get(this.url+'auth/registros').map(res => res.json());
     }
@@ -93,17 +102,25 @@ export class AuthenticationService {
 
    
 
+    updateUserPass(user: any){
+        let json = JSON.stringify(user);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this.http.put(this.url+'auth/pass', params, {headers: headers}).map(res => res.json());
+
+    }
+
     updateUser(user: any){
         let json = JSON.stringify(user);
 		let params= json;
 
 		let headers= new Headers({'Content-Type': 'application/json'});
 
-        return this.http.put(this.url+'auth/'+ user._id, params, {headers: headers}).map(res => res.json());
+        return this.http.put(this.url+'auth/user', params, {headers: headers}).map(res => res.json());
 
-    }
-
-    
+    }    
 
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
         // calculate total pages

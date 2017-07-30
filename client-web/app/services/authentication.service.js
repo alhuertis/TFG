@@ -67,6 +67,12 @@ var AuthenticationService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.http.post(this.url + 'auth/borrarRegistro', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    AuthenticationService.prototype.borrarUsuario = function (model) {
+        var json = JSON.stringify(model);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(this.url + 'auth/borrarUsuario', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     AuthenticationService.prototype.getRegistros = function () {
         return this.http.get(this.url + 'auth/registros').map(function (res) { return res.json(); });
     };
@@ -76,11 +82,17 @@ var AuthenticationService = (function () {
     AuthenticationService.prototype.getAllUsers = function () {
         return this.http.get(this.url + 'auth/allUsers').map(function (res) { return res.json(); });
     };
+    AuthenticationService.prototype.updateUserPass = function (user) {
+        var json = JSON.stringify(user);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.put(this.url + 'auth/pass', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     AuthenticationService.prototype.updateUser = function (user) {
         var json = JSON.stringify(user);
         var params = json;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this.http.put(this.url + 'auth/' + user._id, params, { headers: headers }).map(function (res) { return res.json(); });
+        return this.http.put(this.url + 'auth/user', params, { headers: headers }).map(function (res) { return res.json(); });
     };
     AuthenticationService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }

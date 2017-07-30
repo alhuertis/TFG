@@ -33,6 +33,9 @@ export class  PanelGestionUsuariosComponent implements OnInit{
     public repeatNuevaPass: string;
 	public userUpdate: User;
 	public modalMessage: Boolean;
+	public modalModificar: Boolean;
+	public modalEliminar: Boolean;
+	public posUsuario: number;
 
 	// pager object
     pager: any = {};
@@ -60,6 +63,9 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 		this.errorMessage= "";
 		this.message=  "";
 		this.modalMessage= false;
+		this.modalModificar=false;
+		this.modalEliminar= false;
+		this.posUsuario= null;
 	}
 
 	ngOnInit(){
@@ -118,7 +124,7 @@ export class  PanelGestionUsuariosComponent implements OnInit{
     cambiarPass(){
         if(this.nuevaPass != "" && this.nuevaPass == this.repeatNuevaPass){
 			this.userUpdate.password= this.nuevaPass;
-            this._authenticationService.updateUser(this.userUpdate).subscribe(
+            this._authenticationService.updateUserPass(this.userUpdate).subscribe(
 
 				result=>{
 					if(result.respuesta == 'ok'){
@@ -144,8 +150,9 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 				}
 			);
         }else{
-			//aqui modal diciendo que deben ser iguales
-            alert("No son iguales");
+			this.message="Las dos contraseñas deben coincidir";
+			this.modalMessage=true;
+			setTimeout(() => this.visibleAnimate = true, 300);
         }
 
     }
@@ -154,6 +161,101 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 		this.visibleAnimate = false;
     	setTimeout(() => this.modalMessage = false, 300);
 		this.message="";
+	}
+
+	abrirModalModificar(user: User){
+		this.userUpdate= user;
+		setTimeout(() => this.visibleAnimate = true,200);
+		this.modalModificar= true;
+	}
+
+	cerrarModalModificar(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalModificar = false, 300);
+	}
+
+	modificarUsuario(){
+		 this._authenticationService.updateUser(this.userUpdate).subscribe(
+			
+			result=>{
+				if(result.respuesta == 'ok'){
+					this.cerrarModalModificar();
+					this.message="Usuario actualizado correctamente";
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
+
+				}else{
+					this.cerrarModalModificar();
+					this.message="Se ha producido un error actualizando los datos del usuario";
+					this.modalMessage=true;
+					setTimeout(() => this.visibleAnimate = true, 300);
+				}
+
+			},
+			error=>{
+				this.errorMessage= <any>error;
+				if(this.errorMessage != null){
+					console.log(this.errorMessage);
+					alert('Error en la peticio al servidor para modificar los datos de usario');
+				}
+			}
+		);
+
+	}
+
+	abrirModalEliminar(user: User, i: number){
+		
+		this.userUpdate= user;
+		this.msg="¿Desea eliminar a" + this.userUpdate.nombre + " " + this.userUpdate.apellidos + "?";
+		setTimeout(() => this.visibleAnimate = true,200);
+		this.modalEliminar= true;
+		
+	}
+
+	cerrarModalEliminar(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalEliminar = false, 300);
+	}
+
+	eliminarUsuario(){
+		if(this.userUpdate.role != 'admin'){
+			this._authenticationService.borrarUsuario(this.userUpdate).subscribe(
+				
+				result=>{
+					if(result.respuesta == 'ok'){
+						this.cerrarModalEliminar();
+						this.message="Usuario eliminado correctamente";
+						this.modalMessage=true;
+						setTimeout(() => this.visibleAnimate = true, 300);
+						for(let i = 0; i < this.users.length; i++){
+							if(this.userUpdate._id == this.users[i]._id){
+								this.users.splice(i,1);
+							}
+						}
+						this.pagedItems.splice(this.posUsuario,1);
+
+					}else{
+						this.cerrarModalEliminar();
+						this.message="Se ha producido un error eliminando el usuario";
+						this.modalMessage=true;
+						setTimeout(() => this.visibleAnimate = true, 300);
+					}
+
+				},
+				error=>{
+					this.errorMessage= <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert('Error en la peticio al servidor al borrar el usuario');
+					}
+				}
+			);
+		}else{
+			this.cerrarModalEliminar();
+			this.message="No puede borrar un administrador del sistema";
+			this.modalMessage=true;
+			setTimeout(() => this.visibleAnimate = true, 300);
+		}
 	}
 
     exit(){
