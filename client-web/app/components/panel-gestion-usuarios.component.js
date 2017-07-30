@@ -27,13 +27,14 @@ var PanelGestionUsuariosComponent = (function () {
         this.modalPass = false;
         this.nuevaPass = "";
         this.repeatNuevaPass = "";
-        this.userUpdate = null;
+        this.userUpdate = new user_1.User();
         this.errorMessage = "";
         this.message = "";
         this.modalMessage = false;
         this.modalModificar = false;
         this.modalEliminar = false;
         this.posUsuario = null;
+        this.userBuscar = new user_1.User();
     }
     PanelGestionUsuariosComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -199,6 +200,40 @@ var PanelGestionUsuariosComponent = (function () {
             this.modalMessage = true;
             setTimeout(function () { return _this.visibleAnimate = true; }, 300);
         }
+    };
+    PanelGestionUsuariosComponent.prototype.buscarUsuarios = function () {
+        var _this = this;
+        this._authenticationService.buscarUsuario(this.userBuscar).subscribe(function (result) {
+            if (result.respuesta == 'ok') {
+                _this.users = result.usuarios;
+                if (_this.users.length)
+                    _this.setPage(1);
+                else {
+                    _this.message = "No se han encontrado usuarios";
+                    _this.modalMessage = true;
+                    setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+                }
+            }
+            else {
+                _this.message = "Se ha producido un error en la busqueda de usuarios";
+                _this.modalMessage = true;
+                setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+            }
+        }, function (error) {
+            _this.errorMessage = error;
+            if (_this.errorMessage != null) {
+                console.log(_this.errorMessage);
+                alert('Error en la peticion al servidor al buscar usuarios');
+            }
+        });
+    };
+    PanelGestionUsuariosComponent.prototype.actualizarDatos = function () {
+        var _this = this;
+        this.userBuscar = new user_1.User();
+        this._authenticationService.getAllUsers().subscribe(function (result) {
+            _this.users = result.usuarios;
+            _this.setPage(1);
+        });
     };
     PanelGestionUsuariosComponent.prototype.exit = function () {
         this.salir.emit();

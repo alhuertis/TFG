@@ -215,6 +215,42 @@ function registro(req, res){
         });
     }
 
+    function buscarUsuario(req, res){
+        let criteria= req.body;
+        
+
+        var find= {};
+
+        if(criteria.usuario != null && criteria.usuario != "")
+            find.usuario=new RegExp(criteria.usuario, "i");
+
+        if(criteria.nombre != null && criteria.nombre != "")
+            find.nombre=new RegExp(criteria.nombre, "i");
+
+        if(criteria.apellidos != null && criteria.apellidos != "")
+            find.apellidos=new RegExp(criteria.apellidos, "i");
+        
+        console.log("Busqueda:" + find);
+
+        User.find(find).sort('-_id').exec((err, usuarios)=>{
+		if(err){
+			res.status(500).send({message:'Error al devolver los usuarios'});
+		}
+		else{
+
+			if(!usuarios){
+				res.status(404).send({respuesta: 'ko', message:'No hay usuarios'});
+			}
+			else{
+		    	res.status(200).send({respuesta: 'ok', usuarios});
+				
+			}	
+		}
+
+	});
+
+    }
+
 
 module.exports= {
 	guardarUsuario,
@@ -227,4 +263,5 @@ module.exports= {
     updateUserPass,
     updateUsuario,
     borrarUsuario,
+    buscarUsuario,
 }

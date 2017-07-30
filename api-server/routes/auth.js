@@ -18,6 +18,8 @@ api.get('/auth/listaUsers', AuthController.getListaUsers);
 api.get('/auth/allUsers', AuthController.getAllUsers);
 api.put('/auth/pass', AuthController.updateUserPass);
 api.put('/auth/user', AuthController.updateUsuario);
-api.post('/auth/borrarUsuario', AuthController.borrarUsuario); 
+api.post('/auth/borrarUsuario', AuthController.borrarUsuario);
+api.post('/auth/buscarUsuario', AuthController.buscarUsuario);
+ 
 
 module.exports= api;

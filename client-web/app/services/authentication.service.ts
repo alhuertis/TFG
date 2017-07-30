@@ -88,6 +88,15 @@ export class AuthenticationService {
         return this.http.post(this.url+'auth/borrarUsuario', params, {headers: headers}).map(res => res.json());
     }
 
+    buscarUsuario(model: any){
+        let json = JSON.stringify(model);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this.http.post(this.url+'auth/buscarUsuario', params, {headers: headers}).map(res => res.json());
+    }
+
     getRegistros(){
         return this.http.get(this.url+'auth/registros').map(res => res.json());
     }

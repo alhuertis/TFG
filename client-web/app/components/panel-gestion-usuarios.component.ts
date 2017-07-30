@@ -36,6 +36,7 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 	public modalModificar: Boolean;
 	public modalEliminar: Boolean;
 	public posUsuario: number;
+	public userBuscar: User;
 
 	// pager object
     pager: any = {};
@@ -59,13 +60,14 @@ export class  PanelGestionUsuariosComponent implements OnInit{
         this.modalPass= false;
         this.nuevaPass="";
         this.repeatNuevaPass="";
-		this.userUpdate=null;
+		this.userUpdate=new User();
 		this.errorMessage= "";
 		this.message=  "";
 		this.modalMessage= false;
 		this.modalModificar=false;
 		this.modalEliminar= false;
 		this.posUsuario= null;
+		this.userBuscar= new User();
 	}
 
 	ngOnInit(){
@@ -256,6 +258,47 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 			this.modalMessage=true;
 			setTimeout(() => this.visibleAnimate = true, 300);
 		}
+	}
+
+	buscarUsuarios(){
+		this._authenticationService.buscarUsuario(this.userBuscar).subscribe(
+				
+				result=>{
+					if(result.respuesta == 'ok'){
+						this.users= result.usuarios;
+						if(this.users.length)
+							this.setPage(1);
+						else{
+							this.message="No se han encontrado usuarios";
+							this.modalMessage=true;
+							setTimeout(() => this.visibleAnimate = true, 300);
+						}
+
+					}else{
+						this.message="Se ha producido un error en la busqueda de usuarios";
+						this.modalMessage=true;
+						setTimeout(() => this.visibleAnimate = true, 300);
+					}
+
+				},
+				error=>{
+					this.errorMessage= <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert('Error en la peticion al servidor al buscar usuarios');
+					}
+				}
+			);
+	}
+
+	actualizarDatos(){
+		this.userBuscar= new User();
+		this._authenticationService.getAllUsers().subscribe(
+			result =>{
+				this.users= result.usuarios;
+				this.setPage(1);
+			}
+		);
 	}
 
     exit(){

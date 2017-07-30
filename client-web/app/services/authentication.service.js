@@ -73,6 +73,12 @@ var AuthenticationService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.http.post(this.url + 'auth/borrarUsuario', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    AuthenticationService.prototype.buscarUsuario = function (model) {
+        var json = JSON.stringify(model);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(this.url + 'auth/buscarUsuario', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     AuthenticationService.prototype.getRegistros = function () {
         return this.http.get(this.url + 'auth/registros').map(function (res) { return res.json(); });
     };

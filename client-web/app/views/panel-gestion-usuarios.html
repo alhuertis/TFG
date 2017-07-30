@@ -14,7 +14,23 @@
    
 
   <div class="row">
-      <div class="col-md-6 col-md-offset-3 animated aparecer" *ngIf="users.length > 0">
+      <div class="col-md-3">
+        <div class="buscar-usuarios">
+           <div class="form-group">
+            <input type="text" name="usuario" [(ngModel)]="userBuscar.usuario" #usuario="ngModel" placeholder="usuario">
+          </div>
+          <div class="form-group">
+            <input type="text" name="nombre" [(ngModel)]="userBuscar.nombre" #nombre="ngModel" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <input type="text" name="apellidos" [(ngModel)]="userBuscar.apellidos" #apellidos="ngModel" placeholder="Apellidos" >
+          </div>
+          <button class="btn" (click)="buscarUsuarios()">Buscar</button>
+          <button class="btn" (click)="actualizarDatos()">Borrar busqueda</button>
+        </div>
+        
+      </div>
+      <div class="col-md-6 animated aparecer" *ngIf="users.length > 0">
         <h3 class="text-center">Hay <span>{{users.length}}</span> usuarios registrados</h3>
         
         <div *ngFor="let usuario of pagedItems; let i = index" class="usu-registro">
