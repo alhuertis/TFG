@@ -27,6 +27,10 @@ var PanelGestionUsuariosComponent = (function () {
         this.modalPass = false;
         this.nuevaPass = "";
         this.repeatNuevaPass = "";
+        this.userUpdate = null;
+        this.errorMessage = "";
+        this.message = "";
+        this.modalMessage = false;
     }
     PanelGestionUsuariosComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -62,8 +66,9 @@ var PanelGestionUsuariosComponent = (function () {
         // get current page of items
         this.pagedItems = this.users.slice(this.pager.startIndex, this.pager.endIndex + 1);
     };
-    PanelGestionUsuariosComponent.prototype.abrirModalPass = function () {
+    PanelGestionUsuariosComponent.prototype.abrirModalPass = function (user) {
         var _this = this;
+        this.userUpdate = user;
         setTimeout(function () { return _this.visibleAnimate = true; }, 200);
         this.modalPass = true;
     };
@@ -73,12 +78,40 @@ var PanelGestionUsuariosComponent = (function () {
         setTimeout(function () { return _this.modalPass = false; }, 300);
     };
     PanelGestionUsuariosComponent.prototype.cambiarPass = function () {
+        var _this = this;
         if (this.nuevaPass != "" && this.nuevaPass == this.repeatNuevaPass) {
-            alert("Son iguales");
+            this.userUpdate.password = this.nuevaPass;
+            this._authenticationService.updateUser(this.userUpdate).subscribe(function (result) {
+                if (result.respuesta == 'ok') {
+                    _this.cerrarModalPass();
+                    _this.message = "La contraseña ha sido actualizada correctamente";
+                    _this.modalMessage = true;
+                    setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+                }
+                else {
+                    _this.cerrarModalPass();
+                    _this.message = "Se ha producido un error actualizando la contraseña";
+                    _this.modalMessage = true;
+                    setTimeout(function () { return _this.visibleAnimate = true; }, 300);
+                }
+            }, function (error) {
+                _this.errorMessage = error;
+                if (_this.errorMessage != null) {
+                    console.log(_this.errorMessage);
+                    alert('Error en la peticio al servidor para cambier la contraseña');
+                }
+            });
         }
         else {
+            //aqui modal diciendo que deben ser iguales
             alert("No son iguales");
         }
+    };
+    PanelGestionUsuariosComponent.prototype.cerrarModalMessage = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalMessage = false; }, 300);
+        this.message = "";
     };
     PanelGestionUsuariosComponent.prototype.exit = function () {
         this.salir.emit();

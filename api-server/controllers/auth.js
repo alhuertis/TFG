@@ -5,6 +5,8 @@ var Registro= require('../models/registro');
 var Alumno= require('../models/alumno');
 var Profesor= require('../models/profesor');
 var service = require('./tokenService');
+var bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
 	
 
 function guardarUsuario(req, res){
@@ -166,6 +168,28 @@ function registro(req, res){
 
     }
 
+    function updateUser(req, res) {
+        var userId = req.params.id;
+        var update = req.body;
+        
+        bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+            bcrypt.hash(req.body.password, salt, function(err, hash){
+                update.password = hash;
+                User.findByIdAndUpdate(userId, update, (err, usuariodUpdated) => {
+
+                    if (err)
+                        res.status(500).send({message: "Error al actualizar el usuario"});
+                    else 
+                        res.status(200).send({respuesta:'ok', usuariodUpdated});
+                });
+            });
+        });
+
+        
+
+        
+    }
+
 
 module.exports= {
 	guardarUsuario,
@@ -175,4 +199,5 @@ module.exports= {
     borrarRegistro,
     getListaUsers,
     getAllUsers,
+    updateUser,
 }

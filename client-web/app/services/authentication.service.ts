@@ -91,6 +91,18 @@ export class AuthenticationService {
         return this.http.get(this.url+'auth/allUsers').map(res => res.json());
     }
 
+   
+
+    updateUser(user: any){
+        let json = JSON.stringify(user);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this.http.put(this.url+'auth/'+ user._id, params, {headers: headers}).map(res => res.json());
+
+    }
+
     
 
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {

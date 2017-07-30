@@ -16,5 +16,6 @@ api.get('/auth/registros', AuthController.getRegistros);
 api.post('/auth/borrarRegistro', AuthController.borrarRegistro);
 api.get('/auth/listaUsers', AuthController.getListaUsers);
 api.get('/auth/allUsers', AuthController.getAllUsers);
+api.put('/auth/:id', AuthController.updateUser); 
 
 module.exports= api;

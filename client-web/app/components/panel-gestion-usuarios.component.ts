@@ -29,13 +29,18 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 	public modalUsuario: Boolean;
 	public visibleAnimate: Boolean;
     public modalPass: Boolean;
-    public nuevaPass: String;
-    public repeatNuevaPass: String;
+    public nuevaPass: string;
+    public repeatNuevaPass: string;
+	public userUpdate: User;
+	public modalMessage: Boolean;
 
 	// pager object
     pager: any = {};
     // paged items
     public pagedItems: User[];
+
+	public errorMessage: String;
+	public message: String;
 
     constructor(
 			private _authenticationService: AuthenticationService
@@ -51,6 +56,10 @@ export class  PanelGestionUsuariosComponent implements OnInit{
         this.modalPass= false;
         this.nuevaPass="";
         this.repeatNuevaPass="";
+		this.userUpdate=null;
+		this.errorMessage= "";
+		this.message=  "";
+		this.modalMessage= false;
 	}
 
 	ngOnInit(){
@@ -95,7 +104,8 @@ export class  PanelGestionUsuariosComponent implements OnInit{
         this.pagedItems = this.users.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 
-    abrirModalPass(){
+    abrirModalPass(user: User){
+		this.userUpdate= user;
 		setTimeout(() => this.visibleAnimate = true,200);
 		this.modalPass= true;
     }
@@ -107,12 +117,44 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 
     cambiarPass(){
         if(this.nuevaPass != "" && this.nuevaPass == this.repeatNuevaPass){
-            alert("Son iguales");
+			this.userUpdate.password= this.nuevaPass;
+            this._authenticationService.updateUser(this.userUpdate).subscribe(
+
+				result=>{
+					if(result.respuesta == 'ok'){
+						this.cerrarModalPass();
+						this.message="La contraseña ha sido actualizada correctamente";
+						this.modalMessage=true;
+						setTimeout(() => this.visibleAnimate = true, 300);
+
+					}else{
+						this.cerrarModalPass();
+						this.message="Se ha producido un error actualizando la contraseña";
+						this.modalMessage=true;
+						setTimeout(() => this.visibleAnimate = true, 300);
+					}
+
+				},
+				error=>{
+					this.errorMessage= <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert('Error en la peticio al servidor para cambier la contraseña');
+					}
+				}
+			);
         }else{
+			//aqui modal diciendo que deben ser iguales
             alert("No son iguales");
         }
 
     }
+
+	cerrarModalMessage(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalMessage = false, 300);
+		this.message="";
+	}
 
     exit(){
         this.salir.emit();

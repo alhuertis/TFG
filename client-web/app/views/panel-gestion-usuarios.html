@@ -40,7 +40,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a >Modificar datos</a></li>
-                        <li><a (click)="abrirModalPass()">Cambiar contraseña</a></li>
+                        <li><a (click)="abrirModalPass(usuario)">Cambiar contraseña</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Eliminar</a></li>
                     </ul>
@@ -143,4 +143,16 @@
         </div>
         </div>
     </div>
+</div>
+
+<!-- modal para mensajes -->
+<div (click)="cerrarModalMessage()" style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+      [ngStyle]="{'display': modalMessage ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog modal-xs modal-mensajes">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p class="text-center">{{message}}</p>
+      </div>
+    </div>
+  </div>
 </div>
