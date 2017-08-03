@@ -18,7 +18,8 @@ var EjercicioSchema= Schema({
 	solucionFLogico: String,
 	solucionFPatron: String,
 	solucionPEspanol: String,
-	solucionPLatin: String
+	solucionPLatin: String,
+	explicacion: String,
 });
 
 //Lo exportamos para poder usar como 'Ejercicio'

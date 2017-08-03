@@ -138,6 +138,7 @@ function saveEjercicio(req, res){
 	ejercicio.solucionFPatron= params.solucionFPatron;
 	ejercicio.solucionPEspanol= params.solucionPEspanol;
 	ejercicio.solucionPLatin= params.solucionPLatin;
+	ejercicio.explicacion= params.explicacion;
 
 	ejercicio.save((err, ejercicio) => {
 		if(err){
@@ -153,6 +154,7 @@ function saveEjercicio(req, res){
 function updateEjercicio(req, res){
 	var ejercicioId= req.params.id;
 	var update= req.body; //Recoge todos los parametros
+	console.log(JSON.stringify(update));
 
 	//Busca un objeto y lo actualiza
 	//Recibe el id a actualizar, los datos nuevos y despues una función calback
@@ -257,15 +259,15 @@ function getEjersMiColeccionNivelM(req, res){
 function getEjersMiColeccionNivelB(req, res){
 	var id_profesor= req.params.id_profesor;
 	
-	Ejercicio.find({"id_profesor":id_profesor, "nivel":"Bajo"}).exec(function(err, miColeccionNivelB){
+	Ejercicio.find({"id_profesor":id_profesor, "nivel":"Inicial"}).exec(function(err, miColeccionNivelB){
 
 		if(err){
-			res.status(500).send({message:'Error al devolver la coleccion por id con nivel bajo'});
+			res.status(500).send({message:'Error al devolver la coleccion por id con nivel Inicial'});
 		}
 		else{
 
 			if(!miColeccionNivelB){
-				res.status(404).send({message:'No hay ejers de tu coleccion con nivel Bajo'});	
+				res.status(404).send({message:'No hay ejers de tu coleccion con nivel Inicial'});	
 			}
 			else{
 				res.status(200).send({miColeccionNivelB});
@@ -420,15 +422,15 @@ function getEjersOtrasColeccionesNivelM(req, res){
 function getEjersOtrasColeccionesNivelB(req, res){
 	var id_profesor= req.params.id_profesor;
 	
-	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "nivel":"Bajo"}).exec(function(err, otrasColeccionesNivelB){
+	Ejercicio.find({"id_profesor":{$ne: id_profesor}, "nivel":"Inicial"}).exec(function(err, otrasColeccionesNivelB){
 
 		if(err){
-			res.status(500).send({message:'Error al devolver la coleccion por id con nivel bajo'});
+			res.status(500).send({message:'Error al devolver la coleccion por id con nivel Inicial'});
 		}
 		else{
 
 			if(!otrasColeccionesNivelB){
-				res.status(404).send({message:'No hay ejers de otras colecciones con nivel Bajo'});	
+				res.status(404).send({message:'No hay ejers de otras colecciones con nivel Inicial'});	
 			}
 			else{
 				res.status(200).send({otrasColeccionesNivelB});

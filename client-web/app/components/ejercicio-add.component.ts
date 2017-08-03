@@ -20,7 +20,7 @@ export class EjercicioAddComponent implements OnInit{
 
 	public ejercicio: Ejercicio;
 	public errorMessage: string;
-	public niveles= ['Bajo', 'Medio', 'Avanzado'];
+	public niveles= ['Inicial', 'Medio', 'Avanzado'];
 	public tipos=[1,2,3,4];
 	//public user: string;
 
@@ -41,6 +41,7 @@ export class EjercicioAddComponent implements OnInit{
 	public solucionFPatron: string;
 	public solucionPEspanol: string;
 	public solucionPLatin: string;
+	public explicacion: string;
 
 	public valoresLogico: String[];
 	public tipoLogico: string;
@@ -71,7 +72,7 @@ export class EjercicioAddComponent implements OnInit{
 	ngOnInit(){
 
 		//Lo ponemos asi para rellenarlo con el chuwidatabindin
-		this.ejercicio= new Ejercicio("",this.id_profesor,"","",1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa,new Date(),new Date(),"","","","","","","", false);
+		this.ejercicio= new Ejercicio("",this.id_profesor,"","",1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa,new Date(),new Date(),"","","","","","","", false, "");
 		
 	}
 
@@ -133,7 +134,7 @@ export class EjercicioAddComponent implements OnInit{
 	cerrarModalEjercicio(){
 		this.visibleAnimate = false;
     	setTimeout(() => this.modalEjercicio = false, 300);
-		this.ejercicio= new Ejercicio("",this.id_profesor,"","",1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa,new Date(),new Date(),"","","","","","","", false);
+		this.ejercicio= new Ejercicio("",this.id_profesor,"","",1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa,new Date(),new Date(),"","","","","","","", false, "");
 	}
 	
 

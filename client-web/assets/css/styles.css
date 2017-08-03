@@ -744,7 +744,7 @@ body{
 }
 
 .datos-update .btn-update-act{
-	float: right;
+	
 	margin-top: 15px;
 }
 
@@ -1295,6 +1295,24 @@ body{
 
 /*********PANEL ADMIN**********/
 
+.opciones-admin{
+	cursor: pointer;
+	border: 1px solid #333;
+	text-align: center;
+	display: inline-block;
+	padding: 40px;
+	border-radius: 7px;
+	background: #e8e8e8;
+}
+
+.opciones-admin:hover{
+	background: #f2efef;
+}
+
+.opciones-admin img{
+	margin: 0 auto;
+}
+
 .usu-registro{
 	position: relative;
 	background: #560303;
@@ -1336,6 +1354,25 @@ body{
 
  }
 
+ .opciones-usuarios{
+	 margin-top: 10px;
+ }
+
+ .opciones-usuarios .dropdown-menu{
+	 z-index: 1000000;
+ }
+
+ .opciones-usuarios a{
+	 cursor: pointer;
+ }
+
+ .cambiar-pass input{
+	 margin-bottom: 5px;
+ }
+
+.modificar-usuario input{
+	padding: 6px;
+}
 /*********FIN PANEL ADMIN**********/
 
 
@@ -1693,4 +1730,5 @@ body{
 
 .paginador ul{
 	float: right;
+	z-index: 1;
 }

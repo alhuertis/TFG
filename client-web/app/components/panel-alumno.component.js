@@ -30,7 +30,7 @@ var PanelAlumnoComponent = (function () {
         this.actividades = [];
         this.profesores = [];
         this.disponibles = new Array();
-        this.disponiblesNBajo = new Array();
+        this.disponiblesNInicial = new Array();
         this.disponiblesNMedio = new Array();
         this.disponiblesNAlto = new Array();
         this.propuestas = new Array();
@@ -176,8 +176,8 @@ var PanelAlumnoComponent = (function () {
         });
         this._actividadService.getDisponiblesNB().subscribe(function (result) {
             console.log(result);
-            _this.disponiblesNBajo = result.actividades;
-            if (!_this.disponiblesNBajo) {
+            _this.disponiblesNInicial = result.actividades;
+            if (!_this.disponiblesNInicial) {
                 alert('Error en el servidor');
             }
         }, function (error) {
@@ -366,8 +366,8 @@ var PanelAlumnoComponent = (function () {
                     this.datosAMostrar = "Actividades disponibles";
                     break;
                 case 'disponibles nb':
-                    this.actividadesAMostrar = this.disponiblesNBajo;
-                    this.datosAMostrar = "Disponibles nivel bajo";
+                    this.actividadesAMostrar = this.disponiblesNInicial;
+                    this.datosAMostrar = "Disponibles nivel inicial";
                     break;
                 case 'disponibles nm':
                     this.actividadesAMostrar = this.disponiblesNMedio;
@@ -452,7 +452,7 @@ var PanelAlumnoComponent = (function () {
                     break;
                 case 'resueltasNB':
                     this.solucionesAMostrar = this.actividadesResueltasNB;
-                    this.datosAMostrar = "Mis actividades resueltas (nivel bajo)";
+                    this.datosAMostrar = "Mis actividades resueltas (nivel inicial)";
                     break;
                 case 'resueltasNM':
                     this.solucionesAMostrar = this.actividadesResueltasNM;

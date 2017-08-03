@@ -232,7 +232,7 @@ function registro(req, res){
         
         console.log("Busqueda:" + find);
 
-        User.find(find).sort('-_id').exec((err, usuarios)=>{
+        User.find(find).sort('-nombre').exec((err, usuarios)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver los usuarios'});
 		}

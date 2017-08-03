@@ -157,9 +157,9 @@ function getDisponibles(req, res){
 
 }
 
-function getDisponiblesNBajo(req, res){
+function getDisponiblesNInicial(req, res){
 
-	Actividad.find({"visible": "true", "nivel":"Bajo","propuesta": "false"}).exec((err, actividades)=>{
+	Actividad.find({"visible": "true", "nivel":"Inicial","propuesta": "false"}).exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -412,7 +412,7 @@ function getActsMiColeccionNivelB(req, res){
 
 	var id_profesor= req.params.id_profesor;
 
-	Actividad.find({"id_profesor": id_profesor, "nivel":"Bajo"}).exec((err, miColeccionNivelBAct)=>{
+	Actividad.find({"id_profesor": id_profesor, "nivel":"Inicial"}).exec((err, miColeccionNivelBAct)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -508,7 +508,7 @@ function getActsVisiblesNivelB(req, res){
 
 	var id_profesor= req.params.id_profesor;
 
-	Actividad.find({"id_profesor": id_profesor, "visible": "true",  "nivel": "Bajo"}).exec((err, visiblesNivelBAct)=>{
+	Actividad.find({"id_profesor": id_profesor, "visible": "true",  "nivel": "Inicial"}).exec((err, visiblesNivelBAct)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -604,7 +604,7 @@ function getActsNoVisiblesNivelB(req, res){
 
 	var id_profesor= req.params.id_profesor;
 
-	Actividad.find({"id_profesor": id_profesor, "visible": "false",  "nivel": "Bajo"}).exec((err, invisiblesNivelBAct)=>{
+	Actividad.find({"id_profesor": id_profesor, "visible": "false",  "nivel": "Inicial"}).exec((err, invisiblesNivelBAct)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -700,7 +700,7 @@ function getActsOtrasColeccionesNivelB(req, res){
 
 	var id_profesor= req.params.id_profesor;
 
-	Actividad.find({"id_profesor":{$ne: id_profesor}, "nivel":"Bajo", "visible": "true"}).exec((err, otrasColeccionesNivelBAct)=>{
+	Actividad.find({"id_profesor":{$ne: id_profesor}, "nivel":"Inicial", "visible": "true"}).exec((err, otrasColeccionesNivelBAct)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}
@@ -805,7 +805,7 @@ module.exports= {
 	getActividades,
 	saveActividad,
 	getDisponibles,
-	getDisponiblesNBajo,
+	getDisponiblesNInicial,
 	getDisponiblesNMedio,
 	getDisponiblesNAlto,
 	getPropuestas,

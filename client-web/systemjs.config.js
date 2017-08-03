@@ -29,6 +29,7 @@
       'rxjs':                       'npm:rxjs',
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
       'ng2-drag-drop': 'node_modules/ng2-drag-drop',
+      'angular2-material-datepicker': 'npm:angular2-material-datepicker',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -46,6 +47,10 @@
       'ng2-drag-drop':  { 
         main: './index.js',  
         defaultExtension: 'js' },
+        'angular2-material-datepicker': {
+         main: 'index.js',
+         defaultExtension: 'js',}
+        
       
         
     }

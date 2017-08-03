@@ -12,6 +12,8 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_routing_1 = require("./app.routing");
 var ng2_drag_drop_1 = require("ng2-drag-drop");
+//import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+var angular2_material_datepicker_1 = require("angular2-material-datepicker");
 var panel_admin_component_1 = require("./components/panel-admin.component");
 var panel_registros_component_1 = require("./components/panel-registros.component");
 var panel_gestion_usuarios_component_1 = require("./components/panel-gestion-usuarios.component");
@@ -29,6 +31,7 @@ var login_component_1 = require("./components/login.component");
 var authProfesor_guard_1 = require("./guards/authProfesor.guard");
 var authAlumno_guard_1 = require("./guards/authAlumno.guard");
 var authAdmin_guard_1 = require("./guards/authAdmin.guard");
+//import * as $ from 'jquery';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -42,6 +45,9 @@ AppModule = __decorate([
             http_1.HttpModule,
             app_routing_1.routing,
             ng2_drag_drop_1.Ng2DragDropModule,
+            //DatePickerModule,
+            //NKDatetimeModule,
+            angular2_material_datepicker_1.DatepickerModule
         ],
         //Aqui cargamos todos los componentes que vamos a usar en la aplicacion.(Es un array).
         declarations: [

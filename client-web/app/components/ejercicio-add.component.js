@@ -19,7 +19,7 @@ var EjercicioAddComponent = (function () {
         this._ejercicioService = _ejercicioService;
         this._route = _route;
         this._router = _router;
-        this.niveles = ['Bajo', 'Medio', 'Avanzado'];
+        this.niveles = ['Inicial', 'Medio', 'Avanzado'];
         this.tipos = [1, 2, 3, 4];
         this.titulo = "Crear ejercicio";
         //this.user="Antonio Sarasa";
@@ -34,7 +34,7 @@ var EjercicioAddComponent = (function () {
     }
     EjercicioAddComponent.prototype.ngOnInit = function () {
         //Lo ponemos asi para rellenarlo con el chuwidatabindin
-        this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", 1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa, new Date(), new Date(), "", "", "", "", "", "", "", false);
+        this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", 1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa, new Date(), new Date(), "", "", "", "", "", "", "", false, "");
     };
     EjercicioAddComponent.prototype.aplicaValoresLogicos = function () {
         var frase = this.ejercicio.fraseATraducir;
@@ -80,7 +80,7 @@ var EjercicioAddComponent = (function () {
         var _this = this;
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalEjercicio = false; }, 300);
-        this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", 1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa, new Date(), new Date(), "", "", "", "", "", "", "", false);
+        this.ejercicio = new ejercicio_1.Ejercicio("", this.id_profesor, "", "", 1, this.user.nombre + " " + this.user.apellidos, this.user.institucion_educativa, new Date(), new Date(), "", "", "", "", "", "", "", false, "");
     };
     return EjercicioAddComponent;
 }());

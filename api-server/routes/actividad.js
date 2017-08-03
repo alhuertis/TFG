@@ -15,7 +15,7 @@ api.get('/cargarActividad/:id', ActividadController.cargarActividad);
 api.get('/actividades', ActividadController.getActividades);
 api.post('/actividad', ActividadController.saveActividad);
 api.get('/actividad-disponibles', ActividadController.getDisponibles);
-api.get('/actividad-disponiblesNB', ActividadController.getDisponiblesNBajo);
+api.get('/actividad-disponiblesNB', ActividadController.getDisponiblesNInicial);
 api.get('/actividad-disponiblesNM', ActividadController.getDisponiblesNMedio);
 api.get('/actividad-disponiblesNA', ActividadController.getDisponiblesNAlto);
 api.get('/actividad-propuestas', ActividadController.getPropuestas);

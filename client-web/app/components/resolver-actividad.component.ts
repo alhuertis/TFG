@@ -123,7 +123,7 @@ export class  ResolverActividadComponent implements OnInit{
         this.palabrasAcertadas=[];
         this.busquedaPalabra="";
 
-        this.ejercicio= new Ejercicio("","","","",null,"","",null,null,"","","","","","","",false);
+        this.ejercicio= new Ejercicio("","","","",null,"","",null,null,"","","","","","","",false, "");
         this.ejerSel=0;   
        
         this.calificaciones=[];

@@ -1,17 +1,19 @@
 <cabecera-admin></cabecera-admin>
 
 
-<div class="row" [ngStyle]="{'display': (!verRegistros && !verUsuarios) ? 'block' : 'none'}">
+<div class="row admin-principal" [ngStyle]="{'display': (!verRegistros && !verUsuarios) ? 'block' : 'none'}">
 
-  <div class="col-md-2 col-md-offset-2">
-    <div (click)="entrarRegistros()" id="verRegistros">
+  <div class="col-md-2 col-md-offset-3">
+    <div (click)="entrarRegistros()" id="verRegistros" class="opciones-admin">
       <h4>Nuevos registros ({{registros.length}})</h4>
+      <img  src="../../assets/images/nuevos_usuarios.png" class="img-responsive"> 
     </div>
   </div>
 
   <div class="col-md-2">
-    <div (click)="entrarUsuarios()" id="verUsuarios">
+    <div (click)="entrarUsuarios()" id="verUsuarios" class="opciones-admin">
       <h4>Gestionar usuarios ({{usuarios.length}})</h4>
+      <img  src="../../assets/images/gestionar_usuarios.png" class="img-responsive">
     </div>
   </div>
 

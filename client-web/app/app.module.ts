@@ -5,6 +5,9 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule, JsonpModule} from '@angular/http';
 import {routing, appRoutingProviders} from './app.routing';
 import {Ng2DragDropModule} from "ng2-drag-drop";
+import {DatePickerModule} from 'ng2-datepicker-bootstrap';
+//import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+import { DatepickerModule } from 'angular2-material-datepicker';
 
 import {PanelAdminComponent} from './components/panel-admin.component';
 import {PanelRegistrosComponent} from './components/panel-registros.component';
@@ -24,14 +27,19 @@ import {AuthGuardProfesor} from './guards/authProfesor.guard';
 import {AuthGuardAlumno} from './guards/authAlumno.guard';
 import {AuthGuardAdmin} from './guards/authAdmin.guard';
 
+//import * as $ from 'jquery';
 
 @NgModule({
   imports: [ 
-  			BrowserModule, 
+  			BrowserModule,
   			FormsModule,
   			HttpModule,
         routing,
         Ng2DragDropModule,
+        //DatePickerModule,
+        //NKDatetimeModule,
+        DatepickerModule
+        
        
          
   ],

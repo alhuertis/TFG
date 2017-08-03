@@ -155,7 +155,7 @@ var PanelGestionUsuariosComponent = (function () {
     PanelGestionUsuariosComponent.prototype.abrirModalEliminar = function (user, i) {
         var _this = this;
         this.userUpdate = user;
-        this.msg = "¿Desea eliminar a" + this.userUpdate.nombre + " " + this.userUpdate.apellidos + "?";
+        this.msg = "¿Desea eliminar a " + this.userUpdate.nombre + " " + this.userUpdate.apellidos + "?";
         setTimeout(function () { return _this.visibleAnimate = true; }, 200);
         this.modalEliminar = true;
     };

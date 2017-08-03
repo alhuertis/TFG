@@ -30,7 +30,7 @@
 				<div class="col-md-3 col-md-offset-1">
 					<input type="text" class="form-control" required  placeholder="Titulo..." name="titulo" #titulo="ngModel" [(ngModel)]="ejercicio.titulo">
 					
-					<div class="row" style="margin-top: 10px">
+					<div class="row" style="margin-top: 25px">
 						<div class="col-md-6" >
 							<label for="power">Nivel</label>
 							<select class="form-control" id="nivel"
@@ -55,7 +55,7 @@
 						</div>-->
 					</div>
 
-					<textarea style="margin-top: 25px" class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado" required> </textarea>
+					<textarea style="margin-top: 43px" class="form-control" placeholder="Enunciado..." name="enunciado" #enunciado="ngModel" [(ngModel)]="ejercicio.enunciado" required> </textarea>
 					
 				</div>
 			
@@ -69,7 +69,7 @@
 					<textarea (blur)="aplicaValoresLogicos()"  class="form-control animated aparecer" placeholder="Frase a traducir..." name="fraseATraducir" #fraseATraducir="ngModel" [(ngModel)]="ejercicio.fraseATraducir" required> 
 					</textarea>
 
-					<div class="row" style="margin-top: 10px">
+					<!--<div class="row" style="margin-top: 10px">
 						<div class="col-md-4">
 							<label for="power">Tipo</label>
 							<select class="form-control" id="tipoLogico" name="tipoLogic" [(ngModel)]="tipoLogico"
@@ -87,25 +87,25 @@
 							<option *ngFor="let palabra of valoresLogico" [value]="palabra">{{palabra}}</option>
 							</select>
 
-							<!--<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">-->
+							<input type="text" class="form-control"  placeholder="" name="valorLogico" #titulo="ngModel" [(ngModel)]="valorLogico">
 						</div>
 
 						<div class="col-md-2" style="padding-top: 20px">
 							<a class="btn btn-success" (click)="addFLogico()"><i class="glyphicon glyphicon-plus"></i></a>
 						</div>
-					</div>
-
-					<textarea class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico" required> </textarea>
+					</div>-->
+					<textarea style="margin-top: 10px" class="form-control" placeholder="Explicacion ejercicio..." name="explicacion" #explicacion="ngModel" [(ngModel)]="ejercicio.explicacion" required> </textarea>
+					<textarea style="margin-top: 10px" class="form-control" placeholder="Solución en formato lógico..." name="solucionFLogico" #solucionFLogico="ngModel" [(ngModel)]="ejercicio.solucionFLogico" required> </textarea>
 				</div>
 				
 				<div class="col-md-3">
-					<textarea style="margin-bottom: 20px;" class="form-control" placeholder="Frase lematizada..." name="fLematizada" #fLematizada="ngModel" [(ngModel)]="ejercicio.fraseLematizada" required> </textarea>
+					<textarea style="margin-bottom: 10px;" class="form-control" placeholder="Frase lematizada..." name="fLematizada" #fLematizada="ngModel" [(ngModel)]="ejercicio.fraseLematizada" required> </textarea>
 					
 					<textarea (keyup)="addSeparator($event)" class="form-control" placeholder="Solución en formato patrón..." name="solucionFPatron" #solucionFPatron="ngModel" [(ngModel)]="ejercicio.solucionFPatron" required> </textarea>
 
 					<!--<textarea *ngIf="ejercicio.tipo <= 1 " style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol"> </textarea>
 					<textarea *ngIf="ejercicio.tipo > 1" style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Latin..." name="solucionPLatin" #solucionPLatin="ngModel" [(ngModel)]="ejercicio.solucionPLatin"> </textarea>-->
-					<textarea style="margin-top: 20px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol" required> </textarea>
+					<textarea style="margin-top: 10px" class="form-control animated aparecer" placeholder="Solución posible en Español..." name="solucionPEspanol" #solucionPEspanol="ngModel" [(ngModel)]="ejercicio.solucionPEspanol" required> </textarea>
 					
 					<button style="margin-top: 20px" type="submit" class="btn btn-success">Crear</button> <a style="margin-top: 20px" [routerLink]="['/']" class="btn btn-danger">Salir</a>
 				</div>

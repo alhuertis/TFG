@@ -29,7 +29,7 @@ var PanelProfesorComponent = (function () {
         //objeto update
         this.ejerUpdate = {};
         //Modificar ejer panel
-        this.niveles = ['Bajo', 'Medio', 'Avanzado'];
+        this.niveles = ['Inicial', 'Medio', 'Avanzado'];
         this.tipos = [1, 2, 3, 4];
         this.valoresLogico = [];
         this.tipoLogico = "";
@@ -67,6 +67,7 @@ var PanelProfesorComponent = (function () {
         this.modalMessage = false;
         this.visibleAnimate = false;
         this.updateActividad = new actividad_1.Actividad();
+        this.updateActividadRestore = new actividad_1.Actividad();
         this.deleteAct = new actividad_1.Actividad();
         this.message = "";
         this.buscarSoluciones = false;
@@ -75,8 +76,8 @@ var PanelProfesorComponent = (function () {
         this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
-        var _this = this;
         //Obtencion de datos
+        var _this = this;
         this._ejercicioService.getEjercicios().subscribe(function (result) {
             console.log(result);
             _this.ejercicios = result.ejercicios;
@@ -172,7 +173,7 @@ var PanelProfesorComponent = (function () {
                 console.log(_this.errorMessage);
                 alert('Error en la peticion de mi coleccion');
             }
-        }); //fin getEjercicios de mi coleccion nivel bajo
+        }); //fin getEjercicios de mi coleccion nivel inicial
         this._ejercicioService.getEjersMiColeccionTipo1(this.id_profesor).subscribe(function (result) {
             _this.miColeccionTipo1 = result.miColeccionTipo1;
             if (!_this.miColeccionTipo1) {
@@ -308,7 +309,7 @@ var PanelProfesorComponent = (function () {
                 console.log(_this.errorMessage);
                 alert('Error en la peticion de mi coleccion');
             }
-        }); //fin getEjercicios de mi coleccion nivel bajo
+        }); //fin getEjercicios de mi coleccion nivel inicial
         this._ejercicioService.getEjersOtrasColeccionesTipo1(this.id_profesor).subscribe(function (result) {
             _this.otrasColeccionesTipo1 = result.otrasColeccionesTipo1;
             if (!_this.otrasColeccionesTipo1) {
@@ -463,7 +464,7 @@ var PanelProfesorComponent = (function () {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
-                alert('Error en la peticion de actividades visibles nivel bajo');
+                alert('Error en la peticion de actividades visibles nivel inicial');
             }
         });
         this._actividadService.getActsNoVisibles(this.id_profesor).subscribe(function (result) {
@@ -511,11 +512,12 @@ var PanelProfesorComponent = (function () {
             _this.errorMessage = error;
             if (_this.errorMessage != null) {
                 console.log(_this.errorMessage);
-                alert('Error en la peticion actividades invisibles nivel bajo');
+                alert('Error en la peticion actividades invisibles nivel inicial');
             }
         });
     }; //fin ngOnInit
     PanelProfesorComponent.prototype.ngAfterViewInit = function () {
+        //$(".dates").datepicker({ dateFormat: 'yy-mm-dd'});
         //Este metodo se ejecuta tras cargar la vista. Usaremos aqui codigo jquery
         $.fn.extend({
             treed: function (o) {
@@ -601,9 +603,9 @@ var PanelProfesorComponent = (function () {
                 this.ejersAMostrar = this.miColeccion;
                 this.datosAMostrar = "Mi Coleccion";
                 break;
-            case 'mios bajo':
+            case 'mios inicial':
                 this.ejersAMostrar = this.miColeccionNivelB;
-                this.datosAMostrar = "Mi Coleccion nivel bajo";
+                this.datosAMostrar = "Mi Coleccion nivel inicial";
                 break;
             case 'mios medio':
                 this.ejersAMostrar = this.miColeccionNivelM;
@@ -633,9 +635,9 @@ var PanelProfesorComponent = (function () {
                 this.ejersAMostrar = this.otrasColecciones;
                 this.datosAMostrar = "Coleccion";
                 break;
-            case 'otros bajo':
+            case 'otros inicial':
                 this.ejersAMostrar = this.otrasColeccionesNivelB;
-                this.datosAMostrar = "Coleccion nivel bajo";
+                this.datosAMostrar = "Coleccion nivel inicial";
                 break;
             case 'otros medio':
                 this.ejersAMostrar = this.otrasColeccionesNivelM;
@@ -668,7 +670,7 @@ var PanelProfesorComponent = (function () {
                 break;
             case 'mias bajas':
                 this.actsAMostrar = this.miColeccionNivelBAct;
-                this.datosAMostrar = "Mi Coleccion actividades nivel bajo";
+                this.datosAMostrar = "Mi Coleccion actividades nivel inicial";
                 break;
             case 'mias medias':
                 this.actsAMostrar = this.miColeccionNivelMAct;
@@ -684,7 +686,7 @@ var PanelProfesorComponent = (function () {
                 break;
             case 'visibles bajas':
                 this.actsAMostrar = this.visiblesNivelBAct;
-                this.datosAMostrar = "Visibles actividades nivel bajo";
+                this.datosAMostrar = "Visibles actividades nivel inicial";
                 break;
             case 'visibles medias':
                 this.actsAMostrar = this.visiblesNivelMAct;
@@ -700,7 +702,7 @@ var PanelProfesorComponent = (function () {
                 break;
             case 'invisibles bajas':
                 this.actsAMostrar = this.invisiblesNivelBAct;
-                this.datosAMostrar = "No visibles actividades nivel bajo";
+                this.datosAMostrar = "No visibles actividades nivel inicial";
                 break;
             case 'invisibles medias':
                 this.actsAMostrar = this.invisiblesNivelMAct;
@@ -1000,6 +1002,8 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.cargarModificacion = function (actividad) {
         this.modificando = true;
         this.updateActividad = actividad;
+        this.updateActividadRestore = Object.assign({}, actividad);
+        this.updateActividad.fecha_prop_fin = new Date(actividad.fecha_prop_fin);
         for (var _i = 0, _a = this.pagedItemsActs; _i < _a.length; _i++) {
             var act = _a[_i];
             act.marcado = false;
@@ -1015,6 +1019,9 @@ var PanelProfesorComponent = (function () {
         for (var _i = 0, _a = this.pagedItemsActs; _i < _a.length; _i++) {
             var act = _a[_i];
             act.marcado = false;
+            if (act._id == this.updateActividadRestore._id) {
+                act = this.updateActividadRestore;
+            }
         }
         this.vaciarLista();
         $('.listado-actividad li').removeClass("fadeInLeft").addClass("fadeOut");
@@ -1023,6 +1030,10 @@ var PanelProfesorComponent = (function () {
         });
         //this.updateActividad=new Actividad();
         this.modificando = false;
+        this.ngOnInit();
+        this.sleep(400).then(function () {
+            _this.seleccionaDatos(_this.datosSeleccionados, _this.tipoSeleccionado, _this.pager.currentPage);
+        });
     };
     PanelProfesorComponent.prototype.actualizarActividad = function () {
         var _this = this;

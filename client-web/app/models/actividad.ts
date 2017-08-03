@@ -24,4 +24,8 @@ export class Actividad{
         this.fecha_prop_fin=null;
         this.marcado=null;
     }
+
+    getFechaPropFin() : Date {
+        return this.fecha_prop_fin;
+    }
 }

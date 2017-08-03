@@ -147,7 +147,7 @@ function getTerminadasById(req, res){
 
 function getTerminadasByIdNB(req, res){
 
-	Solucion.find({alumno: req.body._id, terminado: true, nivel:'Bajo'}).sort('-_id').exec((err, soluciones)=>{
+	Solucion.find({alumno: req.body._id, terminado: true, nivel:'Inicial'}).sort('-_id').exec((err, soluciones)=>{
 		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
 			if(err){
 				res.status(500).send({message:'Error al devolver las soluciones'});
@@ -235,7 +235,7 @@ function getSinTerminarById(req, res){
 
 function getSinTerminarByIdNB(req, res){
 
-	Solucion.find({alumno: req.body._id, terminado: false, nivel:'Bajo'}).sort('-_id').exec((err, soluciones)=>{
+	Solucion.find({alumno: req.body._id, terminado: false, nivel:'Inicial'}).sort('-_id').exec((err, soluciones)=>{
 		Actividad.populate(soluciones, {path: "actividad"}, function(err,soluciones ){
 			if(err){
 				res.status(500).send({message:'Error al devolver las soluciones'});

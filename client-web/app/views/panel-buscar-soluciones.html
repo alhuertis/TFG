@@ -28,14 +28,16 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <label for="desde">Desde </label>
-                            <input type="date" class="form-control" name="fecha-desde" [(ngModel)]="fecha_desde" useValueAsDate>
+                        <div class="col-md-6 col-sm-12 form-group">
+                            <label for="desde">Desde </label><br>
+                            <!--<input type="date" class="form-control" name="fecha-desde" [(ngModel)]="fecha_desde" useValueAsDate>-->
+                            <material-datepicker [(date)]="fecha_desde" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
-                           <label for="desde">Hasta </label>
-                            <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="fecha_hasta" useValueAsDate> 
+                           <label for="desde">Hasta </label><br>
+                            <!--<input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="fecha_hasta" useValueAsDate>-->
+                            <material-datepicker [(date)]="fecha-hasta" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker> 
                         </div>
                     </div>
 

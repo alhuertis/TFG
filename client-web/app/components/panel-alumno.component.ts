@@ -33,7 +33,7 @@ export class  PanelAlumnoComponent implements OnInit{
 	public profesores: Profesor[];
 	public actividades: Actividad[];
 	public disponibles: Actividad[];
-	public disponiblesNBajo: Actividad[];
+	public disponiblesNInicial: Actividad[];
 	public disponiblesNMedio: Actividad[];
 	public disponiblesNAlto: Actividad[];
 	public propuestas: Actividad[];
@@ -88,7 +88,7 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.actividades=[];
 		this.profesores=[];
 		this.disponibles=new Array<Actividad>();
-		this.disponiblesNBajo=new Array<Actividad>();
+		this.disponiblesNInicial=new Array<Actividad>();
 		this.disponiblesNMedio=new Array<Actividad>();
 		this.disponiblesNAlto=new Array<Actividad>();
 		this.propuestas=new Array<Actividad>();
@@ -312,9 +312,9 @@ export class  PanelAlumnoComponent implements OnInit{
 		this._actividadService.getDisponiblesNB().subscribe(
 			result =>{
 				console.log(result);
-				this.disponiblesNBajo= result.actividades;
+				this.disponiblesNInicial= result.actividades;
 
-				if(!this.disponiblesNBajo){
+				if(!this.disponiblesNInicial){
 					alert('Error en el servidor');
 				}
 			},
@@ -547,8 +547,8 @@ export class  PanelAlumnoComponent implements OnInit{
 					this.datosAMostrar= "Actividades disponibles";
 					break;
 				case 'disponibles nb':
-					this.actividadesAMostrar=this.disponiblesNBajo;
-					this.datosAMostrar= "Disponibles nivel bajo";
+					this.actividadesAMostrar=this.disponiblesNInicial;
+					this.datosAMostrar= "Disponibles nivel inicial";
 					break;
 				case 'disponibles nm':
 					this.actividadesAMostrar=this.disponiblesNMedio;
@@ -649,7 +649,7 @@ export class  PanelAlumnoComponent implements OnInit{
 
 				case 'resueltasNB':
 					this.solucionesAMostrar= this.actividadesResueltasNB;
-					this.datosAMostrar= "Mis actividades resueltas (nivel bajo)";
+					this.datosAMostrar= "Mis actividades resueltas (nivel inicial)";
 					break;
 
 				case 'resueltasNM':

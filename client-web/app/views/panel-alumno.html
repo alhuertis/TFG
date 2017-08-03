@@ -65,7 +65,7 @@
               <ul>
                 <li> Nivel
                   <ul>
-                    <li> Nivel Inicial <span class="badge badge-small">{{disponiblesNBajo.length}}</span><i *ngIf="disponiblesNBajo.length" (click)="seleccionaDatosActividades('disponibles nb')" class="glyphicon glyphicon-eye-open ojo"></i></li>
+                    <li> Nivel Inicial <span class="badge badge-small">{{disponiblesNInicial.length}}</span><i *ngIf="disponiblesNInicial.length" (click)="seleccionaDatosActividades('disponibles nb')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                     <li> Nivel Medio <span class="badge badge-small">{{disponiblesNMedio.length}}</span><i *ngIf="disponiblesNMedio.length" (click)="seleccionaDatosActividades('disponibles nm')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                     <li> Nivel Avanzado <span class="badge badge-small">{{disponiblesNAlto.length}}</span><i *ngIf="disponiblesNAlto.length" (click)="seleccionaDatosActividades('disponibles na')" class="glyphicon glyphicon-eye-open ojo"></i></li>
                   </ul>
@@ -283,7 +283,7 @@
             <div class="col-md-4">
               <select class="form-control" [(ngModel)]="criteriaActividades.nivel" name="nivel"
                 #nivel="ngModel" required>
-                <option value="Bajo">Bajo</option>
+                <option value="Inicial">Inicial</option>
                 <option value="Medio">Medio</option>
                 <option value="Avanzado">Avanzado</option>
               </select>
@@ -302,13 +302,15 @@
             </div>
 
             <div class="col-md-4 col-sm-12">
-              <label for="desde">Desde </label>
-              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaActividades.desde" useValueAsDate>
+              <label for="desde">Desde </label><br>
+              <!--<input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaActividades.desde" useValueAsDate>-->
+              <material-datepicker [(date)]="criteriaActividades.desde" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker>
             </div>
 
             <div class="col-md-4 col-sm-12">
-                <label for="desde">Hasta </label>
-                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaActividades.hasta" useValueAsDate> 
+                <label for="desde">Hasta </label><br>
+                <!--<input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaActividades.hasta" useValueAsDate>-->
+                <material-datepicker [(date)]="criteriaActividades.hasta" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker> 
             </div>
 		  	</div>
 
@@ -323,8 +325,9 @@
           </div>
 
           <div class="col-md-4 col-sm-4 animated aparecer" *ngIf="criteriaActividades.propuesta">
-              <label for="desde">Fecha propuesta</label>
-              <input type="date" name="fecha_propuesta" class="form-control" [(ngModel)]="criteriaActividades.fecha_propuesta" useValueAsDate>
+              <label for="desde">Fecha propuesta</label><br>
+              <!--<input type="date" name="fecha_propuesta" class="form-control" [(ngModel)]="criteriaActividades.fecha_propuesta" useValueAsDate>-->
+              <material-datepicker [(date)]="criteriaActividades.fecha_propuesta" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker>
           </div>
         </div>
 
@@ -347,7 +350,7 @@
   <!-- modal buscar soluciones -->
   <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
         [ngStyle]="{'display': modalBuscarSol ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-    <div class="modal-dialog modal-buscar-acts">
+    <div class="modal-dialog modal-buscar-acts" style="width: 900px;">
       <div class="modal-content">
         <div class="modal-header" style="background: #6AB5A4;">
           <h4><i class="glyphicon glyphicon-search"></i> Buscar soluciones</h4>
@@ -365,7 +368,7 @@
             <div class="col-md-5">
               <select class="form-control" [(ngModel)]="criteriaSolucion.nivel" name="nivel"
                 #nivel="ngModel" required>
-                <option value="Bajo">Bajo</option>
+                <option value="Inicial">Inicial</option>
                 <option value="Medio">Medio</option>
                 <option value="Avanzado">Avanzado</option>
               </select>
@@ -376,23 +379,27 @@
 
 
             <div class="col-md-3 col-sm-12">
-              <label for="desde">Desde </label>
-              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaSolucion.desde" useValueAsDate>
+              <label for="desde">Desde </label><br>
+              <!--<input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaSolucion.desde" useValueAsDate>-->
+              <material-datepicker [(date)]="criteriaSolucion.desde" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker>
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label for="desde">Hasta </label>
-                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaSolucion.hasta" useValueAsDate> 
+                <label for="desde">Hasta </label><br>
+                <!--<input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaSolucion.hasta" useValueAsDate>-->
+                <material-datepicker [(date)]="criteriaSolucion.hasta" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker> 
             </div>
 
             <div class="col-md-3 col-sm-12">
-              <label for="desde">Modificado desde </label>
-              <input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaSolucion.modificacion_desde" useValueAsDate>
+              <label for="desde">Modificado desde </label><br>
+              <!--<input type="date" name="fecha-desde" class="form-control" [(ngModel)]="criteriaSolucion.modificacion_desde" useValueAsDate>-->
+              <material-datepicker [(date)]="criteriaSolucion.modificacion_desde" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker>
             </div>
 
             <div class="col-md-3 col-sm-12">
-                <label for="desde">Modificado hasta </label>
-                <input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaSolucion.modificacion_hasta" useValueAsDate> 
+                <label for="desde">Modificado hasta </label><br>
+                <!--<input type="date" name="fecha-hasta" class="form-control" [(ngModel)]="criteriaSolucion.modificacion_hasta" useValueAsDate>-->
+                <material-datepicker [(date)]="criteriaSolucion.modificacion_hasta" dateFormat="DD-MM-YYYY" placeholder="Selecciona una fecha"></material-datepicker> 
             </div>
 		  	</div>
 

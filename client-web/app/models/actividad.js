@@ -12,6 +12,9 @@ var Actividad = (function () {
         this.fecha_prop_fin = null;
         this.marcado = null;
     }
+    Actividad.prototype.getFechaPropFin = function () {
+        return this.fecha_prop_fin;
+    };
     return Actividad;
 }());
 exports.Actividad = Actividad;

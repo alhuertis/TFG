@@ -208,7 +208,7 @@ export class  PanelGestionUsuariosComponent implements OnInit{
 	abrirModalEliminar(user: User, i: number){
 		
 		this.userUpdate= user;
-		this.msg="¿Desea eliminar a" + this.userUpdate.nombre + " " + this.userUpdate.apellidos + "?";
+		this.msg="¿Desea eliminar a " + this.userUpdate.nombre + " " + this.userUpdate.apellidos + "?";
 		setTimeout(() => this.visibleAnimate = true,200);
 		this.modalEliminar= true;
 		

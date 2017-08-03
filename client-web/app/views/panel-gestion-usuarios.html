@@ -14,7 +14,7 @@
    
 
   <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="buscar-usuarios">
            <div class="form-group">
             <input type="text" name="usuario" [(ngModel)]="userBuscar.usuario" #usuario="ngModel" placeholder="usuario">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="col-md-3">
-                <div class="btn-group ">
+                <div class="btn-group opciones-usuarios">
                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Opciones <span class="caret"></span>
                     </button>
@@ -70,7 +70,7 @@
 
 
   <div class="row" *ngIf="users.length > 0">
-    <div class="col-md-6 col-md-offset-3 paginador">
+    <div class="col-md-6 col-md-offset-2 paginador" style="margin-top: 35px;">
       <!-- pager -->
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li [ngClass]="{disabled:pager.currentPage === 1}">
@@ -140,7 +140,7 @@
 <!-- modal cambiar contraseña -->
 <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
     [ngStyle]="{'display': modalPass ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-    <div class="modal-dialog">
+    <div class="modal-dialog cambiar-pass">
         <div class="modal-content">
         <div class="modal-body">
           <div class="row">
@@ -177,7 +177,7 @@
 <!-- modal modificar datos personales -->
 <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
     [ngStyle]="{'display': modalModificar ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modificar-usuario">
         <div class="modal-content">
         <div class="modal-body" *ngIf="userUpdate != null">
           <div class="row">
