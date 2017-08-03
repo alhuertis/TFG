@@ -212,19 +212,19 @@
         <!-- pager -->
         <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
           <li [ngClass]="{disabled:pager.currentPage === 1}">
-            <a (click)="setPage(1)">First</a>
+            <a (click)="setPage(1)">Primera</a>
           </li>
           <li [ngClass]="{disabled:pager.currentPage === 1}">
-            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+            <a (click)="setPage(pager.currentPage - 1)">Anterior</a>
           </li>
           <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
             <a (click)="setPage(page)">{{page}}</a>
           </li>
           <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            <a (click)="setPage(pager.currentPage + 1)">Siguiente</a>
           </li>
           <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-            <a (click)="setPage(pager.totalPages)">Last</a>
+            <a (click)="setPage(pager.totalPages)">Ultima</a>
           </li>
         </ul>
       </div>
@@ -237,19 +237,19 @@
         <!-- pager -->
         <ul *ngIf="pagerSolucion.pages && pagerSolucion.pages.length" class="pagination">
           <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
-            <a (click)="setPageSoluciones(1)">First</a>
+            <a (click)="setPageSoluciones(1)">Primera</a>
           </li>
           <li [ngClass]="{disabled:pagerSolucion.currentPage === 1}">
-            <a (click)="setPageSoluciones(pagerSolucion.currentPage - 1)">Previous</a>
+            <a (click)="setPageSoluciones(pagerSolucion.currentPage - 1)">Anterior</a>
           </li>
           <li *ngFor="let page of pagerSolucion.pages" [ngClass]="{active:pagerSolucion.currentPage === page}">
             <a (click)="setPageSoluciones(page)">{{page}}</a>
           </li>
           <li [ngClass]="{disabled:pagerSolucion.currentPage === pagerSolucion.totalPages}">
-            <a (click)="setPageSoluciones(pagerSolucion.currentPage + 1)">Next</a>
+            <a (click)="setPageSoluciones(pagerSolucion.currentPage + 1)">Siguiente</a>
           </li>
           <li [ngClass]="{disabled:pagerSolucion.currentPage === pagerSolucion.totalPages}">
-            <a (click)="setPageSoluciones(pagerSolucion.totalPages)">Last</a>
+            <a (click)="setPageSoluciones(pagerSolucion.totalPages)">Ultima</a>
           </li>
         </ul>
       </div>

@@ -1289,7 +1289,11 @@ body{
 	margin-top: 20px;
 }
 
-
+#diccionario-linea{
+	color: #3b96f7;
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
 
 /*********FIN PANEL ALUMNO**********/
 

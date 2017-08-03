@@ -60,7 +60,7 @@
                 <li id="siguiente-ejer" [ngClass]="{'ejer-disabled': siguiente == false}" (click)="siguienteEjer()">Siguiente <i class="glyphicon glyphicon-chevron-right"></i></li>
                 <li id="anterior-ejer" [ngClass]="{'ejer-disabled': anterior == false}" (click)="anteriorEjer()"><i class="glyphicon glyphicon-chevron-left"></i> Anterior</li>
                 <li (click)="abrirModalDiccionario()"><i class="glyphicon glyphicon-search"></i> Abrir diccionario</li>
-                <li (click)="abrirModalAyuda()"><i class="glyphicon glyphicon-question-sign"></i> Mostrar solucion</li>
+                <li *ngIf="solucion.ejercicios[ejerSel] && solucion.ejercicios[ejerSel].calificacion >= 0" class="animated aparecer" (click)="abrirModalAyuda()"><i class="glyphicon glyphicon-question-sign"></i> Mostrar solucion</li>
                 <li *ngIf="!terminado" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar y salir</li>
                 <li *ngIf="terminado" id="terminar" class="animated aparecer" (click)="abrirModalSalir()"><i class="glyphicon glyphicon-floppy-disk"></i> Terminar</li>
             </ul>
@@ -148,6 +148,9 @@
     </div>
 
     <div class="col-md-4">
+        <div id="diccionario-linea">
+            <a href="http://repositorios.fdi.ucm.es/DiccionarioDidacticoLatin/" target="_blank">Diccionario en linea</a>
+        </div>
         <div *ngIf="solucion.ejercicios[ejerSel] && solucion.ejercicios[ejerSel].respuesta != ''" class="calificacion animated fadeInRigth">
             <p *ngIf="solucion.ejercicios[ejerSel].calificacion >= 0">Nota: {{solucion.ejercicios[ejerSel].calificacion}}</p>
             <p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''">Respuesta: {{solucion.ejercicios[ejerSel].respuesta}}</p>
@@ -156,6 +159,7 @@
         <div *ngIf="msgFichas != '' " class="respuesta-fichas animated fadeInRigth">
             <p>{{msgFichas}}</p>
         </div>
+        
         
     </div>
 

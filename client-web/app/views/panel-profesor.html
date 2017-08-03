@@ -233,19 +233,19 @@
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPageEjers(1)">First</a>
+                  <a (click)="setPageEjers(1)">Primera</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPageEjers(pager.currentPage - 1)">Previous</a>
+                  <a (click)="setPageEjers(pager.currentPage - 1)">Anterior</a>
                 </li>
                 <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
                   <a (click)="setPageEjers(page)">{{page}}</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPageEjers(pager.currentPage + 1)">Next</a>
+                  <a (click)="setPageEjers(pager.currentPage + 1)">Siguiente</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPageEjers(pager.totalPages)">Last</a>
+                  <a (click)="setPageEjers(pager.totalPages)">Ultima</a>
                 </li>
               </ul>
             </div>
@@ -256,19 +256,19 @@
               <!-- pager -->
               <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPageActs(1)">First</a>
+                  <a (click)="setPageActs(1)">Primera</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPageActs(pager.currentPage - 1)">Previous</a>
+                  <a (click)="setPageActs(pager.currentPage - 1)">Anterior</a>
                 </li>
                 <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
                   <a (click)="setPageActs(page)">{{page}}</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPageActs(pager.currentPage + 1)">Next</a>
+                  <a (click)="setPageActs(pager.currentPage + 1)">Siguiente</a>
                 </li>
                 <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPageActs(pager.totalPages)">Last</a>
+                  <a (click)="setPageActs(pager.totalPages)">Ultima</a>
                 </li>
               </ul>
             </div>
