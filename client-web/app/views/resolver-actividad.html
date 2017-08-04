@@ -108,7 +108,7 @@
             <div class="col-md-10" *ngIf="actividad.length > 0">
                 <div class="panel-resolver-centro">
                     <div class="enunciado">
-                        <p><span><i class="glyphicon glyphicon-pencil"></i></span> {{actividad[ejerSel].enunciado}}</p>
+                        <p><span>Enunciado: </span> {{actividad[ejerSel].enunciado}} <i (click)="abrirModalExplicacion()" class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Explicacion ejercicio"></i></p>
                     </div>
 
                     <div class="frase-traducir animated fadeInLeft">
@@ -117,6 +117,7 @@
 
                     <div class="solucion">
                         <input *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
+                        <p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''" class="animated aparecer"><span>Respuesta: </span>{{solucion.ejercicios[ejerSel].respuesta}}</p>
                         <button *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" class="btn btn-default" [disabled]="respuesta.length == 0 || terminado" (click)="calificar()">Enviar</button>
                         <!--<button class="btn btn-success animated aparecer" id="terminar" *ngIf="terminado" (click)="abrirModalSalir()">Terminar</button>-->
                     </div>
