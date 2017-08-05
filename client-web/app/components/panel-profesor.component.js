@@ -753,7 +753,7 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.addActividad = function (event, id) {
         var _this = this;
         var indiceEj = _.findIndex(this.ejersAMostrar, { _id: id });
-        if (event.target.checked) {
+        if (!this.ejersAMostrar[indiceEj].marcado) {
             this.actividad[this.actividad.length] = this.ejersAMostrar[indiceEj];
             this.ejersAMostrar[indiceEj].marcado = true;
         }
@@ -765,6 +765,18 @@ var PanelProfesorComponent = (function () {
                 _this.ejersAMostrar[indiceEj].marcado = false;
             });
         }
+        /*if(event.target.checked){
+            this.actividad[this.actividad.length]=this.ejersAMostrar[indiceEj];
+            this.ejersAMostrar[indiceEj].marcado=true;
+        }
+        else{
+            let indiceAct= _.findIndex(this.actividad, {_id: id});
+            $('.listado-actividad li:eq('+indiceAct+')').removeClass("fadeInLeft").addClass("fadeOut");
+            this.sleep(500).then(()=>{
+                this.actividad.splice(indiceAct, 1);
+                this.ejersAMostrar[indiceEj].marcado=false;
+            });
+        }*/
     };
     PanelProfesorComponent.prototype.descartarEjer = function (event, id, i) {
         var _this = this;

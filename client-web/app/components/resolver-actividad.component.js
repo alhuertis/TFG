@@ -67,7 +67,8 @@ var ResolverActividadComponent = (function () {
         this.terminado = false;
         this.buscandoPalabra = false;
         this.resultadoBusqueda = {};
-        this.msgFichas = "";
+        this.msgFichas = [];
+        this.modalExplicacion = false;
     }
     ResolverActividadComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -195,6 +196,7 @@ var ResolverActividadComponent = (function () {
             this.guardarSolucion();
     };
     ResolverActividadComponent.prototype.calificar = function () {
+        this.borrarMsgFichas();
         if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
             this.solucion.ejercicios[this.ejerSel].msgCalificacion = "!!Enhorabuena¡¡ La respuesta es correcta";
             this.solucion.ejercicios[this.ejerSel].calificacion = 1;
@@ -361,14 +363,26 @@ var ResolverActividadComponent = (function () {
          }*/
     };
     ResolverActividadComponent.prototype.mostrarMsgFichas = function (msg) {
-        var _this = this;
-        this.msgFichas = msg;
-        this.sleep(4000).then(function () {
+        /*this.msgFichas=msg;
+         this.sleep(4000).then(()=>{
             $(".respuesta-fichas").removeClass("fadeInRigth");
             $(".respuesta-fichas").addClass("fadeOutRight");
-            _this.sleep(1000).then(function () {
-                _this.msgFichas = "";
+            this.sleep(1000).then(()=>{
+                this.msgFichas="";
             });
+            
+        });*/
+        this.msgFichas[this.msgFichas.length] = msg;
+    };
+    ResolverActividadComponent.prototype.borraMsgFicha = function (i) {
+        this.msgFichas.splice(i, 1);
+    };
+    ResolverActividadComponent.prototype.borrarMsgFichas = function () {
+        var _this = this;
+        $(".respuesta-fichas").removeClass("fadeInRigth");
+        $(".respuesta-fichas").addClass("fadeOutRight");
+        this.sleep(1000).then(function () {
+            _this.msgFichas = [];
         });
     };
     ResolverActividadComponent.prototype.dropVerbo = function (event, palabra) {
@@ -383,14 +397,17 @@ var ResolverActividadComponent = (function () {
                 if (this.argumentos == 1 && event.dragData == "monovalente") {
                     this.monovalente.activa = true;
                     $(event.nativeEvent.target).addClass("marcada flash");
+                    this.borrarMsgFichas();
                 }
                 else if (this.argumentos == 2 && event.dragData == "bivalente") {
                     this.bivalente.activa = true;
                     $(event.nativeEvent.target).addClass("marcada flash");
+                    this.borrarMsgFichas();
                 }
                 else if (this.argumentos == 3 && event.dragData == "trivalente") {
                     this.trivalente.activa = true;
                     $(event.nativeEvent.target).addClass("marcada flash");
+                    this.borrarMsgFichas();
                 }
                 else {
                     //alert("Pero no es la ficha adecuada");
@@ -634,6 +651,16 @@ var ResolverActividadComponent = (function () {
             $("." + p).removeClass("flash");
             $("." + p).removeClass("shake");
         }
+    };
+    ResolverActividadComponent.prototype.abrirModalExplicacion = function () {
+        var _this = this;
+        this.modalExplicacion = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    ResolverActividadComponent.prototype.cancelarModalExplicacion = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalExplicacion = false; }, 300);
     };
     return ResolverActividadComponent;
 }());

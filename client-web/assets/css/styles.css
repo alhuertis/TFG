@@ -831,6 +831,15 @@ body{
  .ordenar-filtros ul li i{
 	 padding-left: 4px;
  }
+
+ .add-ejercicio{
+	 margin-top: 10px;
+	 color: white;
+	 font-size: 14px;
+	 float: right;
+	 cursor: pointer;
+ }
+ 
 /*******FIN PANEL PROFESOR ********/
 
 /********PANEL ALUMNO***************/
@@ -866,6 +875,12 @@ body{
 }
 
 .enunciado p{margin-bottom: 2px;}
+
+.enunciado i{
+	color: #00cbff;
+	cursor: pointer;
+	font-size: 16px;
+}
 
 .enunciado span{
 	font-size: 18px;
@@ -1036,17 +1051,19 @@ body{
 }
 
 .respuesta-fichas{
-	background: #74b5e8;
+	/*background: #74b5e8;
     padding: 5px 5px 2px 10px;
     border-radius: 10px 0px 0px 10px;
     color: white;
 	font-size: 14px;
+	margin-bottom: 5px;*/
+	margin-bottom: 5px;
 }
 
 .respuesta-fichas i{
-	cursor: pointer;
+	/*cursor: pointer;
 	font-size: 10px;
-	color: #e27878;
+	color: #e27878;*/
 }
 
 .progress{

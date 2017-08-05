@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="solucion">
-                        <input *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
+                        <input droppable="false" *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" type="text" placeholder="Traduce la frase" [(ngModel)]="respuesta">
                         <p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''" class="animated aparecer"><span>Respuesta: </span>{{solucion.ejercicios[ejerSel].respuesta}}</p>
                         <button *ngIf="solucion.ejercicios[ejerSel].respuesta == ''" class="btn btn-default" [disabled]="respuesta.length == 0 || terminado" (click)="calificar()">Enviar</button>
                         <!--<button class="btn btn-success animated aparecer" id="terminar" *ngIf="terminado" (click)="abrirModalSalir()">Terminar</button>-->
@@ -153,12 +153,13 @@
             <a href="http://repositorios.fdi.ucm.es/DiccionarioDidacticoLatin/" target="_blank">Diccionario en linea</a>
         </div>
         <div *ngIf="solucion.ejercicios[ejerSel] && solucion.ejercicios[ejerSel].respuesta != ''" class="calificacion animated fadeInRigth">
-            <p *ngIf="solucion.ejercicios[ejerSel].calificacion >= 0">Nota: {{solucion.ejercicios[ejerSel].calificacion}}</p>
-            <p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''">Respuesta: {{solucion.ejercicios[ejerSel].respuesta}}</p>
+            <p *ngIf="solucion.ejercicios[ejerSel].calificacion >= 0"><span class="badge">{{solucion.ejercicios[ejerSel].calificacion}}</span></p>
+            <!--<p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''">Respuesta: {{solucion.ejercicios[ejerSel].respuesta}}</p>-->
             <p *ngIf="solucion.ejercicios[ejerSel].msgCalificacion != ''">{{solucion.ejercicios[ejerSel].msgCalificacion}}</p>
         </div>
-        <div *ngIf="msgFichas != '' " class="respuesta-fichas animated fadeInRigth">
-            <p>{{msgFichas}}</p>
+        <div *ngFor="let msg of msgFichas; let i = index" class="respuesta-fichas alert alert-info animated fadeInRigth" role="alert">
+            <button (click)="borraMsgFicha(i)" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+            <p>{{msg}}</p>
         </div>
         
         
@@ -293,6 +294,24 @@
                 <h4>{{actividad[ejerSel].solucionPEspanol}}</h4>
             </div>
          
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div (click)="cancelarModalExplicacion()" style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalExplicacion ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">  
+        <div class="modal-body">
+            <div *ngIf="actividad.length > 0 && actividad[ejerSel].explicacion != ''">   
+                <h4>Explicacion: {{actividad[ejerSel].explicacion}}</h4>
+            </div>
+
+            <div *ngIf="actividad.length > 0 && actividad[ejerSel].explicacion == ''"> 
+                <h4>No hay ninguna explicación para este ejercicio</h4>
+            </div>        
+
         </div>
       </div>
     </div>

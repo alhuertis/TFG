@@ -75,6 +75,7 @@ export class  ResolverActividadComponent implements OnInit{
     modalDiccionario: Boolean;
     modalAyuda: Boolean;
     msgSalir: String;
+    modalExplicacion: Boolean;
 
     //Diccionario 
     diccionario: {}[];
@@ -89,7 +90,7 @@ export class  ResolverActividadComponent implements OnInit{
     busquedaPalabra: String;
     resultadoBusqueda: any;
     buscandoPalabra: Boolean;
-    msgFichas: String;
+    msgFichas: String[];
  
 	
 	
@@ -150,7 +151,8 @@ export class  ResolverActividadComponent implements OnInit{
         this.terminado=false;
         this.buscandoPalabra=false;
         this.resultadoBusqueda={};
-        this.msgFichas="";
+        this.msgFichas=[];
+        this.modalExplicacion=false;
         
 
 	
@@ -314,6 +316,7 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     calificar(){
+        this.borrarMsgFichas();
         if(this.respuesta == this.actividad[this.ejerSel].solucionPEspanol){
             this.solucion.ejercicios[this.ejerSel].msgCalificacion="!!Enhorabuena¡¡ La respuesta es correcta";
             this.solucion.ejercicios[this.ejerSel].calificacion= 1;
@@ -501,7 +504,7 @@ export class  ResolverActividadComponent implements OnInit{
     }
 
     mostrarMsgFichas(msg : String){
-        this.msgFichas=msg;
+        /*this.msgFichas=msg;
          this.sleep(4000).then(()=>{
             $(".respuesta-fichas").removeClass("fadeInRigth");
             $(".respuesta-fichas").addClass("fadeOutRight");
@@ -509,6 +512,19 @@ export class  ResolverActividadComponent implements OnInit{
                 this.msgFichas="";
             });
             
+        });*/
+        this.msgFichas[this.msgFichas.length]=msg;
+    }
+
+    borraMsgFicha(i : number){
+        this.msgFichas.splice(i,1);
+    }
+
+    borrarMsgFichas(){
+        $(".respuesta-fichas").removeClass("fadeInRigth");
+        $(".respuesta-fichas").addClass("fadeOutRight");
+        this.sleep(1000).then(()=>{
+            this.msgFichas=[];
         });
     }
 
@@ -526,14 +542,17 @@ export class  ResolverActividadComponent implements OnInit{
                 if(this.argumentos==1 && event.dragData == "monovalente"){
                     this.monovalente.activa=true;
                     $(event.nativeEvent.target).addClass("marcada flash");
+                    this.borrarMsgFichas();
                 }
                 else if(this.argumentos==2 && event.dragData == "bivalente"){
                     this.bivalente.activa=true;
                     $(event.nativeEvent.target).addClass("marcada flash");
+                    this.borrarMsgFichas();
                     
                 }else if(this.argumentos==3 && event.dragData == "trivalente"){
                     this.trivalente.activa=true;
                     $(event.nativeEvent.target).addClass("marcada flash");
+                    this.borrarMsgFichas();
                 }
                 else{
                     //alert("Pero no es la ficha adecuada");
@@ -820,7 +839,15 @@ export class  ResolverActividadComponent implements OnInit{
             $("."+p).removeClass("flash");
             $("."+p).removeClass("shake");
         }
+    }
 
-       
+    abrirModalExplicacion(){
+        this.modalExplicacion=true;
+        setTimeout(() => this.visibleAnimate = true);
+    }
+
+    cancelarModalExplicacion(){
+        this.visibleAnimate=false;
+        setTimeout(() => this.modalExplicacion = false, 300);
     }
 }

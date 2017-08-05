@@ -143,9 +143,9 @@
          
               <div class="col-md-12 ejer-lista animated fadeInLeft" *ngFor="let ejercicio of pagedItemsEjers; let i=index">
                 <div class="row">
-                  <div class="col-sm-1">
+                  <!--<div class="col-sm-1">
                       <input type="checkbox" [checked]="ejercicio.marcado" (click)="addActividad($event, ejercicio._id)">
-                  </div>
+                  </div>-->
                   <div class="col-sm-9">
                     <div class="row">
                       <div class="col-md-12">
@@ -173,11 +173,20 @@
                   </div>
                   </div>
 
-                  <div class="col-sm-2 botones-lista">
+                  <div class="col-sm-3">
+                    <div class="botones-lista">
                       <i class="glyphicon glyphicon-info-sign" id="info-ejer" (click)="showEjercicio(ejercicio)"></i>
                       <i *ngIf="user._id == ejercicio.id_profesor" class="glyphicon glyphicon-cog" id="modificar-ejer" (click)="abrirModEjercicio(ejercicio)"></i>
                       <i *ngIf="user._id == ejercicio.id_profesor" class="glyphicon glyphicon-trash" id="borrar-ejer" (click)="abrirBorrarEjercicio(ejercicio)"></i>
+                    </div>
+                    <div class="clearfix"></div>
 
+                    <div class="add-ejercicio" (click)="addActividad($event, ejercicio._id)">
+                        <!--<input type="checkbox" [checked]="ejercicio.marcado" (click)="addActividad($event, ejercicio._id)">-->
+                        <div *ngIf="!ejercicio.marcado"><i class="glyphicon glyphicon-plus-sign"></i><span> Añadir a actividad</span></div>
+                        <div *ngIf="ejercicio.marcado"><i *ngIf="ejercicio.marcado" class="glyphicon glyphicon-minus-sign"></i><span> Eliminar de actividad</span></div>
+                    </div>
+                      
                   </div>
                 </div>
               </div>
