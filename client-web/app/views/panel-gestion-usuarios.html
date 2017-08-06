@@ -25,15 +25,15 @@
           <div class="form-group">
             <input type="text" name="apellidos" [(ngModel)]="userBuscar.apellidos" #apellidos="ngModel" placeholder="Apellidos" >
           </div>
-          <button class="btn" (click)="buscarUsuarios()">Buscar</button>
-          <button class="btn" (click)="actualizarDatos()">Borrar busqueda</button>
+          <button class="btn" (click)="buscarUsuarios()"><i class="glyphicon glyphicon-search"></i> Buscar</button>
+          <button class="btn" (click)="actualizarDatos()"><i class="glyphicon glyphicon-refresh"></i> Borrar busqueda</button>
         </div>
         
       </div>
       <div class="col-md-6 animated aparecer" *ngIf="users.length > 0">
         <h3 class="text-center">Hay <span>{{users.length}}</span> usuarios registrados</h3>
         
-        <div *ngFor="let usuario of pagedItems; let i = index" class="usu-registro">
+        <div *ngFor="let usuario of pagedItems; let i = index" class="usu-registro animated aparecer">
 
           <div class="row">
 

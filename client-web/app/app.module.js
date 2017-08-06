@@ -14,6 +14,7 @@ var app_routing_1 = require("./app.routing");
 var ng2_drag_drop_1 = require("ng2-drag-drop");
 //import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 var angular2_material_datepicker_1 = require("angular2-material-datepicker");
+var ng2_file_upload_1 = require("ng2-file-upload");
 var panel_admin_component_1 = require("./components/panel-admin.component");
 var panel_registros_component_1 = require("./components/panel-registros.component");
 var panel_gestion_usuarios_component_1 = require("./components/panel-gestion-usuarios.component");
@@ -65,7 +66,8 @@ AppModule = __decorate([
             cabecera_admin_component_1.CabeceraAdminComponent,
             resolver_actividad_component_1.ResolverActividadComponent,
             login_component_1.LoginComponent,
-            datos_solucion_component_1.DatosSolucionComponent
+            datos_solucion_component_1.DatosSolucionComponent,
+            ng2_file_upload_1.FileSelectDirective
         ],
         providers: [app_routing_1.appRoutingProviders, authProfesor_guard_1.AuthGuardProfesor, authAlumno_guard_1.AuthGuardAlumno, authAdmin_guard_1.AuthGuardAdmin],
         bootstrap: [app_component_1.AppComponent]

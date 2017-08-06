@@ -7,6 +7,7 @@ var Profesor= require('../models/profesor');
 var service = require('./tokenService');
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
+var multer = require("multer");
 	
 
 function guardarUsuario(req, res){
@@ -233,23 +234,46 @@ function registro(req, res){
         console.log("Busqueda:" + find);
 
         User.find(find).sort('-nombre').exec((err, usuarios)=>{
-		if(err){
-			res.status(500).send({message:'Error al devolver los usuarios'});
-		}
-		else{
+            if(err){
+                res.status(500).send({message:'Error al devolver los usuarios'});
+            }
+            else{
 
-			if(!usuarios){
-				res.status(404).send({respuesta: 'ko', message:'No hay usuarios'});
-			}
-			else{
-		    	res.status(200).send({respuesta: 'ok', usuarios});
-				
-			}	
-		}
+                if(!usuarios){
+                    res.status(404).send({respuesta: 'ko', message:'No hay usuarios'});
+                }
+                else{
+                    res.status(200).send({respuesta: 'ok', usuarios});
+                    
+                }	
+            }
 
-	});
+	    });
 
     }
+
+    /*var storage = multer.diskStorage({ //multers disk storage settings
+        destination: function (req, file, cb) {
+            console.log("Entro en el nuevo");
+            cb(null, './uploads/');
+        },
+        filename: function (req, file, cb) {
+            var datetimestamp = Date.now();
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+        }
+    });
+
+    var upload = multer({ //multer settings
+                    storage: storage
+                }).single('file');*/
+
+    function uploadFile(req,res){
+        /*let params= req.body;
+        console.log(JSON.stringify(params));*/
+        res.status(200).send({});
+    }
+
+
 
 
 module.exports= {
@@ -264,4 +288,5 @@ module.exports= {
     updateUsuario,
     borrarUsuario,
     buscarUsuario,
+    uploadFile,
 }

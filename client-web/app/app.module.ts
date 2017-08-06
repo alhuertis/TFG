@@ -8,6 +8,7 @@ import {Ng2DragDropModule} from "ng2-drag-drop";
 import {DatePickerModule} from 'ng2-datepicker-bootstrap';
 //import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { DatepickerModule } from 'angular2-material-datepicker';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 
 import {PanelAdminComponent} from './components/panel-admin.component';
 import {PanelRegistrosComponent} from './components/panel-registros.component';
@@ -59,7 +60,8 @@ import {AuthGuardAdmin} from './guards/authAdmin.guard';
         CabeceraAdminComponent,
         ResolverActividadComponent,
         LoginComponent,
-        DatosSolucionComponent
+        DatosSolucionComponent,
+        FileSelectDirective
 
    ],
   providers: [appRoutingProviders,AuthGuardProfesor,AuthGuardAlumno, AuthGuardAdmin],

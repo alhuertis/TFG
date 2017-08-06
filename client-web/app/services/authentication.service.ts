@@ -129,6 +129,17 @@ export class AuthenticationService {
 
         return this.http.put(this.url+'auth/user', params, {headers: headers}).map(res => res.json());
 
+    }
+
+    uploadFiles(formData : any){
+
+        let json = JSON.stringify(formData);
+		let params= json;
+
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this.http.post(this.url+'auth/upload', params, {headers: headers}).map(res => res.json());
+
     }    
 
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {

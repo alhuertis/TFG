@@ -100,6 +100,12 @@ var AuthenticationService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this.http.put(this.url + 'auth/user', params, { headers: headers }).map(function (res) { return res.json(); });
     };
+    AuthenticationService.prototype.uploadFiles = function (formData) {
+        var json = JSON.stringify(formData);
+        var params = json;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(this.url + 'auth/upload', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     AuthenticationService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

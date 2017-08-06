@@ -153,7 +153,7 @@
             <a href="http://repositorios.fdi.ucm.es/DiccionarioDidacticoLatin/" target="_blank">Diccionario en linea</a>
         </div>
         <div *ngIf="solucion.ejercicios[ejerSel] && solucion.ejercicios[ejerSel].respuesta != ''" class="calificacion animated fadeInRigth">
-            <p *ngIf="solucion.ejercicios[ejerSel].calificacion >= 0"><span class="badge">{{solucion.ejercicios[ejerSel].calificacion}}</span></p>
+            <p *ngIf="solucion.ejercicios[ejerSel].calificacion >= 0">Calificacion obtenida <span class="badge">{{solucion.ejercicios[ejerSel].calificacion}}</span></p>
             <!--<p *ngIf="solucion.ejercicios[ejerSel].respuesta != ''">Respuesta: {{solucion.ejercicios[ejerSel].respuesta}}</p>-->
             <p *ngIf="solucion.ejercicios[ejerSel].msgCalificacion != ''">{{solucion.ejercicios[ejerSel].msgCalificacion}}</p>
         </div>

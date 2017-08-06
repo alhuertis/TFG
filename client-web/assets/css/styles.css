@@ -1351,7 +1351,11 @@ body{
 	color: white;
 }
 
-.usu-registro p, .usu-registro i{
+.usu-registro p{
+	margin-top: 10px;
+}
+
+.usu-registro i{
 	margin-top: 10px;
 }
 
@@ -1362,7 +1366,7 @@ body{
 }
 
  .usu-registro i{
-	 font-size: 20px;
+	 font-size: 16px;
 	 margin-right: 20px;
 	 cursor: pointer;
  }

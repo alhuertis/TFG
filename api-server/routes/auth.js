@@ -9,6 +9,22 @@ var AuthController = require('../controllers/auth');
 //Cargamos el router de express
 var api= express.Router();
 
+var multer = require('multer');
+
+var storage = multer.diskStorage({ //multers disk storage settings
+        destination: function (req, file, cb) {
+            cb(null, './uploads/');
+        },
+        filename: function (req, file, cb) {
+            var datetimestamp = Date.now();
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+        }
+    });
+
+    var upload = multer({ //multer settings
+                    storage: storage
+                }).single('file');
+
 api.post('/auth/guardarUsuario', AuthController.guardarUsuario);  
 api.post('/auth/login', AuthController.login);
 api.post('/auth/registro', AuthController.registro);
@@ -20,6 +36,16 @@ api.put('/auth/pass', AuthController.updateUserPass);
 api.put('/auth/user', AuthController.updateUsuario);
 api.post('/auth/borrarUsuario', AuthController.borrarUsuario);
 api.post('/auth/buscarUsuario', AuthController.buscarUsuario);
+api.post('/auth/upload', function(req, res) {
+        upload(req,res,function(err){
+            console.log(req.file);
+            if(err){
+                 res.json({error_code:1,err_desc:err});
+                 return;
+            }
+             res.json({error_code:0,err_desc:null});
+        });
+    });
  
 
 module.exports= api;

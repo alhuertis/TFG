@@ -30,6 +30,7 @@
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
       'ng2-drag-drop': 'node_modules/ng2-drag-drop',
       'angular2-material-datepicker': 'npm:angular2-material-datepicker',
+      'ng2-file-upload' : 'npm:ng2-file-upload',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -49,7 +50,12 @@
         defaultExtension: 'js' },
         'angular2-material-datepicker': {
          main: 'index.js',
-         defaultExtension: 'js',}
+         defaultExtension: 'js',},
+
+      'ng2-file-upload' : { 
+        main: './ng2-file-upload.js',
+        defaultExtension: 'js'
+      }
         
       
         

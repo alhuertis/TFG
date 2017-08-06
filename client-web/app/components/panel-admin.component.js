@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var authentication_service_1 = require("../services/authentication.service");
+var ng2_file_upload_1 = require("ng2-file-upload");
 //los decoradores no tienen punto y coma
 var PanelAdminComponent = (function () {
     function PanelAdminComponent(_authenticationService) {
         this._authenticationService = _authenticationService;
+        this.uploader = new ng2_file_upload_1.FileUploader({ url: 'http://' + window.location.hostname + ':3678/apiAuth//auth/upload' });
         // pager object
         this.pager = {};
         this.registros = [];
@@ -22,9 +24,11 @@ var PanelAdminComponent = (function () {
         this.visibleAnimate = false;
         this.verRegistros = false;
         this.verUsuarios = false;
+        this.modalPdf = false;
     }
     PanelAdminComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.uploader.onAfterAddingFile = function (file) { file.withCredentials = false; };
         this._authenticationService.getRegistros().subscribe(function (result) {
             _this.registros = result.registros;
             //this.setPage(1);
@@ -58,6 +62,16 @@ var PanelAdminComponent = (function () {
             _this.usuarios = result.usuarios;
             //this.setPage(1);
         });
+    };
+    PanelAdminComponent.prototype.abrirModalPdf = function () {
+        var _this = this;
+        this.modalPdf = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelAdminComponent.prototype.cerrarModalPdf = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalPdf = false; }, 300);
     };
     return PanelAdminComponent;
 }());

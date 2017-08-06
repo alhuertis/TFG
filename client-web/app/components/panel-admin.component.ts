@@ -1,10 +1,13 @@
-import{Component, OnInit} from '@angular/core';
+import{Component, OnInit, ElementRef, Input, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Http, Response, Headers} from '@angular/http';
+
 
 import {AuthenticationService} from '../services/authentication.service';
 import {User} from '../models/user';
 
 import {TruncatePipe} from './truncate-pipe.component';
+import { FileUploader } from 'ng2-file-upload';
 
 //Para usar undescore y jquery
 import * as _ from 'underscore';
@@ -25,9 +28,13 @@ export class  PanelAdminComponent implements OnInit{
 	public msg: String;
 	public verRegistros:Boolean;
 	public verUsuarios:Boolean;
+	public modalPdf: Boolean;
 
 	
 	public visibleAnimate: Boolean;
+
+	public uploader:FileUploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiAuth//auth/upload'});
+	
 
 	// pager object
     pager: any = {};
@@ -35,7 +42,7 @@ export class  PanelAdminComponent implements OnInit{
     public pagedItems: User[];
 
     constructor(
-			private _authenticationService: AuthenticationService
+			private _authenticationService: AuthenticationService,
 
 	){
 
@@ -46,10 +53,12 @@ export class  PanelAdminComponent implements OnInit{
 		this.visibleAnimate= false;
 		this.verRegistros=false;
 		this.verUsuarios=false;
+		this.modalPdf= false;
+		
 	}
 
 	ngOnInit(){
-
+		this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
 		this._authenticationService.getRegistros().subscribe(
 			result =>{
 				this.registros= result.registros;
@@ -99,6 +108,19 @@ export class  PanelAdminComponent implements OnInit{
 			}
 		);
 	}
+
+	abrirModalPdf(){
+		this.modalPdf = true;
+    	setTimeout(() => this.visibleAnimate = true);
+	}
+
+	cerrarModalPdf(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalPdf = false, 300);
+	}
+
+ 
+ 
 	/*setPage(page: number) {
         if (page < 1 || page > this.pager.totalPages) {
             return;
