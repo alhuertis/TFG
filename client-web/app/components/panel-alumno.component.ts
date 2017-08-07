@@ -4,6 +4,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {ActividadService} from '../services/actividad.service';
 import {SolucionService} from '../services/solucion.service';
+import {EjercicioService} from '../services/ejercicio.service';
 import {ProfesorService} from '../services/profesor.service';
 import {Actividad} from '../models/actividad';
 import {Profesor} from '../models/profesor';
@@ -21,7 +22,7 @@ declare var $:any;
 
 	selector: 'panel-alumno',
 	templateUrl: 'app/views/panel-alumno.html',
-	providers: [ActividadService, ProfesorService, SolucionService], //Necesitamos esto para poder usar los metodos
+	providers: [ActividadService, ProfesorService, SolucionService, EjercicioService], //Necesitamos esto para poder usar los metodos
 	styleUrls: ['../../assets/css/menu-profesor.css'],
 }) 
 
@@ -72,6 +73,8 @@ export class  PanelAlumnoComponent implements OnInit{
 	public criteriaActividades: CriteriaActividades;
 	public modalBuscarSol: Boolean;
 	public criteriaSolucion: CriteriaSolucion;
+
+	public existeGuia: Boolean;
 	
 
 	
@@ -80,7 +83,8 @@ export class  PanelAlumnoComponent implements OnInit{
 	constructor(
 			private _actividadService: ActividadService,
 			private _profesorService: ProfesorService,
-			private _solucionService: SolucionService
+			private _solucionService: SolucionService,
+			private _ejercicioService: EjercicioService
 
 	){
 		this.user= JSON.parse(localStorage.getItem('currentUser')).user;
@@ -119,6 +123,12 @@ export class  PanelAlumnoComponent implements OnInit{
 
 	ngOnInit(){
 
+		this._ejercicioService.existeFichero({url:'../client-web/assets/guias/guia-alumno.pdf'}).subscribe(
+			result =>{
+				this.existeGuia= result.existe;
+			},
+			error => {}
+		);
 
 		this._solucionService.getTerminadasById(this.user._id).subscribe(
 

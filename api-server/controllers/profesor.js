@@ -3,8 +3,7 @@
 'use strict'
 
 var Profesor= require('../models/profesor');
-var User= require('../models/user')
-
+var User= require('../models/user');
 
 //Recuperar una actividad
 function getProfesor(req, res){
@@ -113,6 +112,6 @@ module.exports= {
 	getProfesores,
 	saveProfesor,
     deleteProfesor,
-    updateProfesor
+    updateProfesor,
 
 }

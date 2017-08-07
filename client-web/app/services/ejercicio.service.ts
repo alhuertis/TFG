@@ -20,6 +20,12 @@ export class EjercicioService{
 		this.url= 'http://'+window.location.hostname+':3678/api/';
 	}
 
+	existeFichero(url : any){
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'existe', url, {headers: headers}).map(res => res.json());
+	}
+
 	getEjercicios(){
 		return this._http.get(this.url+'ejercicios').map(res => res.json());
 	}

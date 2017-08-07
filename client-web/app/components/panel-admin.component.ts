@@ -29,11 +29,13 @@ export class  PanelAdminComponent implements OnInit{
 	public verRegistros:Boolean;
 	public verUsuarios:Boolean;
 	public modalPdf: Boolean;
+	public modalPdfAlum: Boolean;
 
 	
 	public visibleAnimate: Boolean;
 
 	public uploader:FileUploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiAuth//auth/upload'});
+	public uploaderAlum:FileUploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiAuth//auth/uploadAlum'});
 	
 
 	// pager object
@@ -54,11 +56,13 @@ export class  PanelAdminComponent implements OnInit{
 		this.verRegistros=false;
 		this.verUsuarios=false;
 		this.modalPdf= false;
+		this.modalPdfAlum= false;
 		
 	}
 
 	ngOnInit(){
 		this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
+		this.uploaderAlum.onAfterAddingFile = (file)=> { file.withCredentials = false; };
 		this._authenticationService.getRegistros().subscribe(
 			result =>{
 				this.registros= result.registros;
@@ -110,6 +114,7 @@ export class  PanelAdminComponent implements OnInit{
 	}
 
 	abrirModalPdf(){
+		//this.uploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiAuth//auth/upload'});
 		this.modalPdf = true;
     	setTimeout(() => this.visibleAnimate = true);
 	}
@@ -117,6 +122,16 @@ export class  PanelAdminComponent implements OnInit{
 	cerrarModalPdf(){
 		this.visibleAnimate = false;
     	setTimeout(() => this.modalPdf = false, 300);
+	}
+
+	abrirModalPdfAlum(){
+		this.modalPdfAlum = true;
+    	setTimeout(() => this.visibleAnimate = true);
+	}
+
+	cerrarModalPdfAlum(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalPdfAlum = false, 300);
 	}
 
  

@@ -11,7 +11,7 @@ var api= express.Router();
 
 var multer = require('multer');
 
-var storage = multer.diskStorage({ //multers disk storage settings
+/*var storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
             cb(null, './uploads/');
         },
@@ -23,7 +23,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
 
     var upload = multer({ //multer settings
                     storage: storage
-                }).single('file');
+                }).single('file');*/
 
 api.post('/auth/guardarUsuario', AuthController.guardarUsuario);  
 api.post('/auth/login', AuthController.login);
@@ -36,16 +36,8 @@ api.put('/auth/pass', AuthController.updateUserPass);
 api.put('/auth/user', AuthController.updateUsuario);
 api.post('/auth/borrarUsuario', AuthController.borrarUsuario);
 api.post('/auth/buscarUsuario', AuthController.buscarUsuario);
-api.post('/auth/upload', function(req, res) {
-        upload(req,res,function(err){
-            console.log(req.file);
-            if(err){
-                 res.json({error_code:1,err_desc:err});
-                 return;
-            }
-             res.json({error_code:0,err_desc:null});
-        });
-    });
+api.post('/auth/upload', AuthController.uploadFile);
+api.post('/auth/uploadAlum', AuthController.uploadFileAlum);
  
 
 module.exports= api;

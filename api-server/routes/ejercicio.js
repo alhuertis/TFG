@@ -34,5 +34,6 @@ api.get('/ejercicios/otrasColeccionesTipo3/:id_profesor', EjercicioController.ge
 api.get('/ejercicios/otrasColeccionesTipo4/:id_profesor', EjercicioController.getEjersOtrasColeccionesTipo4);
 api.post('/ejercicios-byIds', EjercicioController.getEjerciciosByIds);
 api.post('/ejercicios-byCriteria', EjercicioController.getEjerciciosByCriteria);
+api.post('/existe', EjercicioController.existeFichero);
 
 module.exports= api;

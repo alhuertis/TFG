@@ -16,6 +16,7 @@ var PanelAdminComponent = (function () {
     function PanelAdminComponent(_authenticationService) {
         this._authenticationService = _authenticationService;
         this.uploader = new ng2_file_upload_1.FileUploader({ url: 'http://' + window.location.hostname + ':3678/apiAuth//auth/upload' });
+        this.uploaderAlum = new ng2_file_upload_1.FileUploader({ url: 'http://' + window.location.hostname + ':3678/apiAuth//auth/uploadAlum' });
         // pager object
         this.pager = {};
         this.registros = [];
@@ -25,10 +26,12 @@ var PanelAdminComponent = (function () {
         this.verRegistros = false;
         this.verUsuarios = false;
         this.modalPdf = false;
+        this.modalPdfAlum = false;
     }
     PanelAdminComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.uploader.onAfterAddingFile = function (file) { file.withCredentials = false; };
+        this.uploaderAlum.onAfterAddingFile = function (file) { file.withCredentials = false; };
         this._authenticationService.getRegistros().subscribe(function (result) {
             _this.registros = result.registros;
             //this.setPage(1);
@@ -65,6 +68,7 @@ var PanelAdminComponent = (function () {
     };
     PanelAdminComponent.prototype.abrirModalPdf = function () {
         var _this = this;
+        //this.uploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiAuth//auth/upload'});
         this.modalPdf = true;
         setTimeout(function () { return _this.visibleAnimate = true; });
     };
@@ -72,6 +76,16 @@ var PanelAdminComponent = (function () {
         var _this = this;
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalPdf = false; }, 300);
+    };
+    PanelAdminComponent.prototype.abrirModalPdfAlum = function () {
+        var _this = this;
+        this.modalPdfAlum = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelAdminComponent.prototype.cerrarModalPdfAlum = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalPdfAlum = false; }, 300);
     };
     return PanelAdminComponent;
 }());

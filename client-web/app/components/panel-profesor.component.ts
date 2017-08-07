@@ -14,8 +14,6 @@ import {CriteriaActividades} from '../models/criteriaActividades';
 import {TruncatePipe} from './truncate-pipe.component';
 
 
-
-
 //Para usar undescore y jquery
 import * as _ from 'underscore';
 declare var $:any;
@@ -30,7 +28,7 @@ declare var $:any;
 }) 
 
 export class  PanelProfesorComponent implements OnInit{
-
+	
 	public primeraVisita: Boolean;
 	public title: string;
 	public user: User;
@@ -154,6 +152,8 @@ export class  PanelProfesorComponent implements OnInit{
 
 	public criteriaEjercicios: CriteriaEjercicios;
 	public criteriaActividades: CriteriaActividades;
+
+	public existeGuia: Boolean;
 	
 
 
@@ -214,6 +214,13 @@ export class  PanelProfesorComponent implements OnInit{
 	ngOnInit(){
 		//Obtencion de datos
 		
+		this._ejercicioService.existeFichero({url:'../client-web/assets/guias/guia-profesor.pdf'}).subscribe(
+			result =>{
+				this.existeGuia= result.existe;
+			},
+			error => {}
+		);
+
 		this._ejercicioService.getEjercicios().subscribe(
 			result =>{
 				console.log(result);

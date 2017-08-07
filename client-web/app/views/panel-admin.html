@@ -3,7 +3,7 @@
 
 <div class="row admin-principal" [ngStyle]="{'display': (!verRegistros && !verUsuarios) ? 'block' : 'none'}">
 
-  <div class="col-md-2 col-md-offset-3">
+  <div class="col-md-2 col-md-offset-2">
     <div (click)="entrarRegistros()" id="verRegistros" class="opciones-admin">
       <h4>Nuevos registros ({{registros.length}})</h4>
       <img  src="../../assets/images/nuevos_usuarios.png" class="img-responsive"> 
@@ -24,13 +24,20 @@
     </div>
   </div>
 
+  <div class="col-md-2">
+    <div (click)="abrirModalPdfAlum()" id="subirGuia" class="opciones-admin">
+      <h4>Subir guía de alumnos</h4>
+      <img  src="../../assets/images/subir_pdf.png" class="img-responsive">
+    </div>
+  </div>
+
 
 </div>
 
 <panel-registros *ngIf="verRegistros" (salir)="salirRegistros()"></panel-registros>
 <panel-gestion-usuarios *ngIf="verUsuarios" (salir)="salirUsuarios()"></panel-gestion-usuarios>
 
-<!-- modal registro -->
+<!-- modal pdf profesor -->
 <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
     [ngStyle]="{'display': modalPdf ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog">
@@ -38,13 +45,16 @@
         <div class="modal-body" >
             <div class="form-group">
               <label for="single">Selecciona un archivo pdf</label>
-              <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" />                                  
+              <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" accept="application/pdf" />
             </div>
             <div>
-                progreso:
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
                 </div>
+            </div>
+            <div *ngIf="uploader.progress == 100" class="animated aparecer alert alert-info">
+              <p>Se ha subido correctamente el archivo al servidor con nombre <strong>guia-profesor.pdf</strong></p>
+              <p>Si necesita reemplazarlo vuelva a subir de nuevo un archivo <strong>.pdf</strong></p>
             </div>
         </div>
         <div class="modal-footer">
@@ -52,8 +62,42 @@
             
             <button type="button" class="btn btn-success btn-s"
               (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                <span class="glyphicon glyphicon-upload"></span> Upload all
+                <span class="glyphicon glyphicon-upload"></span> Subir
             </button><br />
+            
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal pdf profesor -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalPdfAlum ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body" >
+            <div class="form-group">
+              <label for="single">Selecciona un archivo pdf</label>
+              <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploaderAlum" accept="application/pdf" />
+            </div>
+            <div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderAlum.progress + '%' }"></div>
+                </div>
+            </div>
+            <div *ngIf="uploaderAlum.progress == 100" class="animated aparecer alert alert-info">
+              <p>Se ha subido correctamente el archivo al servidor con nombre <strong>guia-alumno.pdf</strong></p>
+              <p>Si necesita reemplazarlo vuelva a subir de nuevo un archivo <strong>.pdf</strong></p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModalPdfAlum()" class="btn">Cerrar</button>
+            
+            <button type="button" class="btn btn-success btn-s"
+              (click)="uploaderAlum.uploadAll()" [disabled]="!uploaderAlum.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span> Subir
+            </button><br />
+            
         </div>
         </div>
     </div>

@@ -1,9 +1,21 @@
 //Controlador de la aplicacio de favoritos
 //Aqui vamos a tener las funcones de rutas
 'use strict'
-//mi comentario d emierda!!!!
+
 var Ejercicio= require('../models/ejercicio')
 
+const fileExists = require('file-exists');
+
+function existeFichero(req, res){
+	var url= req.body.url;
+	
+	fileExists(url, (err, exists) => {
+		console.log(exists);
+		res.status(200).send({existe:exists});
+	} );
+
+	
+}
 
 //Recuperar un ejercicio
 function getEjercicio(req, res){
@@ -597,6 +609,7 @@ module.exports= {
 	getEjersOtrasColeccionesTipo4,
 	getEjerciciosByIds,
 	getEjerciciosByCriteria,
+	existeFichero
 
 
 }

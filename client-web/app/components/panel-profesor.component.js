@@ -78,6 +78,9 @@ var PanelProfesorComponent = (function () {
     PanelProfesorComponent.prototype.ngOnInit = function () {
         //Obtencion de datos
         var _this = this;
+        this._ejercicioService.existeFichero({ url: '../client-web/assets/guias/guia-profesor.pdf' }).subscribe(function (result) {
+            _this.existeGuia = result.existe;
+        }, function (error) { });
         this._ejercicioService.getEjercicios().subscribe(function (result) {
             console.log(result);
             _this.ejercicios = result.ejercicios;

@@ -13,6 +13,8 @@
             <ul class="dropdown-menu">
               <li><a (click)="abrirBuscarActs()"><i class="glyphicon glyphicon-search"></i> Buscador actividades</a></li>
               <li><a (click)="abrirBuscarSol()"><i class="glyphicon glyphicon-search"></i> Buscador soluciones</a></li>
+              <li *ngIf="existeGuia" role="separator" class="divider"></li>
+              <li *ngIf="existeGuia"><a href="./assets/guias/guia-alumno.pdf" target="_blank"><i class="glyphicon glyphicon-file"></i> Abrir guía</a></li>
             </ul>
           </div>
        </div>

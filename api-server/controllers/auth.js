@@ -252,25 +252,54 @@ function registro(req, res){
 
     }
 
-    /*var storage = multer.diskStorage({ //multers disk storage settings
+    var storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
-            console.log("Entro en el nuevo");
-            cb(null, './uploads/');
+            cb(null, '../client-web/assets/guias/');
         },
         filename: function (req, file, cb) {
             var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+            cb(null,  'guia-profesor.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
         }
     });
 
     var upload = multer({ //multer settings
                     storage: storage
-                }).single('file');*/
+                }).single('file');
 
     function uploadFile(req,res){
-        /*let params= req.body;
-        console.log(JSON.stringify(params));*/
-        res.status(200).send({});
+        upload(req,res,function(err){
+            console.log(req.file);
+            if(err){
+                 res.json({error_code:1,err_desc:err});
+                 return;
+            }
+             res.json({error_code:0,err_desc:null});
+        });
+    }
+
+    var storageAlum = multer.diskStorage({ //multers disk storage settings
+        destination: function (req, file, cb) {
+            cb(null, '../client-web/assets/guias/');
+        },
+        filename: function (req, file, cb) {
+            var datetimestamp = Date.now();
+            cb(null,  'guia-alumno.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+        }
+    });
+
+    var uploadAlum = multer({ //multer settings
+                    storage: storageAlum
+                }).single('file');
+
+    function uploadFileAlum(req,res){
+        uploadAlum(req,res,function(err){
+            console.log(req.file);
+            if(err){
+                 res.json({error_code:1,err_desc:err});
+                 return;
+            }
+             res.json({error_code:0,err_desc:null});
+        });
     }
 
 
@@ -289,4 +318,5 @@ module.exports= {
     borrarUsuario,
     buscarUsuario,
     uploadFile,
+    uploadFileAlum,
 }

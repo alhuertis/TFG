@@ -1406,6 +1406,10 @@ body{
 .modificar-usuario input{
 	padding: 6px;
 }
+
+.admin-principal{
+	margin-top: 120px;
+}
 /*********FIN PANEL ADMIN**********/
 
 
