@@ -1343,7 +1343,7 @@ body{
 }
 
 .usu-registro{
-	position: relative;
+	
 	background: #560303;
 	margin-bottom: 5px;
 	min-height: 50px;
@@ -1391,9 +1391,7 @@ body{
 	 margin-top: 10px;
  }
 
- .opciones-usuarios .dropdown-menu{
-	 z-index: 1000000;
- }
+ 
 
  .opciones-usuarios a{
 	 cursor: pointer;
@@ -1767,5 +1765,4 @@ body{
 
 .paginador ul{
 	float: right;
-	z-index: 1;
 }
