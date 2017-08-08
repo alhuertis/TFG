@@ -17,6 +17,7 @@ var PanelAdminComponent = (function () {
         this._authenticationService = _authenticationService;
         this.uploader = new ng2_file_upload_1.FileUploader({ url: 'http://' + window.location.hostname + ':3678/apiAuth//auth/upload' });
         this.uploaderAlum = new ng2_file_upload_1.FileUploader({ url: 'http://' + window.location.hostname + ':3678/apiAuth//auth/uploadAlum' });
+        this.uploaderDicc = new ng2_file_upload_1.FileUploader({ url: 'http://' + window.location.hostname + ':3678/apiDiccionario/uploadDiccionario' });
         // pager object
         this.pager = {};
         this.registros = [];
@@ -27,11 +28,13 @@ var PanelAdminComponent = (function () {
         this.verUsuarios = false;
         this.modalPdf = false;
         this.modalPdfAlum = false;
+        this.modalDiccionario = false;
     }
     PanelAdminComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.uploader.onAfterAddingFile = function (file) { file.withCredentials = false; };
         this.uploaderAlum.onAfterAddingFile = function (file) { file.withCredentials = false; };
+        this.uploaderDicc.onAfterAddingFile = function (file) { file.withCredentials = false; };
         this._authenticationService.getRegistros().subscribe(function (result) {
             _this.registros = result.registros;
             //this.setPage(1);
@@ -86,6 +89,16 @@ var PanelAdminComponent = (function () {
         var _this = this;
         this.visibleAnimate = false;
         setTimeout(function () { return _this.modalPdfAlum = false; }, 300);
+    };
+    PanelAdminComponent.prototype.abrirModalDiccionario = function () {
+        var _this = this;
+        this.modalDiccionario = true;
+        setTimeout(function () { return _this.visibleAnimate = true; });
+    };
+    PanelAdminComponent.prototype.cerrarModalDiccionario = function () {
+        var _this = this;
+        this.visibleAnimate = false;
+        setTimeout(function () { return _this.modalDiccionario = false; }, 300);
     };
     return PanelAdminComponent;
 }());

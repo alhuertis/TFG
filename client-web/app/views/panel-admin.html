@@ -3,7 +3,7 @@
 
 <div class="row admin-principal" [ngStyle]="{'display': (!verRegistros && !verUsuarios) ? 'block' : 'none'}">
 
-  <div class="col-md-2 col-md-offset-2">
+  <div class="col-md-2 col-md-offset-1">
     <div (click)="entrarRegistros()" id="verRegistros" class="opciones-admin">
       <h4>Nuevos registros ({{registros.length}})</h4>
       <img  src="../../assets/images/nuevos_usuarios.png" class="img-responsive"> 
@@ -28,6 +28,13 @@
     <div (click)="abrirModalPdfAlum()" id="subirGuia" class="opciones-admin">
       <h4>Subir guía de alumnos</h4>
       <img  src="../../assets/images/subir_pdf.png" class="img-responsive">
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div (click)="abrirModalDiccionario()" id="subirDiccionario" class="opciones-admin">
+      <h4>Subir diccionario</h4>
+      <img  src="../../assets/images/diccionario_excel.png" class="img-responsive">
     </div>
   </div>
 
@@ -70,7 +77,7 @@
     </div>
 </div>
 
-<!-- modal pdf profesor -->
+<!-- modal pdf alumno -->
 <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
     [ngStyle]="{'display': modalPdfAlum ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog">
@@ -95,6 +102,40 @@
             
             <button type="button" class="btn btn-success btn-s"
               (click)="uploaderAlum.uploadAll()" [disabled]="!uploaderAlum.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span> Subir
+            </button><br />
+            
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal excel diccionario -->
+<div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+    [ngStyle]="{'display': modalDiccionario ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body" >
+            <div class="form-group">
+              <label for="single">Selecciona un archivo excel</label>
+              <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploaderDicc" accept=".xls" />
+            </div>
+            <div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [ngStyle]="{ 'width': uploaderDicc.progress + '%' }"></div>
+                </div>
+            </div>
+            <div *ngIf="uploaderDicc.progress == 100" class="animated aparecer alert alert-info">
+              <p>Se ha subido correctamente el archivo al servidor con nombre <strong>diccionario.xls</strong></p>
+              <p>Si necesita reemplazarlo vuelva a subir de nuevo un archivo <strong>.xls</strong></p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)="cerrarModalDiccionario()" class="btn">Cerrar</button>
+            
+            <button type="button" class="btn btn-success btn-s"
+              (click)="uploaderDicc.uploadAll()" [disabled]="!uploaderDicc.getNotUploadedItems().length">
                 <span class="glyphicon glyphicon-upload"></span> Subir
             </button><br />
             

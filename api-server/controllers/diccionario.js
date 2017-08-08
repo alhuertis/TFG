@@ -1,12 +1,12 @@
  'use strict'
-
+var multer = require("multer");
 
  var LexicalResource = require("../models/diccionario");
  if (typeof require !== 'undefined') var XLSX = require('xlsx');
 
 
 
- var workbook = XLSX.readFile("./excel/DiccionarioDidacticoLatin.xls");
+ var workbook = XLSX.readFile("./excel/diccionario.xls");
 
 
  var worksheet = workbook.Sheets['Datos'];
@@ -759,11 +759,38 @@ if(save){
  }
 
 
+var storageAlum = multer.diskStorage({ //multers disk storage settings
+        destination: function (req, file, cb) {
+            cb(null, './excel/');
+        },
+        filename: function (req, file, cb) {
+            var datetimestamp = Date.now();
+            cb(null,  'diccionario.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+        }
+    });
+
+    var upload = multer({ //multer settings
+                    storage: storageAlum
+                }).single('file');
+
+    function uploadDiccionario(req,res){
+        upload(req,res,function(err){
+            //console.log(req.file);
+            if(err){
+                 res.json({error_code:1,err_desc:err});
+                 return;
+            }
+            saveDiccionario();
+            res.json({error_code:0,err_desc:null});
+        });
+    }
+
 
 
  module.exports = {
 
     saveDiccionario,
-     getDiccionario,
-     getPalabra
+    getDiccionario,
+    getPalabra,
+    uploadDiccionario
  }

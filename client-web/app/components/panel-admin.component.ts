@@ -30,12 +30,14 @@ export class  PanelAdminComponent implements OnInit{
 	public verUsuarios:Boolean;
 	public modalPdf: Boolean;
 	public modalPdfAlum: Boolean;
+	public modalDiccionario: Boolean;
 
 	
 	public visibleAnimate: Boolean;
 
 	public uploader:FileUploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiAuth//auth/upload'});
 	public uploaderAlum:FileUploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiAuth//auth/uploadAlum'});
+	public uploaderDicc:FileUploader = new FileUploader({url:'http://'+window.location.hostname+':3678/apiDiccionario/uploadDiccionario'});
 	
 
 	// pager object
@@ -57,12 +59,14 @@ export class  PanelAdminComponent implements OnInit{
 		this.verUsuarios=false;
 		this.modalPdf= false;
 		this.modalPdfAlum= false;
+		this.modalDiccionario = false;
 		
 	}
 
 	ngOnInit(){
 		this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
 		this.uploaderAlum.onAfterAddingFile = (file)=> { file.withCredentials = false; };
+		this.uploaderDicc.onAfterAddingFile = (file)=> { file.withCredentials = false; };
 		this._authenticationService.getRegistros().subscribe(
 			result =>{
 				this.registros= result.registros;
@@ -132,6 +136,16 @@ export class  PanelAdminComponent implements OnInit{
 	cerrarModalPdfAlum(){
 		this.visibleAnimate = false;
     	setTimeout(() => this.modalPdfAlum = false, 300);
+	}
+
+	abrirModalDiccionario(){
+		this.modalDiccionario = true;
+    	setTimeout(() => this.visibleAnimate = true);
+	}
+
+	cerrarModalDiccionario(){
+		this.visibleAnimate = false;
+    	setTimeout(() => this.modalDiccionario = false, 300);
 	}
 
  
