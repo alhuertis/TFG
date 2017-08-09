@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
  
 import { AuthenticationService } from '../services/authentication.service';
 import {User} from '../models/user';
+import * as messages from '../constants/messagesResources';
  
 @Component({
     //moduleId: module.id,
@@ -23,6 +24,9 @@ export class LoginComponent implements OnInit {
     screenHeight = screen.height + "px";
 
     msg: String;
+
+    MS : any = messages;
+    
  
     constructor( private router: Router, private authenticationService: AuthenticationService) {
             
@@ -54,7 +58,7 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/alumno']);
                 } else {
                     // login failed
-                    this.error = 'Usuario o contraseña incorrectas';
+                    this.error = 'Usuario o contraseña incorrectas ' + messages.PRUEBA;
                     this.loading = false;
                 }
             });

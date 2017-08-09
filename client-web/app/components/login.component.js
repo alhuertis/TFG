@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var authentication_service_1 = require("../services/authentication.service");
+var messages = require("../constants/messagesResources");
 var LoginComponent = (function () {
     function LoginComponent(router, authenticationService) {
         this.router = router;
@@ -20,6 +21,7 @@ var LoginComponent = (function () {
         this.loading = false;
         this.error = '';
         this.screenHeight = screen.height + "px";
+        this.MS = messages;
         this.registro = false;
         this.msg = "";
         this.modalRegistro = false;
@@ -47,7 +49,7 @@ var LoginComponent = (function () {
             }
             else {
                 // login failed
-                _this.error = 'Usuario o contraseña incorrectas';
+                _this.error = 'Usuario o contraseña incorrectas ' + messages.PRUEBA;
                 _this.loading = false;
             }
         });

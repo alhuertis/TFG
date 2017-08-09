@@ -5,7 +5,7 @@
      <div class="panel panel-info" >
 
          <div class="panel-heading">
-            <div class="panel-title">LOGIN</div>
+            <div class="panel-title">{{MS.LOGIN_LOGIN}}</div>
             <!--<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>-->
         </div>
 
@@ -31,9 +31,9 @@
                 <div class="form-group">
                     <div class="col-md-12 control">
                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:100%" >
-                            Solicitar mi cuenta de profesor o alumno  
+                            {{MS.LOGIN_SOLICITAR_CUENTA}}  
                         <a (click)="mostrarRegistro(true)" style="cursor: pointer">
-                            aqui!
+                            {{MS.LOGIN_SOLICITAR_AQUI}}
                         </a>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
 <div *ngIf="registro" id="signupbox" style="margin-top:20px" class="mainbox col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
     <div class="panel panel-info">
         <div class="panel-heading">
-            <div class="panel-title">REGISTRO</div>
+            <div class="panel-title">{{MS.LOGIN_REGISTRO}}</div>
             <div style="float:right; font-size: 85%; position: relative; top:-10px; cursor: pointer"><a id="signinlink" (click)="mostrarRegistro(false)">Volver</a></div>
         </div>  
         <div class="panel-body" >
