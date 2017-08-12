@@ -49,7 +49,7 @@ var LoginComponent = (function () {
             }
             else {
                 // login failed
-                _this.error = 'Usuario o contraseña incorrectas ' + messages.PRUEBA;
+                _this.error = 'Usuario o contraseña incorrectas';
                 _this.loading = false;
             }
         });
