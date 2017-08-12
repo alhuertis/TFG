@@ -2,8 +2,8 @@
     <div class="col-md-12">
 
         <ol class="breadcrumb" style="width: 230px; background:#eee">
-            <li><a (click)="exit()"><i class="glyphicon glyphicon-home"></i> Panel Administración</a></li>
-            <li class="active">Nuevos registros</li>
+            <li><a (click)="exit()"><i class="glyphicon glyphicon-home"></i> {{MS.ADMIN_MIGAS_PANEL_REGISTRO}}</a></li>
+            <li class="active">{{MS.ADMIN_MIGAS_NUEVOS_REGISTROS}}</li>
         </ol>
     </div>
         
@@ -15,8 +15,8 @@
 
   <div class="row">
       <div class="col-md-6 col-md-offset-3 animated aparecer" *ngIf="users.length > 0">
-        <h3 class="text-center">Hay <span>{{users.length}}</span> solicitudes de registro</h3>
-        <p class="text-center">Haz clic para ver mas información</p>
+        <h3 class="text-center">{{MS.ADMIN_REGISTROS_HAY}}<span>{{users.length}}</span>{{MS.ADMIN_REGISTROS_HAY_SOLICITUDES}}</h3>
+        <p class="text-center">{{MS.ADMIN_REGISTROS_VER_INFO}}</p>
         <div *ngFor="let usuario of pagedItems" class="usu-registro">
 
           <div class="row">
@@ -34,8 +34,8 @@
             </div>
 
             <div class="col-md-3">
-              <i class="glyphicon glyphicon-ok" (click)="aprobarRegistro(usuario)">Aprobar</i>
-              <i class="glyphicon glyphicon-remove" (click)="desaprobarRegistro(usuario)">Rechazar</i>
+              <i class="glyphicon glyphicon-ok" (click)="aprobarRegistro(usuario)">{{MS.ADMIN_REGISTROS_APROBAR}}</i>
+              <i class="glyphicon glyphicon-remove" (click)="desaprobarRegistro(usuario)">{{MS.ADMIN_REGISTROS_RECHAZAR}}</i>
             </div>
 
           </div>
@@ -45,7 +45,7 @@
 
    <div class="row">
       <div class="col-md-6 col-md-offset-3 animated aparecer" *ngIf="users.length == 0">
-        <h3 class="text-center">No hay solicitudes de registro</h3>
+        <h3 class="text-center">{{MS.ADMIN_REGISTROS_NO_SOLICITUDES}}</h3>
       </div>
    </div>
 
@@ -54,19 +54,19 @@
       <!-- pager -->
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li [ngClass]="{disabled:pager.currentPage === 1}">
-          <a (click)="setPage(1)">Primero</a>
+          <a (click)="setPage(1)">{{MS.PAGINADOR_PRIMERO}}</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === 1}">
-          <a (click)="setPage(pager.currentPage - 1)">Anterior</a>
+          <a (click)="setPage(pager.currentPage - 1)">{{MS.PAGINADOR_ANTERIOR}}</a>
         </li>
         <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
           <a (click)="setPage(page)">{{page}}</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-          <a (click)="setPage(pager.currentPage + 1)">Siguiente</a>
+          <a (click)="setPage(pager.currentPage + 1)">{{MS.PAGINADOR_SIGUIENTE}}</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-          <a (click)="setPage(pager.totalPages)">Ultimo</a>
+          <a (click)="setPage(pager.totalPages)">{{MS.PAGINADOR_ULTIMO}}</a>
         </li>
       </ul>
     </div>
@@ -83,7 +83,7 @@
             <p *ngIf="msg != '' ">{{msg}}</p>
         </div>
         <div class="modal-footer">
-            <button (click)="cerrarModal()" class="btn">Cerrar</button>
+            <button (click)="cerrarModal()" class="btn">{{MS.BTN_CERRAR}}</button>
         </div>
         </div>
     </div>
@@ -104,14 +104,14 @@
                 <li><i class="glyphicon glyphicon-user"></i> Apellidos: {{userInfo.apellidos}}</li>
                 <li><i class="glyphicon glyphicon-envelope"></i> Email: {{userInfo.email}}</li>
                 <li><i class="glyphicon glyphicon-education"></i> Institucion educativa: {{userInfo.institucion_educativa}}</li>
-                <li><i class="glyphicon glyphicon-tag"></i> Role: {{userInfo.role}}</li>
+                <li><i class="glyphicon glyphicon-tag"></i> Rol: {{userInfo.role}}</li>
               </ul>
             </div>
 
           </div>
         </div>
         <div class="modal-footer">
-            <button (click)="cerrarModalInfo()" class="btn">Cerrar</button>
+            <button (click)="cerrarModalInfo()" class="btn">{{MS.BTN_CERRAR}}</button>
         </div>
         </div>
     </div>

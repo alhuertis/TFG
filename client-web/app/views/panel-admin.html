@@ -5,35 +5,35 @@
 
   <div class="col-md-2 col-md-offset-1">
     <div (click)="entrarRegistros()" id="verRegistros" class="opciones-admin">
-      <h4>Nuevos registros ({{registros.length}})</h4>
+      <h4>{{MS.ADMIN_NUEVOS_REGISTROS}} ({{registros.length}})</h4>
       <img  src="../../assets/images/nuevos_usuarios.png" class="img-responsive"> 
     </div>
   </div>
 
   <div class="col-md-2">
     <div (click)="entrarUsuarios()" id="verUsuarios" class="opciones-admin">
-      <h4>Gestionar usuarios ({{usuarios.length}})</h4>
+      <h4>{{MS.ADMIN_GESTIONAR_USUARIOS}} ({{usuarios.length}})</h4>
       <img  src="../../assets/images/gestionar_usuarios.png" class="img-responsive">
     </div>
   </div>
 
   <div class="col-md-2">
     <div (click)="abrirModalPdf()" id="subirGuia" class="opciones-admin">
-      <h4>Subir guía de profesor</h4>
+      <h4>{{MS.ADMIN_GUIA_PROFESOR}}</h4>
       <img  src="../../assets/images/subir_pdf.png" class="img-responsive">
     </div>
   </div>
 
   <div class="col-md-2">
     <div (click)="abrirModalPdfAlum()" id="subirGuia" class="opciones-admin">
-      <h4>Subir guía de alumnos</h4>
+      <h4>{{MS.ADMIN_GUIA_ALUMNO}}</h4>
       <img  src="../../assets/images/subir_pdf.png" class="img-responsive">
     </div>
   </div>
 
   <div class="col-md-2">
     <div (click)="abrirModalDiccionario()" id="subirDiccionario" class="opciones-admin">
-      <h4>Subir diccionario</h4>
+      <h4>{{MS.ADMIN_SUBIR_DICCIONARIO}}</h4>
       <img  src="../../assets/images/diccionario_excel.png" class="img-responsive">
     </div>
   </div>
@@ -51,7 +51,7 @@
         <div class="modal-content">
         <div class="modal-body" >
             <div class="form-group">
-              <label for="single">Selecciona un archivo pdf</label>
+              <label for="single">{{MS.ADMIN_SELECCIONA_PDF}}</label>
               <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" accept="application/pdf" />
             </div>
             <div>
@@ -60,16 +60,16 @@
                 </div>
             </div>
             <div *ngIf="uploader.progress == 100" class="animated aparecer alert alert-info">
-              <p>Se ha subido correctamente el archivo al servidor con nombre <strong>guia-profesor.pdf</strong></p>
-              <p>Si necesita reemplazarlo vuelva a subir de nuevo un archivo <strong>.pdf</strong></p>
+              <p>{{MS.ADMIN_GUIA_OK}}<strong>{{MS.ADMIN_GUIA_OK_PROFESOR}}</strong></p>
+              <p>{{MS.ADMIN_GUIA_OK_INFO}}<strong>{{MS.ADMIN_GUIA_OK_INFO_TIPO}}</strong></p>
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="cerrarModalPdf()" class="btn">Cerrar</button>
+            <button (click)="cerrarModalPdf()" class="btn">{{MS.ADMIN_GUIA_CERRAR}}</button>
             
             <button type="button" class="btn btn-success btn-s"
               (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                <span class="glyphicon glyphicon-upload"></span> Subir
+                <span class="glyphicon glyphicon-upload"></span> {{MS.ADMIN_GUIA_SUBIR}}
             </button><br />
             
         </div>
@@ -84,7 +84,7 @@
         <div class="modal-content">
         <div class="modal-body" >
             <div class="form-group">
-              <label for="single">Selecciona un archivo pdf</label>
+              <label for="single">{{MS.ADMIN_SELECCIONA_PDF}}</label>
               <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploaderAlum" accept="application/pdf" />
             </div>
             <div>
@@ -93,16 +93,16 @@
                 </div>
             </div>
             <div *ngIf="uploaderAlum.progress == 100" class="animated aparecer alert alert-info">
-              <p>Se ha subido correctamente el archivo al servidor con nombre <strong>guia-alumno.pdf</strong></p>
-              <p>Si necesita reemplazarlo vuelva a subir de nuevo un archivo <strong>.pdf</strong></p>
+              <p>{{MS.ADMIN_GUIA_OK}}<strong>{{MS.ADMIN_GUIA_OK_ALUMNO}}</strong></p>
+              <p>{{MS.ADMIN_GUIA_OK_INFO}}<strong>{{MS.ADMIN_GUIA_OK_INFO_TIPO}}</strong></p>
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="cerrarModalPdfAlum()" class="btn">Cerrar</button>
+            <button (click)="cerrarModalPdfAlum()" class="btn">{{MS.ADMIN_GUIA_CERRAR}}</button>
             
             <button type="button" class="btn btn-success btn-s"
               (click)="uploaderAlum.uploadAll()" [disabled]="!uploaderAlum.getNotUploadedItems().length">
-                <span class="glyphicon glyphicon-upload"></span> Subir
+                <span class="glyphicon glyphicon-upload"></span> {{MS.ADMIN_GUIA_SUBIR}}
             </button><br />
             
         </div>
@@ -118,7 +118,7 @@
         <div class="modal-content">
         <div class="modal-body" >
             <div class="form-group">
-              <label for="single">Selecciona un archivo excel</label>
+              <label for="single">{{MS.ADMIN_SELECCIONA_PDF}}</label>
               <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploaderDicc" accept=".xls" />
             </div>
             <div>
@@ -127,16 +127,16 @@
                 </div>
             </div>
             <div *ngIf="uploaderDicc.progress == 100" class="animated aparecer alert alert-info">
-              <p>Se ha subido correctamente el archivo al servidor con nombre <strong>diccionario.xls</strong></p>
-              <p>Si necesita reemplazarlo vuelva a subir de nuevo un archivo <strong>.xls</strong></p>
+              <p>{{MS.ADMIN_GUIA_OK}}<strong>{{MS.ADMIN_GUIA_OK_DICCIONARIO}}</strong></p>
+              <p>{{MS.ADMIN_GUIA_OK_INFO}}<strong>{{MS.ADMIN_GUIA_OK_INFO_TIPO2}}</strong></p>
             </div>
         </div>
         <div class="modal-footer">
-            <button (click)="cerrarModalDiccionario()" class="btn">Cerrar</button>
+            <button (click)="cerrarModalDiccionario()" class="btn">{{MS.ADMIN_GUIA_CERRAR}}</button>
             
             <button type="button" class="btn btn-success btn-s"
               (click)="uploaderDicc.uploadAll()" [disabled]="!uploaderDicc.getNotUploadedItems().length">
-                <span class="glyphicon glyphicon-upload"></span> Subir
+                <span class="glyphicon glyphicon-upload"></span> {{MS.ADMIN_GUIA_SUBIR}}
             </button><br />
             
         </div>

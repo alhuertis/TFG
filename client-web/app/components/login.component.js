@@ -49,7 +49,7 @@ var LoginComponent = (function () {
             }
             else {
                 // login failed
-                _this.error = 'Usuario o contraseña incorrectas';
+                _this.error = _this.MS.LOGIN_INCORRECTO;
                 _this.loading = false;
             }
         });

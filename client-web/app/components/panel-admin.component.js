@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var authentication_service_1 = require("../services/authentication.service");
 var ng2_file_upload_1 = require("ng2-file-upload");
+var messages = require("../constants/messagesResources");
 //los decoradores no tienen punto y coma
 var PanelAdminComponent = (function () {
     function PanelAdminComponent(_authenticationService) {
@@ -20,6 +21,7 @@ var PanelAdminComponent = (function () {
         this.uploaderDicc = new ng2_file_upload_1.FileUploader({ url: 'http://' + window.location.hostname + ':3678/apiDiccionario/uploadDiccionario' });
         // pager object
         this.pager = {};
+        this.MS = messages;
         this.registros = [];
         this.usuarios = [];
         this.msg = "";

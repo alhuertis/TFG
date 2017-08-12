@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/alumno']);
                 } else {
                     // login failed
-                    this.error = 'Usuario o contraseña incorrectas';
+                    this.error = this.MS.LOGIN_INCORRECTO;
                     this.loading = false;
                 }
             });

@@ -10,6 +10,8 @@ import {TruncatePipe} from './truncate-pipe.component';
 import * as _ from 'underscore';
 declare var $:any;
 
+import * as messages from '../constants/messagesResources';
+
 //los decoradores no tienen punto y coma
 @Component({
 
@@ -33,6 +35,8 @@ export class  PanelRegistrosComponent implements OnInit{
     pager: any = {};
     // paged items
     public pagedItems: User[];
+
+	MS : any = messages;
 
     constructor(
 			private _authenticationService: AuthenticationService

@@ -8,6 +8,7 @@ import {User} from '../models/user';
 
 import {TruncatePipe} from './truncate-pipe.component';
 import { FileUploader } from 'ng2-file-upload';
+import * as messages from '../constants/messagesResources';
 
 //Para usar undescore y jquery
 import * as _ from 'underscore';
@@ -44,6 +45,8 @@ export class  PanelAdminComponent implements OnInit{
     pager: any = {};
     // paged items
     public pagedItems: User[];
+
+	MS : any = messages;
 
     constructor(
 			private _authenticationService: AuthenticationService,

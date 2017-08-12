@@ -36,7 +36,7 @@
             </div>
 
             <div class="nota-final animated aparecer" *ngIf="progreso == 100">
-                <p>Has obtenido una nota de {{calificacionFinal}} sobre {{actividad.length}}</p>
+                <p>{{MS.RESOLVER_OBTENIDO_NOTA}} {{calificacionFinal}} sobre {{actividad.length}}</p>
             </div>
         
     </div>
@@ -309,7 +309,7 @@
             </div>
 
             <div *ngIf="actividad.length > 0 && actividad[ejerSel].explicacion == ''"> 
-                <h4>No hay ninguna explicación para este ejercicio</h4>
+                <h4>{{MS.RESOLVER_NO_EXPLICACION}}</h4>
             </div>        
 
         </div>

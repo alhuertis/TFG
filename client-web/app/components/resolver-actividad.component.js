@@ -19,6 +19,7 @@ var ficha_1 = require("../models/ficha");
 var solucion_1 = require("../models/solucion");
 var solucion_ejercicio_1 = require("../models/solucion-ejercicio");
 var _ = require("underscore");
+var messages = require("../constants/messagesResources");
 var ResolverActividadComponent = (function () {
     function ResolverActividadComponent(_actividadService, _solucionService, _diccionarioService, route, _router) {
         this._actividadService = _actividadService;
@@ -26,6 +27,7 @@ var ResolverActividadComponent = (function () {
         this._diccionarioService = _diccionarioService;
         this.route = route;
         this._router = _router;
+        this.MS = messages;
         var parametros = this.route.snapshot.params['id_actividad'];
         parametros = parametros.split('-');
         this.id_actividad = parametros[0];
@@ -198,7 +200,7 @@ var ResolverActividadComponent = (function () {
     ResolverActividadComponent.prototype.calificar = function () {
         this.borrarMsgFichas();
         if (this.respuesta == this.actividad[this.ejerSel].solucionPEspanol) {
-            this.solucion.ejercicios[this.ejerSel].msgCalificacion = "!!Enhorabuena¡¡ La respuesta es correcta";
+            this.solucion.ejercicios[this.ejerSel].msgCalificacion = this.MS.RESOLVER_RESPUESTA_CORRECTA;
             this.solucion.ejercicios[this.ejerSel].calificacion = 1;
         }
         else {
@@ -208,20 +210,20 @@ var ResolverActividadComponent = (function () {
             patron = this.actividad[this.ejerSel].solucionFPatron.split(" + ");
             res = _.intersection(res, patron);
             if (_.isEqual(patron, res)) {
-                this.solucion.ejercicios[this.ejerSel].msgCalificacion = "La solución parece correcta porque las palabras están bien traducidas y se presentan en un orden correcto, pero debe comprobarla el profesor porque no coincide con la solución que ha propuesto";
+                this.solucion.ejercicios[this.ejerSel].msgCalificacion = this.MS.RESOLVER_RESPUESTA_NOTA_1;
                 this.solucion.ejercicios[this.ejerSel].calificacion = 1;
             }
             else {
                 if (res.length == patron.length) {
-                    this.solucion.ejercicios[this.ejerSel].msgCalificacion = "La solución tiene las palabras bien traducidas pero no se presentan en el orden correcto propuesto por el profesor. Esta solución debe comprobarla el profesor";
+                    this.solucion.ejercicios[this.ejerSel].msgCalificacion = this.MS.RESOLVER_RESPUESTA_NOTA_1_2;
                     this.solucion.ejercicios[this.ejerSel].calificacion = 1 / 2;
                 }
                 else if (res.length > patron.length / 2) {
-                    this.solucion.ejercicios[this.ejerSel].msgCalificacion = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.ejercicios[this.ejerSel].msgCalificacion = this.MS.RESOLVER_RESPUESTA_NOTA_1_4;
                     this.solucion.ejercicios[this.ejerSel].calificacion = 1 / 4;
                 }
                 else {
-                    this.solucion.ejercicios[this.ejerSel].msgCalificacion = "Cuidado, tu solución no tiene todas las palabras bien traducidas. Comprueba cuáles son utilizando la solución propuesta por el profesor";
+                    this.solucion.ejercicios[this.ejerSel].msgCalificacion = this.MS.RESOLVER_RESPUESTA_NOTA_0;
                     this.solucion.ejercicios[this.ejerSel].calificacion = 0;
                 }
             }
@@ -389,7 +391,7 @@ var ResolverActividadComponent = (function () {
         //alert(palabra + " " + event.dragData);
         if (this.faseVerbo)
             //alert("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
-            this.mostrarMsgFichas("Ya has encontrado el verbo. Ahora debes encajar una pieza y arrastar las palabras a ella.");
+            this.mostrarMsgFichas(this.MS.RESOLVER_AVISO_VERBO_1);
         else {
             if (palabra == this.verbo) {
                 //alert("Has acertado, es el verbo");
@@ -411,13 +413,13 @@ var ResolverActividadComponent = (function () {
                 }
                 else {
                     //alert("Pero no es la ficha adecuada");
-                    this.mostrarMsgFichas("Has acertado, es el verbo, pero no estas usando la ficha correcta.");
+                    this.mostrarMsgFichas(this.MS.RESOLVER_AVISO_VERBO_2);
                     this.faseVerbo = false;
                 }
             }
             else {
                 //alert("No es el verbo");
-                this.mostrarMsgFichas("Este no es el verbo en la frase, prueba con otra...");
+                this.mostrarMsgFichas(this.MS.RESOLVER_AVISO_VERBO_3);
                 $(event.nativeEvent.target).addClass("shake");
                 this.sleep(1000).then(function () {
                     $(".frase-traducir").children().removeClass("shake");
@@ -472,7 +474,7 @@ var ResolverActividadComponent = (function () {
             }
             else {
                 //alert("No se encuentra en el diccionario");
-                this.mostrarMsgFichas("No ha sido posible validar la palabra en el diccionario");
+                this.mostrarMsgFichas(this.MS.RESOLVER_DICCIONARIO_NO_VALIDA);
             }
         }
         else {
@@ -498,7 +500,7 @@ var ResolverActividadComponent = (function () {
                 }
                 else {
                     //alert("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
-                    this.mostrarMsgFichas("Esta ficha no se corresponde con el argumento nominativo, que debe ir colocado siempre en la izquierda");
+                    this.mostrarMsgFichas(this.MS.RESOLVER_AVISO_FICHA_1);
                     $(event.nativeEvent.target).children().css("display", "block");
                     $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
                     $(event.nativeEvent.target).children().addClass("fadeOut2");
@@ -512,7 +514,7 @@ var ResolverActividadComponent = (function () {
             else {
                 if (data == '+animado +humano') {
                     //alert("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
-                    this.mostrarMsgFichas("Esta ficha corresponde al argumento nominativo y solo puede colocarse por la izquierda");
+                    this.mostrarMsgFichas(this.MS.RESOLVER_AVISO_FICHA_2);
                     $(event.nativeEvent.target).children().css("display", "block");
                     $(event.nativeEvent.target).children().attr("src", this.srcDraggedPentagono);
                     $(event.nativeEvent.target).children().addClass("fadeOut2");
@@ -584,7 +586,7 @@ var ResolverActividadComponent = (function () {
                 _this.solucion._id = result;
                 if (_this.solucion._id == "") {
                     //alert('Error en el servidor guardando la solucion');
-                    _this.mostrarMsgFichas('Error en el servidor guardando la solucion');
+                    _this.mostrarMsgFichas(_this.MS.RESOLVER_ERROR_GUARDAR);
                 }
                 else {
                 }
@@ -614,7 +616,7 @@ var ResolverActividadComponent = (function () {
     };
     ResolverActividadComponent.prototype.abrirModalSalir = function () {
         var _this = this;
-        this.msgSalir = "Estas a punto de salir.\nTus cambios serán guardados";
+        this.msgSalir = this.MS.RESOLVER_MSG_SALIR;
         this.modalSalir = true;
         setTimeout(function () { return _this.visibleAnimate = true; });
     };

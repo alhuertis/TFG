@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var authentication_service_1 = require("../services/authentication.service");
 var user_1 = require("../models/user");
+var messages = require("../constants/messagesResources");
 //los decoradores no tienen punto y coma
 var PanelRegistrosComponent = (function () {
     function PanelRegistrosComponent(_authenticationService) {
@@ -18,6 +19,7 @@ var PanelRegistrosComponent = (function () {
         this.salir = new core_1.EventEmitter();
         // pager object
         this.pager = {};
+        this.MS = messages;
         this.users = [];
         this.msg = "";
         this.modalRegistro = false;
