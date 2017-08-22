@@ -49,14 +49,16 @@ function login(req, res){
         // Y si la contraseña es correcta
 
         if(err){
+            console.log("EL ERROR ESTA DANDO EN MONGO");
 			res.status(500).send({message:'Error al devolver el usuario'});
 		}else if(!user){
+            console.log("NO SE ESTA ENCONTRANDO EL USER");
             res.status(200).send({token:''});
         }
 		else{   
             user.comparePassword(req.body.password, function(err, isMatch) {
                 if (err) throw err;
-                console.log('Password123:', isMatch); // -&gt; Password123: true
+                console.log(req.body.password + ": ", isMatch); // -&gt; Password123: true
                 if(!isMatch){
                     res.status(200).send({token:''});
                 }else{
