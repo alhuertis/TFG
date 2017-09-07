@@ -111,6 +111,10 @@ var EjercicioService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'ejercicios-byCriteria', criteria, { headers: headers }).map(function (res) { return res.json(); });
     };
+    EjercicioService.prototype.borrarColeccion = function () {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'borrarColeccion', { headers: headers }).map(function (res) { return res.json(); });
+    };
     EjercicioService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 10; }

@@ -581,6 +581,19 @@ function getEjerciciosByCriteria(req, res){
 
 }
 
+function borrarColeccion(req, res){
+	
+	Ejercicio.remove({},(err, item)=>{
+		if(err){
+			res.status(500).send({message:'Error al borrar la coleccion', respuesta:'ko'});
+		}else{
+			res.status(200).send({message:'Se ha eliminado la coleccion con exito', respuesta:'ok'});
+		}		
+
+	});
+
+}
+
 
 //Exportamos las funciones que tengamos, para poder usar en routes
 module.exports= {
@@ -609,7 +622,8 @@ module.exports= {
 	getEjersOtrasColeccionesTipo4,
 	getEjerciciosByIds,
 	getEjerciciosByCriteria,
-	existeFichero
+	existeFichero,
+	borrarColeccion,
 
 
 }

@@ -104,6 +104,10 @@ var SolucionService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'soluciones-byCriteria', criteria, { headers: headers }).map(function (res) { return res.json(); });
     };
+    SolucionService.prototype.borrarColeccion = function () {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'borrarColeccion', { headers: headers }).map(function (res) { return res.json(); });
+    };
     SolucionService.prototype.getPager = function (totalItems, currentPage, pageSize) {
         if (currentPage === void 0) { currentPage = 1; }
         if (pageSize === void 0) { pageSize = 5; }

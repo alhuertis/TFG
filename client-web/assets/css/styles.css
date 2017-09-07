@@ -398,14 +398,17 @@ body{
 	color:white !important;
 }
 
-.logout a, .user-nav a{
+.logout a, .user-nav a, .reset-bd a{
 	color: white !important;
 	font-size: 14px;
 }
 
-.logout a:hover{
+.logout a:hover, .reset-bd a:hover{
 	color: #ccc !important;
 }
+
+.reset-bd a:hover{cursor: pointer}
+
 
 
 .logo-cabecera{

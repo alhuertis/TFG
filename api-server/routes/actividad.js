@@ -44,5 +44,6 @@ api.put('/actividad/:id', ActividadController.updateActividad);
 api.put('/actividad-ejercicio/:id', ActividadController.borrarEjercicio);
 api.delete('/actividad/:id', ActividadController.deleteActividad);  
 api.post('/actividades-byCriteria', ActividadController.getActividadesByCriteria);
+api.post('/borrarColeccion', ActividadController.borrarColeccion);
 
 module.exports= api; 

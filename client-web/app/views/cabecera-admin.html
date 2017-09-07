@@ -13,8 +13,38 @@
 
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right menu-opciones">
+        <li class="reset-bd" (click)="abrirModalResetBd()"><a>Reset BBDD</a></li>
         <li class="logout"><a [routerLink]="['/login']">salir <i class="glyphicon glyphicon-off"></i></a></li>
       </ul>
     </div>
   </div>
 </nav>
+
+  <!-- modal autorizar update actividad -->
+  <div style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+        [ngStyle]="{'display': modalResetBd ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4><i class="glyphicon glyphicon-trash"></i> Reset BBDD</h4>
+          <p>¿Estás seguro que desea resetear la base de datos?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="resetBd()">Aceptar</button>
+          <button class="btn btn-danger" (click)="cerrarResetBd()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal para mensajes -->
+<div (click)="cerrarModalMessage()" style="background: rgba(63,63,61,0.8);" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+      [ngStyle]="{'display': modalMessage ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog modal-xs modal-mensajes">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p class="text-center">{{msg}}</p>
+      </div>
+    </div>
+  </div>
+</div>

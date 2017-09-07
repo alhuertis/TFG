@@ -27,5 +27,6 @@ api.put('/soluciones-ejercicio/:id', SolucionController.borrarEjercicio);
 api.delete('/solucionByActividad/:id', SolucionController.deleteSolucionByActividad);
 api.post('/soluciones-byIdActividad', SolucionController.getSolucionesByIdActividad);
 api.post('/soluciones-byCriteria', SolucionController.getSolucionesByCriteria);
+api.post('/borrarColeccion', SolucionController.borrarColeccion);
 
 module.exports= api;

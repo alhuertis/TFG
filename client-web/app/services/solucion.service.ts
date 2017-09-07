@@ -171,6 +171,12 @@ export class SolucionService{
 
     }
 
+    borrarColeccion(){
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'borrarColeccion', {headers: headers}).map(res => res.json());
+    }
+
     
 
     getPager(totalItems: number, currentPage: number = 1, pageSize: number = 5) {
