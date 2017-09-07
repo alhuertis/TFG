@@ -17,7 +17,6 @@ var _ = require("underscore");
 var SolucionService = (function () {
     function SolucionService(_http) {
         this._http = _http;
-        //this.url= 'http://localhost:3678/api2/';
         this.url = 'http://' + window.location.hostname + ':3678/apiSolucion/';
     }
     SolucionService.prototype.saveSolucion = function (solucion) {

@@ -46,9 +46,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.modelLogin.usuario, this.modelLogin.password)
             .subscribe(result => {
                 if (result === true) {
-                    // login successful
                     this.user= JSON.parse(localStorage.getItem('currentUser')).user;
-
                     if(this.user.role == 'admin'){
                         this.router.navigate(['/admin']);
                     }
@@ -57,7 +55,6 @@ export class LoginComponent implements OnInit {
                     else if(this.user.role == 'alumno')
                         this.router.navigate(['/alumno']);
                 } else {
-                    // login failed
                     this.error = this.MS.LOGIN_INCORRECTO;
                     this.loading = false;
                 }

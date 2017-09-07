@@ -37,7 +37,6 @@ var LoginComponent = (function () {
         this.authenticationService.login(this.modelLogin.usuario, this.modelLogin.password)
             .subscribe(function (result) {
             if (result === true) {
-                // login successful
                 _this.user = JSON.parse(localStorage.getItem('currentUser')).user;
                 if (_this.user.role == 'admin') {
                     _this.router.navigate(['/admin']);
@@ -48,7 +47,6 @@ var LoginComponent = (function () {
                     _this.router.navigate(['/alumno']);
             }
             else {
-                // login failed
                 _this.error = _this.MS.LOGIN_INCORRECTO;
                 _this.loading = false;
             }

@@ -16,18 +16,7 @@ export class EjercicioService{
 	public url: string;
 
 	constructor(private _http: Http){
-		//this.url= 'http://localhost:3678/api/';
 		this.url= 'http://'+window.location.hostname+':3678/api/';
-	}
-
-	existeFichero(url : any){
-		let headers= new Headers({'Content-Type': 'application/json'});
-
-        return this._http.post(this.url+'existe', url, {headers: headers}).map(res => res.json());
-	}
-
-	getEjercicios(){
-		return this._http.get(this.url+'ejercicios').map(res => res.json());
 	}
 
 	getEjerciciosFecha(fecha1: Date, fecha2: Date){ 
@@ -41,6 +30,17 @@ export class EjercicioService{
 		return this._http.post(this.url+'ejercicios', params, {headers: headers}).map(res=> res.json());
 	}
 
+	existeFichero(url : any){
+		let headers= new Headers({'Content-Type': 'application/json'});
+
+        return this._http.post(this.url+'existe', url, {headers: headers}).map(res => res.json());
+	}
+
+	getEjercicios(){
+		return this._http.get(this.url+'ejercicios').map(res => res.json());
+	}
+
+	
 	getEjercicio(id: string){
 		return this._http.get(this.url+'ejercicio/'+id).map(res => res.json());
 	}

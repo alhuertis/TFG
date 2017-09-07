@@ -17,21 +17,20 @@ var _ = require("underscore");
 var EjercicioService = (function () {
     function EjercicioService(_http) {
         this._http = _http;
-        //this.url= 'http://localhost:3678/api/';
         this.url = 'http://' + window.location.hostname + ':3678/api/';
     }
+    EjercicioService.prototype.getEjerciciosFecha = function (fecha1, fecha2) {
+        var params = { "fecha1": JSON.stringify(fecha1),
+            "fecha2": JSON.stringify(fecha2) };
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return this._http.post(this.url + 'ejercicios', params, { headers: headers }).map(function (res) { return res.json(); });
+    };
     EjercicioService.prototype.existeFichero = function (url) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         return this._http.post(this.url + 'existe', url, { headers: headers }).map(function (res) { return res.json(); });
     };
     EjercicioService.prototype.getEjercicios = function () {
         return this._http.get(this.url + 'ejercicios').map(function (res) { return res.json(); });
-    };
-    EjercicioService.prototype.getEjerciciosFecha = function (fecha1, fecha2) {
-        var params = { "fecha1": JSON.stringify(fecha1),
-            "fecha2": JSON.stringify(fecha2) };
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        return this._http.post(this.url + 'ejercicios', params, { headers: headers }).map(function (res) { return res.json(); });
     };
     EjercicioService.prototype.getEjercicio = function (id) {
         return this._http.get(this.url + 'ejercicio/' + id).map(function (res) { return res.json(); });

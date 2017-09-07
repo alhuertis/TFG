@@ -100,25 +100,14 @@ export class EjercicioAddComponent implements OnInit{
 	}
 
 	public onSubmit(){
-		console.log(this.ejercicio);
 		this._ejercicioService.addEjercicio(this.ejercicio).subscribe(
-
 			response =>{
-				
-
-				if(!response.ejercicio){
-					alert('Error en el servidor')
-				}
-				else{
-
+				if(response.ejercicio){
 					this.ejercicio= response.ejercicio;
-					//this._router.navigate(['/']);
 					this.modalEjercicio = true;
 					setTimeout(() => this.visibleAnimate = true);
 				}
-
 			},
-
 			error =>{
 				this.errorMessage= <any>error;
 
@@ -128,7 +117,7 @@ export class EjercicioAddComponent implements OnInit{
 				}
 			}
 		);
-	}// fin onSubmit
+	}
 
 
 	cerrarModalEjercicio(){

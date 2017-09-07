@@ -65,14 +65,12 @@ export class  PanelRegistrosComponent implements OnInit{
 	aprobarRegistro(usuario : User){
 
 		this._authenticationService.borrarRegistro(usuario).subscribe(
-
 			result=> {
 
 				if(result.resultado == 'ko'){
 					this.msg=result.message;
 					setTimeout(() => this.visibleAnimate = true);
 					this.modalRegistro= true;
-					
 				}
 				else if(result.resultado == 'ok'){
 					this._authenticationService.guardarUsuario(usuario).subscribe(
@@ -81,15 +79,12 @@ export class  PanelRegistrosComponent implements OnInit{
 							this.msg=result.message;
 							setTimeout(() => this.visibleAnimate = true);
 							this.modalRegistro= true;
-							
-
 							for(let i=0; i < this.users.length; i++){
 								if(this.users[i]._id == usuario._id){	
 									this.users.splice(i,1);
 									continue;
 								}
 							}
-
 							for(let i=0; i < this.pagedItems.length; i++){
 								if(this.pagedItems[i]._id == usuario._id){	
 									this.pagedItems.splice(i,1);

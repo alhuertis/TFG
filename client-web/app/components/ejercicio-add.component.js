@@ -57,14 +57,9 @@ var EjercicioAddComponent = (function () {
     };
     EjercicioAddComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log(this.ejercicio);
         this._ejercicioService.addEjercicio(this.ejercicio).subscribe(function (response) {
-            if (!response.ejercicio) {
-                alert('Error en el servidor');
-            }
-            else {
+            if (response.ejercicio) {
                 _this.ejercicio = response.ejercicio;
-                //this._router.navigate(['/']);
                 _this.modalEjercicio = true;
                 setTimeout(function () { return _this.visibleAnimate = true; });
             }
@@ -75,7 +70,7 @@ var EjercicioAddComponent = (function () {
                 alert('Error en la peticion');
             }
         });
-    }; // fin onSubmit
+    };
     EjercicioAddComponent.prototype.cerrarModalEjercicio = function () {
         var _this = this;
         this.visibleAnimate = false;

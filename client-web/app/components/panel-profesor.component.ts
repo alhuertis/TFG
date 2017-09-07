@@ -1158,6 +1158,7 @@ export class  PanelProfesorComponent implements OnInit{
 				this.ejersAMostrar[indiceEj].marcado=false;
 			});
 		}
+	
 		
 
 		/*if(event.target.checked){

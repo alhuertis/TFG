@@ -364,9 +364,7 @@ export class  ResolverActividadComponent implements OnInit{
             this.solucion.notaFinal=this.calificacionFinal;
             this.terminado=true;
         }
-
         this.guardarSolucion();
-        
     }
 
 
