@@ -1,7 +1,7 @@
 
 export class CriteriaActividades{
 
-    
+    public user : String;
     public titulo: String;
     public nivel: String;
     public propuesta: Boolean;
@@ -13,7 +13,7 @@ export class CriteriaActividades{
     
     
     constructor(){
-       
+        this.user="";
         this.titulo=null;
         this.nivel=null;
         this.desde=null;

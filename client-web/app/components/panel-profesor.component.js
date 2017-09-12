@@ -74,6 +74,7 @@ var PanelProfesorComponent = (function () {
         this.criteriaEjercicios = new criteriaEjercicios_1.CriteriaEjercicios();
         this.modalBuscarEjer = false;
         this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
+        this.criteriaActividades.user = this.user._id;
     }
     PanelProfesorComponent.prototype.ngOnInit = function () {
         //Obtencion de datos

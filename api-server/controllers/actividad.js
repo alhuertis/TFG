@@ -746,6 +746,10 @@ function getActividadesByCriteria(req, res){
 	console.log(criteria);
 
 	var find= {};
+
+	if(criteria.user != null && criteria.user != "")
+		find.id_profesor= criteria.user;
+
 	if(criteria.titulo != null && criteria.titulo != "")
 		find.titulo=new RegExp(criteria.titulo, "i");
 
@@ -777,7 +781,7 @@ function getActividadesByCriteria(req, res){
 	console.log("nueva busqueda de actividades: " + JSON.stringify(find));
 
 	
-	Actividad.find(find).sort('-_id').exec((err, actividades)=>{
+	Actividad.find(find).sort('+_id').exec((err, actividades)=>{
 		if(err){
 			res.status(500).send({message:'Error al devolver las actividades'});
 		}

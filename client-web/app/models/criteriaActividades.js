@@ -1,6 +1,7 @@
 "use strict";
 var CriteriaActividades = (function () {
     function CriteriaActividades() {
+        this.user = "";
         this.titulo = null;
         this.nivel = null;
         this.desde = null;

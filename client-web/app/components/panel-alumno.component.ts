@@ -115,6 +115,7 @@ export class  PanelAlumnoComponent implements OnInit{
 		this.visibleAnimate=false;
 		this.modalBuscarActs=false;
 		this.criteriaActividades= new CriteriaActividades();
+		this.criteriaActividades.visible=true;
 		this.modalBuscarSol= false;
 		this.criteriaSolucion= new CriteriaSolucion();
 		

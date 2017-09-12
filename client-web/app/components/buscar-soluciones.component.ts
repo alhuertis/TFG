@@ -156,30 +156,22 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
 
     buscar(){
         var criteria= new CriteriaSolucion();
-
         if(this.busquedaByActividad != null){
             criteria.id_actividad= this.busquedaByActividad;
         }
-
         if(this.busquedaByAlumnos != null){
             criteria.ids_alumnos= this.busquedaByAlumnos;
         }
-
         if(this.fecha_desde != null){
             criteria.desde= this.fecha_desde;
         }
-
         if(this.fecha_hasta != null){
             criteria.hasta= this.fecha_hasta;
         }
-
         criteria.terminado=true;
-
         this._solucionService.getByCriteria(criteria).subscribe(
-
             result=>{
                 this.soluciones= result.soluciones;
-
 				if(!this.soluciones){
 					alert('Error en el servidor');
 				}else{
@@ -193,21 +185,17 @@ export class  PanelBuscarSolucionesComponent implements OnInit{
                         this.mostrarSoluciones=false;
                         this.msgBusqueda="No hay soluciones para este criterio de busqueda";
                         this.boolMsgBusqueda=true;
-                    }
-                
+                    }  
                 }
             },
-
             error=>{
                  this.errorMessage= <any>error;
-
 				if(this.errorMessage != null){
 					console.log(this.errorMessage);
 					alert('Error en la peticion de mi coleccion');
 				}
             }
         );
-
     }
 
     verSolucion(solucion : Solucion){

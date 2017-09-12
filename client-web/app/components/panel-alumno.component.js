@@ -55,6 +55,7 @@ var PanelAlumnoComponent = (function () {
         this.visibleAnimate = false;
         this.modalBuscarActs = false;
         this.criteriaActividades = new criteriaActividades_1.CriteriaActividades();
+        this.criteriaActividades.visible = true;
         this.modalBuscarSol = false;
         this.criteriaSolucion = new criteriaSolucion_1.CriteriaSolucion();
     }

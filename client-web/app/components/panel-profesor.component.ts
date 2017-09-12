@@ -207,6 +207,7 @@ export class  PanelProfesorComponent implements OnInit{
 		this.criteriaEjercicios= new CriteriaEjercicios();
 		this.modalBuscarEjer=false;
 		this.criteriaActividades= new CriteriaActividades();
+		this.criteriaActividades.user= this.user._id;
 		
 	}
 
